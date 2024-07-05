@@ -20,7 +20,8 @@ use App\Http\Controllers\front\FrontController;
 // });
 
 
-Route::get('/', [FrontController::class, 'index'])->name('home');
+Route::get('/', [FrontController::class, 'index']);
+Route::get('home', [FrontController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
