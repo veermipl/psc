@@ -1,0 +1,56 @@
+name: Laravel CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  laravel-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+    - name: Install Dependencies
+      run: |
+        composer update --quiet --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+        composer install --quiet --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+    - name: Directory Permissions
+      run: chmod -R 777 storage bootstrap/cache
+      
+    - name: Remove .env from FTP
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        server: psc.digitalnoticeboard.biz
+        username: psconline@psc.digitalnoticeboard.biz
+        password: @K$LRy,pVdo0
+        serverPort: 21
+        localDir: ./  # Path to your local directory to deploy
+        remoteDir: /  # Remote directory to deploy to
+        exclude: "vendor/**"  # Exclude VENDOR directory from FTP deployment
+        delete: ".env" # Delete connection.php from remote before deployment
+
+    - name: Create a copy of .env.staging
+      run: cp .env.staging .env.staging_copy.php
+
+    - name: Rename connection_staging_copy.php to .env
+      run: mv .env.staging_copy.php .env
+      
+    - name: FTP Deploy to Staging
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        server: psc.digitalnoticeboard.biz
+        username: psconline@psc.digitalnoticeboard.biz
+        password: @K$LRy,pVdo0
+        serverPort: 21
+        localDir: ./  # Path to your local directory to deploy (adjust as needed)
+        remoteDir: /  # Remote directory to deploy to (adjust as needed)
+        exclude: "vendor/**"
+
+    - name: Run php artisan storage:link
+      run: php artisan storage:link
+    
