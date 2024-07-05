@@ -27,7 +27,8 @@ jobs:
       with:
         server: psc.digitalnoticeboard.biz
         username: psconline@psc.digitalnoticeboard.biz
-        password: @K$LRy,pVdo0
+        password: ${{ secrets.@K$LRy,pVdo0 }}
+        
         serverPort: 21
         localDir: ./  # Path to your local directory to deploy
         remoteDir: /  # Remote directory to deploy to
@@ -45,7 +46,7 @@ jobs:
       with:
         server: psc.digitalnoticeboard.biz
         username: psconline@psc.digitalnoticeboard.biz
-        password: @K$LRy,pVdo0
+        password: ${{ secrets.@K$LRy,pVdo0 }}
         serverPort: 21
         localDir: ./  # Path to your local directory to deploy (adjust as needed)
         remoteDir: /  # Remote directory to deploy to (adjust as needed)
