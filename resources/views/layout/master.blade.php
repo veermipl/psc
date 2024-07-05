@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="utf-8" />
-    {{-- <title>Private Sector Commission Of Guyana</title> --}}
     <title>@yield('title')</title>
 
     <!-- Responsive -->
@@ -46,8 +45,9 @@
                                 <div class="header_top_one_box pull-left">
                                     <ul>
                                         <li class="desk_logo">
-                                            <img src="{{ asset('images/Gover-website/logo-other.png') }}"
-                                                alt="logo" />
+                                            <a href="{{ route('home') }}">
+                                                <img src="{{ asset('images/Gover-website/logo-other.png') }}" alt="logo" />
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -103,11 +103,11 @@
                                     </div>
                                 @endauth
                                 @guest
-                                    <div class="btn-login">
+                                    {{-- <div class="btn-login">
                                         <a href="https://misha.sharedocsdms.com/" class="vs-btn " tabindex="0">
                                             Login<i class="far fa-long-arrow-right"></i>
                                         </a>
-                                    </div>
+                                    </div> --}}
                                 @endguest
                             </div>
                         </div>
@@ -133,10 +133,10 @@
                                         </div>
                                     @endauth
                                     @guest
-                                        <div class="btn-login">
+                                        {{-- <div class="btn-login">
                                             <a href="https://misha.sharedocsdms.com/" class="vs-btn "
                                                 tabindex="0">Login<i class="far fa-long-arrow-right"></i></a>
-                                        </div>
+                                        </div> --}}
                                     @endguest
                                     <div class="logo">
                                         <a href="index.html"><img

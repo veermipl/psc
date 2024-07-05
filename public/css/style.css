@@ -295,7 +295,7 @@ li {
     transition: .5s;
 }
 
-.scroll-to-top span:before {}
+
 
 .scroll-to-top:after {
     position: absolute;
@@ -5817,7 +5817,7 @@ form.language-picker__form select {
     text-decoration: underline;
 }
 
-.flashMsg{
+.flashMsg {
     position: fixed;
     right: 0;
     margin-left: 50px;
@@ -5830,4 +5830,17 @@ form.language-picker__form select {
     background: white;
     padding: 10px;
     box-shadow: -3px 6px 5px #294a63;
+}
+
+@media screen and (max-width:767px) {
+    .log-sect {
+        padding: 50px 0px;
+    }
+
+    .nav-outer .mobile-nav-toggler {
+        top: 20px;
+        padding: 8px 8px 3px;
+        font-size: 16px;
+    }
+
 }
