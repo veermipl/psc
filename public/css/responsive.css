@@ -660,21 +660,67 @@
     }
 
     .about-two-title h2 {
-        font-size: 26px;
+        font-size: 22px;
 
     }
 
     .thm-section-title h2 {
-        font-size: 26px;
+        font-size: 22px;
 
+    }
+
+    .why-choose-two-section {
+        padding: 60px 0 60px;
+    }
+
+    .why-choose-right-content {
+        padding: 90px 40px 53px;
+    }
+
+    .widget_title {
+
+        margin: -0.07em 0 14px 0;
+
+    }
+
+    .vs-btn {
+
+        padding: 16px 30.5px;
+
+    }
+
+    .thm-section-title {
+
+        margin-bottom: 25px;
+    }
+
+    .video-two-sec-content p {
+        font-size: 18px;
+
+    }
+
+    .blog-one-section {
+
+        padding: 50px 0 70px;
     }
 
     .owl-dots {
         display: none;
     }
 
+    .mb-15 {
+        margin-bottom: 30px;
+    }
+
+    /* .banner-section .content-box .inner {
+        padding: 0px !important;
+    } */
+    .ab_s {
+        height: 270px !important;
+    }
+
     .video-two-sec-content h2 {
-        font-size: 26px;
+        font-size: 22px;
         color: #ffffff;
         font-weight: 800;
         line-height: 30px;
