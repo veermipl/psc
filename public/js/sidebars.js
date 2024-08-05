@@ -33,7 +33,7 @@ $(document).ready(function () {
 
       $('#close_side_bar_wrapper').removeClass('text-right').addClass('text-center');
 
-      $(this).attr('toggle', 'close');
+      $('#close_side_bar').attr('toggle', 'close');
     } else {
       $('ul#side-bar-half').hide();
       $('ul#side-bar-full').show();
@@ -47,7 +47,7 @@ $(document).ready(function () {
 
       $('#close_side_bar_wrapper').removeClass('text-center').addClass('text-right');
 
-      $(this).attr('toggle', 'open');
+      $('#close_side_bar').attr('toggle', 'open');
     }
   }
 });

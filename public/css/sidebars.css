@@ -111,3 +111,6 @@ main {
   background: #343a40 !important;
   border-radius: 10px;
 }
+#side-bar-half{
+  display: none;
+}

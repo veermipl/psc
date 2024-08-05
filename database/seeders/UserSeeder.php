@@ -30,8 +30,8 @@ class UserSeeder extends Seeder
 
         # create user of id(1)
         $user = User::factory()->create([
-            'name' => 'JVweed',
-            'email' => 'jvweed@yopmail.com',
+            'name' => 'Demo User',
+            'email' => 'demouser@yopmail.com',
         ]);
         $user->role()->sync(Role::where('name', 'User')->pluck('id')->toArray());
         $this->InitialUserRolePermission($user);
