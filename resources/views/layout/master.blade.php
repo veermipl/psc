@@ -20,7 +20,55 @@
         rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&amp;display=swap"
         rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.css">
+
+    <style>
+        body {
+            top: 0 !important;
+        }
+
+        .goog-logo-link {
+            display: none !important;
+        }
+
+        .goog-te-gadget {
+            font-size: 0px !important;
+        }
+
+
+
+
+        #google_translate_element img {
+            display: none !important;
+        }
+
+        .VIpgJd-ZVi9od-l4eHX-hSRGPd,
+        .VIpgJd-ZVi9od-TvD9Pc-hSRGPd,
+        .VIpgJd-ZVi9od-ORHb-OEVmcd {
+            display: none !important;
+        }
+
+        .VIpgJd-ZVi9od-ORHb {
+            display: none !important;
+        }
+
+        .goog-te-combo {
+            padding: 6px;
+            border-radius: 5px;
+        }
+
+        .goog-te-combo option {
+            font-size: 15px;
+        }
+
+        .language-btn {
+            min-width: 130px;
+            position: relative;
+            top: 12px;
+        }
+    </style>
     @yield('css')
 </head>
 
@@ -38,25 +86,27 @@
         <!-- Main Header-->
         <header class="main-header">
             <div class="header_top">
-                <div class="auto-container">
+                <div class="auto-container p-0">
                     <div class="row">
-                        <div class="col-xl-12">
+                        <div class="col-xl-12 p-0">
                             <div class="header_top_inner clearfix">
                                 <div class="header_top_one_box pull-left">
                                     <ul>
                                         <li class="desk_logo">
                                             <a href="{{ route('home') }}">
-                                                <img src="{{ asset('images/Gover-website/logo-other.png') }}" alt="logo" />
+                                                <img src="{{ asset('images/Gover-website/logo-other.png') }}"
+                                                    alt="logo" />
                                             </a>
                                         </li>
                                     </ul>
                                 </div>
+                                
                                 <div class="header_top_two_box pull-right">
                                     <div class="opening_hour">
                                         <div class="js">
                                             <div class="language-picker js-language-picker"
                                                 data-trigger-class="btn btn--subtle">
-                                                <form action="" class="language-picker__form">
+                                                <!-- <form action="" class="language-picker__form">
                                                     <select name="language-picker-select" id="language-picker-select">
                                                         <option lang="de" value="deutsch">Deutsch</option>
                                                         <option lang="en" value="english" selected>
@@ -68,12 +118,16 @@
                                                         <option lang="it" value="italiano">
                                                             Italiano
                                                         </option>
+                                                        <option lang="es" value="spanish">
+                                                            Spanish
+                                                        </option>
                                                     </select>
-                                                </form>
+                                                </form> -->
+                                                <div id="google_translate_element"></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="social_links_1">
+                                    <div class="opening_hour social_links_1">
                                         <!-- <a href="#"><i class="fab fa-facebook-square"></i></a>
                                             <a href="#"><i class="fab fa-twitter"></i></a>
                                             <a href="#"><i class="fab fa-dribbble"></i></a>
@@ -90,25 +144,25 @@
                                                 -A</a>
                                         </div>
                                     </div>
+                                    @auth
+                                        <div class="d-flex">
+                                            @if(auth()->user()->hasRole('Admin'))
+                                                <a href="{{ route('admin.dashboard') }}" class="btn btn-sm btn-outline-light">Dashboard</a>
+                                            @else
+                                                <a href="{{ route('dashboard') }}" class="btn btn-sm btn-outline-light">Dashboard</a>
+                                            @endif
 
+                                            <div class="ml-2">
+                                                <form action="{{ route('logout') }}" method="post">
+                                                    @csrf
+                                                    <button type="btn" class="btn btn-danger btn-sm">
+                                                        <i class="far fa-lock"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    @endauth
                                 </div>
-                                @auth
-                                    <div class="btn-login">
-                                        <form action="{{ route('logout') }}" method="post">
-                                            @csrf
-                                            <button type="btn" class="btn btn-danger">
-                                                Logout<i class="far fa-lock ml-2"></i>
-                                            </button>
-                                        </form>
-                                    </div>
-                                @endauth
-                                @guest
-                                    {{-- <div class="btn-login">
-                                        <a href="https://misha.sharedocsdms.com/" class="vs-btn " tabindex="0">
-                                            Login<i class="far fa-long-arrow-right"></i>
-                                        </a>
-                                    </div> --}}
-                                @endguest
                             </div>
                         </div>
                     </div>
@@ -122,24 +176,8 @@
                         <div class="col-lg-12">
                             <div class="header_upper_inner clearfix">
                                 <div class="header_upper_one_box pull-left m-show">
-                                    @auth
-                                        <div class="btn-login">
-                                            <form action="{{ route('logout') }}" method="post">
-                                                @csrf
-                                                <button type="btn" class="btn btn-danger">
-                                                    Logout<i class="far fa-lock ml-2"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    @endauth
-                                    @guest
-                                        {{-- <div class="btn-login">
-                                            <a href="https://misha.sharedocsdms.com/" class="vs-btn "
-                                                tabindex="0">Login<i class="far fa-long-arrow-right"></i></a>
-                                        </div> --}}
-                                    @endguest
                                     <div class="logo">
-                                        <a href="index.html"><img
+                                        <a href="{{ route('home') }}"><img
                                                 src="{{ asset('images/Gover-website/logo-other.png') }}"
                                                 alt="" title="" /></a>
                                     </div>
@@ -159,30 +197,24 @@
                                                             <a href="{{ route('home') }}">Home</a>
                                                         </li>
                                                         <li class="dropdown">
-                                                            <a href="index.html">About Us <i
-                                                                    class="fas fa-chevron-down"></i></a>
+                                                            <a href="index.html">About Us
+                                                                <i class="fas fa-chevron-down"></i>
+                                                            </a>
                                                             <ul>
-                                                                <li><a href="#">Staff</a></li>
+                                                                <li><a href="{{ route('about-us-type', 'staff') }}">Staff</a></li>
                                                                 <li>
-                                                                    <a href="#">Council</a>
+                                                                    <a href="{{ route('about-us-type', 'council') }}">Council</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="#">History</a>
+                                                                    <a href="{{ route('about-us-type', 'history') }}">History</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="#">Committees</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Annual Report</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Contact Us</a>
+                                                                    <a href="{{ route('about-us-type', 'committees') }}">Committees</a>
                                                                 </li>
 
                                                             </ul>
                                                         </li>
 
-                                                        <!-- <li><a href="#">Members</a></li> -->
                                                         <li class="dropdown">
                                                             <a href="#">Membership
                                                                 <i class="fas fa-chevron-down"></i></a>
@@ -191,130 +223,123 @@
                                                                     <li>
                                                                         <a href="{{ route('login') }}">Members Sign-in</a>
                                                                     </li>
+                                                                    <li>
+                                                                        <a href="{{ route('register') }}">Join Now</a>
+                                                                    </li>
                                                                 @endguest
                                                                 <li>
-                                                                    <a href="#">Business Directory</a>
+                                                                    <a href="{{ route('membership.business-directory') }}">Business Directory</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="#">Join Now</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#">Member Benefits</a>
+                                                                    <a href="{{ route('membership.member-benefits') }}">Member Benefits</a>
                                                                 </li>
 
                                                             </ul>
                                                         </li>
                                                         <!-- <li class="dropdown">
-                                <a href="#"
-                                  >Sector Committees
-                                  <i class="fas fa-chevron-down"></i
-                                ></a>
-                                <ul>
-                                  <li>
-                                    <a href="#"
-                                      >Governance & Security</a
-                                    >
-                                  </li>
-                                  <li>
-                                    <a href="#">Agriculture</a>
-                                  </li>
-                                  <li>
-                                    <a href="#"
-                                      >Trade & Investment</a
-                                    >
-                                  </li>
-                                  <li>
-                                    <a href="#"
-                                      >Natural Resoures</a
-                                    >
-                                  </li>
-                                  <li>
-                                    <a href="#">Financial & Economics</a>
-                                  </li>
-                                  <li><a href="#">Energy</a></li>
-                                  <li>
-                                    <a href="#">Infrastructure</a>
-                                  </li>
-                                  <li><a href="#">Enviroment</a></li>
-                                  <li><a href="#">Regional</a></li>
-                                </ul>
-                              </li> -->
+                                                            <a href="#"
+                                                            >Sector Committees
+                                                            <i class="fas fa-chevron-down"></i
+                                                            ></a>
+                                                            <ul>
+                                                            <li>
+                                                                <a href="#"
+                                                                >Governance & Security</a
+                                                                >
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">Agriculture</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#"
+                                                                >Trade & Investment</a
+                                                                >
+                                                            </li>
+                                                            <li>
+                                                                <a href="#"
+                                                                >Natural Resoures</a
+                                                                >
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">Financial & Economics</a>
+                                                            </li>
+                                                            <li><a href="#">Energy</a></li>
+                                                            <li>
+                                                                <a href="#">Infrastructure</a>
+                                                            </li>
+                                                            <li><a href="#">Enviroment</a></li>
+                                                            <li><a href="#">Regional</a></li>
+                                                            </ul>
+                                                        </li> -->
                                                         <li>
-                                                            <a href="#"> Guyana's Economy </a>
+                                                            <a href="{{ route('guyana-economy') }}"> Guyana's Economy </a>
                                                         </li>
                                                         <li class="dropdown">
                                                             <a href="#">Data
-                                                                <i class="fas fa-chevron-down"></i></a>
+                                                                <i class="fas fa-chevron-down"></i>
+                                                            </a>
                                                             <ul>
                                                                 <li>
-                                                                    <a href="#">National Budgets</a>
+                                                                    <a href="{{ route('data.national_budgets') }}">National Budgets</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="#">Trade Data</a>
+                                                                    <a href="{{ route('data.trade-data') }}">Trade Data</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="#">COTED</a>
+                                                                    <a href="{{ route('data.coted') }}">COTED</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="#">CARICOM CET</a>
+                                                                    <a href="{{ route('data.caricom-cet') }}">CARICOM CET</a>
                                                                 </li>
 
                                                             </ul>
                                                         </li>
                                                         <li class="dropdown">
-                                                            <a href="#">Resources <i
-                                                                    class="fas fa-chevron-down"></i></a>
+                                                            <a href="#">Resources
+                                                                <i class="fas fa-chevron-down"></i>
+                                                            </a>
                                                             <ul>
-                                                                <li><a href="#">Business Readiness Desk </a></li>
+                                                                <li><a href="{{ route('resources.business-readiness-desk') }}">Business Readiness Desk </a></li>
                                                                 <li>
-                                                                    <a href="#">Go-Invest</a>
+                                                                    <a href="{{ route('resources.go-invest') }}">Go-Invest</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="#">IDB Invest</a>
+                                                                    <a href="{{ route('resources.idb-invest') }}">IDB Invest</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="#">Procurement Process in Guyana</a>
+                                                                    <a href="{{ route('resources.procurement-process-in-guyana') }}">Procurement Process in Guyana</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="#">Certificate of Origins</a>
+                                                                    <a href="{{ route('resources.certificate-of-origins') }}">Certificate of Origins</a>
                                                                 </li>
-                                                                <!-- <li>
-                                    <a href="#"
-                                      >Annual Reports</a
-                                    >
-                                  </li> -->
                                                                 <li>
-                                                                    <a href="#">Annual Reports</a>
+                                                                    <a href="{{ route('resources.annual-report') }}">Annual Reports</a>
                                                                 </li>
                                                             </ul>
                                                         </li>
-                                                        <!-- <li><a href="#">News</a></li> -->
+
                                                         <li class="dropdown">
-                                                            <a href="index.html">Media Center <i
-                                                                    class="fas fa-chevron-down"></i></a>
+                                                            <a href="index.html">Media Center
+                                                                <i class="fas fa-chevron-down"></i>
+                                                            </a>
                                                             <ul>
-                                                                <li><a href="#">News</a></li>
+                                                                <li><a href="{{ route('media.news') }}">News</a></li>
                                                                 <li>
-                                                                    <a href="#">Press Releases</a>
+                                                                    <a href="{{ route('media.press-release') }}">Press Releases</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="#">Social Media</a>
+                                                                    <a href="{{ route('media.social-media') }}">Social Media</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="#">Photos</a>
+                                                                    <a href="{{ route('media.photos') }}">Photos</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="#">Videos</a>
+                                                                    <a href="{{ route('media.videos') }}">Videos</a>
                                                                 </li>
-                                                                <!-- <li>
-                                    <a href="#"
-                                      >Contact Us</a
-                                    >
-                                  </li> -->
 
                                                             </ul>
                                                         </li>
-                                                        <!-- <li><a href="#">Contact Us</a></li> -->
+                                                        <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
                                                     </ul>
                                                 </div>
                                             </nav>
@@ -341,40 +366,6 @@
             </div>
             <!--End Header Upper-->
 
-            <!--End Header Upper-->
-            <div class="sticky-header">
-                <div class="auto-container">
-                    <div class="outer-container">
-                        <div class="header-column">
-                            <div class="logo-box">
-                                <div class="logo">
-                                    <a href="index.html"><img src="images/Gover-website/logo-other.png"
-                                            alt="" title="" /></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="header-column">
-                            <div class="nav-outer">
-                                <!--Mobile Navigation Toggler-->
-                                <div class="mobile-nav-toggler">
-                                    <span class="icon flaticon-menu"></span>
-                                </div>
-
-                                <div class="nav-inner">
-                                    <!-- Main Menu -->
-                                    <nav class="main-menu navbar-expand-xl navbar-dark">
-                                        <div class="collapse navbar-collapse">
-                                            <ul class="navigation"></ul>
-                                        </div>
-                                    </nav>
-                                    <!-- Main Menu End-->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Mobile Menu  -->
             <div class="mobile-menu close-menu">
                 <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
@@ -388,33 +379,16 @@
         </header>
         <!-- End Main Header -->
 
-        {{-- alert --}}
-        @if (session()->has('message'))
-            <div class="flashMsg">
-                <strong>{{ session('message') }}</strong>
-            </div>
-        @endif
-
-        @if (session()->has('flashMsg'))
-            <div class="flashMsg">
-                <strong>{{ session('flashMsg.msg') }}</strong>
-            </div>
-        @endif
-
         @if (session('status') == 'verification-link-sent')
             <div class="flashMsg alertSuccess">
-                <strong>A new verification link has been sent to the email address you provided during registration.</strong>
+                <strong>A new verification link has been sent to the email address you provided during
+                    registration.</strong>
             </div>
         @endif
 
-        @if (session('status'))
-            <div class="flashMsg">
-                <strong>{{ session('status') }}.</strong>
-            </div>
-        @endif
-        {{-- end alert --}}
 
         @yield('content')
+
 
         <!--Start Footer Section -->
         <footer class="footer-section">
@@ -488,7 +462,7 @@
                     </div>
                 </div>
             </div>
-            <!-- <hr / style="border-bottom: 1px solid #fff;"> -->
+            
             <div class="bottom-footer">
                 <div class="container">
                     <div class="row">
@@ -509,7 +483,22 @@
         <div class="scroll-to-top scroll-to-target" data-target="html">
             <span class="icon fas fa-arrow-up"></span>
         </div>
+
     </div>
+
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,es,de,fr,it'
+            }, 'google_translate_element');
+
+
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
 
     {{-- script --}}
     <script src="{{ asset('js/jquery.js') }}"></script>
@@ -527,7 +516,10 @@
     <script src="{{ asset('js/parallax.min.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
 
+    <script type="text/javascript" src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
+
     @yield('scripts')
+
 </body>
 
 </html>

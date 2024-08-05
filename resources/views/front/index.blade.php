@@ -6,7 +6,7 @@
         <div class="swiper-container banner-slider">
             <div class="swiper-wrapper">
                 <!-- Slide Item -->
-                <div class="swiper-slide" style="background-image: url(images/main-slider/slider3.png)">
+                <div class="swiper-slide ab_s" style="background-image: url(images/main-slider/slider3.png)">
                     <div class="content-outer">
                         <div class="content-box">
                             <div class="inner">
@@ -26,18 +26,18 @@
                     </div>
                 </div>
                 <!-- Slide Item -->
-                <div class="swiper-slide" style="background-image: url(images/main-slider/slider1.png)">
+                <div class="swiper-slide ab_s" style="background-image: url(images/main-slider/slider1.png)">
                     <div class="content-outer">
                         <div class="content-box">
                             <div class="inner">
                                 <h1>
                                     <!-- Factory is <br />
-                      equipped with the <br />latest <span>technology</span> -->
+                                  equipped with the <br />latest <span>technology</span> -->
                                     FINANCE & ECONOMIC
                                 </h1>
                                 <div class="text">
                                     <!-- Manufacturing Technology Supports Factories around the
-                      World. <br />Factories are at the heart of manufacturing. -->
+                                  World. <br />Factories are at the heart of manufacturing. -->
                                     They govern investments, trade, and monetary policies,
                                     <br />
                                     influencing employment, inflation, and wealth
@@ -54,7 +54,7 @@
                 </div>
 
                 <!-- Slide Item -->
-                <div class="swiper-slide" style="background-image: url(images/main-slider/slider2.png)">
+                <div class="swiper-slide ab_s" style="background-image: url(images/main-slider/slider2.png)">
                     <div class="content-outer">
                         <div class="content-box">
                             <div class="inner">
@@ -92,7 +92,7 @@
     <section class="features-two-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-6 mb-15">
                     <!--Features One Sec Single-->
                     <div class="features-two-sec-single wow fadeInUp h-100" data-wow-delay="300ms">
                         <div class="features-two-sec-icon">
@@ -108,7 +108,7 @@
                                 class="far fa-long-arrow-right"></i></a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-6 mb-15">
                     <!--Features One Sec Single-->
                     <div class="features-two-sec-single active wow fadeInUp h-100" data-wow-delay="600ms">
                         <div class="features-two-sec-icon">
@@ -124,7 +124,7 @@
                                 class="far fa-long-arrow-right"></i></a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-6 mb-15">
                     <!--Features One Sec Single-->
                     <div class="features-two-sec-single wow fadeInUp h-100" data-wow-delay="900ms">
                         <div class="features-two-sec-icon">
@@ -141,7 +141,7 @@
                                 class="far fa-long-arrow-right"></i></a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-6 mb-15">
                     <!--Features One Sec Single-->
                     <div class="features-two-sec-single wow fadeInUp h-100" data-wow-delay="900ms">
                         <div class="features-two-sec-icon">
@@ -226,11 +226,11 @@
                         </div>
 
                         <!-- <div class="about-two-bottom-content">
-                  <h3>John Franclin - <span>CEO & Founder</span></h3>
-                  <div class="signature">
-                    <img src="images/about/signature-1.png" alt="" />
-                  </div>
-                </div> -->
+                              <h3>John Franclin - <span>CEO & Founder</span></h3>
+                              <div class="signature">
+                                <img src="images/about/signature-1.png" alt="" />
+                              </div>
+                            </div> -->
                     </div>
                 </div>
             </div>
@@ -668,17 +668,17 @@
                                 </div>
                             </div>
                             <!-- <div class="recent-post">
-                       <div class="media-img"><a href="#"><img src="assets/img/blog/recent-post-1-1.jpg" alt="Blog Image"></a></div>
-                       <div class="media-body">
-                          <h4 class="post-title"><a class="text-inherit" href="#">Quarterly News Letter - Volume III (Period Ending July 2011)</a></h4>
-                          <div class="recent-post-meta">
-                             <a href="#">09 Aug, 2022</a>
-                             <ul class="table-list">
-                                <li><a href="#" target="_BLANK" title="The pdf file Open in new window">Download (3.24 MB) <img src="./images/application-pdf.png" width="16" height="16" alt="pdf" border="0"></a></li>
-                             </ul>
-                          </div>
-                       </div>
-                    </div> -->
+                                   <div class="media-img"><a href="#"><img src="assets/img/blog/recent-post-1-1.jpg" alt="Blog Image"></a></div>
+                                   <div class="media-body">
+                                      <h4 class="post-title"><a class="text-inherit" href="#">Quarterly News Letter - Volume III (Period Ending July 2011)</a></h4>
+                                      <div class="recent-post-meta">
+                                         <a href="#">09 Aug, 2022</a>
+                                         <ul class="table-list">
+                                            <li><a href="#" target="_BLANK" title="The pdf file Open in new window">Download (3.24 MB) <img src="./images/application-pdf.png" width="16" height="16" alt="pdf" border="0"></a></li>
+                                         </ul>
+                                      </div>
+                                   </div>
+                                </div> -->
                         </div>
                         <a href="#" class="vs-btn style5 mt-4" tabindex="0">Read More<i
                                 class="far fa-long-arrow-right"></i></a>
@@ -721,17 +721,17 @@
                                 </div>
                             </div>
                             <!-- <div class="recent-post">
-                     <div class="media-img"><a href="#"><img src="assets/img/blog/recent-post-1-1.jpg" alt="Blog Image"></a></div>
-                     <div class="media-body">
-                        <h4 class="post-title"><a class="text-inherit" href="#">Quarterly News Letter - Volume III (Period Ending July 2011)</a></h4>
-                        <div class="recent-post-meta">
-                           <a href="#">09 Aug, 2022</a>
-                           <ul class="table-list">
-                              <li><a href="#" target="_BLANK" title="The pdf file Open in new window">Download (3.24 MB) <img src="./images/application-pdf.png" width="16" height="16" alt="pdf" border="0"></a></li>
-                           </ul>
-                        </div>
-                     </div>
-                  </div> -->
+                                 <div class="media-img"><a href="#"><img src="assets/img/blog/recent-post-1-1.jpg" alt="Blog Image"></a></div>
+                                 <div class="media-body">
+                                    <h4 class="post-title"><a class="text-inherit" href="#">Quarterly News Letter - Volume III (Period Ending July 2011)</a></h4>
+                                    <div class="recent-post-meta">
+                                       <a href="#">09 Aug, 2022</a>
+                                       <ul class="table-list">
+                                          <li><a href="#" target="_BLANK" title="The pdf file Open in new window">Download (3.24 MB) <img src="./images/application-pdf.png" width="16" height="16" alt="pdf" border="0"></a></li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </div> -->
                             <div class="recent-post">
                                 <!-- <div class="media-img"><a href="#"><img src="assets/img/blog/recent-post-1-1.jpg" alt="Blog Image"></a></div> -->
                                 <div class="media-body">
@@ -766,8 +766,8 @@
                                     <div class="recent-post-meta">
                                         <a href="#">09 Aug, 2022</a>
                                         <!-- <ul class="table-list">
-                            <li><a href="#" target="_BLANK" title="The pdf file Open in new window">Download (3.24 MB) <img src="./images/application-pdf.png" width="16" height="16" alt="pdf" border="0"></a></li>
-                         </ul> -->
+                                        <li><a href="#" target="_BLANK" title="The pdf file Open in new window">Download (3.24 MB) <img src="./images/application-pdf.png" width="16" height="16" alt="pdf" border="0"></a></li>
+                                     </ul> -->
                                     </div>
                                 </div>
                             </div>
@@ -780,23 +780,23 @@
                                     <div class="recent-post-meta">
                                         <a href="#">09 Aug, 2022</a>
                                         <!-- <ul class="table-list">
-                            <li><a href="#" target="_BLANK" title="The pdf file Open in new window">Download (3.24 MB) <img src="./images/application-pdf.png" width="16" height="16" alt="pdf" border="0"></a></li>
-                         </ul> -->
+                                        <li><a href="#" target="_BLANK" title="The pdf file Open in new window">Download (3.24 MB) <img src="./images/application-pdf.png" width="16" height="16" alt="pdf" border="0"></a></li>
+                                     </ul> -->
                                     </div>
                                 </div>
                             </div>
                             <!-- <div class="recent-post">
-                   <div class="media-img"><a href="#"><img src="assets/img/blog/recent-post-1-1.jpg" alt="Blog Image"></a></div>
-                   <div class="media-body">
-                      <h4 class="post-title"><a class="text-inherit" href="#">Quarterly News Letter - Volume III (Period Ending July 2011)</a></h4>
-                      <div class="recent-post-meta">
-                         <a href="#">09 Aug, 2022</a>
-                         <ul class="table-list">
-                            <li><a href="#" target="_BLANK" title="The pdf file Open in new window">Download (3.24 MB) <img src="./images/application-pdf.png" width="16" height="16" alt="pdf" border="0"></a></li>
-                         </ul>
-                      </div>
-                   </div>
-                </div> -->
+                               <div class="media-img"><a href="#"><img src="assets/img/blog/recent-post-1-1.jpg" alt="Blog Image"></a></div>
+                               <div class="media-body">
+                                  <h4 class="post-title"><a class="text-inherit" href="#">Quarterly News Letter - Volume III (Period Ending July 2011)</a></h4>
+                                  <div class="recent-post-meta">
+                                     <a href="#">09 Aug, 2022</a>
+                                     <ul class="table-list">
+                                        <li><a href="#" target="_BLANK" title="The pdf file Open in new window">Download (3.24 MB) <img src="./images/application-pdf.png" width="16" height="16" alt="pdf" border="0"></a></li>
+                                     </ul>
+                                  </div>
+                               </div>
+                            </div> -->
                             <div class="recent-post">
                                 <!-- <div class="media-img"><a href="#"><img src="assets/img/blog/recent-post-1-1.jpg" alt="Blog Image"></a></div> -->
                                 <div class="media-body">
@@ -806,8 +806,8 @@
                                     <div class="recent-post-meta">
                                         <a href="#">09 Aug, 2022</a>
                                         <!-- <ul class="table-list">
-                            <li><a href="#" target="_BLANK" title="The pdf file Open in new window">Download (3.24 MB) <img src="./images/application-pdf.png" width="16" height="16" alt="pdf" border="0"></a></li>
-                         </ul> -->
+                                        <li><a href="#" target="_BLANK" title="The pdf file Open in new window">Download (3.24 MB) <img src="./images/application-pdf.png" width="16" height="16" alt="pdf" border="0"></a></li>
+                                     </ul> -->
                                     </div>
                                 </div>
                             </div>
@@ -859,65 +859,65 @@
 
     <!--Start Newsletter One Section -->
     <!--<section class="newsletter-one-section">
-            <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                <div class="newsletter-one-sec-inner">
-                    <div class="title">
-                    <h2>Newsletter Signup</h2>
-                    <p>Sign up for our newsletters to get Update</p>
-                    </div>
-                    <div class="newsletter-one-input-box">
-                    <input type="Email" placeholder="Email Address" />
-                    <button type="submit" class="button">
-                        <i class="fa fa-paper-plane"></i>
-                    </button>
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div>
-        </section>  -->
+                        <div class="container">
+                        <div class="row">
+                            <div class="col-xl-12">
+                            <div class="newsletter-one-sec-inner">
+                                <div class="title">
+                                <h2>Newsletter Signup</h2>
+                                <p>Sign up for our newsletters to get Update</p>
+                                </div>
+                                <div class="newsletter-one-input-box">
+                                <input type="Email" placeholder="Email Address" />
+                                <button type="submit" class="button">
+                                    <i class="fa fa-paper-plane"></i>
+                                </button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </section>  -->
     <!--End Newsletter One Section -->
 
     <!--Start Brand One Section -->
     <!-- <div class="brand-one">
-            <div class="container">
-            <div class="row">
-                <div class="col-xl-12">
-                <div class="brand-one-carousel owl-carousel">
-                    <div class="single_brand_item">
-                    <a href="#"><img src="images/brand/1.png" alt="brand" /></a>
-                    </div>
-                    <div class="single_brand_item">
-                    <a href="#"><img src="images/brand/2.png" alt="brand" /></a>
-                    </div>
-                    <div class="single_brand_item">
-                    <a href="#"><img src="images/brand/3.png" alt="brand" /></a>
-                    </div>
+                        <div class="container">
+                        <div class="row">
+                            <div class="col-xl-12">
+                            <div class="brand-one-carousel owl-carousel">
+                                <div class="single_brand_item">
+                                <a href="#"><img src="images/brand/1.png" alt="brand" /></a>
+                                </div>
+                                <div class="single_brand_item">
+                                <a href="#"><img src="images/brand/2.png" alt="brand" /></a>
+                                </div>
+                                <div class="single_brand_item">
+                                <a href="#"><img src="images/brand/3.png" alt="brand" /></a>
+                                </div>
 
-                    <div class="single_brand_item">
-                    <a href="#"><img src="images/brand/4.png" alt="brand" /></a>
-                    </div>
-                    <div class="single_brand_item">
-                    <a href="#"><img src="images/brand/5.png" alt="brand" /></a>
-                    </div>
-                    <div class="single_brand_item">
-                    <a href="#"><img src="images/brand/6.png" alt="brand" /></a>
-                    </div>
-                    <div class="single_brand_item">
-                    <a href="#"><img src="images/brand/7.png" alt="brand" /></a>
-                    </div>
-                    <div class="single_brand_item">
-                    <a href="#"><img src="images/brand/8.png" alt="brand" /></a>
-                    </div>
-                    <div class="single_brand_item">
-                    <a href="#"><img src="images/brand/9.png" alt="brand" /></a>
-                    </div>
-                </div>
-                </div>
-            </div>
-            </div>
-        </div> -->
+                                <div class="single_brand_item">
+                                <a href="#"><img src="images/brand/4.png" alt="brand" /></a>
+                                </div>
+                                <div class="single_brand_item">
+                                <a href="#"><img src="images/brand/5.png" alt="brand" /></a>
+                                </div>
+                                <div class="single_brand_item">
+                                <a href="#"><img src="images/brand/6.png" alt="brand" /></a>
+                                </div>
+                                <div class="single_brand_item">
+                                <a href="#"><img src="images/brand/7.png" alt="brand" /></a>
+                                </div>
+                                <div class="single_brand_item">
+                                <a href="#"><img src="images/brand/8.png" alt="brand" /></a>
+                                </div>
+                                <div class="single_brand_item">
+                                <a href="#"><img src="images/brand/9.png" alt="brand" /></a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div> -->
     <!--End Brand One Section -->
 @endsection
