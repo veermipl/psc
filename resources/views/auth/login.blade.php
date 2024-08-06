@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title', config('app.name') . ' || Login')
+@section('title', config('') . ' Login')
 @section('content')
     <section class="log-sect">
         <div class="container">
@@ -14,7 +14,8 @@
 
                             <div class="textbox">
                                 <label for="email">Email <span class="text-danger">*</span></label>
-                                <input type="email" id="email" class="form-control" name="email" placeholder="Enter your email" required>
+                                <input type="email" id="email" class="form-control" name="email"
+                                    placeholder="Enter your email" required>
 
                                 @error('email')
                                     <span class="text-danger">{{ $message }}</span>
@@ -23,15 +24,18 @@
 
                             <div class="textbox">
                                 <label for="password">Password <span class="text-danger">*</span></label>
-                                <input type="password" id="password" class="form-control" name="password" placeholder="Enter your password" required>
+                                <input type="password" id="password" class="form-control" name="password"
+                                    placeholder="Enter your password" required>
 
                                 @error('password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
                             <button type="submit" class="btn">Login</button>
+
+                            <a href="{{ route('register') }}" class="forgot">Apply to Become A Member </a>
                             <a href="{{ route('password.request') }}" class="forgot">Forgot Password?</a>
+
                         </form>
                     </div>
                 </div>
