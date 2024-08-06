@@ -226,22 +226,22 @@
                                                                     class="fas fa-chevron-down"></i></a>
                                                             <ul>
                                                                 <li><a
-                                                                        href="{{ route('about-us-type', 'introduction') }}">Introduction</a>
+                                                                        href="{{ route('about-us.introduction') }}">Introduction</a>
                                                                 </li>
                                                                 <li><a
-                                                                        href="{{ route('about-us-type', 'staff') }}">Staff</a>
+                                                                        href="{{ route('about-us.staff') }}">Staff</a>
                                                                 </li>
                                                                 <li>
                                                                     <a
-                                                                        href="{{ route('about-us-type', 'council') }}">Council</a>
+                                                                        href="{{ route('about-us.council') }}">Council</a>
                                                                 </li>
                                                                 <li>
                                                                     <a
-                                                                        href="{{ route('about-us-type', 'history') }}">History</a>
+                                                                        href="{{ route('about-us.history') }}">History</a>
                                                                 </li>
                                                                 <li>
                                                                     <a
-                                                                        href="{{ route('about-us-type', 'committees') }}">Committees</a>
+                                                                        href="{{ route('about-us.committeess') }}">Committees</a>
                                                                 </li>
 
                                                             </ul>

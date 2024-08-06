@@ -14,18 +14,32 @@ class FrontController extends Controller
 
     public function aboutUs()
     {
-        return view('front.about_us');
+        return view('front.about_us.about_us');
     }
 
-    public function aboutUsType($type = null)
+    public function aboutUs_Introduction()
     {
-        $data['typeData'] = [];
+        return view('front.about_us.introduction');
+    }
 
-        if ($type) {
-            return view('front.about_us_type', $data);
-        }
+    public function aboutUs_Staff()
+    {
+        return view('front.about_us.staff');
+    }
 
-        return view('front.about_us');
+    public function aboutUs_Council()
+    {
+        return view('front.about_us.council');
+    }
+
+    public function aboutUs_History()
+    {
+        return view('front.about_us.history');
+    }
+
+    public function aboutUs_Committeess()
+    {
+        return view('front.about_us.committeess');
     }
 
     public function contactUs()
@@ -38,27 +52,33 @@ class FrontController extends Controller
         return view('front.guyana_economy');
     }
 
-    public function membership_BusinessDirectory(){
+    public function membership_BusinessDirectory()
+    {
         return view('front.membership.business_directory');
     }
 
-    public function membership_MemberBenefits(){
+    public function membership_MemberBenefits()
+    {
         return view('front.membership.member_benefits');
     }
 
-    public function data_NationalBudgets(){
+    public function data_NationalBudgets()
+    {
         return view('front.data.national_budgets');
     }
 
-    public function data_TradeData(){
+    public function data_TradeData()
+    {
         return view('front.data.trade_data');
     }
 
-    public function data_Coted(){
+    public function data_Coted()
+    {
         return view('front.data.coted');
     }
 
-    public function data_CaricomCet(){
+    public function data_CaricomCet()
+    {
         return view('front.data.caricom_cet');
     }
 
@@ -116,6 +136,4 @@ class FrontController extends Controller
     {
         return view('front.media.videos');
     }
-
-    
 }
