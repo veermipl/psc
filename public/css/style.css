@@ -6792,6 +6792,16 @@ button.btn-block:hover {
 
 }
 
+@media screen and (max-width:767px) {
+    .logo img {
+        width: 260px;
+    }
+
+    .mobile-nav-toggler .icon {
+        margin-right: 0px;
+    }
+}
+
 /* --------dropdown-end------ */
 
 /* anjani */
