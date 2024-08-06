@@ -122,7 +122,13 @@
                                                     <div id="myDropdownt" class="dropdown-contentt">
                                                         <a href="#"> <i class="far fa-user"></i> Profile</a>
                                                         <a href="{{ route('admin.dashboard') }}"> <i class="far fa-dashboard"> </i> Dashboard</a>
-                                                        <a href="#contact"> <i class="far fa-lock"></i> Logout</a>
+                                                        <form action="{{ route('logout') }}" method="post">
+                                                            @csrf
+                                                            @method('post')
+                                                            <button class="btn btn-sm btn-danger btn-block">
+                                                                <i class="far fa-lock"></i> Logout
+                                                            </button>
+                                                        </form>
                                                     </div>
                                                 </div>
 
