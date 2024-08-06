@@ -18,10 +18,8 @@
 
     <link rel="icon" href="images/favicon.png" type="image/x-icon" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&amp;display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.css">
@@ -95,8 +93,7 @@
                                     <ul>
                                         <li class="desk_logo">
                                             <a href="{{ route('home') }}">
-                                                <img src="{{ asset('images/Gover-website/logo-other.png') }}"
-                                                    alt="logo" />
+                                                <img src="{{ asset('images/Gover-website/logo-other.png') }}" alt="logo" />
                                             </a>
                                         </li>
                                     </ul>
@@ -105,26 +102,40 @@
                                 <div class="header_top_two_box pull-right">
                                     <div class="opening_hour">
                                         <div class="js">
-                                            <div class="language-picker js-language-picker"
-                                                data-trigger-class="btn btn--subtle">
+                                            <div class="language-picker js-language-picker" data-trigger-class="btn btn--subtle">
                                                 <div id="google_translate_element"></div>
                                             </div>
                                         </div>
                                     </div>
                                     @auth
-                                        <div class="d-flex">
-                                            <a href="{{ route('admin.dashboard') }}"
-                                                class="btn btn-sm btn-outline-light">Dashboard</a>
+                                    <div class="d-flex">
+                                        <!-- <a href="" class="btn btn-sm btn-outline-light">Dashboard</a> -->
 
-                                            <div class="ml-2">
-                                                <form action="{{ route('logout') }}" method="post">
-                                                    @csrf
-                                                    <button type="btn" class="btn btn-danger btn-sm">
+                                        <div class="ml-2">
+                                            <form action="{{ route('logout') }}" method="post">
+                                                @csrf
+                                                <div class="dropdownt">
+                                                    <div class="drop-img dropbtnt" id="myBtnt">
+                                                        <img src="https://i.postimg.cc/ydFvrvbN/slider3.png" alt="user-picture">
+                                                        <i class="fas fa-chevron-down"></i>
+                                                    </div>
+                                                    <div id="myDropdownt" class="dropdown-contentt">
+                                                        <a href="#"> <i class="far fa-user"></i> Profile</a>
+                                                        <a href="{{ route('admin.dashboard') }}"> <i class="far fa-dashboard"> </i> Dashboard</a>
+                                                        <a href="#contact"> <i class="far fa-lock"></i> Logout</a>
+                                                    </div>
+                                                </div>
+
+
+
+
+
+                                                <!-- <button type="btn" class="btn btn-danger btn-sm">
                                                         <i class="far fa-lock"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
+                                                    </button> -->
+                                            </form>
                                         </div>
+                                    </div>
                                     @endauth
                                 </div>
                             </div>
@@ -150,7 +161,7 @@
         <div class="flex-shrink-0 p-3 bg-white" id="side-bar">
             <div class="d-flex_ text-right" id="close_side_bar_wrapper">
                 {{-- <a href="{{ route('home') }}">
-                    <img src="{{ asset('images/Gover-website/logo-other.png') }}" alt="logo" width="50" height="50" />
+                <img src="{{ asset('images/Gover-website/logo-other.png') }}" alt="logo" width="50" height="50" />
                 </a> --}}
                 <button id="close_side_bar" toggle="open">
                     <i class="fa fa-bars"></i>
@@ -165,12 +176,10 @@
                     </a>
                 </li>
                 <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#users-collapse" aria-expanded="false">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#users-collapse" aria-expanded="false">
                         Users
                     </button>
-                    <div class="collapse {{ request()->is('admin/user') || request()->is('admin/user/*') ? 'show' : '' }}"
-                        id="users-collapse">
+                    <div class="collapse {{ request()->is('admin/user') || request()->is('admin/user/*') ? 'show' : '' }}" id="users-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                             <li class="rounded {{ request()->is('admin/user') ? 'link-active' : 'no' }}">
                                 <a href="{{ route('admin.user.index') }}" class="link-dark rounded">List</a>
@@ -182,12 +191,10 @@
                     </div>
                 </li>
                 <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#membership-collapse" aria-expanded="false">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#membership-collapse" aria-expanded="false">
                         Membership
                     </button>
-                    <div class="collapse {{ request()->is('admin/membership/*') ? 'show' : '' }}"
-                        id="membership-collapse">
+                    <div class="collapse {{ request()->is('admin/membership/*') ? 'show' : '' }}" id="membership-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                             <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
                                 <a href="#" class="link-dark rounded">Business Directory</a>
@@ -199,8 +206,7 @@
                     </div>
                 </li>
                 <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#data-collapse" aria-expanded="false">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#data-collapse" aria-expanded="false">
                         Data
                     </button>
                     <div class="collapse {{ request()->is('admin/data/*') ? 'show' : '' }}" id="data-collapse">
@@ -221,12 +227,10 @@
                     </div>
                 </li>
                 <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#resources-collapse" aria-expanded="false">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#resources-collapse" aria-expanded="false">
                         Resources
                     </button>
-                    <div class="collapse {{ request()->is('admin/resources/*') ? 'show' : '' }}"
-                        id="resources-collapse">
+                    <div class="collapse {{ request()->is('admin/resources/*') ? 'show' : '' }}" id="resources-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                             <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
                                 <a href="#" class="link-dark rounded">Business Readinedss Desk</a>
@@ -250,8 +254,7 @@
                     </div>
                 </li>
                 <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#media-collapse" aria-expanded="false">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#media-collapse" aria-expanded="false">
                         Media
                     </button>
                     <div class="collapse {{ request()->is('admin/media/*') ? 'show' : '' }}" id="media-collapse">
@@ -275,12 +278,10 @@
                     </div>
                 </li>
                 <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#about_us-collapse" aria-expanded="false">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#about_us-collapse" aria-expanded="false">
                         About Us
                     </button>
-                    <div class="collapse {{ request()->is('admin/about-us/*') ? 'show' : '' }}"
-                        id="about_us-collapse">
+                    <div class="collapse {{ request()->is('admin/about-us/*') ? 'show' : '' }}" id="about_us-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                             <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
                                 <a href="#" class="link-dark rounded">Staff</a>
@@ -298,8 +299,7 @@
                     </div>
                 </li>
                 <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#cms-collapse" aria-expanded="false">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#cms-collapse" aria-expanded="false">
                         CMS
                     </button>
                     <div class="collapse {{ request()->is('admin/cms/*') ? 'show' : '' }}" id="cms-collapse">
@@ -315,12 +315,10 @@
                     </div>
                 </li>
                 <li class="mb-1 pb-5">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                        data-bs-target="#settings-collapse" aria-expanded="false">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#settings-collapse" aria-expanded="false">
                         Settings
                     </button>
-                    <div class="collapse {{ request()->is('admin/settings/*') ? 'show' : '' }}"
-                        id="settings-collapse">
+                    <div class="collapse {{ request()->is('admin/settings/*') ? 'show' : '' }}" id="settings-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                             <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
                                 <a href="#" class="link-dark rounded">General Settings</a>
@@ -335,57 +333,48 @@
 
             <ul class="list-unstyled p-0" id="side-bar-half">
                 <li class="mb-1 rounded {{ request()->is('admin/dashboard') ? 'link-active' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Home"
-                        data-bs-toggle="tooltip" data-bs-placement="right">
+                    <a href="#" class="btn" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
                         <i class="fa fa-home"></i>
                     </a>
                 </li>
                 <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Users"
-                        data-bs-toggle="tooltip" data-bs-placement="right">
+                    <a href="#" class="btn" aria-current="page" title="Users" data-bs-toggle="tooltip" data-bs-placement="right">
                         <i class="fa fa-users"></i>
                     </a>
                 </li>
                 <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Membership"
-                        data-bs-toggle="tooltip" data-bs-placement="right">
+                    <a href="#" class="btn" aria-current="page" title="Membership" data-bs-toggle="tooltip" data-bs-placement="right">
                         <i class="fa fa-bell"></i>
                     </a>
                 </li>
                 <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Data"
-                        data-bs-toggle="tooltip" data-bs-placement="right">
+                    <a href="#" class="btn" aria-current="page" title="Data" data-bs-toggle="tooltip" data-bs-placement="right">
                         <i class="fa fa-server"></i>
                     </a>
                 </li>
                 <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Resources"
-                        data-bs-toggle="tooltip" data-bs-placement="right">
+                    <a href="#" class="btn" aria-current="page" title="Resources" data-bs-toggle="tooltip" data-bs-placement="right">
                         <i class="fa fa-database"></i>
                     </a>
                 </li>
                 <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Media"
-                        data-bs-toggle="tooltip" data-bs-placement="right">
+                    <a href="#" class="btn" aria-current="page" title="Media" data-bs-toggle="tooltip" data-bs-placement="right">
                         <i class="fa fa-rss"></i>
                     </a>
                 </li>
                 <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="About Us"
-                        data-bs-toggle="tooltip" data-bs-placement="right">
+                    <a href="#" class="btn" aria-current="page" title="About Us" data-bs-toggle="tooltip" data-bs-placement="right">
                         <i class="fa fa-info"></i>
                     </a>
                 </li>
                 <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="CMS"
-                        data-bs-toggle="tooltip" data-bs-placement="right">
+                    <a href="#" class="btn" aria-current="page" title="CMS" data-bs-toggle="tooltip" data-bs-placement="right">
                         <i class="fa fa-cogs"></i>
                     </a>
                 </li>
                 <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Settings"
-                        data-bs-toggle="tooltip" data-bs-placement="right">
-                        <i class="fa fa-cog"></i> 
+                    <a href="#" class="btn" aria-current="page" title="Settings" data-bs-toggle="tooltip" data-bs-placement="right">
+                        <i class="fa fa-cog"></i>
                     </a>
                 </li>
             </ul>
@@ -441,13 +430,40 @@
     <script src="{{ asset('js/parallax.min.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <script type="text/javascript" src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.2/dist/bootstrap-table.min.js"></script>
 
     <script src="{{ asset('js/sidebars.js') }}"></script>
+
+    <script>
+        // Get the button, and when the user clicks on it, execute myFunction
+        document.getElementById("myBtnt").onclick = function() {
+            myFunction()
+        };
+
+        /* myFunction toggles between adding and removing the show class, which is used to hide and show the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdownt").classList.toggle("showt");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+
+            if (!event.target.matches('.dropbtnt')) {
+
+                var dropdowns = document.getElementsByClassName("dropdown-contentt");
+
+                for (let i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('showt')) {
+                        openDropdown.classList.remove('showt');
+                    }
+                }
+            }
+        }
+    </script>
 
     @yield('scripts')
 

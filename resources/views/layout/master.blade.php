@@ -137,22 +137,39 @@
                                         </div>
                                     </div>
                                     @auth
-                                        <div class="d-flex">
-                                            @if(auth()->user()->hasRole('Admin'))
-                                                <a href="{{ route('admin.dashboard') }}" class="btn btn-sm btn-outline-light">Dashboard</a>
-                                            @else
-                                                <a href="{{ route('dashboard') }}" class="btn btn-sm btn-outline-light">Dashboard</a>
-                                            @endif
+                                    <div class="d-flex">
+                                        <!-- @if(auth()->user()->hasRole('Admin'))
+                                        <a href="{{ route('admin.dashboard') }}" class="btn btn-sm btn-outline-light">Dashboard</a>
+                                        @else
+                                        <a href="{{ route('dashboard') }}" class="btn btn-sm btn-outline-light">Dashboard</a>
+                                        @endif -->
 
-                                            <div class="ml-2">
-                                                <form action="{{ route('logout') }}" method="post">
-                                                    @csrf
-                                                    <button type="btn" class="btn btn-danger btn-sm">
+                                        <div class="ml-2">
+                                            <form action="{{ route('logout') }}" method="post">
+                                                @csrf
+                                                <!-- <button type="btn" class="btn btn-danger btn-sm">
                                                         <i class="far fa-lock"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
+                                                    </button> -->
+
+                                                <div class="dropdownt">
+                                                    <div class="drop-img dropbtnt" id="myBtnt">
+                                                        <img src="https://i.postimg.cc/ydFvrvbN/slider3.png" alt="user-picture">
+                                                        <i class="fas fa-chevron-down"></i>
+                                                    </div>
+                                                    <div id="myDropdownt" class="dropdown-contentt">
+                                                        <a href="#"> <i class="far fa-user"></i> Profile</a>
+                                                        @if(auth()->user()->hasRole('Admin'))
+                                                        <a href="{{ route('admin.dashboard') }}"> <i class="far fa-dashboard"></i> Dashboard</a>
+                                                        @else
+                                                        <a href="{{ route('dashboard') }}"> <i class="far fa-dashboard"></i> Dashboard</a>
+                                                        @endif
+
+                                                        <a href="#contact"> <i class="far fa-lock"></i> Logout</a>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
+                                    </div>
                                     @endauth
                                 </div>
                             </div>
@@ -189,6 +206,7 @@
                                                         <li class="dropdown">
                                                             <a href="index.html">About Us <i class="fas fa-chevron-down"></i></a>
                                                             <ul>
+                                                                <li><a href="{{ route('about-us-type', 'introduction') }}">Introduction</a></li>
                                                                 <li><a href="{{ route('about-us-type', 'staff') }}">Staff</a></li>
                                                                 <li>
                                                                     <a href="{{ route('about-us-type', 'council') }}">Council</a>
@@ -534,6 +552,34 @@
     <script src="{{ asset('js/custom.js') }}"></script>
 
     <script type="text/javascript" src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
+
+    <script>
+        // Get the button, and when the user clicks on it, execute myFunction
+        document.getElementById("myBtnt").onclick = function() {
+            myFunction()
+        };
+
+        /* myFunction toggles between adding and removing the show class, which is used to hide and show the dropdown content */
+        function myFunction() {
+            document.getElementById("myDropdownt").classList.toggle("showt");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+
+            if (!event.target.matches('.dropbtnt')) {
+
+                var dropdowns = document.getElementsByClassName("dropdown-contentt");
+
+                for (let i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('showt')) {
+                        openDropdown.classList.remove('showt');
+                    }
+                }
+            }
+        }
+    </script>
 
     @yield('scripts')
 
