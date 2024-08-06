@@ -9,7 +9,7 @@
 
         <h5 class="fw-bold">Add User</h5>
 
-        <div class="py-3">
+        <div class="pt-5">
             <form action="{{ route('admin.user.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('post')

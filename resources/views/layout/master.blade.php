@@ -212,19 +212,22 @@
                                                         <li class="dropdown">
                                                             <a href="index.html">About Us <i class="fas fa-chevron-down"></i></a>
                                                             <ul>
-                                                                <li><a href="{{ route('about-us-type', 'introduction') }}">Introduction</a>
+
+                                                                <li><a
+                                                                        href="{{ route('about-us.introduction') }}">Introduction</a>
                                                                 </li>
-                                                                <li><a href="{{ route('about-us-type', 'staff') }}">Staff</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="{{ route('about-us-type', 'council') }}">Council</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="{{ route('about-us-type', 'history') }}">History</a>
+                                                                <li><a
+                                                                        href="{{ route('about-us.staff') }}">Staff</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="{{ route('about-us-type', 'committees') }}">Committees</a>
+                                                                    <a
+                                                                        href="{{ route('about-us.council') }}">Council</a>
                                                                 </li>
+                                                                <li>
+                                                                    <a
+                                                                        href="{{ route('about-us.history') }}">History</a>
+                                                                </li>
+
 
                                                             </ul>
                                                         </li>

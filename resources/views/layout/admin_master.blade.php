@@ -203,6 +203,9 @@
                     <div class="collapse {{ request()->is('admin/membership/*') ? 'show' : '' }}" id="membership-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                             <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
+                                <a href="#" class="link-dark rounded">Type</a>
+                            </li>
+                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
                                 <a href="#" class="link-dark rounded">Business Directory</a>
                             </li>
                             <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">

@@ -45,10 +45,17 @@ Route::prefix('admin')->group(function () {
 
 Route::get('/', [FrontController::class, 'index']);
 Route::get('home', [FrontController::class, 'index'])->name('home');
-Route::get('about-us', [FrontController::class, 'aboutUs'])->name('about-us');
-Route::get('about-us/{id}', [FrontController::class, 'aboutUsType'])->name('about-us-type');
 Route::get('contact-us', [FrontController::class, 'contactUs'])->name('contact-us');
 Route::get('guyana-economy', [FrontController::class, 'guyanaEconomy'])->name('guyana-economy');
+
+Route::get('about-us', [FrontController::class, 'aboutUs'])->name('about-us');
+Route::prefix('about-us')->name('about-us.')->group(function () {
+    Route::get('introduction', [FrontController::class, 'aboutUs_Introduction'])->name('introduction');
+    Route::get('staff', [FrontController::class, 'aboutUs_Staff'])->name('staff');
+    Route::get('council', [FrontController::class, 'aboutUs_Council'])->name('council');
+    Route::get('history', [FrontController::class, 'aboutUs_History'])->name('history');
+    Route::get('committeess', [FrontController::class, 'aboutUs_Committeess'])->name('committeess');
+});
 
 Route::prefix('membership')->name('membership.')->group(function () {
     Route::get('business-directory', [FrontController::class, 'membership_BusinessDirectory'])->name('business-directory');

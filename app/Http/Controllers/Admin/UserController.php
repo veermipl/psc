@@ -32,7 +32,7 @@ class UserController extends Controller
             'role' => $request->role ?? null,
             'status' => $request->status ?? null,
         ];
-        $userList = User::with(['membership'])->orderBy('name', 'asc')
+        $userList = User::with(['membership'])->orderBy('id', 'asc')
             ->where(function (Builder $query) use ($filterValues, $request) {
                 $query->when($request->filled('name'), function (Builder $q) use ($filterValues) {
                     $q->where('name', 'like', '%' . $filterValues['name'] . '%');
