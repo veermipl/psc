@@ -1,0 +1,40 @@
+.main-header {
+    position: fixed !important;
+    height: 60px !important;
+    background: #072d74;
+}
+
+.fw-bold {
+    font-weight: 600;
+}
+
+.btn-custom {
+    color: white;
+    background: #072d74
+}
+
+.btn-outline-custom {
+    color: #072d74;
+    background: white !important;
+    border: 1px solid #072d74;
+}
+
+.btn-outline-custom:hover {
+    color: white;
+    background: #072d74 !important;
+    border: 1px solid #072d74;
+}
+
+.table-borderless {
+    border: none !important
+}
+
+.tableOptions span,
+#userStatus {
+    cursor: pointer;
+}
+
+.filter-wrapper {
+    border-radius: 7px;
+    border: 1px solid #072d74
+}

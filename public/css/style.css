@@ -61,7 +61,7 @@ body {
     line-height: 26px;
     color: var(--thm-gray);
     font-weight: 400;
-    background: #fff;
+    background: #163a7d;
     font-family: var(--body-font);
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: antialiased;
@@ -5961,6 +5961,7 @@ tr:nth-child(even) {
 
 #content {
     margin-left: 250px;
+    margin-top: 60px;
     padding: 0 7px;
     height: 95vh;
 }
@@ -5969,6 +5970,7 @@ tr:nth-child(even) {
     width: 250px;
     max-width: 250px;
     position: fixed;
+    top: 60px;
     height: 100%;
     overflow: hidden;
     overflow-y: scroll;
@@ -5981,7 +5983,7 @@ tr:nth-child(even) {
 }
 
 .link-active {
-    background: #343a40 !important
+    background: #072d74 !important
 }
 
 .link-active a {
@@ -6268,6 +6270,10 @@ textarea.input {
 }
 
 .btn:hover {
+}
+
+.btn:focus {
+    box-shadow:none !important;
     background-color: #FFC107;
     color: #fff;
 }

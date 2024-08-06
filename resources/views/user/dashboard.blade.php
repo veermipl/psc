@@ -64,7 +64,7 @@
 
     <div id="fileContent"></div>
 
-    <section class="log-sect dashboard-data">
+    <section class="log-sect dashboard-data bg-white">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 ">

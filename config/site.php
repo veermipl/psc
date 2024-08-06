@@ -4,10 +4,10 @@ return [
     'status' => [
         [
             'name' => 'Active',
-            'id' => '1'
+            'value' => '1'
         ], [
             'name' => 'Not Active',
-            'id' => '0'
+            'value' => '0'
         ]
     ],
     'roles' => ['Admin', 'User'],
