@@ -8,7 +8,6 @@
 })()
 
 $(document).ready(function () {
-  $('#loader').hide();
 
   $(document).on('click', '#close_side_bar', function (e) {
     e.preventDefault();

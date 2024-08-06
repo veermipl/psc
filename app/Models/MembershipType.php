@@ -5,11 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Settings extends Model
+class MembershipType extends Model
 {
     use HasFactory;
 
-    protected $table = 'settings';
+    protected $table = "membership_types";
 
-    protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'status',
+    ];
 }

@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use App\Models\MembershipType;
+use Illuminate\Validation\Rules;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Auth\Events\Registered;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Storage;
 
 class RegisteredUserController extends Controller
 {
@@ -21,7 +22,11 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $membershipList = MembershipType::orderBy('name', 'asc')->get();
+
+        $data['membershipList'] = $membershipList;
+
+        return view('auth.register', $data);
     }
 
     /**
@@ -32,14 +37,15 @@ class RegisteredUserController extends Controller
    public function store(Request $request): RedirectResponse
     {
         // Validate the request
-        $request->validate([
+        $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'number' => ['required', 'string', 'max:12'],
-            'membership_type' => ['required', 'string', 'in:corporate,sectoral_corporate'],
+            'membership_type' => ['required'],
             'form_pdf' => ['required', 'mimes:pdf', 'max:2048'], // max size in KB
         ]);
+        dd($validated);
 
         $formPdfPath = null;
 
