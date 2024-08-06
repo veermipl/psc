@@ -125,7 +125,7 @@
                                                         <form action="{{ route('logout') }}" method="post">
                                                             @csrf
                                                             @method('post')
-                                                            <button class="btn btn-sm btn-danger btn-block">
+                                                            <button class=" btn-block" style="padding-left: 15px; text-align:start;">
                                                                 <i class="far fa-lock"></i> Logout
                                                             </button>
                                                         </form>
@@ -173,7 +173,7 @@
                     <i class="fa fa-bars"></i>
                 </button>
             </div>
-            <li class="border-top my-3"></li>
+            <li class="border-top my-1"></li>
 
             <ul class="list-unstyled p-0" id="side-bar-full">
                 <li class="mb-1 rounded {{ request()->is('admin/dashboard') ? 'link-active' : '' }}">
