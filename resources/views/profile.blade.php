@@ -5,8 +5,6 @@
 
 @section('content')
 
-    <div class="p-4 mb-3 bg-white">
-
-    </div>
+    <div class="p-3 bg-white"></div>
 
 @endsection

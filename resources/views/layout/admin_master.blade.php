@@ -12,6 +12,7 @@
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/magnific-popup.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/admin.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/responsive.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/sidebars.css') }}" rel="stylesheet" />
 
@@ -24,6 +25,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.2/dist/bootstrap-table.min.css">
 
     <style>
         body {
@@ -144,7 +147,7 @@
         <!-- End Main Header -->
 
 
-        <div class="flex-shrink-0 p-3 bg-light" id="side-bar">
+        <div class="flex-shrink-0 p-3 bg-white" id="side-bar">
             <div class="d-flex_ text-right" id="close_side_bar_wrapper">
                 {{-- <a href="{{ route('home') }}">
                     <img src="{{ asset('images/Gover-website/logo-other.png') }}" alt="logo" width="50" height="50" />
@@ -389,7 +392,6 @@
         </div>
 
 
-
         <div id="content">
             {{-- <header class="bg-white shadow mb-3">
                 <div class="py-3 px-4">
@@ -442,9 +444,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-    <script src="{{ asset('js/sidebars.js') }}"></script>
-
     <script type="text/javascript" src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.2/dist/bootstrap-table.min.js"></script>
+
+    <script src="{{ asset('js/sidebars.js') }}"></script>
 
     @yield('scripts')
 

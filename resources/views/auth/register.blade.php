@@ -257,9 +257,14 @@
                                         <select id="membership_type" class="form-control" name="membership_type"
                                             required>
                                             <option value="" disabled selected>Select Membership Type</option>
-                                            <option value="corporate">Corporate</option>
-                                            <option value="sectoral_corporate">Sectoral Corporate</option>
+                                            @foreach ($membershipList as $membership)
+                                                <option value="{{ $membership['id'] }}"
+                                                    {{ old('membership_type') == $membership['id'] ? 'selected' : '' }}>
+                                                    {{ $membership['name'] }}
+                                                </option>
+                                            @endforeach
                                         </select>
+
                                         @error('membership_type')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror

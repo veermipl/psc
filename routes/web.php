@@ -29,6 +29,16 @@ Route::get('/clear-cache', function () {
     return "Cache cleared successfully";
 });
 
+Route::get('key-gen', function () {
+    Artisan::call('key:generate');
+    return "encryption key generated successfully";
+});
+
+Route::get('migrate', function () {
+    Artisan::call('migrate:fresh --seed');
+    return "migration successfully";
+});
+
 Route::prefix('admin')->group(function () {
     
 });
@@ -90,6 +100,8 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
     Route::resource('user', AdminUserController::class);
+    Route::post('user/filter', [AdminUserController::class, 'index'])->name('user.filter');
+    Route::post('user/export', [AdminUserController::class, 'export'])->name('user.export');
 
     Route::prefix('cms')->name('cms.')->group(function() {
         Route::get('contact-us', [CMSController::class, 'contactUs'])->name('contact-us');
