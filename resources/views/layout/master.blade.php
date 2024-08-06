@@ -16,10 +16,8 @@
 
     <link rel="icon" href="images/favicon.png" type="image/x-icon" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&amp;display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.css">
@@ -94,8 +92,7 @@
                                     <ul>
                                         <li class="desk_logo">
                                             <a href="{{ route('home') }}">
-                                                <img src="{{ asset('images/Gover-website/logo-other.png') }}"
-                                                    alt="logo" />
+                                                <img src="{{ asset('images/Gover-website/logo-other.png') }}" alt="logo" />
                                             </a>
                                         </li>
                                     </ul>
@@ -103,8 +100,7 @@
                                 <div class="header_top_two_box pull-right">
                                     <div class="opening_hour">
                                         <div class="js">
-                                            <div class="language-picker js-language-picker"
-                                                data-trigger-class="btn btn--subtle">
+                                            <div class="language-picker js-language-picker" data-trigger-class="btn btn--subtle">
                                                 <!-- <form action="" class="language-picker__form">
                                                     <select name="language-picker-select" id="language-picker-select">
                                                         <option lang="de" value="deutsch">Deutsch</option>
@@ -132,60 +128,54 @@
                                             <a href="#"><i class="fab fa-dribbble"></i></a>
                                             <a href="#"><i class="fab fa-instagram"></i></a> -->
                                         <div class="topbar-one__right">
-                                            <a href="#" class="topbar-one__guide-btn" id="btn-increase"
-                                                title="Increase font size" style="font-size: 17px">
+                                            <a href="#" class="topbar-one__guide-btn" id="btn-increase" title="Increase font size" style="font-size: 17px">
                                                 +A</a>
-                                            <a href="#" class="topbar-one__guide-btn" id="btn-origs"
-                                                title="Reset font size" style="font-size: 17px">A
+                                            <a href="#" class="topbar-one__guide-btn" id="btn-origs" title="Reset font size" style="font-size: 17px">A
                                             </a>
-                                            <a href="#" class="topbar-one__guide-btn" id="btn-decrease"
-                                                title="Decrease font size" style="font-size: 17px">
+                                            <a href="#" class="topbar-one__guide-btn" id="btn-decrease" title="Decrease font size" style="font-size: 17px">
                                                 -A</a>
                                         </div>
                                     </div>
                                     @auth
-                                        <div class="d-flex">
-                                            <!-- @if (auth()->user()->hasRole('Admin'))
+                                    <div class="d-flex">
+                                        <!-- @if (auth()->user()->hasRole('Admin'))
                                                 <a href="{{ route('admin.dashboard') }}" class="btn btn-sm btn-outline-light">Dashboard</a>
                                             @else
                                                 <a href="{{ route('dashboard') }}" class="btn btn-sm btn-outline-light">Dashboard</a>
                                             @endif -->
 
-                                            <div class="ml-2">
-                                                <form action="{{ route('logout') }}" method="post">
-                                                    @csrf
-                                                    <!-- <button type="btn" class="btn btn-danger btn-sm">
+                                        <div class="ml-2">
+                                            <form action="{{ route('logout') }}" method="post">
+                                                @csrf
+                                                <!-- <button type="btn" class="btn btn-danger btn-sm">
                                                             <i class="far fa-lock"></i>
                                                         </button> -->
 
-                                                    <div class="dropdownt">
-                                                        <div class="drop-img dropbtnt" id="myBtnt">
-                                                            <img src="https://i.postimg.cc/ydFvrvbN/slider3.png"
-                                                                alt="user-picture">
-                                                            <i class="fas fa-chevron-down"></i>
-                                                        </div>
-                                                        <div id="myDropdownt" class="dropdown-contentt">
-                                                            <a href="#"> <i class="far fa-user"></i> Profile</a>
-                                                            @if (auth()->user()->hasRole('Admin'))
-                                                                <a href="{{ route('admin.dashboard') }}"> <i
-                                                                        class="far fa-dashboard"></i> Dashboard</a>
-                                                            @else
-                                                                <a href="{{ route('dashboard') }}"> <i
-                                                                        class="far fa-dashboard"></i> Dashboard</a>
-                                                            @endif
-
-                                                            <form action="{{ route('logout') }}" method="post">
-                                                                @csrf
-                                                                @method('post')
-                                                                <button class="btn btn-sm btn-danger btn-block">
-                                                                    <i class="far fa-lock"></i> Logout
-                                                                </button>
-                                                            </form>
-                                                        </div>
+                                                <div class="dropdownt">
+                                                    <div class="drop-img dropbtnt" id="myBtnt">
+                                                        <img src="https://i.postimg.cc/ydFvrvbN/slider3.png" alt="user-picture">
+                                                        <i class="fas fa-chevron-down"></i>
                                                     </div>
-                                                </form>
-                                            </div>
+                                                    <div id="myDropdownt" class="dropdown-contentt">
+                                                        <a href="#"> <i class="far fa-user"></i> Profile</a>
+                                                        @if (auth()->user()->hasRole('Admin'))
+                                                        <a href="{{ route('admin.dashboard') }}"> <i class="far fa-dashboard"></i> Dashboard</a>
+                                                        @else
+                                                        <a href="{{ route('dashboard') }}"> <i class="far fa-dashboard"></i> Dashboard</a>
+                                                        @endif
+
+                                                        <form action="{{ route('logout') }}" method="post">
+                                                            @csrf
+                                                            @method('post')
+                                                            <button class=" btn-sm btn-block" style="padding-left: 15px; text-align:start;">
+                                                                <i class="far fa-lock"></i> Logout
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
+                                    </div>
                                     @endauth
                                 </div>
                             </div>
@@ -202,9 +192,7 @@
                             <div class="header_upper_inner clearfix">
                                 <div class="header_upper_one_box pull-left m-show">
                                     <div class="logo">
-                                        <a href="{{ route('home') }}"><img
-                                                src="{{ asset('images/Gover-website/logo-other.png') }}"
-                                                alt="" title="" /></a>
+                                        <a href="{{ route('home') }}"><img src="{{ asset('images/Gover-website/logo-other.png') }}" alt="" title="" /></a>
                                     </div>
                                 </div>
                                 <div class="header_upper_two_box one pull-right">
@@ -222,26 +210,20 @@
                                                             <a href="{{ route('home') }}">Home</a>
                                                         </li>
                                                         <li class="dropdown">
-                                                            <a href="index.html">About Us <i
-                                                                    class="fas fa-chevron-down"></i></a>
+                                                            <a href="index.html">About Us <i class="fas fa-chevron-down"></i></a>
                                                             <ul>
-                                                                <li><a
-                                                                        href="{{ route('about-us-type', 'introduction') }}">Introduction</a>
+                                                                <li><a href="{{ route('about-us-type', 'introduction') }}">Introduction</a>
                                                                 </li>
-                                                                <li><a
-                                                                        href="{{ route('about-us-type', 'staff') }}">Staff</a>
+                                                                <li><a href="{{ route('about-us-type', 'staff') }}">Staff</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a
-                                                                        href="{{ route('about-us-type', 'council') }}">Council</a>
+                                                                    <a href="{{ route('about-us-type', 'council') }}">Council</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a
-                                                                        href="{{ route('about-us-type', 'history') }}">History</a>
+                                                                    <a href="{{ route('about-us-type', 'history') }}">History</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a
-                                                                        href="{{ route('about-us-type', 'committees') }}">Committees</a>
+                                                                    <a href="{{ route('about-us-type', 'committees') }}">Committees</a>
                                                                 </li>
 
                                                             </ul>
@@ -253,23 +235,21 @@
                                                                 <i class="fas fa-chevron-down"></i></a>
                                                             <ul>
                                                                 @guest
-                                                                    <li>
-                                                                        <a href="{{ route('login') }}">Members Sign-in</a>
-                                                                    </li>
+                                                                <li>
+                                                                    <a href="{{ route('login') }}">Members Sign-in</a>
+                                                                </li>
                                                                 @endguest
                                                                 <li>
-                                                                    <a
-                                                                        href="{{ route('membership.business-directory') }}">Business
+                                                                    <a href="{{ route('membership.business-directory') }}">Business
                                                                         Directory</a>
                                                                 </li>
                                                                 @guest
-                                                                    <li>
-                                                                        <a href="{{ route('register') }}">Join Now</a>
-                                                                    </li>
+                                                                <li>
+                                                                    <a href="{{ route('register') }}">Join Now</a>
+                                                                </li>
                                                                 @endguest
                                                                 <li>
-                                                                    <a
-                                                                        href="{{ route('membership.member-benefits') }}">Member
+                                                                    <a href="{{ route('membership.member-benefits') }}">Member
                                                                         Benefits</a>
                                                                 </li>
 
@@ -342,25 +322,21 @@
                                                                 <i class="fas fa-chevron-down"></i>
                                                             </a>
                                                             <ul>
-                                                                <li><a
-                                                                        href="{{ route('resources.business-readiness-desk') }}">Business
+                                                                <li><a href="{{ route('resources.business-readiness-desk') }}">Business
                                                                         Readiness Desk </a></li>
                                                                 <li>
-                                                                    <a
-                                                                        href="{{ route('resources.go-invest') }}">Go-Invest</a>
+                                                                    <a href="{{ route('resources.go-invest') }}">Go-Invest</a>
                                                                 </li>
                                                                 <li>
                                                                     <a href="{{ route('resources.idb-invest') }}">IDB
                                                                         Invest</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a
-                                                                        href="{{ route('resources.procurement-process-in-guyana') }}">Procurement
+                                                                    <a href="{{ route('resources.procurement-process-in-guyana') }}">Procurement
                                                                         Process in Guyana</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a
-                                                                        href="{{ route('resources.certificate-of-origins') }}">Certificate
+                                                                    <a href="{{ route('resources.certificate-of-origins') }}">Certificate
                                                                         of Origins</a>
                                                                 </li>
                                                                 <li>
@@ -401,8 +377,7 @@
                                         </div>
                                     </div>
                                     <div class="icon-search-box">
-                                        <button class="dropdown-toggle" id="searchDropdown" data-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
+                                        <button class="dropdown-toggle" id="searchDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fa fa-search" aria-hidden="true"></i>
                                         </button>
                                         <form action="#" class="dropdown-menu" aria-labelledby="searchDropdown">
@@ -427,8 +402,7 @@
                         <div class="header-column">
                             <div class="logo-box">
                                 <div class="logo">
-                                    <a href="index.html"><img src="images/Gover-website/logo-other.png"
-                                            alt="" title="" /></a>
+                                    <a href="index.html"><img src="images/Gover-website/logo-other.png" alt="" title="" /></a>
                                 </div>
                             </div>
                         </div>
@@ -468,10 +442,10 @@
         <!-- End Main Header -->
 
         @if (session('status') == 'verification-link-sent')
-            <div class="flashMsg alertSuccess">
-                <strong>A new verification link has been sent to the email address you provided during
-                    registration.</strong>
-            </div>
+        <div class="flashMsg alertSuccess">
+            <strong>A new verification link has been sent to the email address you provided during
+                registration.</strong>
+        </div>
         @endif
 
 
@@ -525,12 +499,10 @@
                                     <i class="fas fa-map-marker-alt" style="margin-right: 10px"></i>
                                     157 Waterloo St, Georgetown, Guyana
                                 </p>
-                                <a href="tel:+592-223-0875"><i class="fas fa-phone"
-                                        style="margin-right: 10px"></i>+592-223-0875</a>
+                                <a href="tel:+592-223-0875"><i class="fas fa-phone" style="margin-right: 10px"></i>+592-223-0875</a>
                                 <br />
                                 <a href="mailto:office@psc.org.gy">
-                                    <i class="fas fa-envelope"
-                                        style="margin-right: 10px"></i>office@psc.org.gy</a><br />
+                                    <i class="fas fa-envelope" style="margin-right: 10px"></i>office@psc.org.gy</a><br />
                             </div>
                         </div>
                     </div>
@@ -540,10 +512,7 @@
                                 <h3>Private Sector Commission</h3>
                             </div>
                             <ul class="footer-widget-gallery-list list-unstyled">
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.6022967381095!2d-58.160602499999996!3d6.818129600000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8dafef0e7ef8479b%3A0x7bf69734452f5a55!2sPrivate%20Sector%20Commission!5e0!3m2!1sen!2sin!4v1707730504072!5m2!1sen!2sin"
-                                    width="100%" height="170" style="border: 0" allowfullscreen=""
-                                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.6022967381095!2d-58.160602499999996!3d6.818129600000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8dafef0e7ef8479b%3A0x7bf69734452f5a55!2sPrivate%20Sector%20Commission!5e0!3m2!1sen!2sin!4v1707730504072!5m2!1sen!2sin" width="100%" height="170" style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </ul>
                         </div>
                     </div>
