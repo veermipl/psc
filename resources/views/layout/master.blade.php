@@ -138,7 +138,11 @@
                                     </div>
                                     @auth
                                         <div class="d-flex">
-                                            <a href="{{ route('dashboard') }}" class="btn btn-sm btn-outline-light">Dashboard</a>
+                                            @if(auth()->user()->hasRole('Admin'))
+                                                <a href="{{ route('admin.dashboard') }}" class="btn btn-sm btn-outline-light">Dashboard</a>
+                                            @else
+                                                <a href="{{ route('dashboard') }}" class="btn btn-sm btn-outline-light">Dashboard</a>
+                                            @endif
 
                                             <div class="ml-2">
                                                 <form action="{{ route('logout') }}" method="post">

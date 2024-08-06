@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\user;
+namespace App\Http\Controllers\User;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;

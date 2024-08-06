@@ -337,16 +337,52 @@
                         <i class="fa fa-home"></i>
                     </a>
                 </li>
-                <li class="mb-1 rounded {{ request()->is('admin/user') || request()->is('admin/user/*') ? 'show' : '' }}">
+                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
                     <a href="#" class="btn" aria-current="page" title="Users"
                         data-bs-toggle="tooltip" data-bs-placement="right">
                         <i class="fa fa-users"></i>
                     </a>
                 </li>
-                <li class="mb-1 rounded {{ request()->is('admin/user') || request()->is('admin/user/*') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Users"
+                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
+                    <a href="#" class="btn" aria-current="page" title="Membership"
                         data-bs-toggle="tooltip" data-bs-placement="right">
-                        <i class="fa fa-users"></i>
+                        <i class="fa fa-bell"></i>
+                    </a>
+                </li>
+                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
+                    <a href="#" class="btn" aria-current="page" title="Data"
+                        data-bs-toggle="tooltip" data-bs-placement="right">
+                        <i class="fa fa-server"></i>
+                    </a>
+                </li>
+                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
+                    <a href="#" class="btn" aria-current="page" title="Resources"
+                        data-bs-toggle="tooltip" data-bs-placement="right">
+                        <i class="fa fa-database"></i>
+                    </a>
+                </li>
+                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
+                    <a href="#" class="btn" aria-current="page" title="Media"
+                        data-bs-toggle="tooltip" data-bs-placement="right">
+                        <i class="fa fa-rss"></i>
+                    </a>
+                </li>
+                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
+                    <a href="#" class="btn" aria-current="page" title="About Us"
+                        data-bs-toggle="tooltip" data-bs-placement="right">
+                        <i class="fa fa-info"></i>
+                    </a>
+                </li>
+                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
+                    <a href="#" class="btn" aria-current="page" title="CMS"
+                        data-bs-toggle="tooltip" data-bs-placement="right">
+                        <i class="fa fa-cogs"></i>
+                    </a>
+                </li>
+                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
+                    <a href="#" class="btn" aria-current="page" title="Settings"
+                        data-bs-toggle="tooltip" data-bs-placement="right">
+                        <i class="fa fa-cog"></i> 
                     </a>
                 </li>
             </ul>
@@ -355,11 +391,11 @@
 
 
         <div id="content">
-            <header class="bg-white shadow mb-3">
+            {{-- <header class="bg-white shadow mb-3">
                 <div class="py-3 px-4">
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight">@yield('header')</h2>
                 </div>
-            </header>
+            </header> --}}
 
             @yield('content')
         </div>

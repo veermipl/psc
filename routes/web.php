@@ -2,11 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
-use App\Http\Controllers\admin\CMSController;
-use App\Http\Controllers\user\UserController;
+use App\Http\Controllers\Admin\CMSController;
+use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\front\FrontController;
-use App\Http\Controllers\admin\UserController as AdminUserController;
+use App\Http\Controllers\Front\FrontController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 /*
 |--------------------------------------------------------------------------
