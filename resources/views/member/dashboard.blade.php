@@ -139,7 +139,7 @@
                 var dataId = $(this).attr('data-id');
 
                 $.ajax({
-                    url: '{{ route('file-details') }}',
+                    url: '{{ route("member.file-details") }}',
                     method: 'POST',
                     data: {
                         _method: 'post',
@@ -166,7 +166,7 @@
                 var dataId = $(this).attr('data-id');
 
                 $.ajax({
-                    url: '{{ route('file-download') }}',
+                    url: '{{ route("member.file-download") }}',
                     method: 'POST',
                     data: {
                         _method: 'post',

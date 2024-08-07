@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title', config('app.name') . ' || Password Reset')
+@section('title', 'Password Reset')
 @section('content')
     <section class="log-sect">
         <div class="container">

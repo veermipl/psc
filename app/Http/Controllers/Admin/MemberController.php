@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Builder;
-use App\Http\Requests\admin\user\ExporUserRequest;
-use App\Http\Requests\admin\user\StoreUserRequest;
-use App\Http\Requests\admin\user\UpdateUserRequest;
-use App\Http\Requests\admin\user\UpdateUserStatusRequest;
+use App\Http\Requests\admin\member\ExporMemberRequest;
+use App\Http\Requests\admin\member\StoreMemberRequest;
+use App\Http\Requests\admin\member\UpdateMemberRequest;
+use App\Http\Requests\admin\member\UpdateMemberStatusRequest;
 
-class UserController extends Controller
+class MemberController extends Controller
 {
     use UserTraits;
 
@@ -25,21 +25,29 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $this->authorize('user_list');
+        $this->authorize('member_list');
 
         $filterValues = [
             'name' => $request->name ?? null,
+            'email' => $request->email ?? null,
+            'membership_type' => $request->membership_type ?? null,
             'role' => $request->role ?? null,
             'status' => $request->status ?? null,
         ];
-        $userList = User::orderBy('id', 'desc')
+        $userList = User::with(['membership'])->orderBy('id', 'desc')
             ->whereHas('role', function (Builder $x) {
-                $x->whereNotIn('role_id', [2]);
+                $x->where('role_id', 2);
             })
             ->where(function (Builder $query) use ($filterValues, $request) {
                 $query->when($request->filled('name'), function (Builder $q) use ($filterValues) {
                     $q->where('name', 'like', '%' . $filterValues['name'] . '%');
                 })
+                    ->when($request->filled('email'), function (Builder $q) use ($filterValues) {
+                        $q->where('email', $filterValues['email']);
+                    })
+                    ->when($request->filled('membership_type'), function (Builder $q) use ($filterValues) {
+                        $q->where('membership_type', $filterValues['membership_type']);
+                    })
                     ->when($request->filled('role'), function (Builder $q) use ($filterValues) {
                         $q->whereHas('role', function (Builder $x) use ($filterValues) {
                             $x->where('role_id', $filterValues['role']);
@@ -50,19 +58,20 @@ class UserController extends Controller
                     });
             })
             ->get();
-        $roleList = Role::orderBy('name', 'asc')->whereNotIn('id', [2])->get();
+
+        $membershipList = MembershipType::orderBy('name', 'asc')->get();
 
         $data['filterValues'] = $filterValues;
         $data['userList'] = $userList;
         $data['export_id'] = $userList->pluck('id')->toArray();
-        $data['roleList'] = $roleList;
+        $data['membershipList'] = $membershipList;
 
-        return view('admin.user.index', $data);
+        return view('admin.member.index', $data);
     }
 
-    public function export(ExporUserRequest $request)
+    public function export(ExporMemberRequest $request)
     {
-        $this->authorize('user_export');
+        $this->authorize('member_export');
 
         $validated = $request->validated();
 
@@ -123,113 +132,132 @@ class UserController extends Controller
      */
     public function create()
     {
-        $this->authorize('user_create');
+        $this->authorize('member_create');
 
-        $data['roleList'] = Role::orderBy('name', 'asc')->whereNotIn('id', [2])->get();
+        $data['membershipList'] = MembershipType::orderBy('name', 'asc')->get();
 
-        return view('admin.user.create', $data);
+        return view('admin.member.create', $data);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreUserRequest $request)
+    public function store(StoreMemberRequest $request)
     {
-        $this->authorize('user_create');
+        $this->authorize('member_create');
 
         $validated = $request->validated();
+
+        $formPdfPath = null;
+        if ($request->hasFile('form_pdf')) {
+            $file = $request->file('form_pdf');
+
+            $formPdfPath = $file->store('uploaded_forms', 'public');
+        }
+        $validated['form_pdf'] = $formPdfPath;
 
         DB::transaction(function () use ($validated) {
             $user = User::create([
                 'name' => $validated['name'],
+                'membership_type' => $validated['membership_type'],
                 'email' => $validated['email'],
-                'password' => Hash::make($validated['password']),
+                'mobile_number' => $validated['contact'],
+                'form_pdf' => $validated['form_pdf'],
                 'status' => $validated['status'],
+                'password' => Hash::make($validated['password']),
             ]);
 
-            $user->role()->sync(Role::where('id', $validated['role'])->pluck('id')->toArray());
+            $user->role()->sync(Role::where('name', 'Member')->pluck('id')->toArray());
             $this->InitialUserRolePermission($user);
         });
 
-        return redirect()->route('admin.user.index')->with('status', 'User created successfully');
+        return redirect()->route('admin.member.index')->with('status', 'Member created successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(User $member)
     {
         $this->authorize('user_view');
 
-        $data['user'] = $user;
+        $data['user'] = $member;
 
-        return view('admin.user.view', $data);
+        return view('admin.member.view', $data);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit(User $member)
     {
-        $this->authorize('user_edit');
+        $this->authorize('member_edit');
 
-        $userRoles = $user->role ? $user->role->pluck('id')->toArray() : [];
+        $data['user'] = $member;
+        $data['membershipList'] = MembershipType::orderBy('name', 'asc')->get();
 
-        $data['user'] = $user;
-        $data['userRoles'] = $userRoles;
-        $data['roleList'] = Role::orderBy('name', 'asc')->whereNotIn('id', [2])->get();
-
-        return view('admin.user.edit', $data);
+        return view('admin.member.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateMemberRequest $request, User $member)
     {
-        $this->authorize('user_edit');
+        $this->authorize('member_edit');
 
         $validated = $request->validated();
+
+        $formPdfPath = null;
+        if ($request->hasFile('form_pdf')) {
+            $file = $request->file('form_pdf');
+
+            $formPdfPath = $file->store('uploaded_forms', 'public');
+        }
+        $validated['form_pdf'] = $formPdfPath;
 
         if ($request->filled('password')) {
             $validated['password'] = Hash::make($validated['password']);
         } else {
-            $validated['password'] = $user->password;
+            $validated['password'] = $member->password;
         }
 
-        DB::transaction(function () use ($user, $validated) {
-            $user->update([
+        DB::transaction(function () use ($member, $validated) {
+            $member->update([
                 'name' => $validated['name'],
-                'status' => $validated['status'],
+                'membership_type' => $validated['membership_type'],
+                // 'email' => $validated['email'],
+                'mobile_number' => $validated['contact'],
+                'form_pdf' => $validated['form_pdf'],
                 'password' => $validated['password'],
+                'status' => $validated['status'],
             ]);
-
-            //assign role
         });
 
-        return redirect()->route('admin.user.index')->with('success', 'User Updated');
+        return redirect()->route('admin.member.index')->with('success', 'Member Updated');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(User $member)
     {
-        $this->authorize('user_delete');
+        $this->authorize('member_delete');
+        return $member;
 
-        DB::transaction(function () use ($user) {
-            $user->delete();
+        DB::transaction(function () use ($member) {
+            $member->delete();
         });
 
         $data['error'] = false;
-        $data['msg'] = 'User Deleted';
+        $data['msg'] = 'Member Deleted';
 
         return response()->json($data, 200);
     }
 
-    public function statusToggle(UpdateUserStatusRequest $request)
+    public function statusToggle(UpdateMemberStatusRequest $request)
     {
-        $this->authorize('user_status_edit');
+        $this->authorize('member_status_edit');
 
         $validated = $request->validated();
 
@@ -243,7 +271,7 @@ class UserController extends Controller
         });
 
         $data['error'] = false;
-        $data['msg'] = 'User status updated';
+        $data['msg'] = 'Member status updated';
 
         return response()->json($data, 200);
     }

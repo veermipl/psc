@@ -1,16 +1,16 @@
 @extends('layout.admin_master')
 
-@section('title', 'User - Create')
-@section('header', 'Create User')
+@section('title', 'Member - Create')
+@section('header', 'Create Member')
 
 @section('content')
 
     <div class="p-3 bg-white">
 
-        <h5 class="fw-bold">Create User</h5>
+        <h5 class="fw-bold">Create Member</h5>
 
         <div class="pt-5">
-            <form action="{{ route('admin.user.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin.member.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('post')
 
@@ -26,11 +26,60 @@
                     </div>
 
                     <div class="form-group col-md-6">
+                        <label for="membership_type">Membership Type <span class="text-danger">*</span></label>
+                        <select name="membership_type" class="form-control">
+                            <option hidden value="">Select Membership Type</option>
+                            @foreach ($membershipList as $membership)
+                                <option value="{{ $membership['id'] }}"
+                                    {{ old('membership_type') == $membership['id'] ? 'selected' : '' }}>
+                                    {{ $membership['name'] }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        @error('membership_type')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="d-flex">
+                    <div class="form-group col-md-6">
                         <label for="email">Email <span class="text-danger">*</span></label>
                         <input type="email" id="email" class="form-control" name="email" value="{{ old('email') }}"
                             placeholder="Enter email" maxlength="50">
 
                         @error('email')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="number">Contact Number <span class="text-danger">*</span></label>
+                        <input type="text" id="contact" class="form-control" name="contact"
+                            value="{{ old('contact') }}" placeholder="Enter contact"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+
+                        @error('contact')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="d-flex">
+                    <div class="form-group col-md-6">
+                        <label for="form_pdf">Upload filled form <span class="text-danger">*</span></label>
+                        <input type="file" id="form_pdf" class="form-control" name="form_pdf" accept="application/pdf">
+
+                        @error('form_pdf')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="supported_files">Supported Files <span class="text-danger">*</span></label>
+
+                        @error('supported_files')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
@@ -77,24 +126,11 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="confirmed">Role <span class="text-danger">*</span></label>
-                        <select name="role" class="form-control">
-                            <option hidden value="">Role</option>
-                            @foreach ($roleList as $role)
-                                <option value="{{ $role['id'] }}" {{ old('role') == $role['id'] ? 'selected' : '' }}>
-                                    {{ $role['name'] }}
-                                </option>
-                            @endforeach
-                        </select>
-
-                        @error('role')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
                     </div>
                 </div>
 
                 <div class="form-group col-md-12 text-right">
-                    <button class="btn btn-sm btn-custom" type="submit">Create User</button>
+                    <button class="btn btn-sm btn-custom" type="submit">Create Member</button>
                 </div>
             </form>
         </div>

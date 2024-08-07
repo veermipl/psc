@@ -931,7 +931,7 @@ li {
 .header_upper {
     position: relative;
     background: #fff;
-    z-index: 9999;
+    z-index: 99;
 }
 
 .header_upper_inner {

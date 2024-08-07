@@ -20,7 +20,7 @@ class RolePermissionMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $userPer = Auth::user()->permissions->pluck('name_key')->unique();
-        // dd($userPer);
+        // dd(auth()->user()->role->pluck('name')->toArray(), $userPer);
 
         foreach ($userPer as $permission) {
             Gate::define($permission, function(){

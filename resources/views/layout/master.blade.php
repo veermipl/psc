@@ -3,7 +3,13 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>@yield('title')</title>
+    <title>
+        @hasSection('title')
+            {{ config('app.name') }} - @yield('title')
+        @else
+            {{ config('app.name') }}
+        @endif
+    </title>
 
     <!-- Responsive -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -101,32 +107,11 @@
                                     <div class="opening_hour">
                                         <div class="js">
                                             <div class="language-picker js-language-picker" data-trigger-class="btn btn--subtle">
-                                                <!-- <form action="" class="language-picker__form">
-                                                    <select name="language-picker-select" id="language-picker-select">
-                                                        <option lang="de" value="deutsch">Deutsch</option>
-                                                        <option lang="en" value="english" selected>
-                                                            English
-                                                        </option>
-                                                        <option lang="fr" value="francais">
-                                                            Français
-                                                        </option>
-                                                        <option lang="it" value="italiano">
-                                                            Italiano
-                                                        </option>
-                                                        <option lang="es" value="spanish">
-                                                            Spanish
-                                                        </option>
-                                                    </select>
-                                                </form> -->
                                                 <div id="google_translate_element"></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="opening_hour social_links_1">
-                                        <!-- <a href="#"><i class="fab fa-facebook-square"></i></a>
-                                            <a href="#"><i class="fab fa-twitter"></i></a>
-                                            <a href="#"><i class="fab fa-dribbble"></i></a>
-                                            <a href="#"><i class="fab fa-instagram"></i></a> -->
                                         <div class="topbar-one__right">
                                             <a href="#" class="topbar-one__guide-btn" id="btn-increase" title="Increase font size" style="font-size: 17px">
                                                 +A</a>
@@ -138,42 +123,30 @@
                                     </div>
                                     @auth
                                     <div class="d-flex">
-                                        <!-- @if (auth()->user()->hasRole('Admin'))
-                                                <a href="{{ route('admin.dashboard') }}" class="btn btn-sm btn-outline-light">Dashboard</a>
-                                            @else
-                                                <a href="{{ route('dashboard') }}" class="btn btn-sm btn-outline-light">Dashboard</a>
-                                            @endif -->
-
                                         <div class="ml-2">
-                                            <form action="{{ route('logout') }}" method="post">
-                                                @csrf
-                                                <!-- <button type="btn" class="btn btn-danger btn-sm">
-                                                            <i class="far fa-lock"></i>
-                                                        </button> -->
-
-                                                <div class="dropdownt">
-                                                    <div class="drop-img dropbtnt" id="myBtnt">
-                                                        <img src="https://i.postimg.cc/ydFvrvbN/slider3.png" alt="user-picture">
-                                                        <i class="fas fa-chevron-down"></i>
-                                                    </div>
-                                                    <div id="myDropdownt" class="dropdown-contentt">
-                                                        <a href="#"> <i class="far fa-user"></i> Profile</a>
-                                                        @if (auth()->user()->hasRole('Admin'))
-                                                        <a href="{{ route('admin.dashboard') }}"> <i class="far fa-dashboard"></i> Dashboard</a>
-                                                        @else
-                                                        <a href="{{ route('dashboard') }}"> <i class="far fa-dashboard"></i> Dashboard</a>
-                                                        @endif
-
-                                                        <form action="{{ route('logout') }}" method="post">
-                                                            @csrf
-                                                            @method('post')
-                                                            <button class=" btn-sm btn-block" style="padding-left: 15px; text-align:start;">
-                                                                <i class="far fa-lock"></i> Logout
-                                                            </button>
-                                                        </form>
-                                                    </div>
+                                            <div class="dropdownt">
+                                                <div class="drop-img dropbtnt" id="myBtnt">
+                                                    <img src="https://i.postimg.cc/ydFvrvbN/slider3.png" alt="user-picture">
+                                                    <i class="fas fa-chevron-down"></i>
                                                 </div>
-                                            </form>
+                                                <div id="myDropdownt" class="dropdown-contentt">
+                                                    <a href="{{ route('profile') }}"> <i class="far fa-user"></i> Profile</a>
+                                                    @if (auth()->user()->hasPermission('admin_dashboard'))
+                                                        <a href="{{ route('admin.dashboard') }}"> <i class="far fa-dashboard"></i> Dashboard</a>
+                                                    @endif
+                                                    @if (auth()->user()->hasPermission('member_dashboard'))
+                                                        <a href="{{ route('member.dashboard') }}"> <i class="far fa-dashboard"></i> Dashboard</a>
+                                                    @endif
+
+                                                    <form action="{{ route('logout') }}" method="post">
+                                                        @csrf
+                                                        @method('post')
+                                                        <button class=" btn-sm btn-block" style="padding-left: 15px; text-align:start;">
+                                                            <i class="far fa-lock"></i> Logout
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     @endauth

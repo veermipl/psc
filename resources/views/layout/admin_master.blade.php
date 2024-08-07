@@ -23,8 +23,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.css">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.2/dist/bootstrap-table.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <style>
         body {
@@ -109,37 +110,25 @@
                                     </div>
                                     @auth
                                     <div class="d-flex">
-                                        <!-- <a href="" class="btn btn-sm btn-outline-light">Dashboard</a> -->
-
                                         <div class="ml-2">
-                                            <form action="{{ route('logout') }}" method="post">
-                                                @csrf
-                                                <div class="dropdownt">
-                                                    <div class="drop-img dropbtnt" id="myBtnt">
-                                                        <img src="https://i.postimg.cc/ydFvrvbN/slider3.png" alt="user-picture">
-                                                        <i class="fas fa-chevron-down"></i>
-                                                    </div>
-                                                    <div id="myDropdownt" class="dropdown-contentt">
-                                                        <a href="#"> <i class="far fa-user"></i> Profile</a>
-                                                        <a href="{{ route('admin.dashboard') }}"> <i class="far fa-dashboard"> </i> Dashboard</a>
-                                                        <form action="{{ route('logout') }}" method="post">
-                                                            @csrf
-                                                            @method('post')
-                                                            <button class=" btn-block" style="padding-left: 15px; text-align:start;">
-                                                                <i class="far fa-lock"></i> Logout
-                                                            </button>
-                                                        </form>
-                                                    </div>
+                                            <div class="dropdownt">
+                                                <div class="drop-img dropbtnt" id="myBtnt">
+                                                    <img src="https://i.postimg.cc/ydFvrvbN/slider3.png" alt="user-picture">
+                                                    <i class="fas fa-chevron-down"></i>
                                                 </div>
+                                                <div id="myDropdownt" class="dropdown-contentt">
+                                                    <a href="{{ route('profile') }}"> <i class="far fa-user"></i> Profile</a>
+                                                    <a href="{{ route('admin.dashboard') }}"> <i class="far fa-dashboard"> </i> Dashboard</a>
 
-
-
-
-
-                                                <!-- <button type="btn" class="btn btn-danger btn-sm">
-                                                        <i class="far fa-lock"></i>
-                                                    </button> -->
-                                            </form>
+                                                    <form action="{{ route('logout') }}" method="post">
+                                                        @csrf
+                                                        @method('post')
+                                                        <button class=" btn-block" style="padding-left: 15px; text-align:start;">
+                                                            <i class="far fa-lock"></i> Logout
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     @endauth
@@ -187,11 +176,26 @@
                     </button>
                     <div class="collapse {{ request()->is('admin/user') || request()->is('admin/user/*') ? 'show' : '' }}" id="users-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/user') ? 'link-active' : 'no' }}">
+                            <li class="rounded {{ request()->is('admin/user') || request()->is('admin/user/filter') ? 'link-active' : 'no' }}">
                                 <a href="{{ route('admin.user.index') }}" class="link-dark rounded">List</a>
                             </li>
                             <li class="rounded {{ request()->is('admin/user/create') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.user.create') }}" class="link-dark rounded">Create</a>
+                                <a href="{{ route('admin.user.create') }}" class="link-dark rounded">Create User</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#members-collapse" aria-expanded="false">
+                        Members
+                    </button>
+                    <div class="collapse {{ request()->is('admin/member') || request()->is('admin/member/*') ? 'show' : '' }}" id="members-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li class="rounded {{ request()->is('admin/member') || request()->is('admin/member/filter') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.member.index') }}" class="link-dark rounded">List</a>
+                            </li>
+                            <li class="rounded {{ request()->is('admin/member/create') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.member.create') }}" class="link-dark rounded">Create Member</a>
                             </li>
                         </ul>
                     </div>
@@ -264,7 +268,7 @@
                 </li>
                 <li class="mb-1">
                     <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#media-collapse" aria-expanded="false">
-                        Media
+                        Media Center
                     </button>
                     <div class="collapse {{ request()->is('admin/media/*') ? 'show' : '' }}" id="media-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
@@ -443,8 +447,22 @@
     </script>
     <script type="text/javascript" src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.2/dist/bootstrap-table.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     <script src="{{ asset('js/sidebars.js') }}"></script>
+
+    @if (session('success'))
+        <script>
+            toastr.success("{{ session('success') }}");
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            toastr.error("{{ session('error') }}");
+        </script>
+    @endif
 
     <script>
         // Get the button, and when the user clicks on it, execute myFunction
