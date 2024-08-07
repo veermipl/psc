@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Requests\admin\user\ExporUserRequest;
 use App\Http\Requests\admin\user\StoreUserRequest;
+use App\Http\Requests\admin\user\UpdateUserRequest;
+use App\Http\Requests\admin\user\UpdateUserStatusRequest;
 
 class UserController extends Controller
 {
@@ -32,7 +34,7 @@ class UserController extends Controller
             'role' => $request->role ?? null,
             'status' => $request->status ?? null,
         ];
-        $userList = User::with(['membership'])->orderBy('id', 'asc')
+        $userList = User::with(['membership'])->orderBy('id', 'desc')
             ->where(function (Builder $query) use ($filterValues, $request) {
                 $query->when($request->filled('name'), function (Builder $q) use ($filterValues) {
                     $q->where('name', 'like', '%' . $filterValues['name'] . '%');
@@ -172,7 +174,10 @@ class UserController extends Controller
     {
         $this->authorize('user_view');
 
-        dd($user);
+        $data['user'] = $user;
+        $data['membershipList'] = MembershipType::orderBy('name', 'asc')->get();
+
+        return view('admin.user.view', $data);
     }
 
     /**
@@ -182,17 +187,48 @@ class UserController extends Controller
     {
         $this->authorize('user_edit');
 
-        dd($user);
+        $data['user'] = $user;
+        $data['membershipList'] = MembershipType::orderBy('name', 'asc')->get();
+
+        return view('admin.user.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
         $this->authorize('user_edit');
 
-        dd($request->all(), $user);
+        $validated = $request->validated();
+        
+        $formPdfPath = null;
+        if ($request->hasFile('form_pdf')) {
+            $file = $request->file('form_pdf');
+
+            $formPdfPath = $file->store('uploaded_forms', 'public');
+        }
+        $validated['form_pdf'] = $formPdfPath;
+
+        if($request->filled('password')){
+            $validated['password'] = Hash::make($validated['password']);
+        }else{
+            $validated['password'] = $user->password;
+        }
+
+        
+        DB::transaction(function () use ($user, $validated) {
+            $user->update([
+                'name' => $validated['name'],
+                'mobile_number' => $validated['contact'],
+                'membership_type' => $validated['membership_type'],
+                'form_pdf' => $validated['form_pdf'],
+                'password' => $validated['password'],
+                'status' => $validated['status'],
+            ]);
+        });
+
+        return redirect()->route('admin.user.index')->with('success', 'User Updated');
     }
 
     /**
@@ -202,6 +238,34 @@ class UserController extends Controller
     {
         $this->authorize('user_delete');
 
-        dd($user);
+        DB::transaction(function () use ($user) {
+            $user->delete();
+        });
+
+        $data['error'] = false;
+        $data['msg'] = 'User Deleted';
+
+        return response()->json($data, 200);
+    }
+
+    public function statusToggle(UpdateUserStatusRequest $request)
+    {
+        $this->authorize('user_status_edit');
+
+        $validated = $request->validated();
+
+        $user = User::find($validated['uid']);
+        $status = $validated['ustatus'] == 1 ? '0' : '1';
+
+        DB::transaction(function () use ($user, $status) {
+            $user->update([
+                'status' => $status
+            ]);
+        });
+
+        $data['error'] = false;
+        $data['msg'] = 'User status updated';
+
+        return response()->json($data, 200);
     }
 }

@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title', config('') . ' Register')
+@section('title', 'Register')
 @section('content')
 
     <style>

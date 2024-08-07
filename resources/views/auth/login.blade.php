@@ -1,6 +1,6 @@
 @extends('layout.master')
 
-@section('title', config('') . ' Login')
+@section('title', 'Login')
 @section('content')
     <section class="log-sect">
         <div class="container">
@@ -14,7 +14,7 @@
 
                             <div class="textbox">
                                 <label for="email">Email <span class="text-danger">*</span></label>
-                                <input type="email" id="email" class="form-control" name="email"
+                                <input type="email" id="email" class="form-control" name="email" value="{{ old('email') }}"
                                     placeholder="Enter your email" required>
 
                                 @error('email')

@@ -15,29 +15,33 @@
 
                 <div class="row">
                     <div class="form-group col-md-4">
-                        <input type="text" class="form-control" name="name" placeholder="Name" value="{{ $filterValues['name'] }}">
+                        <input type="text" class="form-control" name="name" placeholder="Name"
+                            value="{{ $filterValues['name'] }}">
                     </div>
 
                     <div class="form-group col-md-4">
-                        <input type="email" class="form-control" name="email" placeholder="Email" value="{{ $filterValues['email'] }}">
+                        <input type="email" class="form-control" name="email" placeholder="Email"
+                            value="{{ $filterValues['email'] }}">
                     </div>
 
                     <div class="form-group col-md-4">
                         <select name="membership_type" class="form-control">
                             <option hidden value="">Membership Type</option>
                             @foreach ($membershipList as $membership)
-                                <option value="{{ $membership['id'] }}" {{ ($filterValues['membership_type'] == $membership['id']) ? 'selected' : '' }}>
+                                <option value="{{ $membership['id'] }}"
+                                    {{ $filterValues['membership_type'] == $membership['id'] ? 'selected' : '' }}>
                                     {{ $membership['name'] }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-4 d-none">
                         <select name="role" class="form-control">
                             <option hidden value="">Role</option>
                             @foreach ($roleList as $role)
-                                <option value="{{ $role['id'] }}" {{ ($filterValues['role'] == $role['id']) ? 'selected' : '' }}>
+                                <option value="{{ $role['id'] }}"
+                                    {{ $filterValues['role'] == $role['id'] ? 'selected' : '' }}>
                                     {{ $role['name'] }}
                                 </option>
                             @endforeach
@@ -48,7 +52,8 @@
                         <select name="status" class="form-control">
                             <option hidden value="">Status</option>
                             @foreach (config('site.status') as $status)
-                                <option value="{{ $status['value'] }}" {{ ($filterValues['status'] == $status['value']) ? 'selected' : '' }}>
+                                <option value="{{ $status['value'] }}"
+                                    {{ $filterValues['status'] == $status['value'] ? 'selected' : '' }}>
                                     {{ $status['name'] }}
                                 </option>
                             @endforeach
@@ -93,9 +98,9 @@
                         <th scope="col" data-sortable="true">Name</th>
                         <th scope="col" data-sortable="true">Email</th>
                         <th scope="col" data-sortable="true">Membership</th>
-                        <th scope="col" data-sortable="true">Form</th>
+                        <th scope="col" data-sortable="true">File</th>
                         <th scope="col" data-sortable="true">Status</th>
-                        <th scope="col" data-sortable="true">Role</th>
+                        {{-- <th scope="col" data-sortable="true">Role</th> --}}
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -105,8 +110,10 @@
                             @php
                                 $userRoles = $user->role ? $user->role->pluck('name')->toArray() : [];
                             @endphp
-                            <tr>
+                            <tr class="tr_row_{{ $userKey }}">
+
                                 <th scope="row">{{ $userKey + 1 }}</th>
+
                                 <td>
                                     <a href="{{ route('admin.user.show', $user->id) }}" class="text-secondary">
                                         {{ $user->name }}
@@ -120,24 +127,38 @@
                                 </td>
 
                                 <td>
-                                    <a href=""><button class="btn btn-sm btn-outline-custom">Complete Form</button></a>
+                                    @if ($user->form_pdf)
+                                        <a href="{{ $user->form_pdf ? asset('storage/' . $user->form_pdf) : '' }}"
+                                            target="_blank">
+                                            <i class="fa fa-file-pdf text-danger"></i>
+                                        </a>
+                                    @else
+                                    @endif
                                 </td>
 
                                 <td>
                                     @if ($user->status == 1)
-                                        <span class="badge badge-success" id="userStatus">Active</span>
+                                        <span class="badge badge-success" id="userStatus" uid="{{ $user->id }}"
+                                            ustatus="{{ $user->status }}" urow="{{ $userKey }}">
+                                            Active
+                                        </span>
                                     @else
-                                        <span class="badge badge-danger" id="userStatus">In Active</span>
+                                        <span class="badge badge-danger" id="userStatus" uid="{{ $user->id }}"
+                                            ustatus="{{ $user->status }}" urow="{{ $userKey }}">
+                                            In Active
+                                        </span>
                                     @endif
                                 </td>
-                                <td>{{ implode(', ', $userRoles) }}</td>
+
+                                {{-- <td>{{ implode(', ', $userRoles) }}</td> --}}
+
                                 <td>
                                     <div class="tableOptions">
                                         <span class="text-dark" title="Edit">
                                             <a href="{{ route('admin.user.edit', $user->id) }}"><i
                                                     class="fa fa-edit"></i></a>
                                         </span>
-                                        <span class="text-danger" title="Delete" user_id="{{ $user->id }}"
+                                        <span class="text-danger" title="Delete" uid="{{ $user->id }}" urow="{{ $userKey }}"
                                             id="deleteUserBtn">
                                             <i class="fa fa-trash"></i>
                                         </span>
@@ -150,5 +171,126 @@
             </table>
         </div>
     </div>
+
+@endsection
+
+
+@section('scripts')
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $(document).on('click', '#userStatus', function(e) {
+                e.preventDefault();
+
+                var uid = $(this).attr('uid');
+                var ustatus = $(this).attr('ustatus');
+                var urow = $(this).attr('urow');
+
+                Swal.fire({
+                    title: 'Are you sure ?',
+                    showCancelButton: true,
+                    confirmButtonColor: '#24695c',
+                    cancelButtonColor: '#d22d3d',
+                    confirmButtonText: 'Yes, Change it !'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ route('admin.user.status') }}",
+                            method: 'POST',
+                            data: {
+                                _method: 'post',
+                                _token: '{{ csrf_token() }}',
+                                uid: uid,
+                                ustatus: ustatus,
+                            },
+                            dataType: "json",
+                            beforeSend: function() {
+                                // $('.preloader').show();
+                                $('span#userStatus[urow="'+urow+'"]').prop('disabled', true).css({
+                                    'cursor':'not-allowed'
+                                });
+                            },
+                            success: function(response) {
+                                if (response.error === false) {
+                                    toastr.success(response.msg);
+
+                                    if(parseInt(ustatus) == 1){
+                                        $('span#userStatus[urow="'+urow+'"]').attr('ustatus', 0).removeClass('badge-success').addClass('badge-danger').html('In Active');
+                                    }else{
+                                        $('span#userStatus[urow="'+urow+'"]').attr('ustatus', 1).removeClass('badge-danger').addClass('badge-success').html('Active');
+                                    }
+                                } else {
+                                    toastr.error(response.msg);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                toastr.error(error);
+                            },
+                            complete: function(xhr, status) {
+                                // $('.preloader').hide();
+                                $('span#userStatus[urow="'+urow+'"]').prop('disabled', false).css({
+                                    'cursor':'pointer'
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+
+            $(document).on('click', '#deleteUserBtn', function(e) {
+                e.preventDefault();
+
+                var uid = $(this).attr('uid');
+                var urow = $(this).attr('urow');
+                var url = `{{ url('/admin/user/${uid}') }}`;
+
+                Swal.fire({
+                    title: 'Are you sure ?',
+                    showCancelButton: true,
+                    confirmButtonColor: '#24695c',
+                    cancelButtonColor: '#d22d3d',
+                    confirmButtonText: 'Yes, Delete it !'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: url,
+                            method: 'POST',
+                            data: {
+                                _method: 'delete',
+                                _token: '{{ csrf_token() }}',
+                            },
+                            dataType: "json",
+                            beforeSend: function() {
+                                // $('.preloader').show();
+                                $('span#deleteUserBtn[urow="'+urow+'"]').prop('disabled', true).css({
+                                    'cursor':'not-allowed'
+                                });
+                            },
+                            success: function(response) {
+                                if (response.error === false) {
+                                    $('tr.tr_row_'+urow+'').remove();
+
+                                    toastr.success(response.msg);
+                                } else {
+                                    toastr.error(response.msg);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                toastr.error(error);
+                            },
+                            complete: function(xhr, status) {
+                                // $('.preloader').hide();
+                                $('span#deleteUserBtn[urow="'+urow+'"]').prop('disabled', false).css({
+                                    'cursor':'pointer'
+                                });
+                            }
+                        });
+                    }
+                });
+
+            });
+        });
+    </script>
 
 @endsection
