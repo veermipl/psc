@@ -10,8 +10,14 @@ return [
             'value' => '0'
         ]
     ],
-    'roles' => ['Admin', 'Member', 'User'],
     'membership_type' => ['Corporate', 'Sectoral Corporate'],
+    'settings' => [
+        [
+            'name' => 'admin_mail',
+            'value' => 'admin@yopmail.com'
+        ]
+    ],
+    'roles' => ['Admin', 'Member', 'User'],
     'permissions' => [
         [
             'name_key' => 'profile_view',
