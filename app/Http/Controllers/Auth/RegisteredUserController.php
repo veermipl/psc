@@ -7,19 +7,23 @@ use App\Models\User;
 use Illuminate\View\View;
 use App\Traits\UserTraits;
 use Illuminate\Http\Request;
+use App\Traits\SettingTraits;
 use App\Models\MembershipType;
 use Illuminate\Validation\Rules;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Storage;
+use App\Mail\auth\SendMemberRegistrationMailToAdmin;
 
 class RegisteredUserController extends Controller
 {
     use UserTraits;
+    use SettingTraits;
     
     /**
      * Display the registration view.
@@ -48,6 +52,7 @@ class RegisteredUserController extends Controller
             'number' => ['required', 'string', 'max:12'],
             'membership_type' => ['required'],
             'form_pdf' => ['required', 'mimes:pdf', 'max:2048'], // max size in KB
+            // 'supported_files' => ['required', 'mimes:pdf', 'max:2048'], // max size in KB
         ]);
 
         $formPdfPath = null;
@@ -63,12 +68,18 @@ class RegisteredUserController extends Controller
             'mobile_number' => $request->number,
             'membership_type' => $request->membership_type,
             'form_pdf' => $formPdfPath,
-            'status' => 1,
+            'status' => '0',
             'password' => Hash::make($request->password),
         ]);
 
         $user->role()->sync(Role::where('name', 'Member')->pluck('id')->toArray());
         $this->InitialUserRolePermission($user);
+
+        $admin_email = $this->getSettings('admin_email');
+        if($admin_email){
+            $user->load('membership');
+            Mail::to($admin_email)->queue(new SendMemberRegistrationMailToAdmin($user));
+        }
 
         // event(new Registered($user));
 

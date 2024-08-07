@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\Admin\CMSController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
@@ -46,8 +47,6 @@ Route::get('storage', function () {
     return "storage linked successfully";
 });
 
-Route::prefix('admin')->group(function () {
-});
 
 Route::get('/', [FrontController::class, 'index']);
 Route::get('home', [FrontController::class, 'index'])->name('home');
@@ -136,6 +135,7 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
 //
 
 
+Route::get('test', [TestController::class, 'test'])->name('test');
 
 
 require __DIR__ . '/auth.php';

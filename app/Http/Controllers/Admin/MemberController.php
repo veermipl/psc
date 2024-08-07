@@ -10,7 +10,9 @@ use App\Models\MembershipType;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\Eloquent\Builder;
+use App\Mail\admin\member\SendApprovedMailToMember;
 use App\Http\Requests\admin\member\ExporMemberRequest;
 use App\Http\Requests\admin\member\StoreMemberRequest;
 use App\Http\Requests\admin\member\UpdateMemberRequest;
@@ -243,7 +245,6 @@ class MemberController extends Controller
     public function destroy(User $member)
     {
         $this->authorize('member_delete');
-        return $member;
 
         DB::transaction(function () use ($member) {
             $member->delete();
@@ -269,6 +270,10 @@ class MemberController extends Controller
                 'status' => $status
             ]);
         });
+
+        if($validated['ustatus'] == '0' && $user->email){
+            Mail::to($user->email)->queue(new SendApprovedMailToMember($user));
+        }
 
         $data['error'] = false;
         $data['msg'] = 'Member status updated';
