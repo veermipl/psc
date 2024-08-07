@@ -30,7 +30,8 @@
 }
 
 .tableOptions span,
-#userStatus {
+#userStatus,
+span.status {
     cursor: pointer;
 }
 

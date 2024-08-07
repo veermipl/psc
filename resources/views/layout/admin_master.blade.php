@@ -319,12 +319,23 @@
                     </button>
                     <div class="collapse {{ request()->is('admin/cms/*') ? 'show' : '' }}" id="cms-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Guyana Economy</a>
+                            <li class="rounded {{ request()->is('admin/cms/guyana-economy') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.cms.guyana-economy') }}" class="link-dark rounded">Guyana Economy</a>
                             </li>
-                            <li class="rounded {{ request()->is('admin/cms/contact-us') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.cms.contact-us') }}" class="link-dark rounded">Contact
-                                    Us</a>
+                        </ul>
+                    </div>
+                </li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#authorization-collapse" aria-expanded="false">
+                        Authorization
+                    </button>
+                    <div class="collapse {{ request()->is('admin/authorization/*') ? 'show' : '' }}" id="authorization-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li class="rounded {{ request()->is('admin/authorization/role') ? 'link-active' : 'no' }}">
+                                <a href="" class="link-dark rounded">Roles</a>
+                            </li>
+                            <li class="rounded {{ request()->is('admin/authorization/permission') ? 'link-active' : 'no' }}">
+                                <a href="" class="link-dark rounded">Permission</a>
                             </li>
                         </ul>
                     </div>
@@ -335,11 +346,12 @@
                     </button>
                     <div class="collapse {{ request()->is('admin/settings/*') ? 'show' : '' }}" id="settings-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">General Settings</a>
+                            <li class="rounded {{ request()->is('admin/settings/general') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.settings.general') }}" class="link-dark rounded">General Settings</a>
                             </li>
-                            <li class="rounded">
-                                <a href="#" class="link-danger rounded">Sign out</a>
+                            <li class="rounded {{ request()->is('admin/settings/contact-us') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.settings.contact-us') }}" class="link-dark rounded">Contact
+                                    Us</a>
                             </li>
                         </ul>
                     </div>

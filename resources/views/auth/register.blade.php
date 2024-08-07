@@ -277,7 +277,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 d-none">
                                     <div class="textbox mb-0">
                                         <label for="form_pdf">
                                             Supported Files <span class="text-danger">*</span>

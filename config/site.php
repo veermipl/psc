@@ -118,10 +118,6 @@ return [
             'name' => 'Create Role',
             'roles' => ['Admin', 'User']
         ], [
-            'name_key' => 'role_view',
-            'name' => 'View Role',
-            'roles' => ['Admin', 'User']
-        ], [
             'name_key' => 'role_edit',
             'name' => 'Edit Role',
             'roles' => ['Admin', 'User']
@@ -131,21 +127,33 @@ return [
             'roles' => ['Admin', 'User']
         ],
 
-        // [
-        //     'name_key' => 'cms',
-        //     'name' => 'CMS',
-        //     'roles' => ['Admin']
-        // ], 
-        // [
-        //     'name_key' => 'cms_create',
-        //     'name' => 'Create CMS',
-        //     'roles' => ['Admin']
-        // ], [
-        //     'name_key' => 'cms_view',
-        //     'name' => 'View CMS',
-        //     'roles' => ['Admin']
-        // ], 
         [
+            'name_key' => 'general_settings_edit',
+            'name' => 'Edit General Settings',
+            'roles' => ['Admin', 'User']
+        ],[
+            'name_key' => 'contact_us_settings_edit',
+            'name' => 'Edit Contact Us Settings',
+            'roles' => ['Admin', 'User']
+        ],
+
+        [
+            'name_key' => 'cms',
+            'name' => 'CMS',
+            'roles' => ['Admin', 'User']
+        ],[
+            'name_key' => 'cms_export',
+            'name' => 'Export CMS',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'cms_create',
+            'name' => 'Create CMS',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'cms_view',
+            'name' => 'View CMS',
+            'roles' => ['Admin', 'User']
+        ], [
             'name_key' => 'cms_edit',
             'name' => 'Edit CMS',
             'roles' => ['Admin', 'User']
@@ -153,6 +161,11 @@ return [
             'name_key' => 'cms_delete',
             'name' => 'Delete CMS',
             'roles' => ['Admin', 'User']
+        ],[
+            'name_key' => 'cms_status_edit',
+            'name' => 'Edit CMS Status',
+            'roles' => ['Admin', 'User']
         ],
+
     ],
 ];
