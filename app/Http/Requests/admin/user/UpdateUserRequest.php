@@ -23,10 +23,8 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'contact' => ['required', 'integer'],
-            'membership_type' => ['required'],
-            'form_pdf' => ['nullable', 'mimes:pdf', 'max:2048'],
             'status' => ['required', 'in:0,1'],
+            'role' => ['required', 'exists:roles,id'],
             'password' => ['nullable'],
         ];
     }

@@ -47,6 +47,10 @@ return [
             'name_key' => 'user_list',
             'name' => 'All User',
             'roles' => ['Admin', 'User']
+        ],[
+            'name_key' => 'user_export',
+            'name' => 'Export User',
+            'roles' => ['Admin', 'User']
         ], [
             'name_key' => 'user_create',
             'name' => 'Create User',
@@ -66,6 +70,36 @@ return [
         ],[
             'name_key' => 'user_status_edit',
             'name' => 'Edit User Status',
+            'roles' => ['Admin', 'User']
+        ],
+
+        [
+            'name_key' => 'member_list',
+            'name' => 'All Member',
+            'roles' => ['Admin', 'User']
+        ],[
+            'name_key' => 'member_export',
+            'name' => 'Export Member',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'member_create',
+            'name' => 'Create Member',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'member_view',
+            'name' => 'View Member',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'member_edit',
+            'name' => 'Edit Member',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'member_delete',
+            'name' => 'Delete Member',
+            'roles' => ['Admin', 'User']
+        ],[
+            'name_key' => 'member_status_edit',
+            'name' => 'Edit Member Status',
             'roles' => ['Admin', 'User']
         ],
 

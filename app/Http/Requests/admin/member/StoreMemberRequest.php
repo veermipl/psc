@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\admin\user;
+namespace App\Http\Requests\admin\member;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserRequest extends FormRequest
+class StoreMemberRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,13 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
+            'membership_type' => ['required', 'exists:membership_types,id'],
             'email' => ['required', 'unique:users,email'],
+            'contact' => ['required', 'integer'],
+            'form_pdf' => ['required', 'mimes:pdf', 'max:2048'],
+            'supported_files' => ['nullable'],
             'password' => ['required', 'confirmed'],
             'status' => ['required', 'in:0,1'],
-            'role' => ['required', 'exists:roles,id'],
         ];
     }
 }

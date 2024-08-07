@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Member\MemberController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\MemberController as AdminMemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -122,6 +123,11 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
     Route::post('user/filter', [AdminUserController::class, 'index'])->name('user.filter');
     Route::post('user/export', [AdminUserController::class, 'export'])->name('user.export');
     Route::post('user/status', [AdminUserController::class, 'statusToggle'])->name('user.status');
+
+    Route::resource('member', AdminMemberController::class);
+    Route::post('member/filter', [AdminMemberController::class, 'index'])->name('member.filter');
+    Route::post('member/export', [AdminMemberController::class, 'export'])->name('member.export');
+    Route::post('member/status', [AdminMemberController::class, 'statusToggle'])->name('member.status');
 
     Route::prefix('cms')->name('cms.')->group(function () {
         Route::get('contact-us', [CMSController::class, 'contactUs'])->name('contact-us');

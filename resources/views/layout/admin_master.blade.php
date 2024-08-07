@@ -180,7 +180,22 @@
                                 <a href="{{ route('admin.user.index') }}" class="link-dark rounded">List</a>
                             </li>
                             <li class="rounded {{ request()->is('admin/user/create') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.user.create') }}" class="link-dark rounded">Create</a>
+                                <a href="{{ route('admin.user.create') }}" class="link-dark rounded">Create User</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="mb-1">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#members-collapse" aria-expanded="false">
+                        Members
+                    </button>
+                    <div class="collapse {{ request()->is('admin/member') || request()->is('admin/member/*') ? 'show' : '' }}" id="members-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li class="rounded {{ request()->is('admin/member') || request()->is('admin/member/filter') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.member.index') }}" class="link-dark rounded">List</a>
+                            </li>
+                            <li class="rounded {{ request()->is('admin/member/create') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.member.create') }}" class="link-dark rounded">Create Member</a>
                             </li>
                         </ul>
                     </div>
@@ -253,7 +268,7 @@
                 </li>
                 <li class="mb-1">
                     <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#media-collapse" aria-expanded="false">
-                        Media
+                        Media Center
                     </button>
                     <div class="collapse {{ request()->is('admin/media/*') ? 'show' : '' }}" id="media-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
