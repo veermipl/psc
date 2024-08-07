@@ -8,7 +8,7 @@ use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Member\MemberController;
-use App\Http\Controllers\admin\SettingsController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\MemberController as AdminMemberController;
 
