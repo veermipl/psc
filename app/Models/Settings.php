@@ -14,5 +14,6 @@ class Settings extends Model
     protected $fillable = [
         'meta_key',
         'meta_value',
+        'meta_type',
     ];
 }

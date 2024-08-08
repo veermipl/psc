@@ -16,7 +16,8 @@ class SettingSeeder extends Seeder
         foreach (config('site.settings') as $setting) {
             Settings::create([
                 'meta_key' => $setting['name'],
-                'meta_value' => $setting['value']
+                'meta_value' => $setting['value'],
+                'meta_type' => $setting['type'],
             ]);
         }
     }

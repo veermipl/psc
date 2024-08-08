@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\admin\cms;
+namespace App\Http\Requests\admin\settings;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateGERequest extends FormRequest
+class UpdateEmailSettingsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,13 +22,10 @@ class UpdateGERequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => ['required', 'exists:guyana_economies,id'],
-            'title' => ['required'],
-            'old_images' => ['nullable', 'array'],
-            'images' => ['nullable', 'array'],
-            'images.*' => ['nullable', 'image', 'mimes:jpg,jpeg,gif,png'],
-            'content' => ['required'],
-            'status' => ['required', 'in:0,1'],
+            'email_address' => ['required', 'email'],
+            'password' => ['required'],
+            'host' => ['required'],
+            'port' => ['required'],
         ];
     }
 }

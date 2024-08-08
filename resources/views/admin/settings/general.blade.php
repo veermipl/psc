@@ -26,6 +26,7 @@
                     <div class="form-group col-md-6">
                         <label for="name">App Logo </label>
                         @if (isset($settings['app_logo']))
+                            <input type="hidden" name="app_logo_old" value="{{ $settings['app_logo']  }}">
                             <a href="{{ $settings['app_logo'] ? asset('storage/' . $settings['app_logo']) : '' }}" class="badge badge-dark" target="_blank">
                                 View Logo
                             </a>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Traits\ImageTraits;
 use Illuminate\Http\Request;
 use App\Models\GuyanaEconomy;
 use Illuminate\Support\Facades\DB;
@@ -9,10 +10,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Requests\admin\cms\CreateGERequest;
 use App\Http\Requests\admin\cms\UpdateGERequest;
+use App\Http\Requests\admin\cms\DeleteGEImageRequest;
 use App\Http\Requests\admin\cms\UpdateGEStatusRequest;
 
 class CMSController extends Controller
 {
+    use ImageTraits;
+
     public function guyanaEconomy(Request $request)
     {
         $this->authorize('cms');
@@ -57,13 +61,16 @@ class CMSController extends Controller
 
         $validated = $request->validated();
 
-        $images = null;
+        $allImages = [];
         if ($request->hasFile('images')) {
-            // $file = $request->file('form_pdf');
+            $images = $request->file('images');
 
-            // $images = $file->store('uploaded_forms', 'public');
+            foreach ($images as $imageKey => $image) {
+                $path = $image->store('cms/ge', 'public');
+                array_push($allImages, $path);
+            }
         }
-        $validated['images'] = $images;
+        $validated['images'] = (count($allImages) > 0) ? implode(',', $allImages) : null;
 
         DB::transaction(function () use ($validated) {
             GuyanaEconomy::create([
@@ -77,18 +84,20 @@ class CMSController extends Controller
         return redirect()->route('admin.cms.guyana-economy')->with('success', 'Content Created');
     }
 
-    public function guyanaEconomyShow()
+    public function guyanaEconomyShow(Request $request, $id)
     {
         $this->authorize('cms_view');
 
-        return view('admin.cms.guyana_economy.show');
+        $data['ge_data'] = GuyanaEconomy::findOrFail($id);
+
+        return view('admin.cms.guyana_economy.show', $data);
     }
 
     public function guyanaEconomyEdit($id)
     {
         $this->authorize('cms_edit');
 
-        $data['ge_data'] = GuyanaEconomy::find($id);
+        $data['ge_data'] = GuyanaEconomy::findOrFail($id);
 
         return view('admin.cms.guyana_economy.edit', $data);
     }
@@ -99,13 +108,16 @@ class CMSController extends Controller
 
         $validated = $request->validated();
 
-        $images = null;
+        $allImages = $validated['old_images'] ?? [];
         if ($request->hasFile('images')) {
-            // $file = $request->file('form_pdf');
+            $images = $request->file('images');
 
-            // $images = $file->store('uploaded_forms', 'public');
+            foreach ($images as $imageKey => $image) {
+                $path = $image->store('cms/ge', 'public');
+                array_push($allImages, $path);
+            }
         }
-        $validated['images'] = $images;
+        $validated['images'] = (count($allImages) > 0) ? implode(',', $allImages) : null;
 
         DB::transaction(function () use ($validated) {
             GuyanaEconomy::where('id', $validated['id'])->update([
@@ -123,16 +135,45 @@ class CMSController extends Controller
     {
         $this->authorize('cms_delete');
 
-        $this->authorize('member_delete');
-
         $ge_data = GuyanaEconomy::findOrFail($id);
 
         DB::transaction(function () use ($ge_data) {
             $ge_data->delete();
+            $this->deleteFromStorage('public', explode(',', $ge_data->images), $isArray = true);
         });
 
         $data['error'] = false;
         $data['msg'] = 'Deleted';
+
+        return response()->json($data, 200);
+    }
+
+    public function guyanaEconomyDeleteImage(DeleteGEImageRequest $request)
+    {
+        $this->authorize('cms_delete');
+
+        $validated = $request->validated();
+
+        $ge_data = GuyanaEconomy::findOrFail($validated['id']);
+        $ge_data_images = explode(',', $ge_data->images);
+
+        foreach ($ge_data_images as $key => $value) {
+            if($value === $validated['img_url']){
+                $this->deleteFromStorage('public', $validated['img_url'], $isArray = false);
+                unset($ge_data_images[$key]);
+            }
+        }
+
+        $ge_data_images_new = (count($ge_data_images) > 0) ? implode(',', $ge_data_images) : '';
+
+        DB::transaction(function () use ($ge_data, $ge_data_images_new) {
+            $ge_data->update([
+                'images' => $ge_data_images_new
+            ]);
+        });
+
+        $data['error'] = false;
+        $data['msg'] = 'Image Deleted';
 
         return response()->json($data, 200);
     }

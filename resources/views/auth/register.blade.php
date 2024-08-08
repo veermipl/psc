@@ -264,7 +264,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-12">
+                                <div class="col-lg-12 mb-2">
                                     <div class="textbox mb-0">
                                         <label for="form_pdf">Upload filled form <span
                                                 class="text-danger">*</span></label>
@@ -277,14 +277,12 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-12 d-none">
+                                <div class="col-lg-12">
                                     <div class="textbox mb-0">
-                                        <label for="form_pdf">
-                                            Supported Files <span class="text-danger">*</span>
-                                        </label>
-                                        <input type="file" id="supported_files" class="form-control" name="supported_files">
+                                        <label for="supported_files">Upload Supporting Documents <span class="text-danger">*</span></label>
+                                        <input type="file" id="supporting_document" class="form-control" name="supporting_document[]" accept="application/pdf" multiple>
 
-                                        @error('supported_files')
+                                        @error('supporting_document')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
 

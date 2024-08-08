@@ -1,0 +1,38 @@
+#dropzone {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    border: 2px dashed #072d74;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 20px auto;
+}
+
+#dropzone:hover {
+    background-color: #f1f1f1;
+}
+
+#dropzone p {
+    margin: 0;
+    font-size: 16px;
+    color: #8a8585;
+}
+
+#fileInput {
+    display: none;
+}
+
+#fileList {
+    margin-top: 20px;
+}
+
+.file-item {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    font-size: 14px;
+}

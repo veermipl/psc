@@ -128,23 +128,27 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
     Route::post('member/filter', [AdminMemberController::class, 'index'])->name('member.filter');
     Route::post('member/export', [AdminMemberController::class, 'export'])->name('member.export');
     Route::post('member/status', [AdminMemberController::class, 'statusToggle'])->name('member.status');
+    Route::post('member/delete-doc', [AdminMemberController::class, 'deleteDoc'])->name('member.delete-doc');
 
     Route::prefix('cms')->name('cms.')->group(function () {
         Route::get('guyana-economy', [CMSController::class, 'guyanaEconomy'])->name('guyana-economy');
-        Route::post('guyana-economy/filter', [CMSController::class, 'guyanaEconomy'])->name('guyana-economy.filter');
         Route::get('guyana-economy/create', [CMSController::class, 'guyanaEconomyCreate'])->name('guyana-economy.create');
         Route::post('guyana-economy/store', [CMSController::class, 'guyanaEconomyStore'])->name('guyana-economy.store');
         Route::get('guyana-economy/show/{id}', [CMSController::class, 'guyanaEconomyShow'])->name('guyana-economy.show');
         Route::get('guyana-economy/edit/{id}', [CMSController::class, 'guyanaEconomyEdit'])->name('guyana-economy.edit');
         Route::patch('guyana-economy/update', [CMSController::class, 'guyanaEconomyUpdate'])->name('guyana-economy.update');
         Route::delete('guyana-economy/delete/{id}', [CMSController::class, 'guyanaEconomyDelete'])->name('guyana-economy.delete');
-        Route::post('guyana-economy/status', [CMSController::class, 'guyanaEconomyStatusToggle'])->name('guyana-economy.status');
+        Route::post('guyana-economy/delete-image', [CMSController::class, 'guyanaEconomyDeleteImage'])->name('guyana-economy.delete-image');
+        Route::post('guyana-economy/filter', [CMSController::class, 'guyanaEconomy'])->name('guyana-economy.filter');
         Route::post('guyana-economy/export', [CMSController::class, 'guyanaEconomyExport'])->name('guyana-economy.export');
+        Route::post('guyana-economy/status', [CMSController::class, 'guyanaEconomyStatusToggle'])->name('guyana-economy.status');
     });
 
     Route::prefix('settings')->name('settings.')->group(function () {
         Route::get('general', [SettingsController::class, 'general'])->name('general');
         Route::patch('general', [SettingsController::class, 'updateGeneral']);
+        Route::get('email', [SettingsController::class, 'email'])->name('email');
+        Route::patch('email', [SettingsController::class, 'updateEmail']);
         Route::get('contact-us', [SettingsController::class, 'contactUs'])->name('contact-us');
         Route::patch('contact-us', [SettingsController::class, 'updateContactUs']);
     });

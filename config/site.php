@@ -14,8 +14,9 @@ return [
     'settings' => [
         [
             'name' => 'admin_mail',
-            'value' => 'admin@yopmail.com'
-        ]
+            'value' => 'admin@yopmail.com',
+            'type' => 'general',
+        ],
     ],
     'roles' => ['Admin', 'Member', 'User'],
     'permissions' => [
@@ -107,6 +108,10 @@ return [
             'name_key' => 'member_status_edit',
             'name' => 'Edit Member Status',
             'roles' => ['Admin', 'User']
+        ],[
+            'name_key' => 'member_doc_delete',
+            'name' => 'Delete Member Document',
+            'roles' => ['Admin', 'User']
         ],
 
         [
@@ -130,6 +135,10 @@ return [
         [
             'name_key' => 'general_settings_edit',
             'name' => 'Edit General Settings',
+            'roles' => ['Admin', 'User']
+        ],[
+            'name_key' => 'email_settings_edit',
+            'name' => 'Edit Email Settings',
             'roles' => ['Admin', 'User']
         ],[
             'name_key' => 'contact_us_settings_edit',

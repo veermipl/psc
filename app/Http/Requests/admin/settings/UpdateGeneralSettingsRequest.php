@@ -23,6 +23,7 @@ class UpdateGeneralSettingsRequest extends FormRequest
     {
         return [
             'app_name' => ['required', 'string'],
+            'app_logo_old' => ['nullable', 'string'],
             'app_logo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif'],
             'admin_mail' => ['required', 'email'],
         ];

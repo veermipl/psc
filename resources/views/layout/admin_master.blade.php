@@ -27,7 +27,10 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css">
+    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.css" />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css" rel="stylesheet">
+    <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet" />
 
     <style>
         body {
@@ -203,24 +206,6 @@
                     </div>
                 </li>
                 <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#membership-collapse" aria-expanded="false">
-                        Membership
-                    </button>
-                    <div class="collapse {{ request()->is('admin/membership/*') ? 'show' : '' }}" id="membership-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Type</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Business Directory</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Member Benefits</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
                     <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#data-collapse" aria-expanded="false">
                         Data
                     </button>
@@ -293,6 +278,24 @@
                     </div>
                 </li>
                 <li class="mb-1">
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#membership-collapse" aria-expanded="false">
+                        Membership
+                    </button>
+                    <div class="collapse {{ request()->is('admin/membership/*') ? 'show' : '' }}" id="membership-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
+                                <a href="#" class="link-dark rounded">Type</a>
+                            </li>
+                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
+                                <a href="#" class="link-dark rounded">Business Directory</a>
+                            </li>
+                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
+                                <a href="#" class="link-dark rounded">Member Benefits</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="mb-1">
                     <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#about_us-collapse" aria-expanded="false">
                         About Us
                     </button>
@@ -319,7 +322,7 @@
                     </button>
                     <div class="collapse {{ request()->is('admin/cms/*') ? 'show' : '' }}" id="cms-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/cms/guyana-economy') ? 'link-active' : 'no' }}">
+                            <li class="rounded {{ request()->is('admin/cms/guyana-economy') || request()->is('admin/cms/guyana-economy/*') ? 'link-active' : 'no' }}">
                                 <a href="{{ route('admin.cms.guyana-economy') }}" class="link-dark rounded">Guyana Economy</a>
                             </li>
                         </ul>
@@ -348,6 +351,9 @@
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                             <li class="rounded {{ request()->is('admin/settings/general') ? 'link-active' : 'no' }}">
                                 <a href="{{ route('admin.settings.general') }}" class="link-dark rounded">General Settings</a>
+                            </li>
+                            <li class="rounded {{ request()->is('admin/settings/email') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.settings.email') }}" class="link-dark rounded">Email Settings</a>
                             </li>
                             <li class="rounded {{ request()->is('admin/settings/contact-us') ? 'link-active' : 'no' }}">
                                 <a href="{{ route('admin.settings.contact-us') }}" class="link-dark rounded">Contact
@@ -463,10 +469,44 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.2/dist/bootstrap-table.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
+    <script src="{{ asset('js/dropzone.js') }}"></script>
 
     <script src="{{ asset('js/sidebars.js') }}"></script>
-    <script src="{{ asset('js/dropzone.js') }}"></script>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.js",
+                "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/43.0.0/"
+            }
+        }
+    </script>
+    <script type="module">
+        import {
+            ClassicEditor,
+            Essentials,
+            Bold,
+            Italic,
+            Font,
+            Paragraph
+        } from 'ckeditor5';
+    
+        ClassicEditor
+            .create( document.querySelector( '#editor' ), {
+                plugins: [ Essentials, Bold, Italic, Font, Paragraph ],
+                toolbar: {
+                    items: [
+                        'undo', 'redo', '|', 'bold', 'italic', '|',
+                        'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
+                    ]
+                }
+            } )
+            .then( /* ... */ )
+            .catch( /* ... */ );
+    </script>
+    
 
     @if (session('success'))
         <script>

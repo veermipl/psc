@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\View\View;
 use App\Traits\UserTraits;
+use App\Models\MemberFiles;
 use Illuminate\Http\Request;
 use App\Traits\SettingTraits;
 use App\Models\MembershipType;
@@ -52,7 +53,8 @@ class RegisteredUserController extends Controller
             'number' => ['required', 'string', 'max:12'],
             'membership_type' => ['required'],
             'form_pdf' => ['required', 'mimes:pdf', 'max:2048'], // max size in KB
-            // 'supported_files' => ['required', 'mimes:pdf', 'max:2048'], // max size in KB
+            'supporting_document' => ['required', 'array'],
+            'supporting_document.*' => ['required', 'mimes:pdf', 'max:2048'],
         ]);
 
         $formPdfPath = null;
@@ -60,6 +62,16 @@ class RegisteredUserController extends Controller
             $file = $request->file('form_pdf');
 
             $formPdfPath = $file->store('uploaded_forms', 'public');
+        }
+
+        $sDoc = [];
+        if ($request->hasFile('supporting_document')) {
+            $images = $request->file('supporting_document');
+
+            foreach ($images as $imageKey => $image) {
+                $path = $image->store('supporting_documents', 'public');
+                array_push($sDoc, $path);
+            }
         }
 
         $user = User::create([
@@ -75,10 +87,19 @@ class RegisteredUserController extends Controller
         $user->role()->sync(Role::where('name', 'Member')->pluck('id')->toArray());
         $this->InitialUserRolePermission($user);
 
-        $admin_email = $this->getSettings('admin_email');
-        if($admin_email){
+        if(count($sDoc) > 0){
+            foreach($sDoc as $sDocKey => $sDocValue){
+                MemberFiles::create([
+                    'user_id' => $user->id,
+                    'file_name' => $sDocValue,
+                ]);
+            }
+        }
+
+        $admin_mail = $this->getSettings('admin_mail');
+        if($admin_mail){
             $user->load('membership');
-            Mail::to($admin_email)->queue(new SendMemberRegistrationMailToAdmin($user));
+            Mail::to($admin_mail)->queue(new SendMemberRegistrationMailToAdmin($user));
         }
 
         // event(new Registered($user));

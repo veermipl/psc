@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('setting', function (Blueprint $table) {
+        Schema::create('member_files', function (Blueprint $table) {
             $table->id();
-            $table->string('meta_key')->unique();
-            $table->longText('meta_value')->nullable()->default(null);
-            $table->string('meta_type')->nullable()->default(null);
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->longText('file_name')->nullable()->default(null);
+            $table->longText('file_for')->nullable()->default(null);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('setting');
+        Schema::dropIfExists('member_files');
     }
 };

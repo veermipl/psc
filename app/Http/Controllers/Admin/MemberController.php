@@ -5,7 +5,10 @@ namespace App\Http\Controllers\admin;
 use App\Models\Role;
 use App\Models\User;
 use App\Traits\UserTraits;
+use App\Models\MemberFiles;
+use App\Traits\ImageTraits;
 use Illuminate\Http\Request;
+use App\Traits\SettingTraits;
 use App\Models\MembershipType;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -16,11 +19,12 @@ use App\Mail\admin\member\SendApprovedMailToMember;
 use App\Http\Requests\admin\member\ExporMemberRequest;
 use App\Http\Requests\admin\member\StoreMemberRequest;
 use App\Http\Requests\admin\member\UpdateMemberRequest;
+use App\Http\Requests\admin\member\DeleteMemberDocRequest;
 use App\Http\Requests\admin\member\UpdateMemberStatusRequest;
 
 class MemberController extends Controller
 {
-    use UserTraits;
+    use UserTraits, SettingTraits, ImageTraits;
 
     /**
      * Display a listing of the resource.
@@ -36,7 +40,7 @@ class MemberController extends Controller
             'role' => $request->role ?? null,
             'status' => $request->status ?? null,
         ];
-        $userList = User::with(['membership'])->orderBy('id', 'desc')
+        $userList = User::with(['membership', 'supportingDoc'])->orderBy('id', 'desc')
             ->whereHas('role', function (Builder $x) {
                 $x->where('role_id', 2);
             })
@@ -151,12 +155,23 @@ class MemberController extends Controller
         $validated = $request->validated();
 
         $formPdfPath = null;
-        if ($request->hasFile('form_pdf')) {
-            $file = $request->file('form_pdf');
+        if ($request->hasFile('form')) {
+            $file = $request->file('form');
 
             $formPdfPath = $file->store('uploaded_forms', 'public');
         }
-        $validated['form_pdf'] = $formPdfPath;
+        $validated['form'] = $formPdfPath;
+
+        $sDoc = [];
+        if ($request->hasFile('supporting_document')) {
+            $images = $request->file('supporting_document');
+
+            foreach ($images as $imageKey => $image) {
+                $path = $image->store('supporting_documents', 'public');
+                array_push($sDoc, $path);
+            }
+        }
+        $validated['supporting_document'] = $sDoc;
 
         DB::transaction(function () use ($validated) {
             $user = User::create([
@@ -164,13 +179,22 @@ class MemberController extends Controller
                 'membership_type' => $validated['membership_type'],
                 'email' => $validated['email'],
                 'mobile_number' => $validated['contact'],
-                'form_pdf' => $validated['form_pdf'],
+                'form_pdf' => $validated['form'],
                 'status' => $validated['status'],
                 'password' => Hash::make($validated['password']),
             ]);
 
             $user->role()->sync(Role::where('name', 'Member')->pluck('id')->toArray());
             $this->InitialUserRolePermission($user);
+
+            if (count($validated['supporting_document']) > 0) {
+                foreach ($validated['supporting_document'] as $sDocKey => $sDocValue) {
+                    MemberFiles::create([
+                        'user_id' => $user->id,
+                        'file_name' => $sDocValue,
+                    ]);
+                }
+            }
         });
 
         return redirect()->route('admin.member.index')->with('status', 'Member created successfully');
@@ -195,7 +219,7 @@ class MemberController extends Controller
     {
         $this->authorize('member_edit');
 
-        $data['user'] = $member;
+        $data['user'] = $member->load('supportingDoc');
         $data['membershipList'] = MembershipType::orderBy('name', 'asc')->get();
 
         return view('admin.member.edit', $data);
@@ -210,7 +234,7 @@ class MemberController extends Controller
 
         $validated = $request->validated();
 
-        $formPdfPath = null;
+        $formPdfPath = $validated['old_form'] ?? null;
         if ($request->hasFile('form_pdf')) {
             $file = $request->file('form_pdf');
 
@@ -218,7 +242,18 @@ class MemberController extends Controller
         }
         $validated['form_pdf'] = $formPdfPath;
 
-        if ($request->filled('password')) {
+        $sDoc = $validated['old_doc'] ?? [];
+        if ($request->hasFile('supporting_document')) {
+            $images = $request->file('supporting_document');
+
+            foreach ($images as $imageKey => $image) {
+                $path = $image->store('supporting_documents', 'public');
+                array_push($sDoc, $path);
+            }
+        }
+        $validated['supporting_document'] = $sDoc;
+
+        if ($request->has('password') && !is_null($request->input('password')) && $request->input('password') !== '') {
             $validated['password'] = Hash::make($validated['password']);
         } else {
             $validated['password'] = $member->password;
@@ -234,6 +269,15 @@ class MemberController extends Controller
                 'password' => $validated['password'],
                 'status' => $validated['status'],
             ]);
+
+            if (count($validated['supporting_document']) > 0) {
+                foreach ($validated['supporting_document'] as $sDocKey => $sDocValue) {
+                    MemberFiles::create([
+                        'user_id' => $member->id,
+                        'file_name' => $sDocValue,
+                    ]);
+                }
+            }
         });
 
         return redirect()->route('admin.member.index')->with('success', 'Member Updated');
@@ -256,6 +300,49 @@ class MemberController extends Controller
         return response()->json($data, 200);
     }
 
+    public function deleteDoc(DeleteMemberDocRequest $request)
+    {
+        $this->authorize('member_doc_delete');
+
+        $validated = $request->validated();
+
+        $user = User::findOrFail($validated['id']);
+        $data['error'] = true;
+        $data['msg'] = 'Failed to deleted';
+
+        if ($validated['doc_type'] == 'form') {
+
+            DB::transaction(function () use ($user) {
+                $user->update([
+                    'form_pdf' => null
+                ]);
+            });
+
+            $this->deleteFromStorage('public', $validated['doc_url'], $isArray = false);
+
+            $data['error'] = false;
+            $data['msg'] = 'Document Deleted';
+        }
+
+        if ($validated['doc_type'] == 'supporting') {
+            $doc_from_db = MemberFiles::where([
+                'user_id' => $validated['id'],
+                'file_name' => $validated['doc_url']
+            ])->firstOrFail();
+
+            DB::transaction(function () use ($doc_from_db) {
+                $doc_from_db->delete();
+            });
+
+            $this->deleteFromStorage('public', $validated['doc_url'], $isArray = false);
+
+            $data['error'] = false;
+            $data['msg'] = 'Document Deleted';
+        }
+
+        return response()->json($data, 200);
+    }
+
     public function statusToggle(UpdateMemberStatusRequest $request)
     {
         $this->authorize('member_status_edit');
@@ -271,7 +358,7 @@ class MemberController extends Controller
             ]);
         });
 
-        if($validated['ustatus'] == '0' && $user->email){
+        if ($validated['ustatus'] == '0' && $user->email) {
             Mail::to($user->email)->queue(new SendApprovedMailToMember($user));
         }
 

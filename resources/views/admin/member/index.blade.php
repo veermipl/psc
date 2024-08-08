@@ -86,7 +86,8 @@
                         <th scope="col" data-sortable="true">Name</th>
                         <th scope="col" data-sortable="true">Email</th>
                         <th scope="col" data-sortable="true">Membership</th>
-                        <th scope="col" data-sortable="true">File</th>
+                        <th scope="col" data-sortable="true">Form</th>
+                        <th scope="col" data-sortable="true">Supporting Document</th>
                         <th scope="col" data-sortable="true">Status</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -116,9 +117,25 @@
                                 <td>
                                     @if ($user->form_pdf)
                                         <a href="{{ $user->form_pdf ? asset('storage/' . $user->form_pdf) : '' }}"
-                                            target="_blank">
+                                            target="_blank" title="Filled Form">
                                             <i class="fa fa-file-pdf text-danger"></i>
                                         </a>
+                                    @else
+                                    @endif
+                                </td>
+
+                                <td>
+                                    @if ($user->supportingDoc)
+                                        @php
+                                            $docsArr = $user->supportingDoc->pluck('file_name')->toArray();
+                                        @endphp
+
+                                        @foreach ($docsArr as $docKey => $docVal )
+                                            <a href="{{ $docVal ? asset('storage/' . $docVal) : '' }}"
+                                                target="_blank" title="Supporting Documents">
+                                                <i class="fa fa-file-pdf text-danger"></i>
+                                            </a>
+                                        @endforeach
                                     @else
                                     @endif
                                 </td>

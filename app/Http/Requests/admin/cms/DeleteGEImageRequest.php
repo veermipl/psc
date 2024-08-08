@@ -4,7 +4,7 @@ namespace App\Http\Requests\admin\cms;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateGERequest extends FormRequest
+class DeleteGEImageRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +23,7 @@ class UpdateGERequest extends FormRequest
     {
         return [
             'id' => ['required', 'exists:guyana_economies,id'],
-            'title' => ['required'],
-            'old_images' => ['nullable', 'array'],
-            'images' => ['nullable', 'array'],
-            'images.*' => ['nullable', 'image', 'mimes:jpg,jpeg,gif,png'],
-            'content' => ['required'],
-            'status' => ['required', 'in:0,1'],
+            'img_url' => ['required', 'string']
         ];
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\admin\cms;
+namespace App\Http\Requests\admin\member;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateGERequest extends FormRequest
+class DeleteMemberDocRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,13 +22,9 @@ class UpdateGERequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => ['required', 'exists:guyana_economies,id'],
-            'title' => ['required'],
-            'old_images' => ['nullable', 'array'],
-            'images' => ['nullable', 'array'],
-            'images.*' => ['nullable', 'image', 'mimes:jpg,jpeg,gif,png'],
-            'content' => ['required'],
-            'status' => ['required', 'in:0,1'],
+            'id' => ['required', 'exists:users,id'],
+            'doc_url' => ['required', 'string'],
+            'doc_type' => ['required', 'string', 'in:form,supporting'],
         ];
     }
 }

@@ -25,7 +25,7 @@
 
                     <div class="form-group col-md-6">
                         <label for="name">Images </label>
-                        <input type="file" class="form-control" name="images">
+                        <input type="file" class="form-control" name="images[]"  accept="image/*" multiple>
 
                         @error('images')
                             <span class="text-danger">{{ $message }}</span>
@@ -35,7 +35,7 @@
 
                 <div class="form-group col-md-12">
                     <label for="content">Content <span class="text-danger">*</span></label>
-                    <textarea name="content" id="" cols="30" rows="10" class="form-control"></textarea>
+                    <textarea name="content" id="editor" cols="5" rows="5" class="form-control">{{ old('content') }}</textarea>
 
                     @error('content')
                         <span class="text-danger">{{ $message }}</span>
