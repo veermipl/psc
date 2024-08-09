@@ -456,11 +456,11 @@
                                 <h3>Useful Links</h3>
                             </div>
                             <ul class="footer-widget-useful-links-list list-unstyled">
-                                <li><a href="">Home</a></li>
-                                <li><a href="">Members</a></li>
-                                <li><a href="#">Guyana's Economy</a></li>
-                                <li><a href="">News</a></li>
-                                <li><a href="">Regional</a></li>
+                                <li><a href="{{url('about-us/introduction')}}">Introduction</a></li>
+                                <li><a href="{{url('membership/business-directory')}}">Member Benefits</a></li>
+                                <li><a href="{{url('guyana-economy')}}">Guyana's Economy</a></li>
+                                <li><a href="{{url('media/news')}}">News</a></li>
+                              
                             </ul>
                         </div>
                     </div>

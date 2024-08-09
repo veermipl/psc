@@ -1,23 +1,6 @@
 @extends('layout.master')
 
 @section('content')
-    <!-- <section class="why-choose-two-section">
-        <div class="container">
-            <div class="thm-section-title text-center">
-                <h4 class="sub-title-shape-left section_title-subheading">
-                    Resources
-                </h4>
-                <h2>Certificate Of Origin</h2>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque atque, libero ut repudiandae quas voluptatem. Quo ut natus sapiente eos sunt, laborum eius, in, atque dolore quod harum odit amet.
-                </div>
-            </div>
-        </div>
-    </section> -->
-
     <section class="banner-section wow bg-about">
         <div class="container">
          <div class="row">
@@ -37,6 +20,7 @@
         </div>
        </section>
       <!--Start Blog One Section -->
+
       <section class="about-tow-section about-page">
         <div class="container">
           <div class="row">
@@ -44,15 +28,23 @@
               <div
                 class="about-two-left-content wow slideInLeft animated"
                 data-wow-delay="100ms"
-                style=" visibility: visible;  animation-delay: 100ms; animation-name: slideInLeft; ">
+                style="
+                  visibility: visible;
+                  animation-delay: 100ms;
+                  animation-name: slideInLeft;
+                ">
                 <div class="about-two-sec-image">
                   <div
                     class="about-two-sec-image-bg-1"
-                    style=" background-image: url('{{asset('/images/about/about-2--pattern-1.png')}}');   "></div>
+                    style="
+                      background-image: url('{{asset('/images/about/about-2--pattern-1.png')}}');
+                    "></div>
                   <div
                     class="about-two-sec-image-bg-2"
-                    style=" background-image: url('{{asset('/images/about/about-2--pattern-2.png')}}'); "></div>
-                  <img src="{{asset('images/about/about-page-img-1.png')}}" alt="" />
+                    style="
+                      background-image: url('{{asset('/images/about/about-2--pattern-2.png')}}');
+                    "></div>
+                  <img src="{{asset('images/about/about-page-img-1e.png')}}" alt="" />
                 </div>
               </div>
             </div>
@@ -85,11 +77,11 @@
                     that reduce or eliminate tariffs on goods from certain
                     countries.
                   </p>
-                  <p>
+                  <!-- <p>
                     It ensures compliance with rules of origin under various
                     trade agreements.
                   </p>
-                  <!-- <h5 class="pt-3"><b>Market Access</b></h5>
+                  <h5 class="pt-3"><b>Market Access</b></h5>
                   <p>
                     Facilitates smoother access to international markets by
                     providing proof of origin.
@@ -156,7 +148,7 @@
                 class="blog-one-single guyana-wrap wow fadeInUp"
                 data-wow-delay="100ms">
                 <div class="blog-one-img guyana-imgg">
-                  <img src="{{asset('images/Blog/LU3.jpg')}}" alt="" />
+                  <img src="{{asset('images/about/oil-10.png')}}" alt="" />
                 </div>
                 <div class="blog-one-content">
                   <div class="blog-one-title">
@@ -184,9 +176,7 @@
                 class="blog-one-single guyana-wrap wow fadeInUp"
                 data-wow-delay="100ms">
                 <div class="blog-one-img guyana-imgg">
-                  <img
-                    src="https://psc.gy/wp-content/uploads/2023/03/covid-400x250.png"
-                    alt="" />
+                  <img src="{{asset('images/about/oil-5.png')}}" alt="" />
                 </div>
                 <div class="blog-one-content">
                   <!-- <ul class="blog-classic-meta">
@@ -328,5 +318,6 @@
           </div>
         </div>
       </section>
+   
 
 @endsection

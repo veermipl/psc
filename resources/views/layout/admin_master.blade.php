@@ -302,7 +302,7 @@
                     <div class="collapse {{ request()->is('admin/about-us/*') ? 'show' : '' }}" id="about_us-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                             <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Staff</a>
+                                <a href="{{route('admin.staff.create')}}" class="link-dark rounded">Staff</a>
                             </li>
                             <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
                                 <a href="#" class="link-dark rounded">Council</a>
