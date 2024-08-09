@@ -22,6 +22,7 @@
         </div>
        </section>
       <!--Start Blog One Section -->
+   
       <section class="about-tow-section about-page">
         <div class="container">
           <div class="row">
@@ -45,7 +46,7 @@
                     style="
                       background-image: url('{{asset('/images/about/about-2--pattern-2.png')}}');
                     "></div>
-                  <img src="{{asset('images/about/about-page-img-1.png')}}" alt="" />
+                  <img src="{{asset('images/about/about-page-img-1c.png')}}" alt="" />
                 </div>
               </div>
             </div>
@@ -75,41 +76,7 @@
                     positive impact on communities and the broader economy.
                   </p>
                 </div>
-                <!-- <div class="row">
-                  <div class="col-md-6">
-                    <div class="about-tow-experience-years">
-                      <div class="about-tow-experience-years-icon">
-                        <span class="flaticon-check"></span>
-                      </div>
-                      <div class="about-tow-experience-years-text">
-                        <h2>
-                          30+ Years of <br />
-                          excellence
-                        </h2>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="about-tow-experience-years">
-                      <div class="about-tow-experience-years-icon">
-                        <span class="flaticon-check"></span>
-                      </div>
-                      <div class="about-tow-experience-years-text">
-                        <h2>
-                          Operating <br />
-                          in 9 Sectors
-                        </h2>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
-
-                <!-- <div class="about-two-bottom-content">
-                  <h3>John Franclin - <span>CEO & Founder</span></h3>
-                  <div class="signature">
-                    <img src="images/about/signature-1.png" alt="" />
-                  </div>
-                </div> -->
+                
               </div>
             </div>
           </div>
@@ -129,7 +96,7 @@
                 class="blog-one-single guyana-wrap wow fadeInUp"
                 data-wow-delay="100ms">
                 <div class="blog-one-img guyana-imgg">
-                  <img src="{{asset('images/Blog/LU3.jpg')}}" alt="" />
+                  <img src="{{asset('images/about/oil-6.png')}}" alt="" />
                 </div>
                 <div class="blog-one-content">
                   <!-- <ul class="blog-classic-meta">
@@ -167,9 +134,9 @@
                 class="blog-one-single guyana-wrap wow fadeInUp"
                 data-wow-delay="100ms">
                 <div class="blog-one-img guyana-imgg">
-                  <img
-                    src="https://psc.gy/wp-content/uploads/2023/03/covid-400x250.png"
-                    alt="" />
+                  <div class="blog-one-img guyana-imgg">
+                    <img src="{{asset('images/about/oil-7.png')}}" alt="" />
+                  </div>
                 </div>
                 <div class="blog-one-content">
                   <!-- <ul class="blog-classic-meta">
@@ -207,9 +174,9 @@
                 class="blog-one-single guyana-wrap wow fadeInUp"
                 data-wow-delay="200ms">
                 <div class="blog-one-img guyana-imgg">
-                  <img
-                    src="https://psc.gy/wp-content/uploads/2023/03/Roadmap-400x250.png"
-                    alt="" />
+                  <div class="blog-one-img guyana-imgg">
+                    <img src="{{asset('images/about/oil-8.png')}}" alt="" />
+                  </div>
                 </div>
                 <div class="blog-one-content">
                   <!-- <ul class="blog-classic-meta">
@@ -243,7 +210,7 @@
                 </div>
               </div>
             </div>
-     
+           
           </div>
         </div>
       </section>
@@ -401,6 +368,5 @@
           </div>
         </div>
       </section>
-      <!--End Blog One Section -->
 
 @endsection

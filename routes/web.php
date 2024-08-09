@@ -11,6 +11,7 @@ use App\Http\Controllers\Member\MemberController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\MemberController as AdminMemberController;
+use App\Http\Controllers\Admin\StaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -152,9 +153,14 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         Route::get('contact-us', [SettingsController::class, 'contactUs'])->name('contact-us');
         Route::patch('contact-us', [SettingsController::class, 'updateContactUs']);
     });
-});
+    Route::controller(StaffController::class)->prefix('staff')->name('staff.')->group(function () {
+        Route::get('create', 'create')->name('create');
+        Route::Post('store', 'store')->name('store');
+        Route::get('list', 'list')->name('list');
+        
+    });
 //
-
+});
 
 Route::get('test', [TestController::class, 'test'])->name('test');
 
