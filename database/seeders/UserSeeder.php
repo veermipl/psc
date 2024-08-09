@@ -44,7 +44,7 @@ class UserSeeder extends Seeder
         $this->InitialUserRolePermission($member);
 
         #create members
-        User::factory(10)->create()->each(function ($user) {
+        User::factory(5)->create()->each(function ($user) {
             $role = Role::where('name', 'Member')->pluck('id')->toArray();
             $user->role()->sync($role);
 

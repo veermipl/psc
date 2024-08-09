@@ -68,18 +68,19 @@
 
                 <div class="d-flex">
                     <div class="form-group col-md-6">
-                        <label for="form_pdf">Upload filled form <span class="text-danger">*</span></label>
-                        <input type="file" id="form_pdf" class="form-control" name="form_pdf" accept="application/pdf">
+                        <label for="form">Upload Filled Form <span class="text-danger">*</span></label>
+                        <input type="file" id="form" class="form-control" name="form" accept="application/pdf">
 
-                        @error('form_pdf')
+                        @error('form')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="supported_files">Supported Files <span class="text-danger">*</span></label>
+                        <label for="supported_files">Upload Supporting Documents <span class="text-danger">*</span></label>
+                        <input type="file" id="supporting_document" class="form-control" name="supporting_document[]" accept="application/pdf" multiple>
 
-                        @error('supported_files')
+                        @error('supporting_document')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>

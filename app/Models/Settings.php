@@ -9,7 +9,11 @@ class Settings extends Model
 {
     use HasFactory;
 
-    protected $table = 'settings';
+    protected $table = 'setting';
 
-    protected $fillable = [];
+    protected $fillable = [
+        'meta_key',
+        'meta_value',
+        'meta_type',
+    ];
 }
