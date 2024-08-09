@@ -45,9 +45,9 @@ jobs:
     - name: FTP Deploy to Staging
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
-        server: psc.digitalnoticeboard.biz
-        username: psconline@psc.digitalnoticeboard.biz
-        password: "@K$LRy,pVdo0"
+        server: psc-dev.digitalnoticeboard.biz
+        username: pscdevftp@psc-dev.digitalnoticeboard.biz
+        password: "Slp;WQlqM~ja"
         serverPort: 21
         localDir: ./  # Path to your local directory to deploy (adjust as needed)
         remoteDir: /  # Remote directory to deploy to (adjust as needed)
