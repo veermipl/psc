@@ -186,21 +186,20 @@
                                                             <a href="index.html">About Us <i class="fas fa-chevron-down"></i></a>
                                                             <ul>
 
-                                                                <li><a
-                                                                        href="{{ route('about-us.introduction') }}">Introduction</a>
+                                                                <li><a  href="{{ route('about-us.introduction') }}">Introduction</a>
                                                                 </li>
-                                                                <li><a
-                                                                        href="{{ route('about-us.staff') }}">Staff</a>
+                                                                <li><a  href="{{ route('about-us.staff') }}">Staff</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a
-                                                                        href="{{ route('about-us.council') }}">Council</a>
+                                                                    <a  href="{{ route('about-us.council') }}">Council</a>
                                                                 </li>
                                                                 <li>
-                                                                    <a
-                                                                        href="{{ route('about-us.history') }}">History</a>
+                                                                    <a href="{{ route('about-us.history') }}">History</a>
                                                                 </li>
 
+                                                                <li>
+                                                                    <a href="{{ route('about-us.committeess') }}">Committeess</a>
+                                                                </li>
 
                                                             </ul>
                                                         </li>
@@ -378,7 +377,7 @@
                         <div class="header-column">
                             <div class="logo-box">
                                 <div class="logo">
-                                    <a href="index.html"><img src="images/Gover-website/logo-other.png" alt="" title="" /></a>
+                                    <a href="{{url('/')}}"><img src="{{asset('images/Gover-website/logo-other.png')}}" alt="" title="" /></a>
                                 </div>
                             </div>
                         </div>

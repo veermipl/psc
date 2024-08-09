@@ -313,6 +313,8 @@
                             <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
                                 <a href="#" class="link-dark rounded">Committees</a>
                             </li>
+
+                            
                         </ul>
                     </div>
                 </li>
