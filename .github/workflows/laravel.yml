@@ -33,7 +33,9 @@ jobs:
         serverPort: 21
         localDir: ./  # Path to your local directory to deploy
         remoteDir: /  # Remote directory to deploy to
-        exclude: "vendor/**"  # Exclude VENDOR directory from FTP deployment
+        exclude: |
+          vendor/**,
+          .env,  # Exclude .env file
         delete: true  # Delete remote files not present in local directory
 
     - name: Create a copy of .env.staging
