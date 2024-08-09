@@ -21,10 +21,7 @@
     </div>
 </section>
 <!-- End Bnner Section -->
-
-
-
-
+ 
 
 <!--Start Why Choose Two Section -->
 <section class="why-choose-two-section">
@@ -715,7 +712,7 @@
 </section>
 <!--End Why Choose Two Section -->
 <!-- -----Become a member-start--- -->
-<section class="video-two-section" style="background-image: url(images/main-slider/become.png)">
+<section class="video-two-section" style="background-image: url('{{asset('/images/main-slider/become.png')}}')">
     <div class="container">
         <div class="row">
             <div class="col-xl-12">

@@ -10,9 +10,9 @@
                     <h2>Contact Us</h2>
                     <div class="breadcrumbs text-center wow animate__ animate__fadeInUp animate__delay-1s animated" style="visibility: visible; animation-name: fadeInUp;">
                         <ul>
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="{{url('/')}}">Home</a></li>
                             <span class="slash"> /</span>
-                            <li><a href="about.html">Contact Us</a></li>
+                            <li><a href="#">Contact Us</a></li>
                         </ul>
                     </div>
                 </div>
@@ -31,8 +31,7 @@
             <div class="contact-info">
                 <h3 class="title">Let's get in touch</h3>
                 <p class="text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
-                    dolorum adipisci recusandae praesentium dicta!
+                Reach out to us for any inquiries or assistance, and we’ll be happy to help!
                 </p>
 
                 <div class="info">

@@ -9,9 +9,9 @@
                     <h2>Annual Reports</h2>
                     <div class="breadcrumbs text-center wow animate__ animate__fadeInUp animate__delay-1s animated" style="visibility: visible; animation-name: fadeInUp;">
                         <ul>
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="{{url('/')}}">Home</a></li>
                             <span class="slash"> /</span>
-                            <li><a href="about.html">Annual Reports</a></li>
+                            <li><a href="#">Annual Reports</a></li>
                         </ul>
                     </div>
                 </div>
@@ -75,7 +75,6 @@
                             </h3>
                         </div>
                         <div class="blog-one-text">
-
                         </div>
                         <a href="#" class="vs-btn1 style5 mt-3" tabindex="0">Read More <i class="far fa-long-arrow-right"></i></a>
                     </div>
@@ -102,7 +101,6 @@
                             </h3>
                         </div>
                         <div class="blog-one-text">
-
                         </div>
                         <a href="#" class="vs-btn1 style5 mt-3" tabindex="0">Read More <i class="far fa-long-arrow-right"></i></a>
                     </div>
