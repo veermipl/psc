@@ -68,19 +68,66 @@
 
                 <div class="d-flex">
                     <div class="form-group col-md-6">
-                        <label for="form_pdf">Upload filled form</label>
+                        <label for="form_pdf">Upload Filled Form</label>
                         <input type="file" id="form_pdf" class="form-control" name="form_pdf" accept="application/pdf">
+
                         @error('form_pdf')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="supported_files">Supported Files</label>
+                        <label for="supported_files">Upload Supporting Documents</label>
+                        <input type="file" id="supporting_document" class="form-control" name="supporting_document[]" accept="application/pdf" multiple>
 
                         @error('supported_files')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
+                    </div>
+                </div>
+
+                <div class="d-flex">
+                    <div class="form-group col-md-6">
+                        @if ($user->form_pdf)
+                            <div class="editDocWrapper" doc_row_url="{{ $user->form_pdf }}">
+                                <input type="hidden" name="old_form" value="{{ $user->form_pdf }}">
+                                <span class="text-center">
+                                    <a href="{{ $user->form_pdf ? asset('storage/' . $user->form_pdf) : '' }}"
+                                        target="_blank" title="Filled Form">
+                                        <i class="fa fa-file-pdf text-danger"></i>
+                                    </a>
+                                </span>
+                                <button class="btn btn-sm btn-outline-danger mt-2 deleteDocBtn" type="button" id="{{ $user->id }}" doc_url="{{ $user->form_pdf }}" doc_type="form">
+                                    Delete
+                                </button>
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        @if ($user->supportingDoc)
+                            @php
+                                $docsArr = $user->supportingDoc->pluck('file_name')->toArray();
+                            @endphp
+                            <div class="allDocWrapper d-flex">
+                                @foreach ($docsArr as $docKey => $docVal)
+                                    @if ($docVal)
+                                        <div class="editDocWrapper" doc_row_url="{{ $docVal }}">
+                                            <input type="hidden" name="old_doc[]" value="{{ $docVal }}">
+                                            <span class="text-center">
+                                                <a href="{{ $docVal ? asset('storage/' . $docVal) : '' }}"
+                                                target="_blank" title="Filled Form">
+                                                    <i class="fa fa-file-pdf text-danger"></i>
+                                                </a>
+                                            </span>
+                                            <button class="btn btn-sm btn-outline-danger mt-2 deleteDocBtn" type="button" id="{{ $user->id }}" doc_url="{{ $docVal }}" doc_type="supporting">
+                                                Delete
+                                            </button>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
                 </div>
 
@@ -103,9 +150,9 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="confirmed">Password </label>
+                        <label for="confirmed">Update Password </label>
                         <input type="password" id="password" class="form-control" name="password" value=""
-                            placeholder="Change password" maxlength="50">
+                            placeholder="Update password" maxlength="50">
 
                         @error('password')
                             <span class="text-danger">{{ $message }}</span>
@@ -119,5 +166,66 @@
             </form>
         </div>
     </div>
+
+@endsection
+
+
+
+@section('scripts')
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $(document).on('click', '.deleteDocBtn', function(e) {
+                e.preventDefault();
+
+                var id = $(this).attr('id');
+                var doc_url = $(this).attr('doc_url');
+                var doc_type = $(this).attr('doc_type');
+
+                Swal.fire({
+                    title: 'Are you sure ?',
+                    showCancelButton: true,
+                    confirmButtonColor: '#24695c',
+                    cancelButtonColor: '#d22d3d',
+                    confirmButtonText: 'Yes, Delete it !'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ route('admin.member.delete-doc') }}",
+                            method: 'POST',
+                            data: {
+                                _method: 'post',
+                                _token: '{{ csrf_token() }}',
+                                id: id,
+                                doc_url: doc_url,
+                                doc_type: doc_type,
+                            },
+                            dataType: "json",
+                            beforeSend: function() {
+                                // $('.preloader').show();
+                            },
+                            success: function(response) {
+                                if (response.error === false) {
+                                    $('div.editDocWrapper[doc_row_url="'+doc_url+'"]').remove();
+
+                                    toastr.success(response.msg);
+                                } else {
+                                    toastr.error(response.msg);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                toastr.error(error);
+                            },
+                            complete: function(xhr, status) {
+                                // $('.preloader').hide();
+                            }
+                        });
+                    }
+                });
+
+            });
+        });
+    </script>
 
 @endsection

@@ -27,7 +27,10 @@ class UpdateMemberRequest extends FormRequest
             // 'email' => ['required', 'unique:users,email'],
             'contact' => ['nullable', 'integer'],
             'form_pdf' => ['nullable', 'mimes:pdf', 'max:2048'],
-            'supported_files' => ['nullable'],
+            'supporting_document' => ['nullable', 'array'],
+            'supporting_document.*' => ['nullable', 'mimes:pdf', 'max:2048'],
+            'old_form' => ['nullable', 'string'],
+            'old_doc' => ['nullable', 'array'],
             'password' => ['nullable'],
             'status' => ['required', 'in:0,1'],
         ];

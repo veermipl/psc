@@ -117,7 +117,7 @@
                             <div class=" text-center my-4 pt-4">
                                 <a href="{{ route('login') }}" class="btn btn-primary vs-btn vs-btn-2 mx-3">Login <i
                                         class="far fa-long-arrow-right"></i></a>
-                                <a href="{{ url('/') }}" class="btn btn-secondary vs-btn">Back to Home Page <i
+                                <a href="{{ route('home') }}" class="btn btn-secondary vs-btn">Back to Home Page <i
                                         class="far fa-long-arrow-right"></i></a>
                             </div>
                         </div>
@@ -134,8 +134,7 @@
             @endif
             <div class="row" id="register-row">
 
-
-                <div class="col-md-6   ">
+                <div class="col-md-6">
                     <div class="login-box">
                         <h1> <span class="text-box">1</span> Download Form</h1>
 
@@ -173,24 +172,16 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-6 loginn">
                     <div class="login-box">
                         <h1> <span class="text-box">2</span>Register</h1>
 
-                        <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data" class="dropzone" id="my-dropzone">
                             @csrf
                             @method('post')
 
-
-
                             <div class="row">
-
-
-
-
-
-
-
 
                                 <div class="col-lg-12">
                                     <div class="textbox">
@@ -204,7 +195,6 @@
                                     </div>
                                 </div>
 
-
                                 <div class="col-lg-6">
                                     <div class="textbox">
                                         <label for="email">Email <span class="text-danger">*</span></label>
@@ -214,8 +204,8 @@
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-
                                 </div>
+
                                 <div class="col-lg-6">
                                     <div class="textbox">
                                         <label for="number">Contact Number <span class="text-danger">*</span></label>
@@ -228,6 +218,7 @@
                                         @enderror
                                     </div>
                                 </div>
+
                                 <div class="col-lg-6">
                                     <div class="textbox">
                                         <label for="password">Password <span class="text-danger">*</span></label>
@@ -238,6 +229,7 @@
                                         @enderror
                                     </div>
                                 </div>
+
                                 <div class="col-lg-6">
                                     <div class="textbox">
                                         <label for="confirmed">Confirmation Password<span
@@ -250,6 +242,7 @@
                                         @enderror
                                     </div>
                                 </div>
+
                                 <div class="col-lg-12">
                                     <div class="textbox">
                                         <label for="membership_type">Membership Type <span
@@ -270,7 +263,8 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-lg-12">
+
+                                <div class="col-lg-12 mb-2">
                                     <div class="textbox mb-0">
                                         <label for="form_pdf">Upload filled form <span
                                                 class="text-danger">*</span></label>
@@ -282,12 +276,22 @@
 
                                     </div>
                                 </div>
+
+                                <div class="col-lg-12">
+                                    <div class="textbox mb-0">
+                                        <label for="supported_files">Upload Supporting Documents <span class="text-danger">*</span></label>
+                                        <input type="file" id="supporting_document" class="form-control" name="supporting_document[]" accept="application/pdf" multiple>
+
+                                        @error('supporting_document')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+
+                                    </div>
+                                </div>
+
                                 <div class="col-lg-12">
                                     <p class="text-danger "
-                                        style="font-size: 14px; font-size: 14px;
-
-    line-height: 20px;
-    padding-top: 10px;">
+                                        style="font-size: 14px; font-size: 14px;line-height: 20px;padding-top: 10px;">
                                         Downloaded desired membership type form from section 1 and after filling it upload
                                         that form here.
                                     </p>
@@ -295,12 +299,11 @@
 
                             </div>
 
-
                             <button type="submit" class="btn">Apply Now</button>
                             <a href="{{ route('login') }}" class="forgot">Already Registered?</a>
                         </form>
                     </div>
                 </div>
-
+            </div>
     </section>
 @endsection

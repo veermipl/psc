@@ -30,11 +30,31 @@
 }
 
 .tableOptions span,
-#userStatus {
+#userStatus,
+span.status {
     cursor: pointer;
 }
 
 .filter-wrapper {
     border-radius: 7px;
     border: 1px solid #072d74
+}
+
+
+.imgWrapper {
+    padding: 3px 14px
+}
+
+.ge_img {
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    max-width: 60px;
+    max-height: 60px;
+}
+
+.editImgWrapper, .editDocWrapper{
+    display: flex;
+    flex-direction: column;
+    padding: 3px 14px
 }

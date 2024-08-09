@@ -26,8 +26,9 @@ class StoreMemberRequest extends FormRequest
             'membership_type' => ['required', 'exists:membership_types,id'],
             'email' => ['required', 'unique:users,email'],
             'contact' => ['required', 'integer'],
-            'form_pdf' => ['required', 'mimes:pdf', 'max:2048'],
-            'supported_files' => ['nullable'],
+            'form' => ['required', 'mimes:pdf', 'max:2048'],
+            'supporting_document' => ['required', 'array'],
+            'supporting_document.*' => ['required', 'mimes:pdf', 'max:2048'],
             'password' => ['required', 'confirmed'],
             'status' => ['required', 'in:0,1'],
         ];

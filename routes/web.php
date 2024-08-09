@@ -2,11 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\Admin\CMSController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Member\MemberController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\MemberController as AdminMemberController;
 
@@ -46,8 +48,6 @@ Route::get('storage', function () {
     return "storage linked successfully";
 });
 
-Route::prefix('admin')->group(function () {
-});
 
 Route::get('/', [FrontController::class, 'index']);
 Route::get('home', [FrontController::class, 'index'])->name('home');
@@ -128,14 +128,35 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
     Route::post('member/filter', [AdminMemberController::class, 'index'])->name('member.filter');
     Route::post('member/export', [AdminMemberController::class, 'export'])->name('member.export');
     Route::post('member/status', [AdminMemberController::class, 'statusToggle'])->name('member.status');
+    Route::post('member/delete-doc', [AdminMemberController::class, 'deleteDoc'])->name('member.delete-doc');
 
     Route::prefix('cms')->name('cms.')->group(function () {
-        Route::get('contact-us', [CMSController::class, 'contactUs'])->name('contact-us');
+        Route::get('guyana-economy', [CMSController::class, 'guyanaEconomy'])->name('guyana-economy');
+        Route::get('guyana-economy/create', [CMSController::class, 'guyanaEconomyCreate'])->name('guyana-economy.create');
+        Route::post('guyana-economy/store', [CMSController::class, 'guyanaEconomyStore'])->name('guyana-economy.store');
+        Route::get('guyana-economy/show/{id}', [CMSController::class, 'guyanaEconomyShow'])->name('guyana-economy.show');
+        Route::get('guyana-economy/edit/{id}', [CMSController::class, 'guyanaEconomyEdit'])->name('guyana-economy.edit');
+        Route::patch('guyana-economy/update', [CMSController::class, 'guyanaEconomyUpdate'])->name('guyana-economy.update');
+        Route::delete('guyana-economy/delete/{id}', [CMSController::class, 'guyanaEconomyDelete'])->name('guyana-economy.delete');
+        Route::post('guyana-economy/delete-image', [CMSController::class, 'guyanaEconomyDeleteImage'])->name('guyana-economy.delete-image');
+        Route::post('guyana-economy/filter', [CMSController::class, 'guyanaEconomy'])->name('guyana-economy.filter');
+        Route::post('guyana-economy/export', [CMSController::class, 'guyanaEconomyExport'])->name('guyana-economy.export');
+        Route::post('guyana-economy/status', [CMSController::class, 'guyanaEconomyStatusToggle'])->name('guyana-economy.status');
+    });
+
+    Route::prefix('settings')->name('settings.')->group(function () {
+        Route::get('general', [SettingsController::class, 'general'])->name('general');
+        Route::patch('general', [SettingsController::class, 'updateGeneral']);
+        Route::get('email', [SettingsController::class, 'email'])->name('email');
+        Route::patch('email', [SettingsController::class, 'updateEmail']);
+        Route::get('contact-us', [SettingsController::class, 'contactUs'])->name('contact-us');
+        Route::patch('contact-us', [SettingsController::class, 'updateContactUs']);
     });
 });
 //
 
 
+Route::get('test', [TestController::class, 'test'])->name('test');
 
 
 require __DIR__ . '/auth.php';

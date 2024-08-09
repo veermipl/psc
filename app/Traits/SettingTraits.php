@@ -18,4 +18,19 @@ trait SettingTraits
             }
         }
     }
+
+    public function getSettings($settingsKey = null)
+    {
+        $res = null;
+
+        if ($settingsKey) {
+            $settingVal = Settings::where('meta_key', '=', $settingsKey)->get()->pluck('meta_value')->first();
+
+            if ($settingVal) {
+                $res =  $settingVal;
+            }
+        }
+
+        return $res;
+    }
 }
