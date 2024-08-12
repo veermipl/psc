@@ -85,6 +85,10 @@ return [
             'name' => 'All Member',
             'roles' => ['Admin', 'User']
         ],[
+            'name_key' => 'member_import',
+            'name' => 'Import Member',
+            'roles' => ['Admin', 'User']
+        ],[
             'name_key' => 'member_export',
             'name' => 'Export Member',
             'roles' => ['Admin', 'User']
@@ -115,34 +119,122 @@ return [
         ],
 
         [
-            'name_key' => 'role_list',
-            'name' => 'All Roles',
+            'name_key' => 'data',
+            'name' => 'Data',
+            'roles' => ['Admin', 'User']
+        ],[
+            'name_key' => 'data_export',
+            'name' => 'Export Data',
             'roles' => ['Admin', 'User']
         ], [
-            'name_key' => 'role_create',
-            'name' => 'Create Role',
+            'name_key' => 'data_create',
+            'name' => 'Create Data',
             'roles' => ['Admin', 'User']
         ], [
-            'name_key' => 'role_edit',
-            'name' => 'Edit Role',
+            'name_key' => 'data_view',
+            'name' => 'View Data',
             'roles' => ['Admin', 'User']
         ], [
-            'name_key' => 'role_delete',
-            'name' => 'Delete Role',
+            'name_key' => 'data_edit',
+            'name' => 'Edit Data',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'data_delete',
+            'name' => 'Delete Data',
+            'roles' => ['Admin', 'User']
+        ],[
+            'name_key' => 'data_status_edit',
+            'name' => 'Edit Data Status',
             'roles' => ['Admin', 'User']
         ],
 
         [
-            'name_key' => 'general_settings_edit',
-            'name' => 'Edit General Settings',
+            'name_key' => 'resource',
+            'name' => 'Resource',
             'roles' => ['Admin', 'User']
         ],[
-            'name_key' => 'email_settings_edit',
-            'name' => 'Edit Email Settings',
+            'name_key' => 'resource_export',
+            'name' => 'Export Resource',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'resource_create',
+            'name' => 'Create Resource',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'resource_view',
+            'name' => 'View Resource',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'resource_edit',
+            'name' => 'Edit Resource',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'resource_delete',
+            'name' => 'Delete Resource',
             'roles' => ['Admin', 'User']
         ],[
-            'name_key' => 'contact_us_settings_edit',
-            'name' => 'Edit Contact Us Settings',
+            'name_key' => 'resource_status_edit',
+            'name' => 'Edit Resource Status',
+            'roles' => ['Admin', 'User']
+        ],
+
+        [
+            'name_key' => 'media',
+            'name' => 'Media',
+            'roles' => ['Admin', 'User']
+        ],[
+            'name_key' => 'media_export',
+            'name' => 'Export Media',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'media_create',
+            'name' => 'Create Media',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'media_view',
+            'name' => 'View Media',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'media_edit',
+            'name' => 'Edit Media',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'media_delete',
+            'name' => 'Delete Media',
+            'roles' => ['Admin', 'User']
+        ],[
+            'name_key' => 'media_status_edit',
+            'name' => 'Edit Media Status',
+            'roles' => ['Admin', 'User']
+        ],
+
+        [
+            'name_key' => 'membership',
+            'name' => 'Membership',
+            'roles' => ['Admin', 'User']
+        ],[
+            'name_key' => 'membership_export',
+            'name' => 'Export Membership',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'membership_create',
+            'name' => 'Create Membership',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'membership_view',
+            'name' => 'View Membership',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'membership_edit',
+            'name' => 'Edit Membership',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'membership_delete',
+            'name' => 'Delete Membership',
+            'roles' => ['Admin', 'User']
+        ],[
+            'name_key' => 'membership_status_edit',
+            'name' => 'Edit Membership Status',
             'roles' => ['Admin', 'User']
         ],
 
@@ -173,6 +265,46 @@ return [
         ],[
             'name_key' => 'cms_status_edit',
             'name' => 'Edit CMS Status',
+            'roles' => ['Admin', 'User']
+        ],
+
+        [
+            'name_key' => 'role_list',
+            'name' => 'All Roles',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'role_create',
+            'name' => 'Create Role',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'role_edit',
+            'name' => 'Edit Role',
+            'roles' => ['Admin', 'User']
+        ], [
+            'name_key' => 'role_delete',
+            'name' => 'Delete Role',
+            'roles' => ['Admin', 'User']
+        ],[
+            'name_key' => 'role_status_edit',
+            'name' => 'Edit Role Status',
+            'roles' => ['Admin', 'User']
+        ],[
+            'name_key' => 'permission_list',
+            'name' => 'All Permission',
+            'roles' => ['Admin', 'User']
+        ],
+
+        [
+            'name_key' => 'general_settings_edit',
+            'name' => 'Edit General Settings',
+            'roles' => ['Admin', 'User']
+        ],[
+            'name_key' => 'email_settings_edit',
+            'name' => 'Edit Email Settings',
+            'roles' => ['Admin', 'User']
+        ],[
+            'name_key' => 'contact_us_settings_edit',
+            'name' => 'Edit Contact Us Settings',
             'roles' => ['Admin', 'User']
         ],
 

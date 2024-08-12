@@ -155,11 +155,15 @@
                 var urow = $(this).attr('urow');
 
                 Swal.fire({
-                    title: 'Are you sure ?',
+                    title: "Are you sure?",
+                    // text: "You won't be able to revert this!",
+                    icon: "warning",
                     showCancelButton: true,
+                    confirmButtonText: "Yes, change it!",
+                    cancelButtonText: "No, cancel!",
+                    reverseButtons: true,
                     confirmButtonColor: '#24695c',
                     cancelButtonColor: '#d22d3d',
-                    confirmButtonText: 'Yes, Change it !'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
@@ -213,11 +217,15 @@
                 var url = `{{ url('/admin/user/${uid}') }}`;
 
                 Swal.fire({
-                    title: 'Are you sure ?',
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
                     showCancelButton: true,
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel!",
+                    reverseButtons: true,
                     confirmButtonColor: '#24695c',
                     cancelButtonColor: '#d22d3d',
-                    confirmButtonText: 'Yes, Delete it !'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
