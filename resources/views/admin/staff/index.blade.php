@@ -14,12 +14,12 @@
                 @method('post')
 
                 <div class="row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-6">
                         <input type="text" class="form-control" name="name" placeholder="Name"
                             value="{{ @$filterValues['name'] }}">
                     </div>
 
-                
+                    <div class="form-group col-md-6">
                         <select name="status" class="form-control">
                             <option hidden value="">Status</option>
                             @foreach (config('site.status') as $status)
@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="text-right">
-                    <a href="{{ route('admin.user.index') }}" class="btn btn-danger btn-sm">Reset</a>
+                    <a href="{{ route('admin.staff.list') }}" class="btn btn-danger btn-sm">Reset</a>
                     <button class="btn btn-custom btn-sm" type="submit">Filter</button>
                 </div>
             </form>
@@ -54,10 +54,11 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col" data-sortable="true">Profile</th>
                         <th scope="col" data-sortable="true">Name</th>
-                        <th scope="col" data-sortable="true">ofiice</th>
-                        <th scope="col" data-sortable="true">Status</th>
+                        <th scope="col" data-sortable="true">Office</th>
                         <th scope="col" data-sortable="true">facebook link</th>
+                        <th scope="col" data-sortable="true">Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -68,17 +69,15 @@
                                 $userRoles = $user->role ? $user->role->pluck('name')->toArray() : [];
                             @endphp
                             <tr class="tr_row_{{ $userKey }}">
-
                                 <th scope="row">{{ $userKey + 1 }}</th>
-
+                                <td><img style="height:40px; width:50px" src="{{asset('storage/'.$user->image)}}" > </td>
                                 <td>
                                     <a href="{{ route('admin.user.show', $user->id) }}" class="text-secondary">
                                         {{ $user->name }}
                                     </a>
                                 </td>
-
-                                <td>{{ $user->email }}</td>
-
+                                <td>{{ $user->office }}</td>
+                                <td>{{ $user->facebook }}</td>
                                 <td>
                                     @if ($user->status == 1)
                                         <span class="badge badge-success" id="userStatus" uid="{{ $user->id }}"
@@ -96,7 +95,7 @@
                                 <td>
                                     <div class="tableOptions">
                                         <span class="text-dark" title="Edit">
-                                            <a href="{{ route('admin.user.edit', $user->id) }}"><i
+                                            <a href="{{ route('admin.staff.edit', $user->id) }}"><i
                                                     class="fa fa-edit"></i></a>
                                         </span>
                                         <span class="text-danger" title="Delete" uid="{{ $user->id }}" urow="{{ $userKey }}"
@@ -137,7 +136,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "{{ route('admin.user.status') }}",
+                            url: "{{ route('admin.staff.status') }}",
                             method: 'POST',
                             data: {
                                 _method: 'post',
@@ -184,7 +183,7 @@
 
                 var uid = $(this).attr('uid');
                 var urow = $(this).attr('urow');
-                var url = `{{ url('/admin/user/${uid}') }}`;
+                var url = `{{ url('/admin/staff/destroy/${uid}') }}`;
 
                 Swal.fire({
                     title: 'Are you sure ?',
@@ -196,7 +195,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             url: url,
-                            method: 'POST',
+                            method: 'get',
                             data: {
                                 _method: 'delete',
                                 _token: '{{ csrf_token() }}',
