@@ -663,6 +663,12 @@
         font-size: 22px;
 
     }
+    .about-two-title h2 {
+        font-size: 42px;
+        font-weight: 800;
+        line-height: 33px;
+        margin-bottom: 6px;
+    }
 
     .thm-section-title h2 {
         font-size: 22px;
@@ -701,7 +707,7 @@
 
     .blog-one-section {
 
-        padding: 50px 0 70px;
+        padding: 50px 0 50px;
     }
 
     .owl-dots {

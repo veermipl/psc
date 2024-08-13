@@ -230,7 +230,6 @@ class UserController extends Controller
     public function statusToggle(UpdateUserStatusRequest $request)
     {
         $this->authorize('user_status_edit');
-
         $validated = $request->validated();
 
         $user = User::find($validated['uid']);

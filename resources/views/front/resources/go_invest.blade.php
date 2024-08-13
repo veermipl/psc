@@ -1,5 +1,4 @@
 @extends('layout.master')
-
 @section('content')
 
 <section class="banner-section wow bg-about">
@@ -28,17 +27,23 @@
               <div
                 class="about-two-left-content wow slideInLeft animated"
                 data-wow-delay="100ms"
-                style="visibility: visible; animation-delay: 100ms;  animation-name: slideInLeft;">
+                style="
+                  visibility: visible;
+                  animation-delay: 100ms;
+                  animation-name: slideInLeft;
+                ">
                 <div class="about-two-sec-image">
                   <div
                     class="about-two-sec-image-bg-1"
-                    style=" background-image: url('{{asset('/images/about/about-2--pattern-1.png')}}'); "></div>
+                    style="
+                      background-image: url('{{asset('/images/about/about-2--pattern-1.png')}}');
+                    "></div>
                   <div
                     class="about-two-sec-image-bg-2"
                     style="
                       background-image: url('{{asset('/images/about/about-2--pattern-2.png')}}');
                     "></div>
-                  <img src="{{asset('images/about/about-page-img-1.png')}}" alt="" />
+                  <img src="{{asset('images/about/about-page-img-1b.png')}}" alt="" />
                 </div>
               </div>
             </div>
@@ -52,10 +57,15 @@
                   <p class="about-two-title-text">
                     Guyana, located on the northeastern coast of South America,
                     is an emerging hub for investment with vast potential and
-                    opportunities. With its rich natural resources, strategic
-                    location, and pro-business government policies, Guyana is
-                    poised to become a key player in the global economy. The
-                    Guyana Office for Investment (Go-Invest) serves as the
+                    opportunities.
+                  </p>
+                  <p class="about-two-title-text">
+                    With its rich natural resources, strategic location, and
+                    pro-business government policies, Guyana is poised to become
+                    a key player in the global economy.
+                  </p>
+                  <p class="about-two-title-text">
+                    The Guyana Office for Investment (Go-Invest) serves as the
                     gateway for investors looking to capitalize on the country's
                     economic growth and development.
                   </p>
@@ -114,9 +124,7 @@
                 class="blog-one-single guyana-wrap wow fadeInUp"
                 data-wow-delay="100ms">
                 <div class="blog-one-img guyana-imgg">
-                  <img
-                    src="https://psc.gy/wp-content/uploads/2023/03/covid-400x250.png"
-                    alt="" />
+                  <img src="{{asset('images/about/oil-1.png')}}" alt="" />
                 </div>
                 <div class="blog-one-content">
                   <!-- <ul class="blog-classic-meta">
@@ -154,9 +162,7 @@
                 class="blog-one-single guyana-wrap wow fadeInUp"
                 data-wow-delay="100ms">
                 <div class="blog-one-img guyana-imgg">
-                  <img
-                    src="https://psc.gy/wp-content/uploads/2023/03/covid-400x250.png"
-                    alt="" />
+                  <img src="{{asset('images/about/oil-2.png')}}" alt="" />
                 </div>
                 <div class="blog-one-content">
                   <!-- <ul class="blog-classic-meta">
@@ -194,9 +200,7 @@
                 class="blog-one-single guyana-wrap wow fadeInUp"
                 data-wow-delay="200ms">
                 <div class="blog-one-img guyana-imgg">
-                  <img
-                    src="https://psc.gy/wp-content/uploads/2023/03/Roadmap-400x250.png"
-                    alt="" />
+                  <img src="{{asset('images/about/oil-3.png')}}" alt="" />
                 </div>
                 <div class="blog-one-content">
                   <!-- <ul class="blog-classic-meta">
@@ -236,7 +240,7 @@
                 class="blog-one-single guyana-wrap wow fadeInUp"
                 data-wow-delay="300ms">
                 <div class="blog-one-img guyana-imgg">
-                  <img src="images/Blog/LU3.jpg" alt="" />
+                  <img src="{{asset('images/about/oil-4.png')}}" alt="" />
                 </div>
                 <div class="blog-one-content">
                   <!-- <ul class="blog-classic-meta">
@@ -274,9 +278,7 @@
                 class="blog-one-single guyana-wrap wow fadeInUp"
                 data-wow-delay="100ms">
                 <div class="blog-one-img guyana-imgg">
-                  <img
-                    src="https://psc.gy/wp-content/uploads/2023/03/covid-400x250.png"
-                    alt="" />
+                  <img src="{{asset('images/about/oil-5.png')}}" alt="" />
                 </div>
                 <div class="blog-one-content">
                   <!-- <ul class="blog-classic-meta">
@@ -314,9 +316,7 @@
                 class="blog-one-single guyana-wrap wow fadeInUp"
                 data-wow-delay="200ms">
                 <div class="blog-one-img guyana-imgg">
-                  <img
-                    src="https://psc.gy/wp-content/uploads/2023/03/Roadmap-400x250.png"
-                    alt="" />
+                  <img src="{{asset('images/about/oil-6.png')}}" alt="" />
                 </div>
                 <div class="blog-one-content">
                   <!-- <ul class="blog-classic-meta">
@@ -351,6 +351,7 @@
           </div>
         </div>
       </section>
-
+      <!--End Blog One Section -->
+      
 
 @endsection
