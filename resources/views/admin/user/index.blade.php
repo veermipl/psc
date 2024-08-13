@@ -80,8 +80,8 @@
                         <th scope="col">#</th>
                         <th scope="col" data-sortable="true">Name</th>
                         <th scope="col" data-sortable="true">Email</th>
-                        <th scope="col" data-sortable="true">Status</th>
                         <th scope="col" data-sortable="true">Role</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>

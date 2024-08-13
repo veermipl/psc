@@ -316,8 +316,6 @@
                             <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
                                 <a href="#" class="link-dark rounded">Committees</a>
                             </li>
-
-                            
                         </ul>
                     </div>
                 </li>
@@ -340,10 +338,10 @@
                     <div class="collapse {{ request()->is('admin/authorization/*') ? 'show' : '' }}" id="authorization-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                             <li class="rounded {{ request()->is('admin/authorization/role') || request()->is('admin/authorization/role/*') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Roles</a>
+                                <a href="{{ route('admin.authorization.role.index') }}" class="link-dark rounded">Roles</a>
                             </li>
                             <li class="rounded {{ request()->is('admin/authorization/permission') || request()->is('admin/authorization/permission/*') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Permission</a>
+                                <a href="{{ route('admin.authorization.permission.index') }}" class="link-dark rounded">Permission</a>
                             </li>
                         </ul>
                     </div>

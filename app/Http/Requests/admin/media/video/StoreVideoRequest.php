@@ -22,8 +22,8 @@ class StoreVideoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'video' => ['required_if:type,internal', 'file', 'mimes:mp4,avi,mov,mkv', 'max:10000'],
-            'link' => ['required_if:type,external', 'string', 'url'],
+            'video' => ['nullable', 'required_if:type,internal', 'file', 'mimes:mp4,avi,mov,mkv', 'max:10000'],
+            'link' => ['nullable', 'required_if:type,external', 'string', 'url'],
             'type' => ['required', 'string'],
             'status' => ['required', 'in:0,1'],
         ];

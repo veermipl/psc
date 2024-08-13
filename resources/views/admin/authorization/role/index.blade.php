@@ -1,31 +1,42 @@
 @extends('layout.admin_master')
 
-@section('title', 'Social Media - List')
-@section('header', 'Social Media')
+@section('title', 'Role - List')
+@section('header', 'Role')
 
 @section('content')
 
     <div class="p-3 bg-white">
-        <h5 class="fw-bold">Social Media List</h5>
+        <h5 class="fw-bold">Role List</h5>
 
         <div class="filter-wrapper my-3 p-3">
-            <form action="{{ route('admin.media-center.social-media.filter') }}" method="post">
+            <form action="{{ route('admin.authorization.role.filter') }}" method="post">
                 @csrf
                 @method('post')
 
                 <div class="row">
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" name="name" placeholder="Name"
+                            value="{{ $filterValues['name'] }}">
+                    </div>
 
+                    <div class="form-group col-md-6">
+                        <select name="type" class="form-control">
+                            <option hidden value="">Type</option>
+                            <option value="custom" {{ $filterValues['type'] == 'custom' ? 'selected' : '' }}>Custom</option>
+                            <option value="default" {{ $filterValues['type'] == 'default' ? 'selected' : '' }}>Default</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="text-right">
-                    <a href="{{ route('admin.media-center.social-media.index') }}" class="btn btn-danger btn-sm">Reset</a>
+                    <a href="{{ route('admin.authorization.role.index') }}" class="btn btn-danger btn-sm">Reset</a>
                     <button class="btn btn-custom btn-sm" type="submit">Filter</button>
                 </div>
             </form>
         </div>
 
         <div class="d-flex justify-content-between py-3 d-none">
-            <a href="{{ route('admin.media-center.social-media.create') }}">
+            <a href="{{ route('admin.authorization.role.create') }}">
                 <button class="btn btn-custom btn-sm">
                     <i class="fa fa-plus pr-1"></i>Create
                 </button>
@@ -46,12 +57,13 @@
         </div>
 
         <div class="table-responsive">
-            <table id="socialMediaTable" class="table table-sm table-borderless table-light" data-toggle="table" data-search="true"
+            <table id="roleTable" class="table table-sm table-borderless table-light" data-toggle="table" data-search="true"
                 data-buttons-prefix="btn-md btn" data-pagination="true">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Status</th>
+                        <th scope="col" data-sortable="true">Name</th>
+                        <th scope="col" data-sortable="true">Type</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -64,29 +76,27 @@
                                 <th scope="row">{{ $listKey + 1 }}</th>
 
                                 <td>
-                                    @if ($listValue->status == 1)
-                                        <span class="badge badge-success" id="listStatus" lid="{{ $listValue->id }}"
-                                            lstatus="{{ $listValue->status }}" lrow="{{ $listKey }}">
-                                            Active
-                                        </span>
-                                    @else
-                                        <span class="badge badge-danger" id="listStatus" lid="{{ $listValue->id }}"
-                                            lstatus="{{ $listValue->status }}" lrow="{{ $listKey }}">
-                                            In Active
-                                        </span>
-                                    @endif
+                                    <a href="{{ route('admin.authorization.role.show', $listValue->id) }}" class="text-secondary">
+                                        {{ $listValue->name }}
+                                    </a>
+                                </td>
+
+                                <td>
+                                    {{ ucwords($listValue->type) }}
                                 </td>
 
                                 <td>
                                     <div class="tableOptions">
                                         <span class="text-dark" title="Edit">
-                                            <a href="{{ route('admin.media-center.social-media.edit', $listValue->id) }}"><i
+                                            <a href="{{ route('admin.authorization.role.edit', $listValue->id) }}"><i
                                                     class="fa fa-edit"></i></a>
                                         </span>
-                                        <span class="text-danger" title="Delete" lid="{{ $listValue->id }}" lrow="{{ $listKey }}"
-                                            id="deleteListBtn">
-                                            <i class="fa fa-trash"></i>
-                                        </span>
+                                        @if ($listValue->type === 'custom')
+                                            <span class="text-danger" title="Delete" lid="{{ $listValue->id }}" lrow="{{ $listKey }}"
+                                                id="deleteListBtn">
+                                                <i class="fa fa-trash"></i>
+                                            </span>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>
@@ -105,74 +115,12 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-            $(document).on('click', '#listStatus', function(e) {
-                e.preventDefault();
-
-                var lid = $(this).attr('lid');
-                var lstatus = $(this).attr('lstatus');
-                var lrow = $(this).attr('lrow');
-
-                Swal.fire({
-                    title: "Are you sure?",
-                    // text: "You won't be able to revert this!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonText: "Yes, change it!",
-                    cancelButtonText: "No, cancel!",
-                    reverseButtons: true,
-                    confirmButtonColor: '#24695c',
-                    cancelButtonColor: '#d22d3d',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            url: "{{ route('admin.media-center.social-media.status') }}",
-                            method: 'POST',
-                            data: {
-                                _method: 'post',
-                                _token: '{{ csrf_token() }}',
-                                lid: lid,
-                                lstatus: lstatus,
-                            },
-                            dataType: "json",
-                            beforeSend: function() {
-                                // $('.preloader').show();
-                                $('span#listStatus[urow="'+lrow+'"]').prop('disabled', true).css({
-                                    'cursor':'not-allowed'
-                                });
-                            },
-                            success: function(response) {
-                                if (response.error === false) {
-                                    toastr.success(response.msg);
-
-                                    if(parseInt(lstatus) == 1){
-                                        $('span#listStatus[lrow="'+lrow+'"]').attr('lstatus', 0).removeClass('badge-success').addClass('badge-danger').html('In Active');
-                                    }else{
-                                        $('span#listStatus[lrow="'+lrow+'"]').attr('lstatus', 1).removeClass('badge-danger').addClass('badge-success').html('Active');
-                                    }
-                                } else {
-                                    toastr.error(response.msg);
-                                }
-                            },
-                            error: function(xhr, status, error) {
-                                toastr.error(error);
-                            },
-                            complete: function(xhr, status) {
-                                // $('.preloader').hide();
-                                $('span#listStatus[urow="'+lrow+'"]').prop('disabled', false).css({
-                                    'cursor':'pointer'
-                                });
-                            }
-                        });
-                    }
-                });
-            });
-
             $(document).on('click', '#deleteListBtn', function(e) {
                 e.preventDefault();
 
                 var lid = $(this).attr('lid');
                 var lrow = $(this).attr('lrow');
-                var url = `{{ url('/admin/media-center/social-media/${lid}') }}`;
+                var url = `{{ url('/admin/authorization/role/${lid}') }}`;
 
                 Swal.fire({
                     title: "Are you sure?",

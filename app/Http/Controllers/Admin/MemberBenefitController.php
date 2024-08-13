@@ -80,7 +80,7 @@ class MemberBenefitController extends Controller
 
         $data['member_benefit'] = $member_benefit;
 
-        return view('admin.membership.member_benefit.view', $member_benefit);
+        return view('admin.membership.member_benefit.view', $data);
     }
 
     /**
@@ -115,7 +115,7 @@ class MemberBenefitController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from storage .
      */
     public function destroy(MemberBenefit $member_benefit)
     {

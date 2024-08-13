@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\membership\business_directory\StoreBusinessDirectoryRequest;
+use App\Http\Requests\admin\membership\business_directory\UpdateBusinessDirectoryRequest;
+use App\Http\Requests\admin\membership\business_directory\UpdateBusinessDirectoryStatusRequest;
 use App\Models\BusinessDirectory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -44,50 +47,93 @@ class BusinessDirectoryController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('membership_create');
+
+        return view('admin.membership.business_directory.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreBusinessDirectoryRequest $request)
     {
-        //
+        $this->authorize('membership_create');
+
+        $validated = $request->validated();
+
+        DB::transaction(function () use ($validated) {
+            BusinessDirectory::create([
+                'name' => $validated['name'],
+                'sub_name' => $validated['sub_name'],
+                'status' => $validated['status'],
+            ]);
+        });
+
+        return redirect()->route('admin.membership.business-directory.index')->with('success', 'Business Directory created successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(BusinessDirectory $business_directory)
     {
-        //
+        $this->authorize('membership_view');
+
+        $data['business_directory'] = $business_directory;
+
+        return view('admin.membership.business_directory.view', $data);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(BusinessDirectory $business_directory)
     {
-        //
+        $this->authorize('membership_edit');
+
+        $data['business_directory'] = $business_directory;
+
+        return view('admin.membership.business_directory.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateBusinessDirectoryRequest $request, BusinessDirectory $business_directory)
     {
-        //
+        $this->authorize('membership_edit');
+
+        $validated = $request->validated();
+
+        DB::transaction(function () use ($business_directory, $validated) {
+            $business_directory->update([
+                'name' => $validated['name'],
+                'sub_name' => $validated['sub_name'],
+                'status' => $validated['status'],
+            ]);
+        });
+
+        return redirect()->route('admin.membership.business-directory.index')->with('success', 'Business Directory updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(BusinessDirectory $business_directory)
     {
-        //
+        $this->authorize('membership_delete');
+
+        DB::transaction(function () use ($business_directory) {
+            $business_directory->delete();
+        });
+
+        $data['error'] = false;
+        $data['msg'] = 'Business Directory Deleted';
+
+        return response()->json($data, 200);
     }
 
-    public function statusToggle(UpdateMembershipTypeStatusRequest $request)
+    public function statusToggle(UpdateBusinessDirectoryStatusRequest $request)
     {
         $this->authorize('membership_status_edit');
 
@@ -103,7 +149,7 @@ class BusinessDirectoryController extends Controller
         });
 
         $data['error'] = false;
-        $data['msg'] = 'Membership type status updated';
+        $data['msg'] = 'Business Directory status updated';
 
         return response()->json($data, 200);
     }

@@ -67,7 +67,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col" data-sortable="true">Name</th>
-                        <th scope="col" data-sortable="true">Status</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -80,9 +80,9 @@
                                 <th scope="row">{{ $listKey + 1 }}</th>
 
                                 <td>
-                                    <a href="{{ route('admin.membership.type.show', $listValue->id) }}" class="text-secondary">
+                                    {{-- <a href="{{ route('admin.membership.member-benefit.show', $listValue->id) }}" class="text-secondary"> --}}
                                         {{ $listValue->name }}
-                                    </a>
+                                    {{-- </a> --}}
                                 </td>
 
                                 <td>
@@ -102,8 +102,9 @@
                                 <td>
                                     <div class="tableOptions">
                                         <span class="text-dark" title="Edit">
-                                            <a href="{{ route('admin.membership.type.edit', $listValue->id) }}"><i
-                                                    class="fa fa-edit"></i></a>
+                                            <a href="{{ route('admin.membership.member-benefit.edit', $listValue->id) }}">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
                                         </span>
                                         <span class="text-danger" title="Delete" lid="{{ $listValue->id }}" lrow="{{ $listKey }}"
                                             id="deleteListBtn">
@@ -147,7 +148,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "{{ route('admin.membership.type.status') }}",
+                            url: "{{ route('admin.membership.member-benefit.status') }}",
                             method: 'POST',
                             data: {
                                 _method: 'post',
@@ -194,7 +195,7 @@
 
                 var lid = $(this).attr('lid');
                 var lrow = $(this).attr('lrow');
-                var url = `{{ url('/admin/membership/type/${lid}') }}`;
+                var url = `{{ url('/admin/membership/member-benefit/${lid}') }}`;
 
                 Swal.fire({
                     title: "Are you sure?",

@@ -86,3 +86,136 @@ span.status {
 .external {
     display: none;
 }
+
+
+/*  */
+.uploader label {
+    float: left;
+    clear: both;
+    width: 100%;
+    text-align: center;
+    background: #fff;
+    border-radius: 7px;
+    border: 2px solid #072d74;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding: 14px 0px;
+    margin: 0;
+  
+  }
+  
+  .uploader label:hover {
+    border-color: #ddd;
+  }
+  
+  .uploader label.hover {
+    border: 3px solid #ddd;
+    box-shadow: inset 0 0 0 6px #eee;
+  }
+  
+  .uploader label.hover #start i.fa {
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+    opacity: 0.3;
+  }
+  
+  .uploader #start {
+    float: left;
+    clear: both;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .uploader #start.hidden {
+    display: none;
+  }
+  
+  .uploader #start i {
+    font-size: 20px;
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    margin-right: 10px;
+    color: #072d74;
+    ;
+  }
+  
+  .uploader #response {
+    float: left;
+    clear: both;
+    width: 100%;
+  }
+  
+  .uploader #response.hidden {
+    display: none;
+  }
+  
+  .uploader #file-image {
+    display: inline;
+    height: 100px;
+    width: 200px;
+    object-fit: cover;
+  }
+  
+  .uploader #file-image.hidden {
+    display: none;
+  }
+  
+  .uploader #notimage {
+    display: block;
+    float: left;
+    clear: both;
+    width: 100%;
+  }
+  
+  .uploader #notimage.hidden {
+    display: none;
+  }
+  
+  .uploader progress,
+  .uploader .progress {
+    display: inline;
+    clear: both;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100px;
+    height: 8px;
+    border: 0;
+    border-radius: 4px;
+    background: #EFEFEF;
+    overflow: hidden;
+  }
+  
+  .uploader .progress[value]::-webkit-progress-bar {
+    border-radius: 4px;
+    background-color: #eee;
+  }
+  
+  .uploader input[type="file"] {
+    display: none;
+  }
+  
+  .uploader div {
+    color: #072d74;
+    /* font-family: Poppins; */
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 21px;
+    letter-spacing: 0.03em;
+  }
+  .file-note{
+    font-size: 11px;
+    font-weight: 600;
+    background: #fff299;
+    font-style: italic;
+  }
+  img#output{
+    max-height: 130px;
+  }
+/*  */

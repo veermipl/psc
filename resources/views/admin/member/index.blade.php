@@ -86,9 +86,9 @@
                         <th scope="col" data-sortable="true">Name</th>
                         <th scope="col" data-sortable="true">Email</th>
                         <th scope="col" data-sortable="true">Membership</th>
-                        <th scope="col" data-sortable="true">Form</th>
-                        <th scope="col" data-sortable="true">Sup. Docs</th>
-                        <th scope="col" data-sortable="true">Status</th>
+                        <th scope="col" data-sortable="false">Form</th>
+                        <th scope="col" data-sortable="false">Sup. Docs</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>

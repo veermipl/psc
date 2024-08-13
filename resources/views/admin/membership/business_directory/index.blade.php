@@ -1,15 +1,15 @@
 @extends('layout.admin_master')
 
-@section('title', 'Membership Type - List')
-@section('header', 'Membership Type')
+@section('title', 'Business Directory - List')
+@section('header', 'Business Directory')
 
 @section('content')
 
     <div class="p-3 bg-white">
-        <h5 class="fw-bold">Membership Type List</h5>
+        <h5 class="fw-bold">Business Directory List</h5>
 
         <div class="filter-wrapper my-3 p-3">
-            <form action="{{ route('admin.membership.type.filter') }}" method="post">
+            <form action="{{ route('admin.membership.business-directory.filter') }}" method="post">
                 @csrf
                 @method('post')
 
@@ -33,21 +33,21 @@
                 </div>
 
                 <div class="text-right">
-                    <a href="{{ route('admin.membership.type.index') }}" class="btn btn-danger btn-sm">Reset</a>
+                    <a href="{{ route('admin.membership.business-directory.index') }}" class="btn btn-danger btn-sm">Reset</a>
                     <button class="btn btn-custom btn-sm" type="submit">Filter</button>
                 </div>
             </form>
         </div>
 
         <div class="d-flex justify-content-between py-3 d-none">
-            <a href="{{ route('admin.membership.type.create') }}">
+            <a href="{{ route('admin.membership.business-directory.create') }}">
                 <button class="btn btn-custom btn-sm">
                     <i class="fa fa-plus pr-1"></i>Create
                 </button>
             </a>
 
             @if ($export_id && count($export_id) > 0)
-                <form action="{{ route('admin.membership.type.export') }}" method="post" class="d-none">
+                <form action="" method="post" class="d-none">
                     @csrf
                     @method('post')
 
@@ -67,7 +67,8 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col" data-sortable="true">Name</th>
-                        <th scope="col" data-sortable="true">Status</th>
+                        <th scope="col">Upload</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -80,8 +81,14 @@
                                 <th scope="row">{{ $listKey + 1 }}</th>
 
                                 <td>
-                                    <a href="{{ route('admin.membership.type.show', $listValue->id) }}" class="text-secondary">
+                                    <a href="{{ route('admin.membership.business-directory.show', $listValue->id) }}" class="text-secondary">
                                         {{ $listValue->name }}
+                                    </a>
+                                </td>
+
+                                <td>
+                                    <a href="#" class="btn btn-outline-custom btn-sm">
+                                        Upload <i class="fa fa-upload"></i>
                                     </a>
                                 </td>
 
@@ -102,8 +109,9 @@
                                 <td>
                                     <div class="tableOptions">
                                         <span class="text-dark" title="Edit">
-                                            <a href="{{ route('admin.membership.type.edit', $listValue->id) }}"><i
-                                                    class="fa fa-edit"></i></a>
+                                            <a href="{{ route('admin.membership.business-directory.edit', $listValue->id) }}">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
                                         </span>
                                         <span class="text-danger" title="Delete" lid="{{ $listValue->id }}" lrow="{{ $listKey }}"
                                             id="deleteListBtn">
@@ -147,7 +155,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "{{ route('admin.membership.type.status') }}",
+                            url: "{{ route('admin.membership.business-directory.status') }}",
                             method: 'POST',
                             data: {
                                 _method: 'post',
@@ -194,7 +202,7 @@
 
                 var lid = $(this).attr('lid');
                 var lrow = $(this).attr('lrow');
-                var url = `{{ url('/admin/membership/type/${lid}') }}`;
+                var url = `{{ url('/admin/membership/business-directory/${lid}') }}`;
 
                 Swal.fire({
                     title: "Are you sure?",

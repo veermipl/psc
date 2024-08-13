@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\admin\membership\business_directory;
+namespace App\Http\Requests\admin\authorization\role;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateBusinessDirectoryRequest extends FormRequest
+class CreateRoleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,9 @@ class UpdateBusinessDirectoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string'],
-            'sub_name' => ['nullable', 'string'],
-            'status' => ['required', 'in:0,1'],
+            'name' => ['required', 'string', 'unique:roles,name'],
+            'permissions' => ['required', 'array'],
+            'permissions.*' => ['required', 'exists:permissions,name_key'],
         ];
     }
 }

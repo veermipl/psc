@@ -6,12 +6,14 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\Admin\CMSController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\admin\NewsController;
+use App\Http\Controllers\admin\RoleController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\admin\PhotoController;
 use App\Http\Controllers\admin\VideoController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Member\MemberController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\admin\PermissionController;
 use App\Http\Controllers\admin\SocialMediaController;
 use App\Http\Controllers\admin\PressReleaseController;
 use App\Http\Controllers\admin\MemberBenefitController;
@@ -187,6 +189,10 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
     });
 
     Route::prefix('authorization')->name('authorization.')->group(function () {
+        Route::post('role/filter', [RoleController::class, 'index'])->name('role.filter');
+        Route::resource('role', RoleController::class);
+
+        Route::resource('permission', PermissionController::class);
     });
 
     Route::prefix('settings')->name('settings.')->group(function () {
