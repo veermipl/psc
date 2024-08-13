@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 
-                <div class="d-flex d-none">
+                {{-- <div class="d-flex ">
                     <div class="form-group col-md-6">
                         <label for="name">App Logo </label>
                         <div id="file-upload-form" class="uploader">
@@ -93,7 +93,7 @@
                             </label>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="form-group col-md-12 text-right">
                     <button class="btn btn-sm btn-custom" type="submit">Update</button>
