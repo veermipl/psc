@@ -725,6 +725,7 @@
         </div>
     </div>
 </section>
+
 <!--End Why Choose Two Section -->
 <!-- -----Become a member-start--- -->
 <!-- <section class="video-two-section" style="background-image: url('{{asset('/images/main-slider/become.png')}}')">

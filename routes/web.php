@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\TestController;
@@ -157,6 +158,19 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         Route::get('create', 'create')->name('create');
         Route::Post('store', 'store')->name('store');
         Route::get('list', 'list')->name('list');
+        Route::Post('status', 'status')->name('status');
+        Route::get('destroy/{id}', 'destroy')->name('destroy');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::patch('update/{id}', 'Update')->name('update');
+        
+    });
+
+    Route::controller(AboutController::class)->prefix('about')->name('about.')->group(function () {
+        Route::get('council', 'Council')->name('council');
+        Route::patch('council/{id}', 'Council_update')->name('council_update');
+        Route::get('history', 'History')->name('history');
+        Route::patch('history/{id}', 'History_update')->name('history_update');
+       
         
     });
 //

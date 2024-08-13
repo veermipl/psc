@@ -91,15 +91,13 @@
                     Origin and the EUR1 Certificate.
                   </p>
                   <p>
-                    <b class="text-dark"
-                      >Non-Preferential Certificate of Origin</b
-                    >
-
+                    <b class="text-dark">Non-Preferential Certificate of Origin</b >
                     Used for goods that do not qualify for any preferential
                     treatment. Provides standard information required by customs
                     authorities worldwide.
                   </p>
                 </div>
+
                 <!-- <div class="row">
                   <div class="col-md-6">
                     <div class="about-tow-experience-years">
@@ -135,6 +133,7 @@
                     <img src="images/about/signature-1.png" alt="" />
                   </div>
                 </div> -->
+
               </div>
             </div>
           </div>
