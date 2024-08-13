@@ -24,12 +24,16 @@ class PhotoController extends Controller
         $this->authorize('media');
 
         $filterValues = [
+            'title' => $request->title ?? null,
             'status' => $request->status ?? null,
         ];
 
         $list = Photos::orderBy('id', 'desc')
             ->where(function (Builder $query) use ($filterValues, $request) {
-                $query->when($request->filled('status'), function (Builder $q) use ($filterValues) {
+                $query->when($request->filled('title'), function (Builder $q) use ($filterValues) {
+                        $q->where('title', 'like', '%'.$filterValues['title'].'%');
+                    })
+                ->when($request->filled('status'), function (Builder $q) use ($filterValues) {
                         $q->where('status', $filterValues['status']);
                     });
             })
@@ -73,6 +77,7 @@ class PhotoController extends Controller
         DB::transaction(function () use ($validated) {
             Photos::create([
                 'name' => $validated['name'],
+                'title' => $validated['title'],
                 'status' => $validated['status'],
             ]);
         });
@@ -129,6 +134,7 @@ class PhotoController extends Controller
         DB::transaction(function () use ($photo, $validated) {
             $photo->update([
                 'name' => $validated['name'],
+                'title' => $validated['title'],
                 'status' => $validated['status'],
             ]);
         });

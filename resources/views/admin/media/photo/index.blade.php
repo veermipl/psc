@@ -15,6 +15,11 @@
 
                 <div class="row">
                     <div class="form-group col-md-6">
+                        <input type="text" class="form-control" name="title" placeholder="Title"
+                            value="{{ $filterValues['title'] }}">
+                    </div>
+
+                    <div class="form-group col-md-6">
                         <select name="status" class="form-control">
                             <option hidden value="">Status</option>
                             @foreach (config('site.status') as $status)
@@ -62,6 +67,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col" data-sortable="true">Image</th>
+                        <th scope="col" data-sortable="true">Title</th>
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -77,6 +83,10 @@
                                     <a href="{{ asset('storage/' .$listValue->name) }}" target="_blank" class="text-dark pop_up_image">
                                         <img src="{{ ($listValue->name && isset($listValue->name)) ? asset('storage/' . $listValue->name) :  asset('storage/default/no_image.jpg') }}" class="tableImg" alt="">
                                     </a>
+                                </td>
+
+                                <td>
+                                    {{ $listValue->title }}
                                 </td>
 
                                 <td>
