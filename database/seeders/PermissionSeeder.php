@@ -16,6 +16,7 @@ class PermissionSeeder extends Seeder
     {
         foreach(config('site.permissions') as $permission){
             $permissionDB= Permission::create([
+                'module' => $permission['module'],
                 'name' => $permission['name'],
                 'name_key' => $permission['name_key']
             ]);

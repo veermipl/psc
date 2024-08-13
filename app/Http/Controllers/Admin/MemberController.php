@@ -14,12 +14,16 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Database\Eloquent\Builder;
 use App\Mail\admin\member\SendApprovedMailToMember;
 use App\Http\Requests\admin\member\ExporMemberRequest;
 use App\Http\Requests\admin\member\StoreMemberRequest;
+use App\Http\Requests\admin\member\ImportMemberRequest;
 use App\Http\Requests\admin\member\UpdateMemberRequest;
 use App\Http\Requests\admin\member\DeleteMemberDocRequest;
+use App\Http\Requests\admin\member\ImportAddMemberRequest;
+use App\Mail\admin\member\SendMemberWelcomeRegistrationMail;
 use App\Http\Requests\admin\member\UpdateMemberStatusRequest;
 
 class MemberController extends Controller
@@ -49,7 +53,7 @@ class MemberController extends Controller
                     $q->where('name', 'like', '%' . $filterValues['name'] . '%');
                 })
                     ->when($request->filled('email'), function (Builder $q) use ($filterValues) {
-                        $q->where('email', $filterValues['email']);
+                        $q->where('email', 'email', '%' . $filterValues['email'] . '%');
                     })
                     ->when($request->filled('membership_type'), function (Builder $q) use ($filterValues) {
                         $q->where('membership_type', $filterValues['membership_type']);
@@ -73,6 +77,165 @@ class MemberController extends Controller
         $data['membershipList'] = $membershipList;
 
         return view('admin.member.index', $data);
+    }
+
+    public function import(Request $request)
+    {
+        $this->authorize('member_import');
+
+        return view('admin.member.import');
+    }
+
+    public function importSample()
+    {
+        $fileName = 'member_list_sample.csv';
+        $memberData = [];
+
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+        $columns = array('Name', 'Email', 'Mobile');
+
+        $callback = function () use ($memberData, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            fputcsv($file, array('John Doe', 'johndoe@yopmail.com', '1234567890'));
+
+            fclose($file);
+        };
+        return response()->stream($callback, 200, $headers);
+    }
+
+    public function importWithExcel(ImportMemberRequest $request)
+    {
+        $this->authorize('member_import');
+
+        $validated = $request->validated();
+        $data = [];
+
+        if ($request->hasFile('excelDoc')) {
+            $flag = false;
+            $invalidRow = [];
+
+            $file = $request->file('excelDoc');
+            $file_data = fopen($file->getPathname(), 'r');
+            fgetcsv($file_data);
+            $line = 2;
+            $row_id = 1;
+
+            while ($row = fgetcsv($file_data)) {
+                $info = [];
+
+                // Validate each column
+                if (empty($row[0]) || !isset($row[0]) || !is_string($row[0])) {
+                    $invalidRow[] = "Invalid member name '" . htmlspecialchars($row[0] ?? '') . "' at line $line";
+                    $flag = true;
+                } else {
+                    $info['name'] = $row[0];
+                }
+
+                if (empty($row[1]) || !isset($row[1]) || !filter_var($row[1], FILTER_VALIDATE_EMAIL)) {
+                    $invalidRow[] = "Invalid member email '" . htmlspecialchars($row[1] ?? '') . "' at line $line";
+                    $flag = true;
+                } else {
+                    if($this->mailExist($row[1])){
+                        $invalidRow[] = "Email already exist! '" . htmlspecialchars($row[1] ?? '') . "' at line $line";
+                        $flag = true;
+                    }else{
+                        $info['email'] = $row[1];
+                    }
+                }
+
+                if (empty($row[2]) || !isset($row[2]) || !is_numeric($row[2])) {
+                    $invalidRow[] = "Invalid member mobile '" . htmlspecialchars($row[2] ?? '') . "' at line $line";
+                    $flag = true;
+                } else {
+                    $info['mobile'] = $row[2];
+                }
+
+                // if (empty($row[3]) || !isset($row[3]) || !in_array((string)$row[3], ['0', 0, '1', 1])) {
+                //     $invalidRow[] = "Invalid member status value '" . htmlspecialchars($row[3] ?? '') . "' at line $line";
+                //     $flag = true;
+                // } else {
+                //     $info['status'] = $row[3];
+                // }
+
+                $info['id'] = $row_id;
+
+                $data['importedData'][] = $info;
+
+                $line++;
+                $row_id++;
+            }
+
+            // Check if any invalid row was found
+            if ($flag) {
+                $data['error'] = true;
+                $data['msg'] = "";
+                $data['invalidRow'] = $invalidRow;
+            } else {
+                $data['error'] = false;
+                $data['msg'] = "";
+                $data['invalidRow'] = $invalidRow;
+            }
+        } else {
+            $data['status'] = false;
+            $data['msg'] = "No file uploaded";
+        }
+
+        return response()->json($data);
+    }
+
+    public function importWithExcelAdd(ImportAddMemberRequest $request)
+    {
+        $this->authorize('member_import');
+
+        $validated = $request->validated();
+
+        $tableData = json_decode($validated['tableData'], true);
+
+        if(count($tableData) > 0){
+            foreach ($tableData as $key => $userData) {
+                $genPwd = $this->generateRandomPassword(12);
+
+                DB::transaction(function () use ($userData, $genPwd) {
+                    $user = User::create([
+                        'name' => $userData['name'],
+                        'email' => $userData['email'],
+                        'mobile_number' => $userData['mobile'],
+                        'form_pdf' => null,
+                        'status' => '0',
+                        'password' => Hash::make($genPwd),
+                    ]);
+        
+                    $user->role()->sync(Role::where('name', 'Member')->pluck('id')->toArray());
+                    $this->InitialUserRolePermission($user);
+
+                    $userData['password'] = $genPwd;
+                    $userData['app_name'] = $this->getSettings('app_name') ?? config('app.name');
+                    $userData['support_mail'] = $this->getSettings('email') ?? 'psc@support.com';
+
+                    Mail::to($userData['email'])->queue((new SendMemberWelcomeRegistrationMail($userData))->afterCommit());
+
+                    Session::flash("success", "Members Imported");
+        
+                });
+            }
+
+            $data['error'] = false;
+            $data['msg'] = "Members Imported";
+            $data['redirect'] = route('admin.member.index');
+        }else{
+            $data['error'] = true;
+            $data['msg'] = "No data sent";
+        }
+
+        return response()->json($data);
     }
 
     public function export(ExporMemberRequest $request)
@@ -271,6 +434,8 @@ class MemberController extends Controller
             ]);
 
             if (count($validated['supporting_document']) > 0) {
+                MemberFiles::where('user_id', $member->id)->delete();
+
                 foreach ($validated['supporting_document'] as $sDocKey => $sDocValue) {
                     MemberFiles::create([
                         'user_id' => $member->id,
