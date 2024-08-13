@@ -24,6 +24,7 @@ class UpdatePhotoRequest extends FormRequest
         return [
             'old_image' => ['nullable', 'string'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,gif,png'],
+            'title' => ['required', 'string'],
             'status' => ['required', 'in:0,1'],
         ];
     }

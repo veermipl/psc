@@ -25,6 +25,17 @@
                     </div>
 
                     <div class="form-group col-md-6">
+                        <label for="title">Title <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="title" placeholder="Image title" value="{{ old('title', $photo->title) }}">
+
+                        @error('title')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="d-flex">
+                    <div class="form-group col-md-6">
                         <label for="status">Status <span class="text-danger">*</span></label>
                         <select name="status" class="form-control">
                             <option hidden value="">Status</option>
