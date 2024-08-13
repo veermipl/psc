@@ -57,14 +57,14 @@ return [
             'name_key' => 'member_dashboard',
             'name' => 'Member Dashboard',
             'roles' => ['Member'],
-            'module' => 'Member',
+            'module' => 'Dashboard',
         ],
 
         [
             'name_key' => 'admin_dashboard',
             'name' => 'Admin Dashboard',
             'roles' => ['Admin', 'User'],
-            'module' => 'Admin',
+            'module' => 'Dashboard',
         ],
 
         [

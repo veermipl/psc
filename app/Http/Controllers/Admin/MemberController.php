@@ -358,9 +358,16 @@ class MemberController extends Controller
                     ]);
                 }
             }
+
+            $userData = $validated;
+            $userData['password'] = $validated['password'];
+            $userData['app_name'] = $this->getSettings('app_name') ?? config('app.name');
+            $userData['support_mail'] = $this->getSettings('email') ?? 'psc@support.com';
+
+            Mail::to($userData['email'])->queue((new SendMemberWelcomeRegistrationMail($userData))->afterCommit());
         });
 
-        return redirect()->route('admin.member.index')->with('status', 'Member created successfully');
+        return redirect()->route('admin.member.index')->with('success', 'Member created successfully');
     }
 
     /**

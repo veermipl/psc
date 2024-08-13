@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\admin\authorization\role;
+namespace App\Http\Requests\user;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateRoleRequest extends FormRequest
+class UpdateProfileStatusRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,16 +22,7 @@ class CreateRoleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'unique:roles,name'],
-            'permissions' => ['required', 'array'],
-            // 'permissions.*' => ['required', 'exists:permissions,name_key'],
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
-            'permissions.required' => 'Select at least 1 permission for this role'
+            //
         ];
     }
 }

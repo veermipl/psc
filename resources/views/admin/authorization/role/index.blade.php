@@ -88,8 +88,9 @@
                                 <td>
                                     <div class="tableOptions">
                                         <span class="text-dark" title="Edit">
-                                            <a href="{{ route('admin.authorization.role.edit', $listValue->id) }}"><i
-                                                    class="fa fa-edit"></i></a>
+                                            <a href="{{ route('admin.authorization.role.edit', $listValue->id) }}">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
                                         </span>
                                         @if ($listValue->type === 'custom')
                                             <span class="text-danger" title="Delete" lid="{{ $listValue->id }}" lrow="{{ $listKey }}"

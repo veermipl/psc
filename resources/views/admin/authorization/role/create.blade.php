@@ -31,27 +31,33 @@
                     @enderror
 
                     <div id="accordion">
-                        @foreach($permissions as $key => $value)
+                        @foreach($permissionModule as $key => $module)
+                            @php
+                                $module_str = Str::of($module)->replace([' ', '-'], '_')->lower();
+                            @endphp
                             <div class="card">
-                                <div class="card-header" id="headingOne">
+                                <div class="card-header" id="heading{{ $module_str }}">
                                     <h5 class="mb-0">
-                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
-                                            aria-expanded="true" aria-controls="collapseOne">
-                                            Collapsible Group Item #1
+                                        <button class="btn btn-sm btn-link" data-toggle="collapse" data-target="#collapse{{ $module_str }}"
+                                            aria-expanded="true" aria-controls="collapse{{ $module_str }}" type="button">
+                                            {{ $module }}
                                         </button>
                                     </h5>
                                 </div>
 
-                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                <div id="collapse{{ $module_str }}" class="collapse {{ $key == 0 ? 'show' : '' }}" aria-labelledby="heading{{ $module_str }}"
                                     data-parent="#accordion">
                                     <div class="card-body">
-                                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                                        squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck
-                                        quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it
-                                        squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica,
-                                        craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur
-                                        butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth
-                                        nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                        <div class="persWrapper row">
+                                            @foreach ($permissionList as $permissionKey => $permissionValue)
+                                                @if ($permissionValue['module'] === $module)
+                                                    <div class="perWrapper col-md-4">
+                                                        <input type="checkbox" name="permissions[{{ $permissionValue['name_key'] }}]">
+                                                        <label for="">{{ $permissionValue['name'] }}</label>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                             </div>

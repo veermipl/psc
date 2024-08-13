@@ -106,6 +106,8 @@ Route::middleware(['auth', 'role_per'])->prefix('member')->name('member.')->grou
 //
 Route::middleware(['auth', 'role_per'])->group(function () {
     Route::get('profile', [UserController::class, 'profile'])->name('profile');
+    Route::post('profile/update', [UserController::class, 'profileUpdate'])->name('profile.update');
+    Route::post('profile/status', [UserController::class, 'profileStatus'])->name('profile.status');
 });
 //
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mail\admin\member;
+namespace App\Mail\admin\user;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -9,10 +9,10 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class SendMemberWelcomeRegistrationMail extends Mailable implements ShouldQueue
+class SendUserWelcomeRegistrationMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
-    
+
     protected $userData;
 
     /**
@@ -39,11 +39,10 @@ class SendMemberWelcomeRegistrationMail extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.admin.member.send-member-welcome-registration-mail',
+            markdown: 'mail.admin.user.send-user-welcome-registration-mail',
             with: [
                 'name' => $this->userData['name'],
                 'email' => $this->userData['email'],
-                'contact' => isset($this->userData['mobile']) ? $this->userData['mobile'] : $this->userData['contact'],
                 'password' => $this->userData['password'],
                 'created_at' => now(),
                 'app_name' => $this->userData['app_name'],
