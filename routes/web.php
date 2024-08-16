@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Admin\CMSController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AnnulReportController;
 use App\Http\Controllers\Admin\BusinessController;
@@ -13,16 +15,27 @@ use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\CoreValueController;
 use App\Http\Controllers\Admin\GoInvestController;
 use App\Http\Controllers\Admin\IDBInvestController;
+use App\Http\Controllers\Admin\PhotoController;
+use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Member\MemberController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\SocialMediaController;
+use App\Http\Controllers\Admin\PressReleaseController;
+use App\Http\Controllers\Admin\MemberBenefitController;
+use App\Http\Controllers\Admin\MembershipTypeController;
+use App\Http\Controllers\Admin\BusinessDirectoryController;
+use App\Http\Controllers\Admin\CaricomCETController;
+use App\Http\Controllers\Admin\CotedController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\MemberController as AdminMemberController;
+use App\Http\Controllers\Admin\NationalBudgetController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\PerformanceController;
 use App\Http\Controllers\ProcurementController;
-
+use App\Http\Controllers\Admin\TradeDataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,22 +57,6 @@ Route::get('/clear-cache', function () {
     Artisan::call('route:clear');
     return "Cache cleared successfully";
 });
-
-Route::get('key-gen', function () {
-    Artisan::call('key:generate');
-    return "encryption key generated successfully";
-});
-
-Route::get('migrate', function () {
-    Artisan::call('migrate:fresh --seed');
-    return "migration successfully";
-});
-
-Route::get('storage', function () {
-    Artisan::call('storage:link');
-    return "storage linked successfully";
-});
-
 
 Route::get('/', [FrontController::class, 'index']);
 Route::get('home', [FrontController::class, 'index'])->name('home');
@@ -123,6 +120,8 @@ Route::middleware(['auth', 'role_per'])->prefix('member')->name('member.')->grou
 //
 Route::middleware(['auth', 'role_per'])->group(function () {
     Route::get('profile', [UserController::class, 'profile'])->name('profile');
+    Route::post('profile/update', [UserController::class, 'profileUpdate'])->name('profile.update');
+    Route::post('profile/status', [UserController::class, 'profileStatus'])->name('profile.status');
 });
 //
 
@@ -132,16 +131,107 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
     Route::get('/', [AdminController::class, 'dashboard']);
     Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
-    Route::resource('user', AdminUserController::class);
     Route::post('user/filter', [AdminUserController::class, 'index'])->name('user.filter');
     Route::post('user/export', [AdminUserController::class, 'export'])->name('user.export');
     Route::post('user/status', [AdminUserController::class, 'statusToggle'])->name('user.status');
+    Route::resource('user', AdminUserController::class);
 
-    Route::resource('member', AdminMemberController::class);
+    Route::get('member/import', [AdminMemberController::class, 'import'])->name('member.import');
+    Route::get('member/import-sample', [AdminMemberController::class, 'importSample'])->name('member.import-sample');
+    Route::post('member/import-excel', [AdminMemberController::class, 'importWithExcel'])->name('member.import-excel');
+    Route::post('member/import-excel-add', [AdminMemberController::class, 'importWithExcelAdd'])->name('member.import-excel-add');
     Route::post('member/filter', [AdminMemberController::class, 'index'])->name('member.filter');
     Route::post('member/export', [AdminMemberController::class, 'export'])->name('member.export');
     Route::post('member/status', [AdminMemberController::class, 'statusToggle'])->name('member.status');
     Route::post('member/delete-doc', [AdminMemberController::class, 'deleteDoc'])->name('member.delete-doc');
+    Route::resource('member', AdminMemberController::class);
+
+    Route::prefix('data')->name('data.')->group(function () {
+        Route::get('national-budget', [NationalBudgetController::class, 'index'])->name('national-budget');
+        Route::post('national-budget/update', [NationalBudgetController::class, 'update'])->name('national-budget.update');
+        Route::get('national-budget/create-source', [NationalBudgetController::class, 'createSource'])->name('national-budget.create-source');
+        Route::post('national-budget/save-source', [NationalBudgetController::class, 'saveSource'])->name('national-budget.save-source');
+        Route::get('national-budget/edit-source/{id}', [NationalBudgetController::class, 'editSource'])->name('national-budget.edit-source');
+        Route::post('national-budget/update-source', [NationalBudgetController::class, 'updateSource'])->name('national-budget.update-source');
+        Route::post('national-budget/update-source-status', [NationalBudgetController::class, 'updateSourceStatus'])->name('national-budget.update-source-status');
+        Route::post('national-budget/delete-source', [NationalBudgetController::class, 'deleteSource'])->name('national-budget.delete-source');
+
+        Route::get('trade-data', [TradeDataController::class, 'index'])->name('trade-data');
+        Route::post('trade-data/update', [TradeDataController::class, 'update'])->name('trade-data.update');
+        Route::get('trade-data/create-top-partner', [TradeDataController::class, 'createTopPartner'])->name('trade-data.create-top-partner');
+        Route::post('trade-data/save-top-partner', [TradeDataController::class, 'saveTopPartner'])->name('trade-data.save-top-partner');
+        Route::get('trade-data/edit-top-partner/{id}', [TradeDataController::class, 'editTopPartner'])->name('trade-data.edit-top-partner');
+        Route::post('trade-data/update-top-partner', [TradeDataController::class, 'updateTopPartner'])->name('trade-data.update-top-partner');
+        Route::post('trade-data/update-top-partner-status', [TradeDataController::class, 'updateTopPartnerStatus'])->name('trade-data.update-top-partner-status');
+        Route::post('trade-data/delete-top-partner', [TradeDataController::class, 'deleteTopPartner'])->name('trade-data.delete-top-partner');
+        Route::get('trade-data/create-top-country', [TradeDataController::class, 'createTopCountry'])->name('trade-data.create-top-country');
+        Route::post('trade-data/save-top-country', [TradeDataController::class, 'saveTopCountry'])->name('trade-data.save-top-country');
+        Route::get('trade-data/edit-top-country/{id}', [TradeDataController::class, 'editTopCountry'])->name('trade-data.edit-top-country');
+        Route::post('trade-data/update-top-country', [TradeDataController::class, 'updateTopCountry'])->name('trade-data.update-top-country');
+        Route::post('trade-data/update-top-country-status', [TradeDataController::class, 'updateTopCountryStatus'])->name('trade-data.update-top-country-status');
+        Route::post('trade-data/delete-top-country', [TradeDataController::class, 'deleteTopCountry'])->name('trade-data.delete-top-country');
+
+        Route::get('coted', [CotedController::class, 'index'])->name('coted');
+        Route::post('coted/update', [CotedController::class, 'update'])->name('coted.update');
+        Route::get('coted/create-entrepreneurship-development', [CotedController::class, 'createEntrepreneurshipDevelopment'])->name('coted.create-entrepreneurship-development');
+        Route::post('coted/save-entrepreneurship-development', [CotedController::class, 'saveEntrepreneurshipDevelopment'])->name('coted.save-entrepreneurship-development');
+        Route::get('coted/edit-entrepreneurship-development/{id}', [CotedController::class, 'editEntrepreneurshipDevelopment'])->name('coted.edit-entrepreneurship-development');
+        Route::post('coted/update-entrepreneurship-development', [CotedController::class, 'updateEntrepreneurshipDevelopment'])->name('coted.update-entrepreneurship-development');
+        Route::post('coted/update-entrepreneurship-development-status', [CotedController::class, 'updateEntrepreneurshipDevelopmentStatus'])->name('coted.update-entrepreneurship-development-status');
+        Route::post('coted/delete-entrepreneurship-development', [CotedController::class, 'deleteEntrepreneurshipDevelopment'])->name('coted.delete-entrepreneurship-development');
+
+        Route::get('caricom-cet', [CaricomCETController::class, 'index'])->name('caricom-cet');
+        Route::post('caricom-cet/update', [CaricomCETController::class, 'update'])->name('caricom-cet.update');
+        Route::get('caricom-cet/create-objective', [CaricomCETController::class, 'createObjective'])->name('caricom-cet.create-objective');
+        Route::post('caricom-cet/save-objective', [CaricomCETController::class, 'saveObjective'])->name('caricom-cet.save-objective');
+        Route::get('caricom-cet/edit-objective/{id}', [CaricomCETController::class, 'editObjective'])->name('caricom-cet.edit-objective');
+        Route::post('caricom-cet/update-objective', [CaricomCETController::class, 'updateObjective'])->name('caricom-cet.update-objective');
+        Route::post('caricom-cet/update-objective-status', [CaricomCETController::class, 'updateObjectiveStatus'])->name('caricom-cet.update-objective-status');
+        Route::post('caricom-cet/delete-objective', [CaricomCETController::class, 'deleteObjective'])->name('caricom-cet.delete-objective');
+    });
+
+    Route::prefix('resource')->name('resource.')->group(function () {
+    });
+
+    Route::prefix('media-center')->name('media-center.')->group(function () {
+        Route::post('news/filter', [NewsController::class, 'index'])->name('news.filter');
+        Route::post('news/status', [NewsController::class, 'statusToggle'])->name('news.status');
+        Route::post('news/delete-file', [NewsController::class, 'deleteFile'])->name('news.delete-file');
+        Route::resource('news', NewsController::class);
+
+        Route::post('press-release/filter', [PressReleaseController::class, 'index'])->name('press-release.filter');
+        Route::post('press-release/status', [PressReleaseController::class, 'statusToggle'])->name('press-release.status');
+        Route::post('press-release/delete-file', [PressReleaseController::class, 'deleteFile'])->name('press-release.delete-file');
+        Route::resource('press-release', PressReleaseController::class);
+
+        Route::post('social-media/filter', [SocialMediaController::class, 'index'])->name('social-media.filter');
+        Route::post('social-media/status', [SocialMediaController::class, 'statusToggle'])->name('social-media.status');
+        Route::resource('social-media', SocialMediaController::class);
+
+        Route::post('photo/filter', [PhotoController::class, 'index'])->name('photo.filter');
+        Route::post('photo/status', [PhotoController::class, 'statusToggle'])->name('photo.status');
+        Route::resource('photo', PhotoController::class);
+
+        Route::post('video/filter', [VideoController::class, 'index'])->name('video.filter');
+        Route::post('video/status', [VideoController::class, 'statusToggle'])->name('video.status');
+        Route::resource('video', VideoController::class);
+
+    });
+
+    Route::prefix('membership')->name('membership.')->group(function () {
+        Route::post('type/filter', [MembershipTypeController::class, 'index'])->name('type.filter');
+        Route::post('type/export', [MembershipTypeController::class, 'export'])->name('type.export');
+        Route::post('type/status', [MembershipTypeController::class, 'statusToggle'])->name('type.status');
+        Route::resource('type', MembershipTypeController::class);
+
+        Route::post('business-directory/filter', [BusinessDirectoryController::class, 'index'])->name('business-directory.filter');
+        Route::post('business-directory/status', [BusinessDirectoryController::class, 'statusToggle'])->name('business-directory.status');
+        Route::resource('business-directory', BusinessDirectoryController::class);
+
+        Route::get('member-benefit', [MemberBenefitController::class, 'index'])->name('member-benefit');
+        Route::post('member-benefit/update', [MemberBenefitController::class, 'update'])->name('member-benefit.update');
+        // Route::resource('member-benefit', MemberBenefitController::class);
+    });
 
     Route::prefix('cms')->name('cms.')->group(function () {
         Route::get('guyana-economy', [CMSController::class, 'guyanaEconomy'])->name('guyana-economy');
@@ -177,6 +267,13 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         });
 
 
+    });
+
+    Route::prefix('authorization')->name('authorization.')->group(function () {
+        Route::post('role/filter', [RoleController::class, 'index'])->name('role.filter');
+        Route::resource('role', RoleController::class);
+
+        Route::resource('permission', PermissionController::class);
     });
 
     Route::prefix('settings')->name('settings.')->group(function () {

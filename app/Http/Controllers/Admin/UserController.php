@@ -6,19 +6,22 @@ use App\Models\Role;
 use App\Models\User;
 use App\Traits\UserTraits;
 use Illuminate\Http\Request;
+use App\Traits\SettingTraits;
 use App\Models\MembershipType;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Requests\admin\user\ExporUserRequest;
 use App\Http\Requests\admin\user\StoreUserRequest;
 use App\Http\Requests\admin\user\UpdateUserRequest;
+use App\Mail\admin\user\SendUserWelcomeRegistrationMail;
 use App\Http\Requests\admin\user\UpdateUserStatusRequest;
 
 class UserController extends Controller
 {
-    use UserTraits;
+    use UserTraits, SettingTraits;
 
     /**
      * Display a listing of the resource.
@@ -149,9 +152,16 @@ class UserController extends Controller
 
             $user->role()->sync(Role::where('id', $validated['role'])->pluck('id')->toArray());
             $this->InitialUserRolePermission($user);
+
+            $userData = $validated;
+            $userData['password'] = $validated['password'];
+            $userData['app_name'] = $this->getSettings('app_name') ?? config('app.name');
+            $userData['support_mail'] = $this->getSettings('email') ?? 'psc@support.com';
+
+            Mail::to($userData['email'])->queue((new SendUserWelcomeRegistrationMail($userData))->afterCommit());
         });
 
-        return redirect()->route('admin.user.index')->with('status', 'User created successfully');
+        return redirect()->route('admin.user.index')->with('success', 'User created successfully');
     }
 
     /**
@@ -204,7 +214,7 @@ class UserController extends Controller
                 'password' => $validated['password'],
             ]);
 
-            //assign role
+            //update assigned role
         });
 
         return redirect()->route('admin.user.index')->with('success', 'User Updated');
