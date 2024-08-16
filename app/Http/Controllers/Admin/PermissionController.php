@@ -20,11 +20,14 @@ class PermissionController extends Controller
             'name' => $request->name ?? null,
             'status' => $request->status ?? null,
         ];
-        $list = Permission::orderBy('name', 'asc')->get();
 
+        $permissionModule = Permission::select('module')->groupBy('module')->get()->pluck('module')->toArray();
+        $permissionList = Permission::get();
+
+        $data['permissionModule'] = $permissionModule;
+        $data['permissionList'] = $permissionList;
         $data['filterValues'] = $filterValues;
-        $data['list'] = $list;
-        $data['export_id'] = $list->pluck('id')->toArray();
+        $data['export_id'] = $permissionList->pluck('id')->toArray();
 
         return view('admin.authorization.permission.index', $data);
     }
@@ -74,6 +77,6 @@ class PermissionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        
     }
 }

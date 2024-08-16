@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('member_benefits', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('title');
+            $table->longText('content')->nullable()->default(null);
+            $table->longText('file')->nullable()->default(null);
+            $table->string('type');
             $table->enum('status', [0, 1])->default(1);
             $table->timestamps();
             $table->softDeletes();

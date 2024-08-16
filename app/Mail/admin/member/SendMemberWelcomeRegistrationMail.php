@@ -12,6 +12,7 @@ use Illuminate\Queue\SerializesModels;
 class SendMemberWelcomeRegistrationMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
+    
     protected $userData;
 
     /**
@@ -28,7 +29,7 @@ class SendMemberWelcomeRegistrationMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Welcome to '.$this->userData['app_name'],
+            subject: 'Welcome to '.$this->userData['app_name'].'',
         );
     }
 
@@ -42,7 +43,7 @@ class SendMemberWelcomeRegistrationMail extends Mailable implements ShouldQueue
             with: [
                 'name' => $this->userData['name'],
                 'email' => $this->userData['email'],
-                'contact' => $this->userData['mobile'],
+                'contact' => isset($this->userData['mobile']) ? $this->userData['mobile'] : $this->userData['contact'],
                 'password' => $this->userData['password'],
                 'created_at' => now(),
                 'app_name' => $this->userData['app_name'],

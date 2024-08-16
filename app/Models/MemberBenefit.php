@@ -13,7 +13,10 @@ class MemberBenefit extends Model
     protected $table = "member_benefits";
 
     protected $fillable = [
-        'name',
+        'title',
+        'content',
+        'file',
+        'type',
         'status',
     ];
 }

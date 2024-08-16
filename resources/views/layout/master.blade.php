@@ -132,10 +132,10 @@
                                                 <div id="myDropdownt" class="dropdown-contentt">
                                                     <a href="{{ route('profile') }}"> <i class="far fa-user"></i> Profile</a>
                                                     @if (auth()->user()->hasPermission('admin_dashboard'))
-                                                        <a href="{{ route('admin.dashboard') }}"> <i class="far fa-dashboard"></i> Dashboard</a>
+                                                        <a href="{{ route('admin.dashboard') }}"> <i class="far fa-dashboard"></i> Member Dashboard</a>
                                                     @endif
                                                     @if (auth()->user()->hasPermission('member_dashboard'))
-                                                        <a href="{{ route('member.dashboard') }}"> <i class="far fa-dashboard"></i> Dashboard</a>
+                                                        <a href="{{ route('member.dashboard') }}"> <i class="far fa-dashboard"></i> Admin Dashboard</a>
                                                     @endif
 
                                                     <form action="{{ route('logout') }}" method="post">

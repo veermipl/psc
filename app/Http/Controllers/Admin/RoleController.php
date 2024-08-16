@@ -50,8 +50,7 @@ class RoleController extends Controller
     {
         $this->authorize('role_create');
 
-        $permissionModule = Permission::select('module')->groupBy('module')->get();
-        dd($permissionModule);
+        $permissionModule = Permission::select('module')->groupBy('module')->get()->pluck('module')->toArray();
         $permissionList = Permission::get();
 
         $data['permissionModule'] = $permissionModule;
@@ -69,10 +68,18 @@ class RoleController extends Controller
 
         $validated = $request->validated();
 
-        DB::transaction(function () use ($validated) {
-            Role::create([
+        $permissionsToSync = array();
+        foreach ($validated['permissions'] as $key => $value) {
+            $dbPermissionId = Permission::where('name_key', $key)->pluck('id')->first();
+            array_push($permissionsToSync, $dbPermissionId);
+        }
+
+        DB::transaction(function () use ($validated, $permissionsToSync) {
+            $dbRole = Role::create([
                 'name' => $validated['name'],
             ]);
+
+            $dbRole->permissions()->sync($permissionsToSync);
         });
 
         return redirect()->route('admin.authorization.role.index')->with('success', 'Role created successfully');
@@ -85,10 +92,15 @@ class RoleController extends Controller
     {
         $this->authorize('role_create');
 
-        $permissionList = Permission::get();
+        $role->load('permissions');
+        
+        $permissions = $role->permissions;
+        $permissionModule = $permissions->unique('module')->pluck('module')->toArray();
+        sort($permissionModule);
 
+        $data['permissionModule'] = $permissionModule;
+        $data['permissionList'] = $permissions;
         $data['role'] = $role;
-        $data['permissions'] = $permissionList;
 
         return view('admin.authorization.role.view', $data);
     }
@@ -100,10 +112,16 @@ class RoleController extends Controller
     {
         $this->authorize('role_edit');
         
+        $role->load('permissions');
+        
+        $permissionModule = Permission::select('module')->groupBy('module')->get()->pluck('module')->toArray();
         $permissionList = Permission::get();
+        $rolePermissionList = $role->permissions->pluck('name_key')->toArray();
 
+        $data['permissionModule'] = $permissionModule;
+        $data['permissionList'] = $permissionList;
+        $data['rolePermissionList'] = $rolePermissionList;
         $data['role'] = $role;
-        $data['permissions'] = $permissionList;
 
         return view('admin.authorization.role.edit', $data);
     }
@@ -117,11 +135,18 @@ class RoleController extends Controller
 
         $validated = $request->validated();
 
-        DB::transaction(function () use ($role, $validated) {
+        $permissionsToSync = array();
+        foreach ($validated['permissions'] as $key => $value) {
+            $dbPermissionId = Permission::where('name_key', $key)->pluck('id')->first();
+            array_push($permissionsToSync, $dbPermissionId);
+        }
+
+        DB::transaction(function () use ($role, $validated, $permissionsToSync) {
             $role->update([
                 'name' => $validated['name'],
-                'status' => $validated['status'],
             ]);
+
+            $role->permissions()->sync($permissionsToSync);
         });
 
         return redirect()->route('admin.authorization.role.index')->with('success', 'Role updated successfully');
@@ -143,4 +168,53 @@ class RoleController extends Controller
 
         return response()->json($data, 200);
     }
+
+    // public function getUserRolePermissions()
+    // {
+    //     $this->authorize('user_role_permission_view');
+
+    //     $validated = request()->validate([
+    //         'userId' => ['required', 'integer', 'exists:users,id']
+    //     ]);
+
+    //     $user = User::find($validated['userId']);
+    //     $user->load(['role.permissions']); //load permission relating to selected role of user
+
+    //     $userPermissions = $user->permissions;
+    //     $rolePermissions = $user->role->pluck('permissions')->collapse();
+
+
+    //     $data['user'] = $user;
+    //     $data['role'] = $user->role->first();
+
+    //     $data['permissionList'] = $rolePermissions->unique('controller')->pluck('controller');
+    //     $data['permissionNameKeyList'] = $rolePermissions->unique('name_key')->pluck('name_key')->toArray();
+        
+    //     $data['userPermissions'] = $userPermissions;
+    //     $data['status'] = true;
+
+    //     return response()->json($data);
+    // }
+
+    // public function updateUserRolePermissions(UpdateUserRolePermissionRequest $request)
+    // {
+    //     $this->authorize('user_role_permission_update');
+
+    //     $validated = $request->validated();
+
+    //     $permissionsToSync = array();
+    //     foreach ($validated['permissions'] as $key => $value) {
+    //         $dbPermissionId = Permission::where('name_key', $key)->pluck('id')->first();
+    //         array_push($permissionsToSync, $dbPermissionId);
+    //     }
+
+    //     $user = User::find($validated['user_id']);
+    //     $role = Role::where('id', $validated['role'])->pluck('id')->toArray();
+
+    //     DB::transaction(function () use ($role, $user, $permissionsToSync) {
+    //         $user->role()->sync($role);
+
+    //         $user->permissions()->sync($permissionsToSync);
+    //     });
+    // }
 }

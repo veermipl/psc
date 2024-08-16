@@ -19,7 +19,10 @@ class RolePermissionMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $userPer = Auth::user()->permissions->pluck('name_key')->unique();
+        Auth::user()->role->load('permissions');
+        // $userPer = Auth::user()->permissions->pluck('name_key')->unique();
+        $userPer = Auth::user()->role->pluck('permissions')->collapse()->pluck('name_key')->unique();
+
         // dd(auth()->user()->role->pluck('name')->toArray(), $userPer);
 
         foreach ($userPer as $permission) {

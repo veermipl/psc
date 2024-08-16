@@ -24,7 +24,14 @@ class CreateRoleRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'unique:roles,name'],
             'permissions' => ['required', 'array'],
-            'permissions.*' => ['required', 'exists:permissions,name_key'],
+            // 'permissions.*' => ['required', 'exists:permissions,name_key'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'permissions.required' => 'Select at least 1 permission for this role'
         ];
     }
 }

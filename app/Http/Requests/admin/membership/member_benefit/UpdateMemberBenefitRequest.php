@@ -22,8 +22,18 @@ class UpdateMemberBenefitRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string'],
-            'status' => ['required', 'in:0,1'],
+            'title' => ['required'],
+            'old_file' => ['nullable', 'string'],
+            'file' => ['required_if:old_file,null', 'image', 'mimes:jpg,jpeg,gif,png', 'max:2048'],
+            'content' => ['required'],
+            'type' => ['required'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'file.required_if' => 'The file field is required',
         ];
     }
 }
