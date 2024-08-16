@@ -1,12 +1,12 @@
 @extends('layout.admin_master')
 
-@section('title', 'Types of certificates of origin - List')
+@section('title', 'Annual Reports - List')
 @section('header', 'Performance')
 
 @section('content')
 
     <div class="p-3 bg-white">
-        <h5 class="fw-bold"> List</h5>
+        <h5 class="fw-bold">Annual Reports List</h5>
 
         <!-- <div class="filter-wrapper my-3 p-3">
             <form action="#" method="post">
@@ -99,7 +99,7 @@
                                 <td>
                                     <div class="tableOptions">
                                         <span class="text-dark" title="Edit">
-                                            <a href="{{ route('admin.readines.annul', $user->id) }}"><i
+                                            <a href="{{ route('admin.readines.annul.edit', $user->id) }}"><i
                                                     class="fa fa-edit"></i></a>
                                         </span>
                                         <span class="text-danger" title="Delete" uid="{{ $user->id }}" urow="{{ $userKey }}"
@@ -140,7 +140,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "{{ route('admin.readines.certificate.status') }}",
+                            url: "{{ route('admin.readines.annul.status') }}",
                             method: 'POST',
                             data: {
                                 _method: 'post',
@@ -187,7 +187,7 @@
 
                 var uid = $(this).attr('uid');
                 var urow = $(this).attr('urow');
-                var url = `{{ url('/admin/readines/origins/certificate-destroy/${uid}') }}`;
+                var url = `{{ url('/admin/readines/annul-destroy/${uid}') }}`;
 
                 Swal.fire({
                     title: 'Are you sure ?',

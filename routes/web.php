@@ -7,6 +7,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\Admin\CMSController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AnnulReportController;
 use App\Http\Controllers\Admin\BusinessController;
 use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\CoreValueController;
@@ -316,6 +317,20 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::patch('origins/certificate-update/{id}', 'origins_update')->name('certificate.update');
 
         });
+
+
+        Route::controller(AnnulReportController::class)->group(function(){
+
+            Route::get('annual',  'annual')->name('annul');
+            Route::get('annual-add','annual_add')->name('annul.add');
+            Route::post('annual-store',  'annual_store')->name('annul.store');
+            Route::post('annual-status',  'annual_status')->name('annul.status');
+            Route::get('annual-destroy/{id}', 'annual_destroy')->name('annul.destroy');
+            Route::get('annual-edit/{id}',  'annual_edit')->name('annul.edit');
+            Route::patch('annual-update/{id}', 'annual_update')->name('annul.update');
+
+        });
+
 
     });
     // Certificate

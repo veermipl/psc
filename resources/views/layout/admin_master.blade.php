@@ -330,7 +330,7 @@
                             </li>
 
                             <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Annual Reports</a>
+                                <a href="{{route('admin.readines.annul')}}" class="link-dark rounded">Annual Reports</a>
                             </li>
                         </ul>
                     </div>
