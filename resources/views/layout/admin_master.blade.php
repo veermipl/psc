@@ -181,7 +181,7 @@
                     </button>
                     <div class="collapse {{ request()->is('admin/user') || request()->is('admin/user/*') ? 'show' : '' }}" id="users-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/user') || request()->is('admin/user/filter') ? 'link-active' : 'no' }}">
+                            <li class="rounded {{ request()->is('admin/user') || request()->is('admin/user/*') ? 'link-active' : 'no' }}">
                                 <a href="{{ route('admin.user.index') }}" class="link-dark rounded">List</a>
                             </li>
                             <li class="rounded {{ request()->is('admin/user/create') ? 'link-active' : 'no' }}">
@@ -202,6 +202,9 @@
                             <li class="rounded {{ request()->is('admin/member/create') ? 'link-active' : 'no' }}">
                                 <a href="{{ route('admin.member.create') }}" class="link-dark rounded">Create Member</a>
                             </li>
+                            <li class="rounded {{ request()->is('admin/member/import') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.member.import') }}" class="link-dark rounded">Import Member</a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -211,17 +214,17 @@
                     </button>
                     <div class="collapse {{ request()->is('admin/data/*') ? 'show' : '' }}" id="data-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">National Budgets</a>
+                            <li class="rounded {{ request()->is('admin/data/national-budget') || request()->is('admin/data/national-budget/*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.data.national-budget') }}" class="link-dark rounded">National Budgets</a>
                             </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Trade Data</a>
+                            <li class="rounded {{ request()->is('admin/data/trade-data') || request()->is('admin/data/trade-data/*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.data.trade-data') }}" class="link-dark rounded">Trade Data</a>
                             </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">COTED</a>
+                            <li class="rounded {{ request()->is('admin/data/coted') || request()->is('admin/data/coted/*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.data.coted') }}" class="link-dark rounded">COTED</a>
                             </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Caricom CET</a>
+                            <li class="rounded {{ request()->is('admin/data/caricom-cet') || request()->is('admin/data/caricom-cet/*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.data.caricom-cet') }}" class="link-dark rounded">Caricom CET</a>
                             </li>
                         </ul>
                     </div>
@@ -339,22 +342,22 @@
                     <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#media-collapse" aria-expanded="false">
                         Media Center
                     </button>
-                    <div class="collapse {{ request()->is('admin/media/*') ? 'show' : '' }}" id="media-collapse">
+                    <div class="collapse {{ request()->is('admin/media-center/*') ? 'show' : '' }}" id="media-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">News</a>
+                            <li class="rounded {{ request()->is('admin/media-center/news') || request()->is('admin/media-center/news/*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.media-center.news.index') }}" class="link-dark rounded">News</a>
                             </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Press Release</a>
+                            <li class="rounded {{ request()->is('admin/media-center/press-release') || request()->is('admin/media-center/press-release/*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.media-center.press-release.index') }}" class="link-dark rounded">Press Release</a>
                             </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Social Media</a>
+                            <li class="rounded {{ request()->is('admin/media-center/social-media') || request()->is('admin/media-center/social-media/*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.media-center.social-media.index') }}" class="link-dark rounded">Social Media</a>
                             </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Photos</a>
+                            <li class="rounded {{ request()->is('admin/media-center/photo') || request()->is('admin/media-center/photo/*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.media-center.photo.index') }}" class="link-dark rounded">Photos</a>
                             </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Videos</a>
+                            <li class="rounded {{ request()->is('admin/media-center/video') || request()->is('admin/media-center/video/*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.media-center.video.index') }}" class="link-dark rounded">Videos</a>
                             </li>
                         </ul>
                     </div>
@@ -365,14 +368,14 @@
                     </button>
                     <div class="collapse {{ request()->is('admin/membership/*') ? 'show' : '' }}" id="membership-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Type</a>
+                            <li class="rounded {{ request()->is('admin/membership/type') || request()->is('admin/membership/type/*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.membership.type.index') }}" class="link-dark rounded">Type</a>
                             </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Business Directory</a>
+                            <li class="d-none rounded {{ request()->is('admin/membership/business-directory') || request()->is('admin/membership/business-directory/*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.membership.business-directory.index') }}" class="link-dark rounded">Business Directory</a>
                             </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Member Benefits</a>
+                            <li class="rounded {{ request()->is('admin/membership/member-benefit') || request()->is('admin/membership/member-benefit/*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.membership.member-benefit') }}" class="link-dark rounded">Member Benefits</a>
                             </li>
                         </ul>
                     </div>
@@ -432,11 +435,11 @@
                     </button>
                     <div class="collapse {{ request()->is('admin/authorization/*') ? 'show' : '' }}" id="authorization-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/authorization/role') ? 'link-active' : 'no' }}">
-                                <a href="" class="link-dark rounded">Roles</a>
+                            <li class="rounded {{ request()->is('admin/authorization/role') || request()->is('admin/authorization/role/*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.authorization.role.index') }}" class="link-dark rounded">Roles</a>
                             </li>
-                            <li class="rounded {{ request()->is('admin/authorization/permission') ? 'link-active' : 'no' }}">
-                                <a href="" class="link-dark rounded">Permission</a>
+                            <li class="rounded {{ request()->is('admin/authorization/permission') || request()->is('admin/authorization/permission/*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.authorization.permission.index') }}" class="link-dark rounded">Permission</a>
                             </li>
                         </ul>
                     </div>
@@ -640,6 +643,32 @@
                         openDropdown.classList.remove('showt');
                     }
                 }
+            }
+        }
+
+        //sub_page_body
+        $(document).on('click', '.sub_page_link', function(e){
+            e.preventDefault();
+
+            var target_id = $(this).data('target');
+            console.log(target_id);
+            
+            if(target_id){
+                toggle_sub_page(target_id);
+            }
+
+        });
+
+        //sub_page_body_toggle
+        function toggle_sub_page(target_id = null){
+            if(target_id){
+                //btn
+                $('.sub_page_link').removeClass('btn-custom').addClass('btn-outline-custom');
+                $('#sub_page_link_'+target_id+'').removeClass('btn-outline-custom').addClass('btn-custom');
+
+                //body
+                $('.sub_page_body').removeClass('show').addClass('hide');
+                $('#sub_page_body_'+target_id+'').removeClass('hide').addClass('show');
             }
         }
     </script>

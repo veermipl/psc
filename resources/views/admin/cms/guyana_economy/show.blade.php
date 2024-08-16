@@ -16,9 +16,9 @@
                 <hr>
                 <div class="d-flex text-right" style="justify-content: space-between">
                     @if ($ge_data->status == 1)
-                        <span><i class="fa fa-circle text-success"></i></span>
+                        <span><i class="fa fa-circle text-success" title="Active"></i></span>
                     @else
-                        <span><i class="fa fa-circle text-danger"></i></span>
+                        <span><i class="fa fa-circle text-danger" title="In Active"></i></span>
                     @endif
 
                     <span class="text-danger">{{ $ge_data->created_at }}</span>

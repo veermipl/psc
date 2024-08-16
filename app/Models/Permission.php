@@ -13,6 +13,7 @@ class Permission extends Model
     protected $table = 'permissions';
     
     protected $fillable = [
+        'module',
         'name',
         'name_key',
     ];
