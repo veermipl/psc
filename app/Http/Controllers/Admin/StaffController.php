@@ -22,7 +22,9 @@ class StaffController extends Controller
             'name'  => 'required',
             'office'  => 'required',
             'profile'  => 'required',
+            'profile'  => 'nullable|mimes:jpeg,jpg,png',
             'status' => 'required'
+            
         ]);
 
         // $profile = null;
@@ -71,10 +73,10 @@ class StaffController extends Controller
         $user = Staff::find($id);
 
         $user->delete();
-        $data['error'] = false;
+        $data['error'] = false; 
         $data['msg'] = 'User Deleted';
 
-        return response()->json($data, 200);
+        return response()->json($data, 200);  
     }
 
     public function edit($id) {
@@ -89,7 +91,8 @@ class StaffController extends Controller
             'name'  => 'required',
             'office'  => 'required',
             // 'profile'  => 'required',
-            'status' => 'required'
+            'status' => 'required',
+            'profile'  => 'nullable|mimes:jpeg,jpg,png',
         ]);
         $staff = Staff::find($id);
         if ($request->hasFile('profile')) {

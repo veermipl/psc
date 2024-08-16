@@ -233,25 +233,107 @@
                     <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#resources-collapse" aria-expanded="false">
                         Resources
                     </button>
-                    <div class="collapse {{ request()->is('admin/resources/*') ? 'show' : '' }}" id="resources-collapse">
+                    <div class="collapse {{ request()->is('admin/readines/*') ? 'show' : '' }}" id="resources-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Business Readinedss Desk</a>
+
+                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#business" aria-expanded="false">
+                        Business
+                    </button>
+
+                    <div class="collapse {{ request()->is('admin/readines/*') ? 'show' : '' }}" id="business">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+
+                            <li class="rounded {{ request()->is('admin/readines/business') ? 'link-active' : 'no' }}">
+                                <a href="{{route('admin.readines.business')}}" class="link-dark rounded">Business Readinedss Desk</a>
                             </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Go Invest</a>
+
+                            <li class="rounded {{ request()->is('admin/readines/certificate') ? 'link-active' : 'no' }}">
+                                <a href="{{route('admin.readines.certificate')}}" class="link-dark rounded">Business Certificate</a>
                             </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">IDB Invest</a>
+
+                            <li class="rounded {{ request()->is('admin/readines/benefits-certificate') ? 'link-active' : 'no' }}">
+                                <a href="{{route('admin.readines.benefits')}}" class="link-dark rounded">Benefits of a Certificate</a>
                             </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Procurement Process In Guyana</a>
+                    </ul>
+                    </div>
+
+
+ 
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Invest" aria-expanded="false">
+                    Go Invest
+                    </button>
+                    <div class="collapse {{ request()->is('admin/readines/*') ? 'show' : '' }}" id="Invest">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li class="rounded {{ request()->is('admin/readines/go-invest') ? 'link-active' : 'no' }}">
+                                    <a href="{{route('admin.readines.goinvest')}}" class="link-dark rounded">Go Invest</a>
+                                </li>
+
+                                <li class="rounded {{ request()->is('admin/readines/investment') ? 'link-active' : 'no' }}">
+                                    <a href="{{route('admin.readines.investment')}}" class="link-dark rounded">Go Invest to Investment Sectors</a>
+                                </li>
+                        </ul>
+                    </div>
+
+
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#IDB" aria-expanded="false">
+                    IDB Invest
+                    </button>
+                    <div class="collapse {{ request()->is('admin/readines/*') ? 'show' : '' }}" id="IDB">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+
+                            <li class="rounded {{ request()->is('admin/readines/idb-inves') ? 'link-active' : 'no' }}">
+                                <a href="{{route('admin.readines.idbinves')}}" class="link-dark rounded">IDB Invest</a>
                             </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Certificate Of Origins</a>
+
+                            <li class="rounded {{ request()->is('admin/readines/key-areas') ? 'link-active' : 'no' }}">
+                                <a href="{{route('admin.readines.key_areas')}}" class="link-dark rounded">Key Areas of Focus</a>
                             </li>
+                            <li class="rounded {{ request()->is('admin/readines/idb-investment') ? 'link-active' : 'no' }}">
+                                <a href="{{route('admin.readines.IDB_Investment')}}" class="link-dark rounded">IDB Investment Services </a>
+                            </li>
+
+                            </ul>
+                    </div>
+
+
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#procurement" aria-expanded="false">
+                    Procurement Process
+                    </button>
+                    <div class="collapse {{ request()->is('admin/readines/*') ? 'show' : '' }}" id="procurement">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+
+                            <li class="rounded {{ request()->is('admin/readines/procurement') ? 'link-active' : 'no' }}">
+                                <a href="{{route('admin.readines.procurement')}}" class="link-dark rounded">Procurement Process In Guyana</a>
+                            </li>
+
+                            <li class="rounded {{ request()->is('admin/readines/methods') ? 'link-active' : 'no' }}">
+                                <a href="{{route('admin.readines.methods')}}" class="link-dark rounded">Methods</a>
+                            </li>
+
+                            <li class="rounded {{ request()->is('admin/readines/methods-services') ? 'link-active' : 'no' }}">
+                                <a href="{{route('admin.readines.services')}}" class="link-dark rounded">Services Procurement Procedures</a>
+                            </li>                         
+
+                        </ul>
+                    </div>
+                            <li class="rounded {{ request()->is('admin/readines/origins/certificate') ? 'link-active' : 'no' }}">
+                                <a href="{{route('admin.readines.certificate.origins')}}" class="link-dark rounded">Certificate Of Origins</a>
+                            </li>
+
+                            <li class="rounded {{ request()->is('admin/readines/origins/type-certificate') ? 'link-active' : 'no' }}">
+                                <a href="{{route('admin.readines.origins.type.certificate')}}" class="link-dark rounded">Types of Certificates</a>
+                            </li>
+
+                            <!-- <li class="rounded {{ request()->is('admin/readines/origins') ? 'link-active' : 'no' }}">
+                                <a href="{{route('admin.readines.origins.type.certificate')}}" class="link-dark rounded">Certificate of Origin</a>
+                            </li> -->
+
+                            <li class="rounded {{ request()->is('admin/readines/origins') ? 'link-active' : 'no' }}">
+                                <a href="{{route('admin.readines.origins.certificate')}}" class="link-dark rounded">Certificate of Origin</a>
+                            </li>
+
                             <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Annual Reports</a>
+                                <a href="{{route('admin.readines.annul')}}" class="link-dark rounded">Annual Reports</a>
                             </li>
                         </ul>
                     </div>
@@ -313,8 +395,8 @@
                             <li class="rounded {{ request()->is('admin/about/history') ? 'link-active' : 'no' }}">
                                 <a href="{{route('admin.about.history')}}" class="link-dark rounded">History</a>
                             </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Committees</a>
+                            <li class="rounded {{ request()->is('admin/about/introduction') ? 'link-active' : 'no' }}">
+                                <a href="{{route('admin.about.introduction')}}" class="link-dark rounded">Introduction</a>
                             </li>
                         </ul>
                     </div>
@@ -328,6 +410,22 @@
                             <li class="rounded {{ request()->is('admin/cms/guyana-economy') || request()->is('admin/cms/guyana-economy/*') ? 'link-active' : 'no' }}">
                                 <a href="{{ route('admin.cms.guyana-economy') }}" class="link-dark rounded">Guyana Economy</a>
                             </li>
+
+                            <li class="rounded {{ request()->is('admin/about/mission') || request()->is('admin/about/mission/*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.about.mission') }}" class="link-dark rounded">Our Mission</a>
+                            </li>
+                            <li class="rounded {{ request()->is('admin/testimonial/list') || request()->is('admin/testimonial/list*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.testimonial.list') }}" class="link-dark rounded">Testimonial</a>
+                            </li>
+
+                            <li class="rounded {{ request()->is('admin/cms/performance') || request()->is('admin/cms/performance*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.cms.performance') }}" class="link-dark rounded">Performance </a>
+                            </li>
+
+                            <li class="rounded {{ request()->is('admin/cms/core-value') || request()->is('admin/cms/core-value*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.cms.corevalue') }}" class="link-dark rounded">Core Value</a>
+                            </li>
+                            
                         </ul>
                     </div>
                 </li>
@@ -426,8 +524,6 @@
 
             @yield('content')
         </div>
-
-
 
         <!--Scroll to top-->
         <div class="scroll-to-top scroll-to-target" data-target="html">
