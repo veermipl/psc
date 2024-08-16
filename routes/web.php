@@ -67,6 +67,7 @@ Route::get('about-us', [FrontController::class, 'aboutUs'])->name('about-us');
 Route::prefix('about-us')->name('about-us.')->group(function () {
     Route::get('introduction', [FrontController::class, 'aboutUs_Introduction'])->name('introduction');
     Route::get('staff', [FrontController::class, 'aboutUs_Staff'])->name('staff');
+
     Route::get('council', [FrontController::class, 'aboutUs_Council'])->name('council');
     Route::get('history', [FrontController::class, 'aboutUs_History'])->name('history');
     Route::get('committeess', [FrontController::class, 'aboutUs_Committeess'])->name('committeess');
@@ -296,13 +297,13 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
 
     Route::controller(AboutController::class)->prefix('about')->name('about.')->group(function () {
         Route::get('council', 'Council')->name('council');
-        Route::patch('council/{id}', 'Council_update')->name('council_update');
+        Route::post('council', 'Council_update')->name('council_update');
         Route::get('history', 'History')->name('history');
-        Route::patch('history/{id}', 'History_update')->name('history_update');
+        Route::Post('history', 'History_update')->name('history_update');
         Route::get('introduction', 'Introduction')->name('introduction');
-        Route::patch('introduction/{id}', 'Introduction_update')->name('introduction_update');
+        Route::Post('introduction', 'Introduction_update')->name('introduction_update');
         Route::get('mission', 'Mission')->name('mission');
-        Route::patch('mission/{id}', 'Mission_update')->name('mission_update');
+        Route::post('mission', 'Mission_update')->name('mission_update');
     });
 
     Route::controller(TestimonialController::class)->name('testimonial.')->group(function(){
@@ -318,7 +319,7 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
 
     Route::prefix('readines/')->name('readines.')->group(function () {
         Route::get('business', [BusinessController::class, 'business'])->name('business');
-        Route::patch('update-business/{id}', [BusinessController::class, 'business_update'])->name('update_business');
+        Route::Post('update-business', [BusinessController::class, 'business_update'])->name('update_business');
 
         Route::get('certificate', [BusinessController::class, 'certificate'])->name('certificate');
         Route::get('certificate-add', [BusinessController::class, 'certificate_add'])->name('certificate.add');
@@ -339,7 +340,7 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
 
         Route::controller(GoInvestController::class)->group(function(){
             Route::get('go-invest', 'GoInves')->name('goinvest');
-            Route::patch('update-go-invest/{id}',  'GoInvest_update')->name('update_goinvest');
+            Route::Post('update-go-invest',  'GoInvest_update')->name('update_goinvest');
             Route::get('investment',  'Investment')->name('investment');
             Route::get('investment-add', 'Investment_add')->name('investment.add');
             Route::post('investment-store',  'Investment_store')->name('investment.store');
@@ -351,7 +352,7 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
 
         Route::controller(IDBInvestController::class)->group(function(){
             Route::get('idb-inves', 'idb_inves')->name('idbinves');
-            Route::patch('update-idb-inves/{id}',  'inves_update')->name('update_idbinves');
+            Route::Post('update-idb-inves',  'inves_update')->name('update_idbinves');
 
             Route::get('key-areas',  'key_areas')->name('key_areas');
             Route::get('key-areas-add', 'areas_add')->name('areas.add');
@@ -372,7 +373,7 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         
         Route::controller(ProcurementController::class)->group(function(){
             Route::get('procurement', 'procurement')->name('procurement');
-            Route::patch('update-procurement/{id}',  'procurement_update')->name('procurement_update');
+            Route::Post('update-procurement',  'procurement_update')->name('procurement_update');
 
             Route::get('methods',  'methods')->name('methods');
             Route::get('methods-add', 'methods_add')->name('methods.add');
@@ -395,7 +396,7 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         Route::controller(CertificateController::class)->group(function(){
 
             Route::get('origins/certificate', 'certificate')->name('certificate.origins');
-            Route::patch('origins/certificate/{id}',  'certificate_update')->name('origins.certificate_update');
+            Route::Post('origins/certificate',  'certificate_update')->name('origins.certificate_update');
 
             Route::get('origins/type-certificate',  'type_certificate')->name('origins.type.certificate');
             Route::get('origins/type-add','type_add')->name('origins.add');

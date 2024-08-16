@@ -15,27 +15,33 @@ class CertificateController extends Controller
         return view('admin.origins.edit', compact('data'));
     }
 
-    public function certificate_update(Request $request, $id){
+    public function certificate_update(Request $request){
+
         $this->validate($request,[
             'title'  => 'required',
             'content'  => 'required',
             'status' => 'required',
             'images'  => 'nullable|mimes:jpeg,jpg,png',
         ]);
-        $data = Business::find($id);
+        $data = Business::where('type', $request->type)->first();
         if ($request->hasFile('images')) {
             $file = $request->file('images');
             $profile = $file->store('/images/business', 'public');
         }else{
-            $profile=  $data->image;
+            $profile=  $data->image ?? '';
         }
         $array = [
             'title' => $request->title ,
             'contant' => $request->content ,
             'image' => $profile,
             'status' => $request->status,
+            'type' => $request->type,
         ];
+        if($data != ''){
         $data->Update($array);
+        }else{
+            Business::create($array);
+        }
         return redirect()->route('admin.readines.certificate.origins')->with('status', 'Certificate of Origins update successfully');
     }
 

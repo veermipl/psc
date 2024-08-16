@@ -12,28 +12,40 @@ class AboutController extends Controller
         $data= About::where('type', 'Council')->first();
         return view('admin.about.council', compact('data'));
     }
-    public function Council_update(Request $request, $id){
+    public function Council_update(Request $request){
+
         $this->validate($request,[
             'title'  => 'required',
             'content'  => 'required',
             'status' => 'required',
             'images'  => 'nullable|mimes:jpeg,jpg,png',
         ]);
-        $data = About::find($id);
+
+        $data = About::where('type' ,$request->type)->first();
+
         if ($request->hasFile('images')) {
             $file = $request->file('images');
             $profile = $file->store('/images/team', 'public');
         }else{
-            $profile=  $data->image;
+            $profile=  $data->image ?? '';
         }
+
         $array = [
             'title' => $request->title ,
             'contant' => $request->content ,
             'image' => $profile ,
             'status' => $request->status,
+            'type' => $request->type,
         ];
+
+        if($data != ''){
         $data->Update($array);
+        }else
+        {
+            About::create($array);
+        }
         return redirect()->route('admin.about.council')->with('status', 'Council update successfully');
+
     }
 
     public function History(){
@@ -41,14 +53,18 @@ class AboutController extends Controller
         return view('admin.about.history', compact('data'));
     }
 
-    public function History_update(Request $request, $id){
+    public function History_update(Request $request ){
         $this->validate($request,[
             'title'  => 'required',
             'content'  => 'required',
             'status' => 'required',
             'images'  => 'nullable|mimes:jpeg,jpg,png',
         ]);
-        $data = About::find($id);
+
+
+        // $data = About::find($id);
+        $data = About::where('type' ,$request->type)->first();
+
         if ($request->hasFile('images')) {
             $file = $request->file('images');
             $profile = $file->store('/images/team', 'public');
@@ -60,8 +76,14 @@ class AboutController extends Controller
             'contant' => $request->content ,
             'image' => $profile ,
             'status' => $request->status,
+            'type' => $request->type
         ];
+        if($data !=  ''){
         $data->Update($array);
+        }else{
+            About::create($array);
+        }
+
         return redirect()->route('admin.about.history')->with('status', 'History update successfully');
     }
 
@@ -70,27 +92,35 @@ class AboutController extends Controller
         return view('admin.about.introduction', compact('data'));
     }
 
-    public function Introduction_update(Request $request, $id){
+    public function Introduction_update(Request $request){
         $this->validate($request,[
             'title'  => 'required',
             'content'  => 'required',
             'images'  => 'nullable|mimes:jpeg,jpg,png',
             'status' => 'required'
         ]);
-        $data = About::find($id);
+
+        $data = About::where('type' ,$request->type)->first();
+
+
         if ($request->hasFile('images')) {
             $file = $request->file('images');
             $profile = $file->store('/images/team', 'public');
         }else{
-            $profile=  $data->image;
+            $profile=  $data->image ?? '';
         }
         $array = [
             'title' => $request->title ,
             'contant' => $request->content ,
             'image' => $profile ,
             'status' => $request->status,
+            'type'  => $request->type,
         ];
+        if($data != ''){
         $data->Update($array);
+        }else{
+            About::create($array);
+        }
         return redirect()->route('admin.about.introduction')->with('status', 'Introduction update successfully');
     }
 
@@ -99,27 +129,33 @@ class AboutController extends Controller
         return view('admin.about.mission', compact('data'));
     }
 
-    public function Mission_update(Request $request, $id){
+    public function Mission_update(Request $request){
+     
         $this->validate($request,[
             'title'  => 'required',
             'content'  => 'required',
             'status' => 'required',
             'images'  => 'nullable|mimes:jpeg,jpg,png',
         ]);
-        $data = About::find($id);
+        $data = About::where('type' ,$request->type)->first();
         if ($request->hasFile('images')) {
             $file = $request->file('images');
             $profile = $file->store('/images/team', 'public');
         }else{
-            $profile=  $data->image;
+            $profile=  $data->image ?? '';
         }
         $array = [
             'title' => $request->title ,
             'contant' => $request->content ,
             'image' => $profile ,
             'status' => $request->status,
+            'type'  =>$request->type,
         ];
+        if($data != ''){ 
         $data->Update($array);
+        }else{
+            About::create($array);
+        }
         return redirect()->route('admin.about.mission')->with('status', 'Mission update successfully');
     }
 
