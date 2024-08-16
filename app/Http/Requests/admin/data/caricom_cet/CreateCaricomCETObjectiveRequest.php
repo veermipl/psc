@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\admin\membership\member_benefit;
+namespace App\Http\Requests\admin\data\caricom_cet;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateMemberBenefitStatusRequest extends FormRequest
+class CreateCaricomCETObjectiveRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,11 @@ class UpdateMemberBenefitStatusRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'lid' => ['required', 'exists:member_benefits,id'],
-            'lstatus' => ['required'],
+            'title' => ['required'],
+            'file' => ['required', 'image', 'mimes:jpg,jpeg,gif,png', 'max:2048'],
+            'content' => ['required'],
+            'type' => ['required'],
+            'status' => ['required', 'in:0,1'],
         ];
     }
 }

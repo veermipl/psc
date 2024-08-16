@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\admin\membership\member_benefit;
+namespace App\Http\Requests\admin\data\caricom_cet;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreMemberBenefitRequest extends FormRequest
+class DeleteCaricomCETObjectiveRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,7 @@ class StoreMemberBenefitRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string'],
-            'status' => ['required', 'in:0,1'],
+            'lid' => ['required', 'exists:caricom_cet,id'],
         ];
     }
 }

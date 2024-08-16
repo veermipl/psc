@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\admin\membership\member_benefit;
+namespace App\Http\Requests\admin\data\national_budget;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateMemberBenefitRequest extends FormRequest
+class UpdateNationalBudgetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,13 +27,6 @@ class UpdateMemberBenefitRequest extends FormRequest
             'file' => ['required_if:old_file,null', 'image', 'mimes:jpg,jpeg,gif,png', 'max:2048'],
             'content' => ['required'],
             'type' => ['required'],
-        ];
-    }
-
-    public function messages(): array
-    {
-        return [
-            'file.required_if' => 'The file field is required',
         ];
     }
 }

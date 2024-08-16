@@ -214,17 +214,17 @@
                     </button>
                     <div class="collapse {{ request()->is('admin/data/*') ? 'show' : '' }}" id="data-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">National Budgets</a>
+                            <li class="rounded {{ request()->is('admin/data/national-budget') || request()->is('admin/data/national-budget/*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.data.national-budget') }}" class="link-dark rounded">National Budgets</a>
                             </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Trade Data</a>
+                            <li class="rounded {{ request()->is('admin/data/trade-data') || request()->is('admin/data/trade-data/*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.data.trade-data') }}" class="link-dark rounded">Trade Data</a>
                             </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">COTED</a>
+                            <li class="rounded {{ request()->is('admin/data/coted') || request()->is('admin/data/coted/*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.data.coted') }}" class="link-dark rounded">COTED</a>
                             </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Caricom CET</a>
+                            <li class="rounded {{ request()->is('admin/data/caricom-cet') || request()->is('admin/data/caricom-cet/*') ? 'link-active' : 'no' }}">
+                                <a href="{{ route('admin.data.caricom-cet') }}" class="link-dark rounded">Caricom CET</a>
                             </li>
                         </ul>
                     </div>
@@ -289,11 +289,11 @@
                             <li class="rounded {{ request()->is('admin/membership/type') || request()->is('admin/membership/type/*') ? 'link-active' : 'no' }}">
                                 <a href="{{ route('admin.membership.type.index') }}" class="link-dark rounded">Type</a>
                             </li>
-                            <li class="rounded {{ request()->is('admin/membership/business-directory') || request()->is('admin/membership/business-directory/*') ? 'link-active' : 'no' }}">
+                            <li class="d-none rounded {{ request()->is('admin/membership/business-directory') || request()->is('admin/membership/business-directory/*') ? 'link-active' : 'no' }}">
                                 <a href="{{ route('admin.membership.business-directory.index') }}" class="link-dark rounded">Business Directory</a>
                             </li>
                             <li class="rounded {{ request()->is('admin/membership/member-benefit') || request()->is('admin/membership/member-benefit/*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.membership.member-benefit.index') }}" class="link-dark rounded">Member Benefits</a>
+                                <a href="{{ route('admin.membership.member-benefit') }}" class="link-dark rounded">Member Benefits</a>
                             </li>
                         </ul>
                     </div>
@@ -547,6 +547,32 @@
                         openDropdown.classList.remove('showt');
                     }
                 }
+            }
+        }
+
+        //sub_page_body
+        $(document).on('click', '.sub_page_link', function(e){
+            e.preventDefault();
+
+            var target_id = $(this).data('target');
+            console.log(target_id);
+            
+            if(target_id){
+                toggle_sub_page(target_id);
+            }
+
+        });
+
+        //sub_page_body_toggle
+        function toggle_sub_page(target_id = null){
+            if(target_id){
+                //btn
+                $('.sub_page_link').removeClass('btn-custom').addClass('btn-outline-custom');
+                $('#sub_page_link_'+target_id+'').removeClass('btn-outline-custom').addClass('btn-custom');
+
+                //body
+                $('.sub_page_body').removeClass('show').addClass('hide');
+                $('#sub_page_body_'+target_id+'').removeClass('hide').addClass('show');
             }
         }
     </script>

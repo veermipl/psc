@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('member_benefits', function (Blueprint $table) {
+        Schema::create('caricom_cet', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->longText('content')->nullable()->default(null);
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('member_benefits');
+        Schema::dropIfExists('caricom_cet');
     }
 };
