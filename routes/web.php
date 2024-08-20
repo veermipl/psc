@@ -407,12 +407,12 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::patch('origins/type-update/{id}', 'type_update')->name('origins.update');
 
             Route::get('origins/certificates',  'certificatess')->name('origins.certificate');
-            Route::get('origins/certificate-add','origins_add')->name('certificate.add');
-            Route::post('origins/certificate-store',  'origins_store')->name('certificate.store');
-            Route::post('origins/certificate-status',  'origins_status')->name('certificate.status');
-            Route::get('origins/certificate-destroy/{id}',  'origins_destroy')->name('certificate.destroy');
-            Route::get('origins/certificate-edit/{id}',  'origins_edit')->name('certificate.edit');
-            Route::patch('origins/certificate-update/{id}', 'origins_update')->name('certificate.update');
+            Route::get('origins/certificate-add','origins_add')->name('origins.certificate.add');
+            Route::post('origins/certificate-store',  'origins_store')->name('origins.certificate.store');
+            Route::post('origins/certificate-status',  'origins_status')->name('origins.certificate.status');
+            Route::get('origins/certificate-destroy/{id}',  'origins_destroy')->name('origins.certificate.destroy');
+            Route::get('origins/certificate-edit/{id}',  'origins_edit')->name('origins.certificate.edit');
+            Route::patch('origins/certificate-update/{id}', 'origins_update')->name('origins.certificate.update');
 
         });
 
