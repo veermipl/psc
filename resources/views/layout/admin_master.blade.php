@@ -2,24 +2,34 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
     <title>@yield('title')</title>
 
-    <!-- Responsive -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/magnific-popup.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/admin.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/responsive.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/sidebars.css') }}" rel="stylesheet" />
+    <!-- loader-->
+    <link href="{{ asset('admin/css/pace.min.css') }}" rel="stylesheet" />
+    <script src="{{ asset('admin/js/pace.min.js') }}"></script>
 
-    <link rel="icon" href="images/favicon.png" type="image/x-icon" />
+    <!--plugins-->
+    <link href="{{ asset('admin/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admin/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admin/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="{{ asset('admin/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/css/bootstrap-extended.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/css/icons.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+
+    <!--Theme Styles-->
+    <link href="{{ asset('admin/css/dark-theme.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admin/css/semi-dark.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admin/css/header-colors.css') }}" rel="stylesheet" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.css">
@@ -29,509 +39,525 @@
 
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.css" />
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css" rel="stylesheet">
-    <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet" />
+    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css" rel="stylesheet"> --}}
+    {{-- <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet" /> --}}
 
-    <style>
-        body {
-            top: 0 !important;
-        }
-
-        .goog-logo-link {
-            display: none !important;
-        }
-
-        .goog-te-gadget {
-            font-size: 0px !important;
-        }
-
-        #google_translate_element img {
-            display: none !important;
-        }
-
-        .VIpgJd-ZVi9od-l4eHX-hSRGPd,
-        .VIpgJd-ZVi9od-TvD9Pc-hSRGPd,
-        .VIpgJd-ZVi9od-ORHb-OEVmcd {
-            display: none !important;
-        }
-
-        .VIpgJd-ZVi9od-ORHb {
-            display: none !important;
-        }
-
-        .goog-te-combo {
-            padding: 6px;
-            border-radius: 5px;
-        }
-
-        .goog-te-combo option {
-            font-size: 15px;
-        }
-
-        .language-btn {
-            min-width: 130px;
-            position: relative;
-            top: 12px;
-        }
-    </style>
     @yield('css')
 </head>
 
 <body>
 
-    <div class="wrapper_box">
-        <!-- Preloader -->
-        <div class="loader-wrap">
-            <div class="preloader">
-                <i class="fa fa-spinner fa-spin"></i>
-            </div>
-        </div>
-        <!-- End Preloader -->
 
-        <!-- Main Header-->
-        <header class="main-header">
-            <div class="header_top">
-                <div class="auto-container p-0">
-                    <div class="row">
-                        <div class="col-xl-12 p-0">
-                            <div class="header_top_inner clearfix">
-                                <div class="header_top_one_box pull-left">
-                                    <ul>
-                                        <li class="desk_logo">
-                                            <a href="{{ route('home') }}">
-                                                <img src="{{ asset('images/Gover-website/logo-other.png') }}" alt="logo" />
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="header_top_two_box pull-right">
-                                    <div class="opening_hour">
-                                        <div class="js">
-                                            <div class="language-picker js-language-picker" data-trigger-class="btn btn--subtle">
-                                                <div id="google_translate_element"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @auth
-                                    <div class="d-flex">
-                                        <div class="ml-2">
-                                            <div class="dropdownt">
-                                                <div class="drop-img dropbtnt" id="myBtnt">
-                                                    <img src="https://i.postimg.cc/ydFvrvbN/slider3.png" alt="user-picture">
-                                                    <i class="fas fa-chevron-down"></i>
-                                                </div>
-                                                <div id="myDropdownt" class="dropdown-contentt">
-                                                    <a href="{{ route('profile') }}"> <i class="far fa-user"></i> Profile</a>
-                                                    <a href="{{ route('admin.dashboard') }}"> <i class="far fa-dashboard"> </i> Dashboard</a>
-
-                                                    <form action="{{ route('logout') }}" method="post">
-                                                        @csrf
-                                                        @method('post')
-                                                        <button class=" btn-block" style="padding-left: 15px; text-align:start;">
-                                                            <i class="far fa-lock"></i> Logout
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endauth
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <!--start wrapper-->
+    <div class="wrapper">
+        <!--start sidebar -->
+        <aside class="sidebar-wrapper" data-simplebar="true">
+            <div class="sidebar-header">
+                <div>
+                    <img src="{{ asset('admin/images/logo-icon-2.png') }}" class="logo-icon" alt="logo icon">
+                </div>
+                <div>
+                    <h6 class="logo-text">PSCGY Admin</h6>
+                </div>
+                <div class="toggle-icon ms-auto"><ion-icon name="menu-sharp"></ion-icon>
                 </div>
             </div>
-
-            <!-- Mobile Menu  -->
-            <div class="mobile-menu close-menu">
-                <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
-                <nav class="menu-box">
-                    <ul class="navigation"></ul>
-                </nav>
-            </div>
-            <!-- End Mobile Menu -->
-
-            <div class="nav-overlay"></div>
-        </header>
-        <!-- End Main Header -->
-
-
-        <div class="flex-shrink-0 p-3 bg-white" id="side-bar">
-            <div class="d-flex_ text-right" id="close_side_bar_wrapper">
-                {{-- <a href="{{ route('home') }}">
-                <img src="{{ asset('images/Gover-website/logo-other.png') }}" alt="logo" width="50" height="50" />
-                </a> --}}
-                <button id="close_side_bar" toggle="open">
-                    <i class="fa fa-bars"></i>
-                </button>
-            </div>
-            <li class="border-top my-1"></li>
-
-            <ul class="list-unstyled p-0" id="side-bar-full">
-                <li class="mb-1 rounded {{ request()->is('admin/dashboard') ? 'link-active' : '' }}">
-                    <a href="{{ route('admin.dashboard') }}" class="btn">
-                        <i class="fa fa-home pr-2"></i>Dashboard
+            <!--navigation-->
+            <ul class="metismenu" id="menu">
+                <li>
+                    <a href="{{ route('admin.dashboard') }}" class="">
+                        <div class="parent-icon"><ion-icon name="home-sharp"></ion-icon></div>
+                        <div class="menu-title">Dashboard</div>
                     </a>
                 </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#users-collapse" aria-expanded="false">
-                        Users
-                    </button>
-                    <div class="collapse {{ request()->is('admin/user') || request()->is('admin/user/*') ? 'show' : '' }}" id="users-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/user') || request()->is('admin/user/*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.user.index') }}" class="link-dark rounded">List</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/user/create') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.user.create') }}" class="link-dark rounded">Create User</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#members-collapse" aria-expanded="false">
-                        Members
-                    </button>
-                    <div class="collapse {{ request()->is('admin/member') || request()->is('admin/member/*') ? 'show' : '' }}" id="members-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/member') || request()->is('admin/member/filter') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.member.index') }}" class="link-dark rounded">List</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/member/create') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.member.create') }}" class="link-dark rounded">Create Member</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/member/import') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.member.import') }}" class="link-dark rounded">Import Member</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#data-collapse" aria-expanded="false">
-                        Data
-                    </button>
-                    <div class="collapse {{ request()->is('admin/data/*') ? 'show' : '' }}" id="data-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/data/national-budget') || request()->is('admin/data/national-budget/*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.data.national-budget') }}" class="link-dark rounded">National Budgets</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/data/trade-data') || request()->is('admin/data/trade-data/*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.data.trade-data') }}" class="link-dark rounded">Trade Data</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/data/coted') || request()->is('admin/data/coted/*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.data.coted') }}" class="link-dark rounded">COTED</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/data/caricom-cet') || request()->is('admin/data/caricom-cet/*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.data.caricom-cet') }}" class="link-dark rounded">Caricom CET</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#resources-collapse" aria-expanded="false">
-                        Resources
-                    </button>
-                    <div class="collapse {{ request()->is('admin/readines/*') ? 'show' : '' }}" id="resources-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
 
-                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#business" aria-expanded="false">
-                        Business
-                    </button>
+                <li class="{{ request()->is('admin/user') || request()->is('admin/user/*') ? 'mm-active' : '' }}">
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><ion-icon name="people-sharp"></ion-icon></div>
+                        <div class="menu-title">Users</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.user.index') }}"><ion-icon name="ellipse-outline"></ion-icon>List</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.user.create') }}"><ion-icon name="ellipse-outline"></ion-icon>Create User</a>
+                        </li>
 
-                    <div class="collapse {{ request()->is('admin/readines/*') ? 'show' : '' }}" id="business">
-                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-
-                            <li class="rounded {{ request()->is('admin/readines/business') ? 'link-active' : 'no' }}">
-                                <a href="{{route('admin.readines.business')}}" class="link-dark rounded">Business Readinedss Desk</a>
-                            </li>
-
-                            <li class="rounded {{ request()->is('admin/readines/certificate') ? 'link-active' : 'no' }}">
-                                <a href="{{route('admin.readines.certificate')}}" class="link-dark rounded">Business Certificate</a>
-                            </li>
-
-                            <li class="rounded {{ request()->is('admin/readines/benefits-certificate') ? 'link-active' : 'no' }}">
-                                <a href="{{route('admin.readines.benefits')}}" class="link-dark rounded">Benefits of a Certificate</a>
-                            </li>
                     </ul>
-                    </div>
+                </li>
 
+                <li class="{{ request()->is('admin/member') || request()->is('admin/member/*') ? 'mm-active' : '' }}">
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><ion-icon name="people-sharp"></ion-icon></div>
+                        <div class="menu-title">Members</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.member.index') }}"><ion-icon name="ellipse-outline"></ion-icon>List</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.member.create') }}"><ion-icon name="ellipse-outline"></ion-icon>Create Member</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.member.import') }}"><ion-icon name="ellipse-outline"></ion-icon>Import Members</a>
+                        </li>
+                    </ul>
+                </li>
 
- 
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Invest" aria-expanded="false">
-                    Go Invest
-                    </button>
-                    <div class="collapse {{ request()->is('admin/readines/*') ? 'show' : '' }}" id="Invest">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <li class="rounded {{ request()->is('admin/readines/go-invest') ? 'link-active' : 'no' }}">
-                                    <a href="{{route('admin.readines.goinvest')}}" class="link-dark rounded">Go Invest</a>
+                <li class="{{ request()->is('admin/data/*') ? 'mm-active' : '' }}">
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><ion-icon name="bar-chart-sharp"></ion-icon></div>
+                        <div class="menu-title">Data</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.data.national-budget') }}"><ion-icon name="ellipse-outline"></ion-icon>National Budgets</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.data.trade-data') }}"><ion-icon name="ellipse-outline"></ion-icon>Trade Data</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.data.coted') }}"><ion-icon name="ellipse-outline"></ion-icon>COTED</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.data.caricom-cet') }}"><ion-icon name="ellipse-outline"></ion-icon>Caricom CET</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a class="has-arrow" href="javascript:;">
+                        <div class="parent-icon"><ion-icon name="document-sharp"></ion-icon></div>
+                        <div class="menu-title">Resources</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                                Business Readinedss Desk
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                                Go Invest
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                                IDB Invest
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                                Procurement Process In Guyana
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                                Certificate Of Origins
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                                Annual Reports
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li class="{{ request()->is('admin/media-center/*') ? 'mm-active' : '' }}">
+                    <a class="has-arrow" href="javascript:;">
+                        <div class="parent-icon"><ion-icon name="play-circle-sharp"></ion-icon>
+                        </div>
+                        <div class="menu-title">Media Center</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.media-center.news.index') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                                News
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.media-center.press-release.index') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                                Press Release
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.media-center.social-media.index') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                                Social Media
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.media-center.photo.index') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                                Photos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.media-center.video.index') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                                Videos
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li class="{{ request()->is('admin/membership/*') ? 'mm-active' : '' }}">
+                    <a class="has-arrow" href="javascript:;">
+                        <div class="parent-icon"><ion-icon name="key-sharp"></ion-icon></div>
+                        <div class="menu-title">Membership</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.membership.type.index') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                                Type
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.membership.business-directory.index') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                                Business Directory
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.membership.member-benefit') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                                Member Benefits
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li>
+                    <a class="has-arrow" href="javascript:;">
+                        <div class="parent-icon"><ion-icon name="server-sharp"></ion-icon></div>
+                        <div class="menu-title">About us</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                                Staff
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                                Council
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                                History
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                                Committees
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ request()->is('admin/cms/*') ? 'mm-active' : '' }}">
+                    <a class="has-arrow" href="javascript:;">
+                        <div class="parent-icon"><ion-icon name="create-sharp"></ion-icon></div>
+                        <div class="menu-title">CMS</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.cms.guyana-economy') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                                Guyana Economy
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ request()->is('admin/authorization/*') ? 'mm-active' : '' }}">
+                    <a class="has-arrow" href="javascript:;">
+                        <div class="parent-icon"><ion-icon name="lock-closed-sharp"></ion-icon></div>
+                        <div class="menu-title">Authorization</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.authorization.role.index') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                                Roles
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.authorization.permission.index') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                                Permissions
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ request()->is('admin/settings/*') ? 'mm-active' : '' }}">
+                    <a class="has-arrow" href="javascript:;">
+                        <div class="parent-icon"><ion-icon name="settings-sharp"></ion-icon></div>
+                        <div class="menu-title">Settings</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.settings.general') }}"><ion-icon name="ellipse-outline"></ion-icon>General Settings</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.settings.email') }}"><ion-icon name="ellipse-outline"></ion-icon>Email Settings</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.settings.contact-us') }}"><ion-icon name="ellipse-outline"></ion-icon>Contact Us</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+        </aside>
+        <!--end sidebar -->
+
+        <!--start top header-->
+        <header class="top-header">
+            <nav class="navbar navbar-expand gap-3">
+                <div class="mobile-menu-button"><ion-icon name="menu-sharp"></ion-icon></div>
+                <form class="searchbar">
+                    <div class="position-absolute top-50 translate-middle-y search-icon ms-3"><ion-icon
+                            name="search-sharp"></ion-icon></div>
+                    <input class="form-control" type="text" placeholder="Search for anything">
+                    <div class="position-absolute top-45 translate-middle-y search-close-icon"><ion-icon
+                            name="close-sharp"></ion-icon></div>
+                </form>
+                <div class="top-navbar-right ms-auto">
+                    <ul class="navbar-nav align-items-center">
+                        <li class="nav-item mobile-search-button">
+                            <a class="nav-link" href="javascript:;">
+                                <div class="">
+                                    <ion-icon name="search-sharp"></ion-icon>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="nav-item dropdown dropdown-large">
+                            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;"
+                                data-bs-toggle="dropdown">
+                                <div class="position-relative">
+                                    <span class="notify-badge">8</span>
+                                    <ion-icon name="notifications-sharp"></ion-icon>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a href="javascript:;">
+                                    <div class="msg-header">
+                                        <p class="msg-header-title">Notifications</p>
+                                        <p class="msg-header-clear ms-auto">Marks all as read</p>
+                                    </div>
+                                </a>
+                                <div class="header-notifications-list">
+                                    <a class="dropdown-item" href="javascript:;">
+                                        <div class="d-flex align-items-center">
+                                            <div class="notify text-primary"><ion-icon name="cart-outline"></ion-icon>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="msg-name">New Orders <span class="msg-time float-end">2 min
+                                                        ago</span></h6>
+                                                <p class="msg-info">You have recived new orders</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:;">
+                                        <div class="d-flex align-items-center">
+                                            <div class="notify text-danger"><ion-icon
+                                                    name="person-outline"></ion-icon>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="msg-name">New Customers<span class="msg-time float-end">14
+                                                        Sec
+                                                        ago</span></h6>
+                                                <p class="msg-info">5 new user registered</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:;">
+                                        <div class="d-flex align-items-center">
+                                            <div class="notify text-success"><ion-icon
+                                                    name="document-outline"></ion-icon>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="msg-name">24 PDF File<span class="msg-time float-end">19
+                                                        min
+                                                        ago</span></h6>
+                                                <p class="msg-info">The pdf files generated</p>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <a class="dropdown-item" href="javascript:;">
+                                        <div class="d-flex align-items-center">
+                                            <div class="notify text-info"><ion-icon
+                                                    name="checkmark-done-outline"></ion-icon>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="msg-name">New Product Approved <span
+                                                        class="msg-time float-end">2 hrs ago</span></h6>
+                                                <p class="msg-info">Your new product has approved</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:;">
+                                        <div class="d-flex align-items-center">
+                                            <div class="notify text-warning"><ion-icon name="send-outline"></ion-icon>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="msg-name">Time Response <span class="msg-time float-end">28
+                                                        min
+                                                        ago</span></h6>
+                                                <p class="msg-info">5.1 min avarage time response</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:;">
+                                        <div class="d-flex align-items-center">
+                                            <div class="notify text-danger"><ion-icon
+                                                    name="chatbox-ellipses-outline"></ion-icon>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="msg-name">New Comments <span class="msg-time float-end">4
+                                                        hrs
+                                                        ago</span></h6>
+                                                <p class="msg-info">New customer comments recived</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:;">
+                                        <div class="d-flex align-items-center">
+                                            <div class="notify text-primary"><ion-icon
+                                                    name="albums-outline"></ion-icon>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="msg-name">New 24 authors<span class="msg-time float-end">1
+                                                        day
+                                                        ago</span></h6>
+                                                <p class="msg-info">24 new authors joined last week</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:;">
+                                        <div class="d-flex align-items-center">
+                                            <div class="notify text-success"><ion-icon
+                                                    name="shield-outline"></ion-icon>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="msg-name">Your item is shipped <span
+                                                        class="msg-time float-end">5 hrs
+                                                        ago</span></h6>
+                                                <p class="msg-info">Successfully shipped your item</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:;">
+                                        <div class="d-flex align-items-center">
+                                            <div class="notify text-warning"><ion-icon name="cafe-outline"></ion-icon>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="msg-name">Defense Alerts <span class="msg-time float-end">2
+                                                        weeks
+                                                        ago</span></h6>
+                                                <p class="msg-info">45% less alerts last 4 weeks</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <a href="javascript:;">
+                                    <div class="text-center msg-footer">View All Notifications</div>
+                                </a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item dropdown dropdown-user-setting">
+                            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;"
+                                data-bs-toggle="dropdown">
+                                <div class="user-setting">
+                                    <img src="{{ asset('admin/images/avatars/06.png') }}" class="user-img" alt="">
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('profile') }}">
+                                        <div class="d-flex align-items-center">
+                                            <div class=""><ion-icon name="person-outline"></ion-icon></div>
+                                            <div class="ms-3"><span>Profile</span></div>
+                                        </div>
+                                    </a>
                                 </li>
-
-                                <li class="rounded {{ request()->is('admin/readines/investment') ? 'link-active' : 'no' }}">
-                                    <a href="{{route('admin.readines.investment')}}" class="link-dark rounded">Go Invest to Investment Sectors</a>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                        <div class="d-flex align-items-center">
+                                            <div class=""><ion-icon name="speedometer-outline"></ion-icon></div>
+                                            <div class="ms-3"><span>Dashboard</span></div>
+                                        </div>
+                                    </a>
                                 </li>
-                        </ul>
-                    </div>
-
-
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#IDB" aria-expanded="false">
-                    IDB Invest
-                    </button>
-                    <div class="collapse {{ request()->is('admin/readines/*') ? 'show' : '' }}" id="IDB">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-
-                            <li class="rounded {{ request()->is('admin/readines/idb-inves') ? 'link-active' : 'no' }}">
-                                <a href="{{route('admin.readines.idbinves')}}" class="link-dark rounded">IDB Invest</a>
-                            </li>
-
-                            <li class="rounded {{ request()->is('admin/readines/key-areas') ? 'link-active' : 'no' }}">
-                                <a href="{{route('admin.readines.key_areas')}}" class="link-dark rounded">Key Areas of Focus</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/readines/idb-investment') ? 'link-active' : 'no' }}">
-                                <a href="{{route('admin.readines.IDB_Investment')}}" class="link-dark rounded">IDB Investment Services </a>
-                            </li>
-
+                                <li>
+                                    <a class="dropdown-item" href="authentication-sign-in-basic.html">
+                                        <div class="d-flex align-items-center">
+                                            <div class=""><ion-icon name="log-out-outline"></ion-icon></div>
+                                            <div class="ms-3">
+                                                <form action="{{ route('logout') }}" method="post">
+                                                    @csrf
+                                                    @method('post')
+                                                    <button class="btn-sm btn btn-light p-0"><span>Logout</span></button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
                             </ul>
-                    </div>
+                        </li>
 
-
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#procurement" aria-expanded="false">
-                    Procurement Process
-                    </button>
-                    <div class="collapse {{ request()->is('admin/readines/*') ? 'show' : '' }}" id="procurement">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-
-                            <li class="rounded {{ request()->is('admin/readines/procurement') ? 'link-active' : 'no' }}">
-                                <a href="{{route('admin.readines.procurement')}}" class="link-dark rounded">Procurement Process In Guyana</a>
-                            </li>
-
-                            <li class="rounded {{ request()->is('admin/readines/methods') ? 'link-active' : 'no' }}">
-                                <a href="{{route('admin.readines.methods')}}" class="link-dark rounded">Methods</a>
-                            </li>
-
-                            <li class="rounded {{ request()->is('admin/readines/methods-services') ? 'link-active' : 'no' }}">
-                                <a href="{{route('admin.readines.services')}}" class="link-dark rounded">Services Procurement Procedures</a>
-                            </li>                         
-
-                        </ul>
-                    </div>
-                            <li class="rounded {{ request()->is('admin/readines/origins/certificate') ? 'link-active' : 'no' }}">
-                                <a href="{{route('admin.readines.certificate.origins')}}" class="link-dark rounded">Certificate Of Origins</a>
-                            </li>
-
-                            <li class="rounded {{ request()->is('admin/readines/origins/type-certificate') ? 'link-active' : 'no' }}">
-                                <a href="{{route('admin.readines.origins.type.certificate')}}" class="link-dark rounded">Types of Certificates</a>
-                            </li>
-
-                            <!-- <li class="rounded {{ request()->is('admin/readines/origins') ? 'link-active' : 'no' }}">
-                                <a href="{{route('admin.readines.origins.type.certificate')}}" class="link-dark rounded">Certificate of Origin</a>
-                            </li> -->
-
-                            <li class="rounded {{ request()->is('admin/readines/origins') ? 'link-active' : 'no' }}">
-                                <a href="{{route('admin.readines.origins.certificate')}}" class="link-dark rounded">Certificate of Origin</a>
-                            </li>
-
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="{{route('admin.readines.annul')}}" class="link-dark rounded">Annual Reports</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#media-collapse" aria-expanded="false">
-                        Media Center
-                    </button>
-                    <div class="collapse {{ request()->is('admin/media-center/*') ? 'show' : '' }}" id="media-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/media-center/news') || request()->is('admin/media-center/news/*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.media-center.news.index') }}" class="link-dark rounded">News</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/media-center/press-release') || request()->is('admin/media-center/press-release/*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.media-center.press-release.index') }}" class="link-dark rounded">Press Release</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/media-center/social-media') || request()->is('admin/media-center/social-media/*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.media-center.social-media.index') }}" class="link-dark rounded">Social Media</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/media-center/photo') || request()->is('admin/media-center/photo/*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.media-center.photo.index') }}" class="link-dark rounded">Photos</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/media-center/video') || request()->is('admin/media-center/video/*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.media-center.video.index') }}" class="link-dark rounded">Videos</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#membership-collapse" aria-expanded="false">
-                        Membership
-                    </button>
-                    <div class="collapse {{ request()->is('admin/membership/*') ? 'show' : '' }}" id="membership-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/membership/type') || request()->is('admin/membership/type/*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.membership.type.index') }}" class="link-dark rounded">Type</a>
-                            </li>
-                            <li class="d-none rounded {{ request()->is('admin/membership/business-directory') || request()->is('admin/membership/business-directory/*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.membership.business-directory.index') }}" class="link-dark rounded">Business Directory</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/membership/member-benefit') || request()->is('admin/membership/member-benefit/*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.membership.member-benefit') }}" class="link-dark rounded">Member Benefits</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#about_us-collapse" aria-expanded="false">
-                        About Us
-                    </button>
-                    <div class="collapse {{ request()->is('admin/about-us/*') ? 'show' : '' }}" id="about_us-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/staff/list') ? 'link-active' : 'no' }}">
-                                <a href="{{route('admin.staff.list')}}" class="link-dark rounded">Staff</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/about/council') ? 'link-active' : 'no' }}">
-                                <a href="{{route('admin.about.council')}}" class="link-dark rounded">Council</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/about/history') ? 'link-active' : 'no' }}">
-                                <a href="{{route('admin.about.history')}}" class="link-dark rounded">History</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/about/introduction') ? 'link-active' : 'no' }}">
-                                <a href="{{route('admin.about.introduction')}}" class="link-dark rounded">Introduction</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#cms-collapse" aria-expanded="false">
-                        CMS
-                    </button>
-                    <div class="collapse {{ request()->is('admin/cms/*') ? 'show' : '' }}" id="cms-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/cms/guyana-economy') || request()->is('admin/cms/guyana-economy/*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.cms.guyana-economy') }}" class="link-dark rounded">Guyana Economy</a>
-                            </li>
-
-                            <li class="rounded {{ request()->is('admin/about/mission') || request()->is('admin/about/mission/*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.about.mission') }}" class="link-dark rounded">Our Mission</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/testimonial/list') || request()->is('admin/testimonial/list*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.testimonial.list') }}" class="link-dark rounded">Testimonial</a>
-                            </li>
-
-                            <li class="rounded {{ request()->is('admin/cms/performance') || request()->is('admin/cms/performance*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.cms.performance') }}" class="link-dark rounded">Performance </a>
-                            </li>
-
-                            <li class="rounded {{ request()->is('admin/cms/core-value') || request()->is('admin/cms/core-value*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.cms.corevalue') }}" class="link-dark rounded">Core Value</a>
-                            </li>
-                            
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#authorization-collapse" aria-expanded="false">
-                        Authorization
-                    </button>
-                    <div class="collapse {{ request()->is('admin/authorization/*') ? 'show' : '' }}" id="authorization-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/authorization/role') || request()->is('admin/authorization/role/*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.authorization.role.index') }}" class="link-dark rounded">Roles</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/authorization/permission') || request()->is('admin/authorization/permission/*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.authorization.permission.index') }}" class="link-dark rounded">Permission</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1 pb-5">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#settings-collapse" aria-expanded="false">
-                        Settings
-                    </button>
-                    <div class="collapse {{ request()->is('admin/settings/*') ? 'show' : '' }}" id="settings-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/settings/general') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.settings.general') }}" class="link-dark rounded">General Settings</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/settings/email') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.settings.email') }}" class="link-dark rounded">Email Settings</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/settings/contact-us') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.settings.contact-us') }}" class="link-dark rounded">Contact
-                                    Us</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-
-            <ul class="list-unstyled p-0" id="side-bar-half">
-                <li class="mb-1 rounded {{ request()->is('admin/dashboard') ? 'link-active' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
-                        <i class="fa fa-home"></i>
-                    </a>
-                </li>
-                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Users" data-bs-toggle="tooltip" data-bs-placement="right">
-                        <i class="fa fa-users"></i>
-                    </a>
-                </li>
-                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Membership" data-bs-toggle="tooltip" data-bs-placement="right">
-                        <i class="fa fa-bell"></i>
-                    </a>
-                </li>
-                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Data" data-bs-toggle="tooltip" data-bs-placement="right">
-                        <i class="fa fa-server"></i>
-                    </a>
-                </li>
-                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Resources" data-bs-toggle="tooltip" data-bs-placement="right">
-                        <i class="fa fa-database"></i>
-                    </a>
-                </li>
-                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Media" data-bs-toggle="tooltip" data-bs-placement="right">
-                        <i class="fa fa-rss"></i>
-                    </a>
-                </li>
-                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="About Us" data-bs-toggle="tooltip" data-bs-placement="right">
-                        <i class="fa fa-info"></i>
-                    </a>
-                </li>
-                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="CMS" data-bs-toggle="tooltip" data-bs-placement="right">
-                        <i class="fa fa-cogs"></i>
-                    </a>
-                </li>
-                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Settings" data-bs-toggle="tooltip" data-bs-placement="right">
-                        <i class="fa fa-cog"></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-
-        <div id="content">
-            {{-- <header class="bg-white shadow mb-3">
-                <div class="py-3 px-4">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">@yield('header')</h2>
+                    </ul>
                 </div>
-            </header> --}}
+            </nav>
+        </header>
+        <!--end top header-->
 
-            @yield('content')
+        <!-- start page content wrapper-->
+        <div class="page-content-wrapper">
+            <!-- start page content-->
+            <div class="page-content">
+                @yield('content')
+            </div>
+            <!-- end page content-->
         </div>
+        <!--end page content wrapper-->
 
-        <!--Scroll to top-->
-        <div class="scroll-to-top scroll-to-target" data-target="html">
-            <span class="icon fas fa-arrow-up"></span>
-        </div>
+        <!--start footer-->
+        <footer class="footer">
+            <div class="footer-text">
+                Copyright © 2024. All right reserved.
+            </div>
+        </footer>
+        <!--end footer-->
+
+        <!--Start Back To Top Button-->
+        <a href="javaScript:;" class="back-to-top"><ion-icon name="arrow-up-outline"></ion-icon></a>
+        <!--End Back To Top Button-->
+
+        <!--start overlay-->
+        <div class="overlay"></div>
+        <!--end overlay-->
 
     </div>
+    <!--end wrapper-->
 
+
+    <!-- JS Files-->
+    <script src="{{ asset('admin/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/simplebar/js/simplebar.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/metismenu/js/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <!--plugins-->
+    <script src="{{ asset('admin/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+    <script src="{{ asset('admin/plugins/chartjs/chart.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/apexcharts-bundle/js/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('admin/js/index2.js') }}"></script>
+    <!-- Main JS-->
+    <script src="{{ asset('admin/js/main.js') }}"></script>
 
     <script type="text/javascript">
         function googleTranslateElementInit() {
@@ -539,40 +565,23 @@
                 pageLanguage: 'en',
                 includedLanguages: 'en,es,de,fr,it'
             }, 'google_translate_element');
-
-
         }
     </script>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
     </script>
 
-    {{-- script --}}
-    <script src="{{ asset('js/jquery.js') }}"></script>
-    <script src="{{ asset('js/popper.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/swiper.min.js') }}"></script>
-    <script src="{{ asset('js/appear.js') }}"></script>
-    <script src="{{ asset('js/jquery.countTo.js') }}"></script>
-    <script src="{{ asset('js/isotope.js') }}"></script>
-    <script src="{{ asset('js/owl.js') }}"></script>
-    <script src="{{ asset('js/wow.js') }}"></script>
-    <script src="{{ asset('js/jquery.fancybox.js') }}"></script>
-    <script src="{{ asset('js/TweenMax.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
-    <script src="{{ asset('js/parallax.min.js') }}"></script>
-    <script src="{{ asset('js/custom.js') }}"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script> --}}
     <script type="text/javascript" src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.2/dist/bootstrap-table.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
-    <script src="{{ asset('js/dropzone.js') }}"></script>
-
-    <script src="{{ asset('js/sidebars.js') }}"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script> --}}
+    {{-- <script src="{{ asset('js/dropzone.js') }}"></script> --}}
 
     <script type="importmap">
         {
@@ -591,21 +600,21 @@
             Font,
             Paragraph
         } from 'ckeditor5';
-    
+
         ClassicEditor
-            .create( document.querySelector( '#editor' ), {
-                plugins: [ Essentials, Bold, Italic, Font, Paragraph ],
+            .create(document.querySelector('#editor'), {
+                plugins: [Essentials, Bold, Italic, Font, Paragraph],
                 toolbar: {
                     items: [
                         'undo', 'redo', '|', 'bold', 'italic', '|',
                         'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
                     ]
                 }
-            } )
+            })
             .then( /* ... */ )
             .catch( /* ... */ );
     </script>
-    
+
 
     @if (session('success'))
         <script>
@@ -620,55 +629,29 @@
     @endif
 
     <script>
-        // Get the button, and when the user clicks on it, execute myFunction
-        document.getElementById("myBtnt").onclick = function() {
-            myFunction()
-        };
-
-        /* myFunction toggles between adding and removing the show class, which is used to hide and show the dropdown content */
-        function myFunction() {
-            document.getElementById("myDropdownt").classList.toggle("showt");
-        }
-
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
-
-            if (!event.target.matches('.dropbtnt')) {
-
-                var dropdowns = document.getElementsByClassName("dropdown-contentt");
-
-                for (let i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('showt')) {
-                        openDropdown.classList.remove('showt');
-                    }
-                }
-            }
-        }
-
         //sub_page_body
-        $(document).on('click', '.sub_page_link', function(e){
+        $(document).on('click', '.sub_page_link', function(e) {
             e.preventDefault();
 
             var target_id = $(this).data('target');
             console.log(target_id);
-            
-            if(target_id){
+
+            if (target_id) {
                 toggle_sub_page(target_id);
             }
 
         });
 
         //sub_page_body_toggle
-        function toggle_sub_page(target_id = null){
-            if(target_id){
+        function toggle_sub_page(target_id = null) {
+            if (target_id) {
                 //btn
                 $('.sub_page_link').removeClass('btn-custom').addClass('btn-outline-custom');
-                $('#sub_page_link_'+target_id+'').removeClass('btn-outline-custom').addClass('btn-custom');
+                $('#sub_page_link_' + target_id + '').removeClass('btn-outline-custom').addClass('btn-custom');
 
                 //body
                 $('.sub_page_body').removeClass('show').addClass('hide');
-                $('#sub_page_body_'+target_id+'').removeClass('hide').addClass('show');
+                $('#sub_page_body_' + target_id + '').removeClass('hide').addClass('show');
             }
         }
     </script>

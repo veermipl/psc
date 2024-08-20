@@ -6,7 +6,7 @@ return [
             'name' => 'Active',
             'value' => '1'
         ], [
-            'name' => 'Not Active',
+            'name' => 'In Active',
             'value' => '0'
         ]
     ],
