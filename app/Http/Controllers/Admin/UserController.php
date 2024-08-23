@@ -69,24 +69,21 @@ class UserController extends Controller
 
         $validated = $request->validated();
 
-        $fileName = 'user_data.csv';
+        $fileName = 'user.csv';
         $noData = 'NA';
         $dataarray = array();
         $user_ids = explode(',', $validated['export_id']);
 
-        $users = User::orderBy('name', 'asc')->where('id', $user_ids)->get();
+        $users = User::orderBy('name', 'asc')->whereIn('id', $user_ids)->get();
 
         foreach ($users as $userKey => $user) {
             $userRoles = $user->role ? $user->role->pluck('name')->toArray() : [];
-            $membershipData = $user->membership_type;
             $statusData = $user->status;
 
             $dataarray[] = [
                 'id' => $user->id,
                 'name' => $user->name ?? $noData,
                 'email' => $user->email ?? $noData,
-                'mobile' => $user->mobile_number ?? $noData,
-                'membership_type' => $membershipData ?? $noData,
                 'role' => implode(', ', $userRoles),
                 'status' => $statusData,
             ];
@@ -99,7 +96,7 @@ class UserController extends Controller
             "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
             "Expires"             => "0"
         );
-        $columns = array('ID', 'Name', 'Email', 'Mobile', 'Membership', 'Role', 'Status');
+        $columns = array('ID', 'Name', 'Email', 'Role', 'Status');
         $callback = function () use ($dataarray, $columns) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columns);
@@ -108,12 +105,10 @@ class UserController extends Controller
                 $row['ID'] = $task['id'];
                 $row['Name'] = $task['name'];
                 $row['Email'] = $task['email'];
-                $row['Mobile'] = $task['mobile'];
-                $row['Membership'] = $task['membership_type'];
                 $row['Role'] = $task['role'];
                 $row['Status'] = $task['status'];
 
-                fputcsv($file, array($row['ID'], $row['Name'], $row['Email'], $row['Mobile'], $row['Membership'], $row['Role'], $row['Status']));
+                fputcsv($file, array($row['ID'], $row['Name'], $row['Email'], $row['Role'], $row['Status']));
             }
 
             fclose($file);

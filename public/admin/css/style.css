@@ -1562,3 +1562,38 @@ ul.categories-list li {
     background: #ecbd00 !important;
     border: 1px solid #ecbd00 !important;
 }
+
+
+
+
+/* anjani file button */
+.ghy {
+    position: absolute;
+    top: 0px;
+}
+
+.cross-m {
+    position: relative;
+    cursor: pointer;
+    left: 14px;
+}
+
+.pdf-files {
+    font-size: 28px;
+    text-align: start !important;
+}
+
+.cross-m i {
+    /* background: red; */
+    color: #fff;
+    font-size: 10px;
+    height: 17px;
+    width: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 1px solid white
+}
+
+/* anjani file button */

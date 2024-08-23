@@ -4,62 +4,66 @@
 
 @section('content')
 
-    <div class="p-3 bg-white">
-        <h5 class="fw-bold">Email Settings</h5>
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">Email Settings</div>
+    </div>
 
-        <div class="pt-5">
-            <form action="{{ route('admin.settings.email') }}" method="post" enctype="multipart/form-data">
-                @csrf
-                @method('patch')
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card radius-10">
+                <div class="card-body">
+                    <div class="p-4 border rounded">
+                        <form action="{{ route('admin.settings.email') }}" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+                            @csrf
+                            @method('patch')
 
-                <div class="d-flex">
-                    <div class="form-group col-md-6">
-                        <label for="name">Email Address <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="email_address" placeholder="Email Address"
-                            value="{{ old('email_address', @$settings['email_address']) }}" maxlength="50">
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Email Address <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="email_address" placeholder="Email Address"
+                                    value="{{ old('email_address', @$settings['email_address']) }}" maxlength="50">
 
-                        @error('email_address')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
+                                @error('email_address')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
 
-                    <div class="form-group col-md-6">
-                        <label for="name">Password <span class="text-danger">*</span></label>
-                        <input type="password" class="form-control" name="password" placeholder="Password"
-                            value="{{ old('password', @$settings['password']) }}" maxlength="50">
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Password <span class="text-danger">*</span></label>
+                                <input type="password" class="form-control" name="password" placeholder="Password"
+                                    value="{{ old('password', @$settings['password']) }}" maxlength="50">
 
-                        @error('password')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                                @error('password')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Host <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="host" placeholder="Host"
+                                    value="{{ old('host', @$settings['host']) }}" maxlength="50">
+
+                                @error('host')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Port <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="port" placeholder="Port"
+                                    value="{{ old('port', @$settings['port']) }}" maxlength="50">
+
+                                @error('port')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-12 text-end mt-5">
+                                <button class="btn btn-sm btn-primary" type="submit">Update</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-
-                <div class="d-flex">
-                    <div class="form-group col-md-6">
-                        <label for="name">Host <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="host" placeholder="Host"
-                            value="{{ old('host', @$settings['host']) }}" maxlength="50">
-
-                        @error('host')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="name">Port <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="port" placeholder="Port"
-                            value="{{ old('port', @$settings['port']) }}" maxlength="50">
-
-                        @error('port')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-group col-md-12 text-right">
-                    <button class="btn btn-sm btn-custom" type="submit">Update</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 

@@ -5,65 +5,73 @@
 
 @section('content')
 
-    <div class="p-3 bg-white">
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">Import Member</div>
+    </div>
 
-        <h5 class="fw-bold">Import Member</h5>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card radius-10">
+                <div class="card-body">
+                    <div class="p-4 border rounded">
+                        <form method="post" id="excelImportMemberForm">
+                            @csrf
+                            @method('post')
 
-        <div class="pt-5">
-            <form method="post" id="excelImportMemberForm">
-                @csrf
-                @method('post')
+                            <div class="row align-items-center">
+                                <div class="col-md-9 custom-file">
+                                    <input type="file" name="excelDoc" accept=".xls, .xlsx, .csv" class="form-control_">
+                                </div>
+                                <div class="col-md-3 text-right">
+                                    <button type="submit" class="btn btn-primary btn-sm" id="excelImportMemberBtn">
+                                        <ion-icon name="document-outline" role="img" class="md hydrated" aria-label="document"></ion-icon>Import
+                                    </button>
+                                    <a href="{{ route('admin.member.import-sample') }}" class="btn btn-primary btn-sm align-content-center">
+                                        <ion-icon name="download-outline" role="img" class="md hydrated" aria-label="document"></ion-icon>Sample
+                                    </a>
+                                </div>
+                            </div>
 
-                <div class="row align-items-center">
-                    <div class="col-md-9 custom-file">
-                        <input type="file" name="excelDoc" accept=".xls, .xlsx, .csv" class="form-control_">
+                            <div class="mt-2">
+                                <p class="text-danger fw-bold_ m-0">Allowed file types .csv, .xls</p>
+                                <p class="text-danger fw-bold_ m-0">Max file size of 5MB</p>
+                            </div>
+                        </form>
+
+                        <hr>
+
+                        <form method="post" id="excelAddMemberForm">
+                            @csrf
+                            @method('post')
+
+                            <div class="table-responsive">
+                                <table id="excelAddMemberTable" class="table table-sm table-borderless table-light" data-toggle="table" data-search="true" data-pagination="true">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="id" data-sortable="true">#</th>
+                                            <th data-field="name" data-sortable="true">Name</th>
+                                            <th data-field="email" data-sortable="true">Email</th>
+                                            <th data-field="mobile" data-sortable="true">Mobile</th>
+                                            <th data-field="membership_type" data-sortable="true">Membership Type</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+
+                            <div class="errWrapper text-center">
+                                <span class="error" id="importMemberErr"></span>
+                                <div class="error" id="importMemberRowErr"></div>
+                            </div>
+
+                            <div class="col-12 text-end">
+                                <button type="submit" class="btn btn-primary btn-sm text-light disabled" disabled id="excelAddMemberBtn">
+                                    Create
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="col-md-3 text-right">
-                        <button type="submit" class="btn btn-outline-custom btn-sm" id="excelImportMemberBtn">
-                            <i class="fa fa-download pr-1"></i>Import
-                        </button>
-                        <a href="{{ route('admin.member.import-sample') }}" class="btn btn-outline-custom btn-sm align-content-center">
-                            <i class="fa fa-file pr-1"></i>Sample
-                        </a>
-                    </div>
                 </div>
-
-                <div class="mt-2">
-                    <h6 class="text-danger fw-bold">Allowed file types .csv, .xls</h6>
-                    <h6 class="text-danger fw-bold">Max file size of 5MB</h6>
-                </div>
-            </form>
-
-            <hr>
-
-            <form method="post" id="excelAddMemberForm">
-                @csrf
-                @method('post')
-
-                <div class="table-responsive">
-                    <table id="excelAddMemberTable" class="table table-sm table-borderless table-light" data-toggle="table" data-search="true" data-pagination="true">
-                        <thead>
-                            <tr>
-                                <th data-field="id" data-sortable="true">#</th>
-                                <th data-field="name" data-sortable="true">Name</th>
-                                <th data-field="email" data-sortable="true">Email</th>
-                                <th data-field="mobile" data-sortable="true">Mobile</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-
-                <div class="errWrapper text-center">
-                    <span class="error" id="importMemberErr"></span>
-                    <div class="error" id="importMemberRowErr"></div>
-                </div>
-
-                <div class="form-group text-right mt-3">
-                    <button type="submit" class="btn btn-custom text-light disabled" disabled id="excelAddMemberBtn">
-                        Add
-                    </button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 
@@ -103,7 +111,7 @@
                     contentType: false,
                     processData: false,
                     beforeSend: function() {
-                        $('#excelImportMemberBtn').removeClass('btn-outline-custom').addClass('btn-danger disabled').text('Importing...').prop('disabled', true);
+                        $('#excelImportMemberBtn').removeClass('btn-primary').addClass('btn-danger disabled').text('Importing...').prop('disabled', true);
                         $("#importMemberErr").text("").fadeOut();
                         $("#importMemberRowErr").children().remove();
                         $("#importMemberRowErr").fadeOut();
@@ -163,7 +171,7 @@
                         }
                     },
                     complete: function(xhr, status) {
-                        $('#excelImportMemberBtn').removeClass('btn-danger disabled').addClass('btn-outline-custom').text('Import').prop('disabled', false);
+                        $('#excelImportMemberBtn').removeClass('btn-danger disabled').addClass('btn-primary').html('<ion-icon name="download" role="img" class="md hydrated" aria-label="document"></ion-icon>Import').prop('disabled', false);
                     }
                 });
             });

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Requests\admin\authorization\role\CreateRoleRequest;
+use App\Http\Requests\admin\authorization\role\ExportRoleRequest;
 use App\Http\Requests\admin\authorization\role\UpdateRoleRequest;
 use App\Http\Requests\admin\authorization\role\UpdateRoleStatusRequest;
 
@@ -43,6 +44,52 @@ class RoleController extends Controller
         return view('admin.authorization.role.index', $data);
     }
 
+    public function export(ExportRoleRequest $request)
+    {
+        $this->authorize('role_export');
+
+        $validated = $request->validated();
+
+        $fileName = 'role.csv';
+        $noData = 'NA';
+        $dataarray = array();
+        $role_ids = explode(',', $validated['export_id']);
+
+        $roles = Role::orderBy('name', 'asc')->whereIn('id', $role_ids)->get();
+
+        foreach ($roles as $roleKey => $role) {
+            $dataarray[] = [
+                'id' => $role->id,
+                'name' => $role->name ?? $noData,
+                'type' => $role->type ?? $noData,
+            ];
+        }
+
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+        $columns = array('ID', 'Name', 'Type');
+        $callback = function () use ($dataarray, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            foreach ($dataarray as $task) {
+                $row['ID'] = $task['id'];
+                $row['Name'] = $task['name'];
+                $row['Type'] = $task['type'];
+
+                fputcsv($file, array($row['ID'], $row['Name'], $row['Type']));
+            }
+
+            fclose($file);
+        };
+        return response()->stream($callback, 200, $headers);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -52,9 +99,11 @@ class RoleController extends Controller
 
         $permissionModule = Permission::select('module')->groupBy('module')->get()->pluck('module')->toArray();
         $permissionList = Permission::get();
+        $defaultPermissionList = ['member_dashboard', 'profile_view', 'profile_update',''];
 
         $data['permissionModule'] = $permissionModule;
         $data['permissionList'] = $permissionList;
+        $data['defaultPermissionList'] = $defaultPermissionList;
 
         return view('admin.authorization.role.create', $data);
     }
