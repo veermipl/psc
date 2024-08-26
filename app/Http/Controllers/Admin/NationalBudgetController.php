@@ -191,7 +191,7 @@ class NationalBudgetController extends Controller
         });
 
         $data['error'] = false;
-        $data['msg'] = 'Source status updated';
+        $data['msg'] = 'Status updated';
 
         return response()->json($data, 200);
     }

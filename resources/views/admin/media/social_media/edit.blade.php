@@ -5,19 +5,26 @@
 
 @section('content')
 
-    <div class="p-3 bg-white">
+    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">Update Social Media</div>
+    </div>
 
-        <h5 class="fw-bold">Update Social Media</h5>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card radius-10">
+                <div class="card-body">
+                    <div class="p-4 border rounded">
+                        <form action="{{ route('admin.media-center.social-media.update', $social_media->id) }}" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+                            @csrf
+                            @method('patch')
 
-        <div class="pt-5">
-            <form action="{{ route('admin.media-center.social-media.update', $social_media->id) }}" method="post" enctype="multipart/form-data">
-                @csrf
-                @method('patch')
-
-                <div class="form-group col-md-12 text-right">
-                    <button class="btn btn-sm btn-custom" type="submit">Update Social Media</button>
+                            <div class="col-12 text-end mt-5">
+                                <button class="btn btn-sm btn-primary" type="submit">Update</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 

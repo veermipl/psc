@@ -21,10 +21,10 @@ class UserController extends Controller
         $data['userRole'] = $userRole;
 
         if(in_array('Admin', $userRole)){
-            return view('profile', $data);
+            return view('profile.profile', $data);
         }
 
-        return view('member_profile', $data);
+        return view('profile.member_profile', $data);
 
     }
 

@@ -19,7 +19,8 @@
                             @method('post')
 
                             <div class="col-md-4 position-relative">
-                                <input type="text" class="form-control" name="name" placeholder="Name" value="{{ $filterValues['name'] }}">
+                                <input type="text" class="form-control" name="name" placeholder="Name"
+                                    value="{{ $filterValues['name'] }}">
                             </div>
 
                             {{-- <div class="col-md-4 position-relative">
@@ -52,7 +53,8 @@
 
                             <div class="col-12 text-end">
                                 <a href="{{ route('admin.member.index') }}" class="btn btn-danger btn-sm">
-                                    <ion-icon name="reload" role="img" class="md hydrated" aria-label="reload"></ion-icon>
+                                    <ion-icon name="reload" role="img" class="md hydrated"
+                                        aria-label="reload"></ion-icon>
                                     Reset
                                 </a>
                                 <button class="btn btn-primary btn-sm"><ion-icon name="funnel" role="img"
@@ -68,6 +70,11 @@
     <div class="row">
         <div class="col-lg-12 mb-3">
             <div class="d-flex justify-content-between">
+                <a href="{{ route('admin.member.create') }}" class="btn btn-primary btn-sm">
+                    <ion-icon name="person-add-outline" role="img" class="md hydrated"
+                        aria-label="person add"></ion-icon>Create Member
+                </a>
+
                 @if ($export_id && count($export_id) > 0)
                     <form action="{{ route('admin.member.export') }}" method="post" class="d-none_">
                         @csrf
@@ -80,10 +87,6 @@
                         </button>
                     </form>
                 @endif
-
-                <a href="{{ route('admin.member.create') }}" class="btn btn-primary btn-sm">
-                    <ion-icon name="person-add-outline" role="img" class="md hydrated" aria-label="person add"></ion-icon>Create Member
-                </a>
             </div>
         </div>
     </div>
@@ -119,7 +122,8 @@
                                             <th scope="row">{{ $userKey + 1 }}</th>
 
                                             <td>
-                                                <a href="{{ route('admin.member.show', $user->id) }}" class="text-secondary">
+                                                <a href="{{ route('admin.member.show', $user->id) }}"
+                                                    class="text-secondary">
                                                     {{ $user->name }}
                                                 </a>
                                             </td>
@@ -134,7 +138,8 @@
                                                 @if ($user->form_pdf)
                                                     <a href="{{ $user->form_pdf ? asset('storage/' . $user->form_pdf) : '' }}"
                                                         target="_blank" title="Filled Form">
-                                                        <ion-icon name="document" role="img" class="md hydrated" aria-label="document"></ion-icon>
+                                                        <ion-icon name="document" role="img" class="md hydrated"
+                                                            aria-label="document"></ion-icon>
                                                     </a>
                                                 @else
                                                 @endif
@@ -146,10 +151,11 @@
                                                         $docsArr = $user->supportingDoc->pluck('file_name')->toArray();
                                                     @endphp
 
-                                                    @foreach ($docsArr as $docKey => $docVal )
+                                                    @foreach ($docsArr as $docKey => $docVal)
                                                         <a href="{{ $docVal ? asset('storage/' . $docVal) : '' }}"
                                                             target="_blank" title="Supporting Documents">
-                                                            <ion-icon name="document" role="img" class="md hydrated" aria-label="document"></ion-icon>
+                                                            <ion-icon name="document" role="img" class="md hydrated"
+                                                                aria-label="document"></ion-icon>
                                                         </a>
                                                     @endforeach
                                                 @else
@@ -158,13 +164,15 @@
 
                                             <td>
                                                 @if ($user->status == 1)
-                                                    <span class="badge alert-success" id="userStatus" uid="{{ $user->id }}"
-                                                        ustatus="{{ $user->status }}" urow="{{ $userKey }}">
+                                                    <span class="badge alert-success" id="userStatus"
+                                                        uid="{{ $user->id }}" ustatus="{{ $user->status }}"
+                                                        urow="{{ $userKey }}">
                                                         Active
                                                     </span>
                                                 @else
-                                                    <span class="badge alert-danger" id="userStatus" uid="{{ $user->id }}"
-                                                        ustatus="{{ $user->status }}" urow="{{ $userKey }}">
+                                                    <span class="badge alert-danger" id="userStatus"
+                                                        uid="{{ $user->id }}" ustatus="{{ $user->status }}"
+                                                        urow="{{ $userKey }}">
                                                         In Active
                                                     </span>
                                                 @endif
@@ -174,10 +182,10 @@
                                                 <div class="tableOptions">
                                                     <span class="text-dark" title="Edit">
                                                         <a href="{{ route('admin.member.edit', $user->id) }}"><i
-                                                                class="fa fa-edit"></i></a>
+                                                                class="fa fa-pencil"></i></a>
                                                     </span>
-                                                    <span class="text-danger" title="Delete" uid="{{ $user->id }}" urow="{{ $userKey }}"
-                                                        id="deleteUserBtn">
+                                                    <span class="text-danger" title="Delete" uid="{{ $user->id }}"
+                                                        urow="{{ $userKey }}" id="deleteUserBtn">
                                                         <i class="fa fa-trash"></i>
                                                     </span>
                                                 </div>
@@ -232,18 +240,25 @@
                             dataType: "json",
                             beforeSend: function() {
                                 // $('.preloader').show();
-                                $('span#userStatus[urow="'+urow+'"]').prop('disabled', true).css({
-                                    'cursor':'not-allowed'
+                                $('span#userStatus[urow="' + urow + '"]').prop(
+                                    'disabled', true).css({
+                                    'cursor': 'not-allowed'
                                 });
                             },
                             success: function(response) {
                                 if (response.error === false) {
                                     toastr.success(response.msg);
 
-                                    if(parseInt(ustatus) == 1){
-                                        $('span#userStatus[urow="'+urow+'"]').attr('ustatus', 0).removeClass('alert-success').addClass('alert-danger').html('In Active');
-                                    }else{
-                                        $('span#userStatus[urow="'+urow+'"]').attr('ustatus', 1).removeClass('alert-danger').addClass('alert-success').html('Active');
+                                    if (parseInt(ustatus) == 1) {
+                                        $('span#userStatus[urow="' + urow + '"]').attr(
+                                            'ustatus', 0).removeClass(
+                                            'alert-success').addClass(
+                                            'alert-danger').html('In Active');
+                                    } else {
+                                        $('span#userStatus[urow="' + urow + '"]').attr(
+                                            'ustatus', 1).removeClass(
+                                            'alert-danger').addClass(
+                                            'alert-success').html('Active');
                                     }
                                 } else {
                                     toastr.error(response.msg);
@@ -254,8 +269,9 @@
                             },
                             complete: function(xhr, status) {
                                 // $('.preloader').hide();
-                                $('span#userStatus[urow="'+urow+'"]').prop('disabled', false).css({
-                                    'cursor':'pointer'
+                                $('span#userStatus[urow="' + urow + '"]').prop(
+                                    'disabled', false).css({
+                                    'cursor': 'pointer'
                                 });
                             }
                         });
@@ -292,13 +308,14 @@
                             dataType: "json",
                             beforeSend: function() {
                                 // $('.preloader').show();
-                                $('span#deleteUserBtn[urow="'+urow+'"]').prop('disabled', true).css({
-                                    'cursor':'not-allowed'
+                                $('span#deleteUserBtn[urow="' + urow + '"]').prop(
+                                    'disabled', true).css({
+                                    'cursor': 'not-allowed'
                                 });
                             },
                             success: function(response) {
                                 if (response.error === false) {
-                                    $('tr.tr_row_'+urow+'').remove();
+                                    $('tr.tr_row_' + urow + '').remove();
 
                                     toastr.success(response.msg);
                                 } else {
@@ -310,8 +327,9 @@
                             },
                             complete: function(xhr, status) {
                                 // $('.preloader').hide();
-                                $('span#deleteUserBtn[urow="'+urow+'"]').prop('disabled', false).css({
-                                    'cursor':'pointer'
+                                $('span#deleteUserBtn[urow="' + urow + '"]').prop(
+                                    'disabled', false).css({
+                                    'cursor': 'pointer'
                                 });
                             }
                         });

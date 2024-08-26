@@ -14,31 +14,37 @@
             <div class="card radius-10">
                 <div class="card-body">
                     <div class="p-4 border rounded">
-                        <form action="{{ route('admin.authorization.role.filter') }}" method="post" class="row g-3 needs-validation">
+                        <form action="{{ route('admin.authorization.role.filter') }}" method="post"
+                            class="row g-3 needs-validation">
                             @csrf
                             @method('post')
 
                             <div class="row">
                                 <div class="col-md-6 position-relative">
-                                    <input type="text" class="form-control" name="name" placeholder="Name" value="{{ $filterValues['name'] }}">
+                                    <input type="text" class="form-control" name="name" placeholder="Name"
+                                        value="{{ $filterValues['name'] }}">
                                 </div>
 
                                 <div class="col-md-6 position-relative">
                                     <select name="type" class="form-control">
                                         <option hidden value="">Type</option>
-                                        <option value="custom" {{ $filterValues['type'] == 'custom' ? 'selected' : '' }}>Custom</option>
-                                        <option value="default" {{ $filterValues['type'] == 'default' ? 'selected' : '' }}>Default</option>
+                                        <option value="custom" {{ $filterValues['type'] == 'custom' ? 'selected' : '' }}>
+                                            Custom</option>
+                                        <option value="default" {{ $filterValues['type'] == 'default' ? 'selected' : '' }}>
+                                            Default</option>
                                     </select>
                                 </div>
                             </div>
 
                             <div class="col-12 text-end">
                                 <a href="{{ route('admin.authorization.role.index') }}" class="btn btn-danger btn-sm">
-                                    <ion-icon name="reload" role="img" class="md hydrated" aria-label="reload"></ion-icon>
+                                    <ion-icon name="reload" role="img" class="md hydrated"
+                                        aria-label="reload"></ion-icon>
                                     Reset
                                 </a>
                                 <button class="btn btn-primary btn-sm">
-                                    <ion-icon name="funnel" role="img" class="md hydrated" aria-label="funnel"></ion-icon>Filter
+                                    <ion-icon name="funnel" role="img" class="md hydrated"
+                                        aria-label="funnel"></ion-icon>Filter
                                 </button>
                             </div>
                         </form>
@@ -51,6 +57,11 @@
     <div class="row">
         <div class="col-lg-12 mb-3">
             <div class="d-flex justify-content-between">
+                <a href="{{ route('admin.authorization.role.create') }}" class="btn btn-primary btn-sm d-none_">
+                    <ion-icon name="add-outline" role="img" class="md hydrated"
+                        aria-label="person add"></ion-icon>Create Role
+                </a>
+
                 @if ($export_id && count($export_id) > 0)
                     <form action="{{ route('admin.authorization.role.export') }}" method="post" class="">
                         @csrf
@@ -63,10 +74,6 @@
                         </button>
                     </form>
                 @endif
-
-                <a href="{{ route('admin.authorization.role.create') }}" class="btn btn-primary btn-sm d-none_">
-                    <ion-icon name="add-outline" role="img" class="md hydrated" aria-label="person add"></ion-icon>Create
-                </a>
             </div>
         </div>
     </div>
@@ -80,7 +87,8 @@
                     </div>
 
                     <div class="table-responsive">
-                        <table id="roleTable" class="table table-sm table-borderless" data-toggle="table" data-search="true" data-buttons-prefix="btn-md btn" data-pagination="true">
+                        <table id="roleTable" class="table table-sm table-borderless" data-toggle="table" data-search="true"
+                            data-buttons-prefix="btn-md btn" data-pagination="true">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -92,13 +100,13 @@
                             <tbody>
                                 @if ($list && count($list) > 0)
                                     @foreach ($list as $listKey => $listValue)
-
                                         <tr class="tr_row_{{ $listKey }}">
 
                                             <th scope="row">{{ $listKey + 1 }}</th>
 
                                             <td>
-                                                <a href="{{ route('admin.authorization.role.show', $listValue->id) }}" class="text-secondary">
+                                                <a href="{{ route('admin.authorization.role.show', $listValue->id) }}"
+                                                    class="text-secondary">
                                                     {{ $listValue->name }}
                                                 </a>
                                             </td>
@@ -110,13 +118,14 @@
                                             <td>
                                                 <div class="tableOptions">
                                                     <span class="text-dark" title="Edit">
-                                                        <a href="{{ route('admin.authorization.role.edit', $listValue->id) }}">
-                                                            <i class="fa fa-edit"></i>
+                                                        <a
+                                                            href="{{ route('admin.authorization.role.edit', $listValue->id) }}">
+                                                            <i class="fa fa-pencil"></i>
                                                         </a>
                                                     </span>
                                                     @if ($listValue->type === 'custom')
-                                                        <span class="text-danger" title="Delete" lid="{{ $listValue->id }}" lrow="{{ $listKey }}"
-                                                            id="deleteListBtn">
+                                                        <span class="text-danger" title="Delete" lid="{{ $listValue->id }}"
+                                                            lrow="{{ $listKey }}" id="deleteListBtn">
                                                             <i class="fa fa-trash"></i>
                                                         </span>
                                                     @endif
@@ -170,13 +179,14 @@
                             dataType: "json",
                             beforeSend: function() {
                                 // $('.preloader').show();
-                                $('span#deleteListBtn[lrow="'+lrow+'"]').prop('disabled', true).css({
-                                    'cursor':'not-allowed'
+                                $('span#deleteListBtn[lrow="' + lrow + '"]').prop(
+                                    'disabled', true).css({
+                                    'cursor': 'not-allowed'
                                 });
                             },
                             success: function(response) {
                                 if (response.error === false) {
-                                    $('tr.tr_row_'+lrow+'').remove();
+                                    $('tr.tr_row_' + lrow + '').remove();
 
                                     toastr.success(response.msg);
                                 } else {
@@ -188,8 +198,9 @@
                             },
                             complete: function(xhr, status) {
                                 // $('.preloader').hide();
-                                $('span#deleteListBtn[lrow="'+lrow+'"]').prop('disabled', false).css({
-                                    'cursor':'pointer'
+                                $('span#deleteListBtn[lrow="' + lrow + '"]').prop(
+                                    'disabled', false).css({
+                                    'cursor': 'pointer'
                                 });
                             }
                         });

@@ -171,7 +171,7 @@
                         }
                     },
                     complete: function(xhr, status) {
-                        $('#excelImportMemberBtn').removeClass('btn-danger disabled').addClass('btn-primary').html('<ion-icon name="download" role="img" class="md hydrated" aria-label="document"></ion-icon>Import').prop('disabled', false);
+                        $('#excelImportMemberBtn').removeClass('btn-danger disabled').addClass('btn-primary').html('<ion-icon name="document-outline" role="img" class="md hydrated" aria-label="document"></ion-icon>Import').prop('disabled', false);
                     }
                 });
             });

@@ -14,7 +14,12 @@ class BusinessDirectory extends Model
 
     protected $fillable = [
         'name',
-        'sub_name',
+        'type',
         'status',
     ];
+
+    public function membershipType()
+    {
+        return $this->hasOne(MembershipType::class, 'id', 'type');
+    }
 }

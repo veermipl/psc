@@ -208,7 +208,7 @@ class PressReleaseController extends Controller
         });
 
         $data['error'] = false;
-        $data['msg'] = 'Press Release status updated';
+        $data['msg'] = 'Status updated';
 
         return response()->json($data, 200);
     }

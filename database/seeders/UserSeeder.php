@@ -7,12 +7,13 @@ use App\Models\User;
 use App\Traits\UserTraits;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use App\Traits\NotificationTraits;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserSeeder extends Seeder
 {
-    use UserTraits;
+    use UserTraits, NotificationTraits;
 
     /**
      * Run the database seeds.
@@ -26,6 +27,7 @@ class UserSeeder extends Seeder
         ]);
         $admin->role()->sync(Role::where('name', 'Admin')->pluck('id')->toArray());
         $this->InitialUserRolePermission($admin);
+        $this->logNotification('user_created', $admin);
 
         # create user of id(2)
         $user = User::factory()->create([
@@ -34,6 +36,7 @@ class UserSeeder extends Seeder
         ]);
         $user->role()->sync(Role::where('name', 'User')->pluck('id')->toArray());
         $this->InitialUserRolePermission($user);
+        $this->logNotification('user_created', $user);
 
         # create members of id(3)
         $member = User::factory()->create([
@@ -42,6 +45,7 @@ class UserSeeder extends Seeder
         ]);
         $member->role()->sync(Role::where('name', 'Member')->pluck('id')->toArray());
         $this->InitialUserRolePermission($member);
+        $this->logNotification('member_created', $member);
 
         #create members
         User::factory(5)->create()->each(function ($user) {
@@ -49,6 +53,7 @@ class UserSeeder extends Seeder
             $user->role()->sync($role);
 
             $this->InitialUserRolePermission($user);
+            $this->logNotification('member_created', $user);
         });
     }
 }

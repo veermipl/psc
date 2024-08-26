@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">User List</div>
     </div>
 
@@ -64,6 +64,10 @@
     <div class="row">
         <div class="col-lg-12 mb-3">
             <div class="d-flex justify-content-between">
+                <a href="{{ route('admin.user.create') }}" class="btn btn-primary btn-sm">
+                    <ion-icon name="person-add-outline" role="img" class="md hydrated" aria-label="person add"></ion-icon>Create User
+                </a>
+                
                 @if ($export_id && count($export_id) > 0)
                     <form action="{{ route('admin.user.export') }}" method="post" class="d-none_">
                         @csrf
@@ -76,10 +80,6 @@
                         </button>
                     </form>
                 @endif
-
-                <a href="{{ route('admin.user.create') }}" class="btn btn-primary btn-sm">
-                    <ion-icon name="person-add-outline" role="img" class="md hydrated" aria-label="person add"></ion-icon>Create User
-                </a>
             </div>
         </div>
     </div>

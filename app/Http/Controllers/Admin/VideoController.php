@@ -173,7 +173,7 @@ class VideoController extends Controller
         });
 
         $data['error'] = false;
-        $data['msg'] = 'Video status updated';
+        $data['msg'] = 'Status updated';
 
         return response()->json($data, 200);
     }

@@ -152,7 +152,7 @@ class SocialMediaController extends Controller
         });
 
         $data['error'] = false;
-        $data['msg'] = 'Social Media status updated';
+        $data['msg'] = 'Status updated';
 
         return response()->json($data, 200);
     }

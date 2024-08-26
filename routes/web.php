@@ -226,6 +226,7 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         Route::resource('type', MembershipTypeController::class);
 
         Route::post('business-directory/filter', [BusinessDirectoryController::class, 'index'])->name('business-directory.filter');
+        Route::post('business-directory/export', [BusinessDirectoryController::class, 'export'])->name('business-directory.export');
         Route::post('business-directory/status', [BusinessDirectoryController::class, 'statusToggle'])->name('business-directory.status');
         Route::resource('business-directory', BusinessDirectoryController::class);
 

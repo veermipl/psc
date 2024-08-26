@@ -10,6 +10,7 @@ use App\Traits\ImageTraits;
 use Illuminate\Http\Request;
 use App\Traits\SettingTraits;
 use App\Models\MembershipType;
+use App\Traits\NotificationTraits;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -28,7 +29,7 @@ use App\Http\Requests\admin\member\UpdateMemberStatusRequest;
 
 class MemberController extends Controller
 {
-    use UserTraits, SettingTraits, ImageTraits;
+    use UserTraits, SettingTraits, ImageTraits, NotificationTraits;
 
     /**
      * Display a listing of the resource.
@@ -364,6 +365,8 @@ class MemberController extends Controller
             $userData['support_mail'] = $this->getSettings('email') ?? 'psc@support.com';
 
             Mail::to($userData['email'])->queue((new SendMemberWelcomeRegistrationMail($userData))->afterCommit());
+
+            $this->logNotification('member_created', $user);
         });
 
         return redirect()->route('admin.member.index')->with('success', 'Member created successfully');
@@ -535,7 +538,7 @@ class MemberController extends Controller
         }
 
         $data['error'] = false;
-        $data['msg'] = 'Member status updated';
+        $data['msg'] = 'Status updated';
 
         return response()->json($data, 200);
     }

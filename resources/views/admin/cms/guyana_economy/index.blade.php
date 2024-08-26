@@ -17,32 +17,34 @@
                             @csrf
                             @method('post')
 
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" name="title" placeholder="Title"
-                                        value="{{ $filterValues['title'] }}">
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <select name="status" class="form-control">
-                                        <option hidden value="">Status</option>
-                                        @foreach (config('site.status') as $status)
-                                            <option value="{{ $status['value'] }}"
-                                                {{ $filterValues['status'] == $status['value'] ? 'selected' : '' }}>
-                                                {{ $status['name'] }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="form-group col-md-4 d-none">
-                                    <input type="date" class="form-control" name="created_at" value="{{ $filterValues['created_at'] }}">
-                                </div>
+                            <div class="col-md-6 position-relative">
+                                <input type="text" class="form-control" name="title" placeholder="Title" value="{{ $filterValues['title'] }}">
                             </div>
 
-                            <div class="text-right">
-                                <a href="{{ route('admin.cms.guyana-economy') }}" class="btn btn-danger btn-sm">Reset</a>
-                                <button class="btn btn-custom btn-sm" type="submit">Filter</button>
+                            <div class="col-md-6 position-relative">
+                                <select name="status" class="form-control">
+                                    <option hidden value="">Status</option>
+                                    @foreach (config('site.status') as $status)
+                                        <option value="{{ $status['value'] }}"
+                                            {{ $filterValues['status'] == $status['value'] ? 'selected' : '' }}>
+                                            {{ $status['name'] }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 position-relative d-none">
+                                <input type="date" class="form-control" name="created_at" value="{{ $filterValues['created_at'] }}">
+                            </div>
+
+                            <div class="col-12 text-end">
+                                <a href="{{ route('admin.cms.guyana-economy') }}" class="btn btn-danger btn-sm">
+                                    <ion-icon name="reload" role="img" class="md hydrated" aria-label="reload"></ion-icon>
+                                    Reset
+                                </a>
+                                <button class="btn btn-primary btn-sm">
+                                    <ion-icon name="funnel" role="img" class="md hydrated" aria-label="funnel"></ion-icon>Filter
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -54,22 +56,22 @@
     <div class="row">
         <div class="col-lg-12 mb-3">
             <div class="d-flex justify-content-between">
+                <a href="{{ route('admin.cms.guyana-economy.create') }}" class="btn btn-primary btn-sm">
+                    <ion-icon name="add" role="img" class="md hydrated" aria-label="person add"></ion-icon>Create Guyana Economy
+                </a>
+
                 @if ($export_id && count($export_id) > 0)
-                    <form action="" method="post" class="d-none">
+                    <form action="{{ route('admin.cms.guyana-economy.export') }}" method="post" class="d-none-">
                         @csrf
                         @method('post')
 
                         <input type="hidden" value="{{ implode(',', $export_id) }}" name="export_id">
 
-                        <button class="btn btn-custom btn-sm" type="submit">
-                            <i class="fa fa-file pr-1"></i>Export
+                        <button class="btn btn-primary btn-sm" type="submit">
+                            <ion-icon name="document-outline"></ion-icon>Export
                         </button>
                     </form>
                 @endif
-
-                <a href="{{ route('admin.cms.guyana-economy.create') }}" class="btn btn-primary btn-sm">
-                    <ion-icon name="person-add-outline" role="img" class="md hydrated" aria-label="person add"></ion-icon>Create User
-                </a>
             </div>
         </div>
     </div>
@@ -83,7 +85,7 @@
                     </div>
 
                     <div class="table-responsive">
-                        <table id="memberTable" class="table table-sm table-borderless table-light" data-toggle="table" data-search="true"
+                        <table id="cmsGuyanaEconomyTable" class="table table-sm" data-toggle="table" data-search="true"
                             data-buttons-prefix="btn-md btn" data-pagination="true">
                             <thead>
                                 <tr>
@@ -108,12 +110,12 @@
 
                                             <td>
                                                 @if ($list->status == 1)
-                                                    <span class="badge badge-success status" id="{{ $list->id }}"
+                                                    <span class="badge alert-success status" id="{{ $list->id }}"
                                                         status="{{ $list->status }}" row="{{ $listKey }}">
                                                         Active
                                                     </span>
                                                 @else
-                                                    <span class="badge badge-danger status" id="{{ $list->id }}"
+                                                    <span class="badge alert-danger status" id="{{ $list->id }}"
                                                         status="{{ $list->status }}" row="{{ $listKey }}">
                                                         In Active
                                                     </span>
@@ -123,8 +125,9 @@
                                             <td>
                                                 <div class="tableOptions">
                                                     <span class="text-dark" title="Edit">
-                                                        <a href="{{ route('admin.cms.guyana-economy.edit', $list->id) }}"><i
-                                                                class="fa fa-edit"></i></a>
+                                                        <a href="{{ route('admin.cms.guyana-economy.edit', $list->id) }}">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </a>
                                                     </span>
                                                     <span class="text-danger delete" title="Delete" id="{{ $list->id }}" row="{{ $listKey }}">
                                                         <i class="fa fa-trash"></i>
@@ -191,9 +194,9 @@
                                     toastr.success(response.msg);
 
                                     if(parseInt(status) == 1){
-                                        $('span.status[row="'+row+'"]').attr('status', 0).removeClass('badge-success').addClass('badge-danger').html('In Active');
+                                        $('span.status[row="'+row+'"]').attr('status', 0).removeClass('alert-success').addClass('alert-danger').html('In Active');
                                     }else{
-                                        $('span.status[row="'+row+'"]').attr('status', 1).removeClass('badge-danger').addClass('badge-success').html('Active');
+                                        $('span.status[row="'+row+'"]').attr('status', 1).removeClass('alert-danger').addClass('alert-success').html('Active');
                                     }
                                 } else {
                                     toastr.error(response.msg);

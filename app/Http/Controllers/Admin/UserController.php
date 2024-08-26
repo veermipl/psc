@@ -8,6 +8,7 @@ use App\Traits\UserTraits;
 use Illuminate\Http\Request;
 use App\Traits\SettingTraits;
 use App\Models\MembershipType;
+use App\Traits\NotificationTraits;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -21,7 +22,7 @@ use App\Http\Requests\admin\user\UpdateUserStatusRequest;
 
 class UserController extends Controller
 {
-    use UserTraits, SettingTraits;
+    use UserTraits, SettingTraits, NotificationTraits;
 
     /**
      * Display a listing of the resource.
@@ -154,6 +155,8 @@ class UserController extends Controller
             $userData['support_mail'] = $this->getSettings('email') ?? 'psc@support.com';
 
             Mail::to($userData['email'])->queue((new SendUserWelcomeRegistrationMail($userData))->afterCommit());
+
+            $this->logNotification('user_created', $user);
         });
 
         return redirect()->route('admin.user.index')->with('success', 'User created successfully');
@@ -247,7 +250,7 @@ class UserController extends Controller
         });
 
         $data['error'] = false;
-        $data['msg'] = 'User status updated';
+        $data['msg'] = 'Status updated';
 
         return response()->json($data, 200);
     }

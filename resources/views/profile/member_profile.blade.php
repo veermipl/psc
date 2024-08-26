@@ -24,7 +24,7 @@
                                     <p class="mb-1">Private Sector Commission</p>
                                     <p>157 Waterloo St, Georgetown, Guyana</p>
                                 </div>
-                                <div class="">
+                                <div class="d-none">
                                     <a href="{{ route('profile') }}" class="btn btn-primary btn-sm"><ion-icon name="pencil"></ion-icon>
                                         Edit
                                     </a>

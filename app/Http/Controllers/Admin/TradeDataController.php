@@ -187,7 +187,7 @@ class TradeDataController extends Controller
         });
 
         $data['error'] = false;
-        $data['msg'] = 'Top Partner status updated';
+        $data['msg'] = 'Status updated';
 
         return response()->json($data, 200);
     }
@@ -304,7 +304,7 @@ class TradeDataController extends Controller
         });
 
         $data['error'] = false;
-        $data['msg'] = 'Top Country status updated';
+        $data['msg'] = 'Status updated';
 
         return response()->json($data, 200);
     }
