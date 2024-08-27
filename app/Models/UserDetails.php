@@ -23,5 +23,6 @@ class UserDetails extends Model
         'location',
         'address',
         'about_me',
+        'gender',
     ];
 }

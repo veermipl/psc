@@ -339,56 +339,68 @@ return [
         [
             'name_key' => 'role_list',
             'name' => 'All Roles',
-            'roles' => ['Admin', 'User'],
+            'roles' => ['Admin'],
             'module' => 'Authorization',
         ],[
             'name_key' => 'role_export',
             'name' => 'Export Role',
-            'roles' => ['Admin', 'User'],
+            'roles' => ['Admin'],
             'module' => 'Authorization',
         ], [
             'name_key' => 'role_create',
             'name' => 'Create Role',
-            'roles' => ['Admin', 'User'],
+            'roles' => ['Admin'],
             'module' => 'Authorization',
         ], [
             'name_key' => 'role_edit',
             'name' => 'Edit Role',
-            'roles' => ['Admin', 'User'],
+            'roles' => ['Admin'],
             'module' => 'Authorization',
         ], [
             'name_key' => 'role_delete',
             'name' => 'Delete Role',
-            'roles' => ['Admin', 'User'],
-            'module' => 'Authorization',
-        ],[
-            'name_key' => 'role_status_edit',
-            'name' => 'Edit Role Status',
-            'roles' => ['Admin', 'User'],
+            'roles' => ['Admin'],
             'module' => 'Authorization',
         ],[
             'name_key' => 'permission_list',
             'name' => 'Permission List',
-            'roles' => ['Admin', 'User'],
+            'roles' => ['Admin'],
             'module' => 'Authorization',
         ],
 
         [
             'name_key' => 'general_settings_edit',
             'name' => 'Edit General Settings',
-            'roles' => ['Admin', 'User'],
+            'roles' => ['Admin'],
             'module' => 'Settings',
         ],[
             'name_key' => 'email_settings_edit',
             'name' => 'Edit Email Settings',
-            'roles' => ['Admin', 'User'],
+            'roles' => ['Admin'],
             'module' => 'Settings',
         ],[
             'name_key' => 'contact_us_settings_edit',
             'name' => 'Edit Contact Us Settings',
-            'roles' => ['Admin', 'User'],
+            'roles' => ['Admin'],
             'module' => 'Settings',
         ],
+
+        [
+            'name_key' => 'notification',
+            'name' => 'All Notifications',
+            'roles' => ['Admin'],
+            'module' => 'Notification',
+        ], [
+            'name_key' => 'notification_delete',
+            'name' => 'Delete Notification',
+            'roles' => ['Admin'],
+            'module' => 'Notification',
+        ],[
+            'name_key' => 'notification_status_edit',
+            'name' => 'Mark read',
+            'roles' => ['Admin'],
+            'module' => 'Notification',
+        ]
 
     ],
 ];

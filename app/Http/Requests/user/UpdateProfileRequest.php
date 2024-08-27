@@ -17,12 +17,24 @@ class UpdateProfileRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string => ['nullable'], \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            //
+            'user_id' => ['required', 'exists:users,id'],
+            'profile_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif'],
+            'background_image' => ['nullable', 'string'],
+            // 'email' => ['nullable', 'url'],
+            'mobile_number' => ['nullable'],
+            'connect_url' => ['nullable', 'url'],
+            'connect_fb' => ['nullable', 'url'],
+            'connect_twitter' => ['nullable', 'url'],
+            'connect_linkedin' => ['nullable', 'url'],
+            'about_me' => ['nullable', 'string'],
+            'address' => ['nullable', 'string'],
+            'location' => ['nullable', 'string'],
+            'gender' => ['nullable', 'in:male,female'],
         ];
     }
 }
