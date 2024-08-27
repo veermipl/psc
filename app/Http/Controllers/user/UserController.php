@@ -15,9 +15,17 @@ class UserController extends Controller
     {
         $this->authorize('profile_view');
 
-        $data['user'] = Auth::user();
+        $userRole = Auth::user()->role->pluck('name')->toArray();
 
-        return view('profile', $data);
+        $data['user'] = Auth::user();
+        $data['userRole'] = $userRole;
+
+        if(in_array('Admin', $userRole)){
+            return view('profile.profile', $data);
+        }
+
+        return view('profile.member_profile', $data);
+
     }
 
     public function profileUpdate(UpdateProfileRequest $request)

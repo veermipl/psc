@@ -5,41 +5,53 @@
 
 @section('content')
 
-    <div class="p-3 bg-white">
-        <h5 class="fw-bold">Pemission List</h5>
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">Pemission List</div>
+    </div>
 
-        <div class="pt-5" id="accordion">
-            @foreach($permissionModule as $key => $module)
-                @php
-                    $module_str = Str::of($module)->replace([' ', '-'], '_')->lower();
-                @endphp
-                <div class="card">
-                    <div class="card-header" id="heading{{ $module_str }}">
-                        <h5 class="mb-0">
-                            <button class="btn btn-sm btn-link" data-toggle="collapse" data-target="#collapse{{ $module_str }}"
-                                aria-expanded="true" aria-controls="collapse{{ $module_str }}" type="button">
-                                {{ $module }}
-                            </button>
-                        </h5>
-                    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card radius-10">
+                <div class="card-body">
+                    <div class="accordion" id="accordionExample">
+                        @foreach ($permissionModule as $key => $module)
+                            @php
+                                $module_str = Str::of($module)
+                                    ->replace([' ', '-'], '_')
+                                    ->lower();
+                            @endphp
 
-                    <div id="collapse{{ $module_str }}" class="collapse {{ $key == 0 ? 'show' : '' }}" aria-labelledby="heading{{ $module_str }}"
-                        data-parent="#accordion">
-                        <div class="card-body">
-                            <div class="persWrapper row">
-                                @foreach ($permissionList as $permissionKey => $permissionValue)
-                                    @if ($permissionValue['module'] === $module)
-                                        <div class="perWrapper col-md-4">
-                                            <i class="fa fa-circle text-success"></i>
-                                            <label>{{ $permissionValue['name'] }}</label>
+                            <div class="accordion-item">
+                                <h5 class="accordion-header" id="heading{{ $module_str }}">
+                                    <button class="accordion-button {{ $key !== 0 ? 'collapsed' : '' }}" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapse{{ $module_str }}"
+                                        aria-expanded="{{ $key == 0 ? 'true' : 'false' }}"
+                                        aria-controls="collapse{{ $module_str }}">
+                                        {{ $module }}
+                                    </button>
+                                </h5>
+
+                                <div id="collapse{{ $module_str }}"
+                                    class="accordion-collapse collapse {{ $key == 0 ? 'show' : '' }}"
+                                    aria-labelledby="heading{{ $module_str }}" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <div class="persWrapper row">
+                                            @foreach ($permissionList as $permissionKey => $permissionValue)
+                                                @if ($permissionValue['module'] === $module)
+                                                    <div class="perWrapper col-md-4">
+                                                        <i class="fa fa-circle text-success"></i>
+                                                        <label>{{ $permissionValue['name'] }}</label>
+                                                    </div>
+                                                @endif
+                                            @endforeach
                                         </div>
-                                    @endif
-                                @endforeach
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
-            @endforeach
+            </div>
         </div>
     </div>
 
@@ -82,18 +94,25 @@
                             dataType: "json",
                             beforeSend: function() {
                                 // $('.preloader').show();
-                                $('span#listStatus[urow="'+lrow+'"]').prop('disabled', true).css({
-                                    'cursor':'not-allowed'
+                                $('span#listStatus[urow="' + lrow + '"]').prop(
+                                    'disabled', true).css({
+                                    'cursor': 'not-allowed'
                                 });
                             },
                             success: function(response) {
                                 if (response.error === false) {
                                     toastr.success(response.msg);
 
-                                    if(parseInt(lstatus) == 1){
-                                        $('span#listStatus[lrow="'+lrow+'"]').attr('lstatus', 0).removeClass('badge-success').addClass('badge-danger').html('In Active');
-                                    }else{
-                                        $('span#listStatus[lrow="'+lrow+'"]').attr('lstatus', 1).removeClass('badge-danger').addClass('badge-success').html('Active');
+                                    if (parseInt(lstatus) == 1) {
+                                        $('span#listStatus[lrow="' + lrow + '"]').attr(
+                                            'lstatus', 0).removeClass(
+                                            'badge-success').addClass(
+                                            'badge-danger').html('In Active');
+                                    } else {
+                                        $('span#listStatus[lrow="' + lrow + '"]').attr(
+                                            'lstatus', 1).removeClass(
+                                            'badge-danger').addClass(
+                                            'badge-success').html('Active');
                                     }
                                 } else {
                                     toastr.error(response.msg);
@@ -104,8 +123,9 @@
                             },
                             complete: function(xhr, status) {
                                 // $('.preloader').hide();
-                                $('span#listStatus[urow="'+lrow+'"]').prop('disabled', false).css({
-                                    'cursor':'pointer'
+                                $('span#listStatus[urow="' + lrow + '"]').prop(
+                                    'disabled', false).css({
+                                    'cursor': 'pointer'
                                 });
                             }
                         });
@@ -142,13 +162,14 @@
                             dataType: "json",
                             beforeSend: function() {
                                 // $('.preloader').show();
-                                $('span#deleteListBtn[lrow="'+lrow+'"]').prop('disabled', true).css({
-                                    'cursor':'not-allowed'
+                                $('span#deleteListBtn[lrow="' + lrow + '"]').prop(
+                                    'disabled', true).css({
+                                    'cursor': 'not-allowed'
                                 });
                             },
                             success: function(response) {
                                 if (response.error === false) {
-                                    $('tr.tr_row_'+lrow+'').remove();
+                                    $('tr.tr_row_' + lrow + '').remove();
 
                                     toastr.success(response.msg);
                                 } else {
@@ -160,8 +181,9 @@
                             },
                             complete: function(xhr, status) {
                                 // $('.preloader').hide();
-                                $('span#deleteListBtn[lrow="'+lrow+'"]').prop('disabled', false).css({
-                                    'cursor':'pointer'
+                                $('span#deleteListBtn[lrow="' + lrow + '"]').prop(
+                                    'disabled', false).css({
+                                    'cursor': 'pointer'
                                 });
                             }
                         });

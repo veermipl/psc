@@ -341,6 +341,11 @@ return [
             'name' => 'All Roles',
             'roles' => ['Admin', 'User'],
             'module' => 'Authorization',
+        ],[
+            'name_key' => 'role_export',
+            'name' => 'Export Role',
+            'roles' => ['Admin', 'User'],
+            'module' => 'Authorization',
         ], [
             'name_key' => 'role_create',
             'name' => 'Create Role',

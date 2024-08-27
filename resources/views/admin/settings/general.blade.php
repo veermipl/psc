@@ -4,101 +4,66 @@
 
 @section('content')
 
-    <div class="p-3 bg-white">
-        <h5 class="fw-bold">General Settings</h5>
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">General Settings</div>
+    </div>
 
-        <div class="pt-5">
-            <form action="{{ route('admin.settings.general') }}" method="post" enctype="multipart/form-data">
-                @csrf
-                @method('patch')
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card radius-10">
+                <div class="card-body">
+                    <div class="p-4 border rounded">
+                        <form action="{{ route('admin.settings.general') }}" method="post" enctype="multipart/form-data"
+                            class="row g-3 needs-validation">
+                            @csrf
+                            @method('patch')
 
-                <div class="d-flex">
-                    <div class="form-group col-md-6">
-                        <label for="name">App Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="app_name" placeholder="Application Name"
-                            value="{{ old('app_name', @$settings['app_name']) }}" maxlength="50">
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">App Name <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="app_name" placeholder="Application Name"
+                                    value="{{ old('app_name', @$settings['app_name']) }}" maxlength="50">
 
-                        @error('app_name')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
+                                @error('app_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
 
-                    <div class="form-group col-md-6">
-                        <label for="name">App Logo </label>
-                        @if (isset($settings['app_logo']))
-                            <input type="hidden" name="app_logo_old" value="{{ $settings['app_logo']  }}">
-                            <a href="{{ $settings['app_logo'] ? asset('storage/' . $settings['app_logo']) : '' }}" class="badge badge-dark" target="_blank">
-                                View Logo
-                            </a>
-                        @endif
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">App Logo </label>
+                                @if (isset($settings['app_logo']))
+                                    <input type="hidden" name="app_logo_old" value="{{ $settings['app_logo'] }}">
+                                    <a href="{{ $settings['app_logo'] ? asset('storage/' . $settings['app_logo']) : '' }}"
+                                        class="badge alert-primary text-dark" target="_blank">
+                                        View Logo
+                                    </a>
+                                @endif
 
-                        <input type="file" class="form-control" name="app_logo">
+                                <input type="file" class="form-control" name="app_logo">
 
-                        @error('app_logo')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                                @error('app_logo')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Admin Mail <span
+                                        class="text-danger">*</span></label>
+                                <input type="email" class="form-control" name="admin_mail" placeholder="Admin Mail"
+                                    value="{{ old('admin_mail', @$settings['admin_mail']) }}" maxlength="50">
+
+                                @error('admin_mail')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-12 text-end mt-5">
+                                <button class="btn btn-sm btn-primary" type="submit">Update</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-
-                <div class="d-flex">
-                    <div class="form-group col-md-6">
-                        <label for="name">Admin Mail <span class="text-danger">*</span></label>
-                        <input type="email" class="form-control" name="admin_mail" placeholder="Admin Mail"
-                            value="{{ old('admin_mail', @$settings['admin_mail']) }}" maxlength="50">
-
-                        @error('admin_mail')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
-                
-                {{-- <div class="d-flex ">
-                    <div class="form-group col-md-6">
-                        <label for="name">App Logo </label>
-                        <div id="file-upload-form" class="uploader">
-                            <input id="file-upload" type="file" name="image" accept="image/*" onchange="loadFile(event)">
-
-                            <label for="file-upload" id="file-drag">
-                                <div id="start">
-                                    <i class="fa fa-download" aria-hidden="true"></i>
-                                    <div>Upload Logo</div>
-                                    <div id="notimage" class="hidden">Upload Banner</div>
-                                </div>
-                            </label>
-
-                            @error('app_logo')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="name">App Logo </label>
-                        <div id="file-upload-form" class="uploader">
-                            <input id="file-upload" type="file" name="logo" accept="image/*" />
-                            <label for="file-upload" id="file-drag">
-                                <img src="{{ asset('storage/' . @$settings['app_logo']) }}" width="100" alt="">
-                                <img id="file-image" src="#" alt="Preview" class="hidden">
-                                <div id="start">
-                                    <i class="fa fa-download" aria-hidden="true"></i>
-                                    <div>Upload Logo</div>
-                                    <div id="notimage" class="hidden">Upload logo</div>
-                                </div>
-                                <div id="response" class="hidden">
-                                    <div id="messages"></div>
-                                    <progress class="progress" id="file-progress" value="0">
-                                        <span>0</span>%
-                                    </progress>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                </div> --}}
-
-                <div class="form-group col-md-12 text-right">
-                    <button class="btn btn-sm btn-custom" type="submit">Update</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 

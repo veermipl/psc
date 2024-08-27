@@ -41,6 +41,7 @@ span.status {
 }
 
 .editImgWrapper,
+.editDocWrapper,
 .editFileWrapper {
   display: flex;
   flex-direction: column;

@@ -191,7 +191,7 @@ class CaricomCETController extends Controller
         });
 
         $data['error'] = false;
-        $data['msg'] = 'Objective status updated';
+        $data['msg'] = 'Status updated';
 
         return response()->json($data, 200);
     }

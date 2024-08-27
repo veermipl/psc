@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">User List</div>
     </div>
 
@@ -19,12 +19,10 @@
                             @method('post')
 
                             <div class="col-md-4 position-relative">
-                                <label for="validationTooltip01" class="form-label">Name</label>
                                 <input type="text" class="form-control" name="name" placeholder="Name" value="{{ $filterValues['name'] }}">
                             </div>
 
                             <div class="col-md-4 position-relative">
-                                <label for="validationTooltip02" class="form-label">Role</label>
                                 <select name="role" class="form-select">
                                     <option hidden value="">Role</option>
                                     @foreach ($roleList as $role)
@@ -37,7 +35,6 @@
                             </div>
 
                             <div class="col-md-4 position-relative">
-                                <label for="validationTooltip04" class="form-label">Status</label>
                                 <select name="status" class="form-select">
                                     <option hidden value="">Status</option>
                                     @foreach (config('site.status') as $status)
@@ -67,6 +64,10 @@
     <div class="row">
         <div class="col-lg-12 mb-3">
             <div class="d-flex justify-content-between">
+                <a href="{{ route('admin.user.create') }}" class="btn btn-primary btn-sm">
+                    <ion-icon name="person-add-outline" role="img" class="md hydrated" aria-label="person add"></ion-icon>Create User
+                </a>
+                
                 @if ($export_id && count($export_id) > 0)
                     <form action="{{ route('admin.user.export') }}" method="post" class="d-none_">
                         @csrf
@@ -79,10 +80,6 @@
                         </button>
                     </form>
                 @endif
-
-                <a href="{{ route('admin.user.create') }}" class="btn btn-primary btn-sm">
-                    <ion-icon name="person-add" role="img" class="md hydrated" aria-label="person add"></ion-icon>Create User
-                </a>
             </div>
         </div>
     </div>
@@ -130,12 +127,12 @@
 
                                             <td>
                                                 @if ($user->status == 1)
-                                                    <span class="badge alert-success" id="userStatus" uid="{{ $user->id }}"
+                                                    <span class="badge alert-success" id="{{ ($user->id !== 1) ? 'userStatus' : '' }}" uid="{{ $user->id }}"
                                                         ustatus="{{ $user->status }}" urow="{{ $userKey }}">
                                                         Active
                                                     </span>
                                                 @else
-                                                    <span class="badge alert-danger" id="userStatus" uid="{{ $user->id }}"
+                                                    <span class="badge alert-danger" id="{{ ($user->id !== 1) ? 'userStatus' : '' }}" uid="{{ $user->id }}"
                                                         ustatus="{{ $user->status }}" urow="{{ $userKey }}">
                                                         In Active
                                                     </span>
@@ -143,6 +140,7 @@
                                             </td>
 
                                             <td>
+                                                @if($user->id !== 1)
                                                 <div class="tableOptions">
                                                     <span class="text-dark" title="Edit">
                                                         <a href="{{ route('admin.user.edit', $user->id) }}">
@@ -153,6 +151,7 @@
                                                         <i class="fa fa-trash"></i>
                                                     </span>
                                                 </div>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('business_directories', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('type')->nullable()->default(null);
-            $table->enum('status', [0, 1])->default(1);
+            $table->text('title')->nullable()->default(null);
+            $table->longText('message')->nullable()->default(null);
+            $table->longText('link')->nullable()->default(null);
+            $table->enum('read', [0, 1])->default(0);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('business_directories');
+        Schema::dropIfExists('notifications');
     }
 };

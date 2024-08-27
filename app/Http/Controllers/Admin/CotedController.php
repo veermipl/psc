@@ -191,7 +191,7 @@ class CotedController extends Controller
         });
 
         $data['error'] = false;
-        $data['msg'] = 'Entrepreneurship Development status updated';
+        $data['msg'] = 'Status updated';
 
         return response()->json($data, 200);
     }

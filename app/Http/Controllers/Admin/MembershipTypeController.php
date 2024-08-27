@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\membership\type\ExportMembershipTypeRequest;
 use App\Http\Requests\admin\membership\type\StoreMembershipTypeRequest;
 use App\Http\Requests\admin\membership\type\UpdateMembershipTypeRequest;
 use Illuminate\Database\Eloquent\Builder;
@@ -147,8 +148,57 @@ class MembershipTypeController extends Controller
         });
 
         $data['error'] = false;
-        $data['msg'] = 'Membership type status updated';
+        $data['msg'] = 'Status updated';
 
         return response()->json($data, 200);
+    }
+
+    public function export(ExportMembershipTypeRequest $request)
+    {
+        $this->authorize('membership_export');
+
+        $validated = $request->validated();
+
+        $fileName = 'membership_type.csv';
+        $noData = 'NA';
+        $dataarray = array();
+        $data_ids = explode(',', $validated['export_id']);
+
+        $data = MembershipTypeModel::orderBy('id', 'asc')->whereIn('id', $data_ids)->get();
+
+        foreach ($data as $dataKey => $dataVal) {
+            $statusData = $dataVal->status == 1 ? 'Active' : 'InActive';
+
+            $dataarray[] = [
+                'id' => $dataVal->id,
+                'name' => $dataVal->name ?? $noData,
+                'status' => $statusData,
+            ];
+        }
+
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+        $columns = array('ID', 'Name', 'Status');
+        $callback = function () use ($dataarray, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            foreach ($dataarray as $task) {
+                $row['ID'] = $task['id'];
+                $row['Name'] = $task['name'];
+                $row['Status'] = $task['status'];
+
+                fputcsv($file, array($row['ID'], $row['Name'], $row['Status']));
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 }

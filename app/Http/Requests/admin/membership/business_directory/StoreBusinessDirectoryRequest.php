@@ -23,7 +23,7 @@ class StoreBusinessDirectoryRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'sub_name' => ['nullable', 'string'],
+            'type' => ['required', 'exists:membership_types,id'],
             'status' => ['required', 'in:0,1'],
         ];
     }

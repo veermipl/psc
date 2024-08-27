@@ -5,56 +5,56 @@
 
 @section('content')
 
-    <div class="p-3 bg-white">
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">View News</div>
+    </div>
 
-        <h5 class="fw-bold">View News</h5>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card radius-10">
+                <div class="card-body">
+                    <div class="p-4 border rounded">
+                        <h5 class="text-center fw-bold p-0 m-0">{{ $news->title }}</h5>
 
-        <div class="pt-5">
-            <div class="list-group-item mb-3">
-                <h4 class="text-center fw-bold pb-2">{{ $news->title }}</h4>
+                        <div class="card-body">
+                            <p class="">{!! $news->content !!}</p>
+                        </div>
 
-                <p class="">{!! $news->content !!}</p>
+                        <div class="text-end">
+                            <span class="text-danger">{{ $news->created_at }}</span>
+                        </div>
 
-                <hr>
-                <div class="d-flex text-right" style="justify-content: space-between">
-                    @if ($news->status == 1)
-                        <span><i class="fa fa-circle text-success" title="Active"></i></span>
-                    @else
-                        <span><i class="fa fa-circle text-danger" title="In Active"></i></span>
-                    @endif
+                        @if ($news->files)
+                            @php
+                                $news_files = explode(',', $news->files);
+                            @endphp
 
-                    <span class="text-danger">{{ $news->created_at }}</span>
-                </div>
+                            <div class="allFileWrapper d-flex mt-5">
+                                @foreach ($news_files as $fileKey => $fileValue)
+                                    @if ($fileValue)
+                                        @php
+                                            $fileInfo = pathinfo($fileValue);
+                                            $extension = $fileInfo['extension'];
+                                        @endphp
 
-                @if ($news->files)
-                    @php
-                        $news_files = explode(',', $news->files);
-                    @endphp
-                    <hr>
+                                        @if (in_array($extension, ['jpg', 'jpeg', 'gif', 'png']))
+                                            <div class="fileWrapper">
+                                                <img class="li_img pop_up_image" src="{{ asset('storage/' . $fileValue) }}">
+                                            </div>
+                                        @endif
 
-                    <div class="allFileWrapper d-flex">
-                        @foreach ($news_files as $fileKey => $fileValue)
-                            @if ($fileValue)
-                                @php
-                                    $fileInfo = pathinfo($fileValue);
-                                    $extension = $fileInfo['extension'];
-                                @endphp
+                                        @if (in_array($extension, ['pdf']))
+                                            <div class="fileWrapper">
+                                                <img class="li_img pop_up_doc" src="{{ asset('storage/default/pdf.png') }}">
+                                            </div>
+                                        @endif
+                                    @endif
+                                @endforeach
+                            </div>
+                        @endif
 
-                                @if (in_array($extension, ['jpg', 'jpeg', 'gif', 'png']))
-                                    <div class="fileWrapper">
-                                        <img class="li_img pop_up_image" src="{{ asset('storage/' . $fileValue) }}">
-                                    </div>
-                                @endif
-
-                                @if (in_array($extension, ['pdf']))
-                                    <div class="fileWrapper">
-                                        <img class="li_img pop_up_doc" src="{{ asset('storage/default/pdf.png') }}">
-                                    </div>
-                                @endif
-                            @endif
-                        @endforeach
                     </div>
-                @endif
+                </div>
             </div>
         </div>
     </div>

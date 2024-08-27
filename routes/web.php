@@ -120,6 +120,7 @@ Route::middleware(['auth', 'role_per'])->prefix('member')->name('member.')->grou
 //
 Route::middleware(['auth', 'role_per'])->group(function () {
     Route::get('profile', [UserController::class, 'profile'])->name('profile');
+    Route::get('profile/edit', [UserController::class, 'profileEdit'])->name('profile.edit');
     Route::post('profile/update', [UserController::class, 'profileUpdate'])->name('profile.update');
     Route::post('profile/status', [UserController::class, 'profileStatus'])->name('profile.status');
 });
@@ -225,6 +226,7 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         Route::resource('type', MembershipTypeController::class);
 
         Route::post('business-directory/filter', [BusinessDirectoryController::class, 'index'])->name('business-directory.filter');
+        Route::post('business-directory/export', [BusinessDirectoryController::class, 'export'])->name('business-directory.export');
         Route::post('business-directory/status', [BusinessDirectoryController::class, 'statusToggle'])->name('business-directory.status');
         Route::resource('business-directory', BusinessDirectoryController::class);
 
@@ -270,6 +272,7 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
     });
 
     Route::prefix('authorization')->name('authorization.')->group(function () {
+        Route::post('role/export', [RoleController::class, 'export'])->name('role.export');
         Route::post('role/filter', [RoleController::class, 'index'])->name('role.filter');
         Route::resource('role', RoleController::class);
 

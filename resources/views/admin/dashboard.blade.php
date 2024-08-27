@@ -6,7 +6,7 @@
 @section('content')
 
     <!--start breadcrumb-->
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-0">Dashboard</div>
         {{-- <div class="ps-0">
             <nav aria-label="breadcrumb">
@@ -201,7 +201,8 @@
                                 <tr>
                                     <td>
                                         <div class="country-icon">
-                                            <img src="{{ asset('admin/images/icons/usa.png') }}" alt="" width="32">
+                                            <img src="{{ asset('admin/images/icons/usa.png') }}" alt=""
+                                                width="32">
                                         </div>
                                     </td>
                                     <td>

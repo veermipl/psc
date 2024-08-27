@@ -28,6 +28,8 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
     <style>
         body {
             top: 0 !important;
@@ -132,10 +134,10 @@
                                                 <div id="myDropdownt" class="dropdown-contentt">
                                                     <a href="{{ route('profile') }}"> <i class="far fa-user"></i> Profile</a>
                                                     @if (auth()->user()->hasPermission('admin_dashboard'))
-                                                        <a href="{{ route('admin.dashboard') }}"> <i class="far fa-dashboard"></i> Member Dashboard</a>
+                                                        <a href="{{ route('admin.dashboard') }}"> <i class="far fa-dashboard"></i> Admin Dashboard</a>
                                                     @endif
                                                     @if (auth()->user()->hasPermission('member_dashboard'))
-                                                        <a href="{{ route('member.dashboard') }}"> <i class="far fa-dashboard"></i> Admin Dashboard</a>
+                                                        <a href="{{ route('member.dashboard') }}"> <i class="far fa-dashboard"></i> Member Dashboard</a>
                                                     @endif
 
                                                     <form action="{{ route('logout') }}" method="post">
@@ -576,6 +578,26 @@
             }
         }
     </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    @if (session('success'))
+    <script>
+        toastr.success("{{ session('success') }}");
+    </script>
+    @endif
+
+    @if (session('error'))
+    <script>
+        toastr.error("{{ session('error') }}");
+    </script>
+    @endif
+
+    @if (session('status'))
+    <script>
+        toastr.success("{{ session('status') }}");
+    </script>
+    @endif
 
     @yield('scripts')
 

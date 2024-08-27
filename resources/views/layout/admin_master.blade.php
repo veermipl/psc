@@ -628,6 +628,12 @@
         </script>
     @endif
 
+    @if (session('status'))
+    <script>
+        toastr.success("{{ session('status') }}");
+    </script>
+    @endif
+
     <script>
         //sub_page_body
         $(document).on('click', '.sub_page_link', function(e) {

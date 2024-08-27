@@ -10,6 +10,7 @@ use App\Traits\ImageTraits;
 use Illuminate\Http\Request;
 use App\Traits\SettingTraits;
 use App\Models\MembershipType;
+use App\Traits\NotificationTraits;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -28,7 +29,7 @@ use App\Http\Requests\admin\member\UpdateMemberStatusRequest;
 
 class MemberController extends Controller
 {
-    use UserTraits, SettingTraits, ImageTraits;
+    use UserTraits, SettingTraits, ImageTraits, NotificationTraits;
 
     /**
      * Display a listing of the resource.
@@ -98,13 +99,13 @@ class MemberController extends Controller
             "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
             "Expires"             => "0"
         );
-        $columns = array('Name', 'Email', 'Mobile');
+        $columns = array('Name', 'Email', 'Mobile', 'Membership Type');
 
         $callback = function () use ($memberData, $columns) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columns);
 
-            fputcsv($file, array('John Doe', 'johndoe@yopmail.com', '1234567890'));
+            fputcsv($file, array('John Doe', 'johndoe@yopmail.com', '1234567890', '1'));
 
             fclose($file);
         };
@@ -159,11 +160,12 @@ class MemberController extends Controller
                 }
 
                 // if (empty($row[3]) || !isset($row[3]) || !in_array((string)$row[3], ['0', 0, '1', 1])) {
-                //     $invalidRow[] = "Invalid member status value '" . htmlspecialchars($row[3] ?? '') . "' at line $line";
-                //     $flag = true;
-                // } else {
-                //     $info['status'] = $row[3];
-                // }
+                if (empty($row[3]) || !isset($row[3])) {
+                    $invalidRow[] = "Invalid membership type value '" . htmlspecialchars($row[3] ?? '') . "' at line $line";
+                    $flag = true;
+                } else {
+                    $info['membership_type'] = $row[3];
+                }
 
                 $info['id'] = $row_id;
 
@@ -208,6 +210,7 @@ class MemberController extends Controller
                         'name' => $userData['name'],
                         'email' => $userData['email'],
                         'mobile_number' => $userData['mobile'],
+                        'membership_type' => $userData['membership_type'],
                         'form_pdf' => null,
                         'status' => '0',
                         'password' => Hash::make($genPwd),
@@ -244,16 +247,15 @@ class MemberController extends Controller
 
         $validated = $request->validated();
 
-        $fileName = 'user_data.csv';
+        $fileName = 'members.csv';
         $noData = 'NA';
         $dataarray = array();
         $user_ids = explode(',', $validated['export_id']);
 
-        $users = User::orderBy('name', 'asc')->where('id', $user_ids)->get();
+        $users = User::orderBy('name', 'asc')->whereIn('id', $user_ids)->get();
 
         foreach ($users as $userKey => $user) {
-            $userRoles = $user->role ? $user->role->pluck('name')->toArray() : [];
-            $membershipData = $user->membership_type;
+            $membershipData = $user->membership;
             $statusData = $user->status;
 
             $dataarray[] = [
@@ -261,8 +263,7 @@ class MemberController extends Controller
                 'name' => $user->name ?? $noData,
                 'email' => $user->email ?? $noData,
                 'mobile' => $user->mobile_number ?? $noData,
-                'membership_type' => $membershipData ?? $noData,
-                'role' => implode(', ', $userRoles),
+                'membership_type' => $membershipData->name ?? $noData,
                 'status' => $statusData,
             ];
         }
@@ -274,7 +275,7 @@ class MemberController extends Controller
             "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
             "Expires"             => "0"
         );
-        $columns = array('ID', 'Name', 'Email', 'Mobile', 'Membership', 'Role', 'Status');
+        $columns = array('ID', 'Name', 'Email', 'Mobile', 'Membership', 'Status');
         $callback = function () use ($dataarray, $columns) {
             $file = fopen('php://output', 'w');
             fputcsv($file, $columns);
@@ -285,10 +286,9 @@ class MemberController extends Controller
                 $row['Email'] = $task['email'];
                 $row['Mobile'] = $task['mobile'];
                 $row['Membership'] = $task['membership_type'];
-                $row['Role'] = $task['role'];
                 $row['Status'] = $task['status'];
 
-                fputcsv($file, array($row['ID'], $row['Name'], $row['Email'], $row['Mobile'], $row['Membership'], $row['Role'], $row['Status']));
+                fputcsv($file, array($row['ID'], $row['Name'], $row['Email'], $row['Mobile'], $row['Membership'], $row['Status']));
             }
 
             fclose($file);
@@ -365,6 +365,8 @@ class MemberController extends Controller
             $userData['support_mail'] = $this->getSettings('email') ?? 'psc@support.com';
 
             Mail::to($userData['email'])->queue((new SendMemberWelcomeRegistrationMail($userData))->afterCommit());
+
+            $this->logNotification('member_created', $user);
         });
 
         return redirect()->route('admin.member.index')->with('success', 'Member created successfully');
@@ -481,6 +483,7 @@ class MemberController extends Controller
         $user = User::findOrFail($validated['id']);
         $data['error'] = true;
         $data['msg'] = 'Failed to deleted';
+        return response()->json($data, 200);
 
         if ($validated['doc_type'] == 'form') {
 
@@ -535,7 +538,7 @@ class MemberController extends Controller
         }
 
         $data['error'] = false;
-        $data['msg'] = 'Member status updated';
+        $data['msg'] = 'Status updated';
 
         return response()->json($data, 200);
     }

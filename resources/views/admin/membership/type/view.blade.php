@@ -5,11 +5,18 @@
 
 @section('content')
 
-    <div class="p-3 bg-white">
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">View Membership Type</div>
+    </div>
 
-        <h5 class="fw-bold">View Membership Type</h5>
-
-        <div class="pt-5">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card radius-10">
+                <div class="card-body">
+                    <div class="p-4 border rounded">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
