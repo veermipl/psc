@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">Create Social Media</div>
     </div>
 
@@ -14,7 +14,8 @@
             <div class="card radius-10">
                 <div class="card-body">
                     <div class="p-4 border rounded">
-                        <form action="{{ route('admin.media-center.social-media.store') }}" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+                        <form action="{{ route('admin.media-center.social-media.store') }}" method="post"
+                            enctype="multipart/form-data" class="row g-3 needs-validation">
                             @csrf
                             @method('post')
 

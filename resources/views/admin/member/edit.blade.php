@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">Update Member</div>
     </div>
 
@@ -14,12 +14,14 @@
             <div class="card radius-10">
                 <div class="card-body">
                     <div class="p-4 border rounded">
-                        <form action="{{ route('admin.member.update', $user->id) }}" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+                        <form action="{{ route('admin.member.update', $user->id) }}" method="post"
+                            enctype="multipart/form-data" class="row g-3 needs-validation">
                             @csrf
                             @method('patch')
 
                             <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Name <span class="text-danger">*</span></label>
+                                <label for="validationTooltip01" class="form-label">Name <span
+                                        class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="name" placeholder="Enter name"
                                     value="{{ old('name', $user->name) }}" maxlength="50">
 
@@ -29,7 +31,8 @@
                             </div>
 
                             <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Membership Type <span class="text-danger">*</span></label>
+                                <label for="validationTooltip01" class="form-label">Membership Type <span
+                                        class="text-danger">*</span></label>
                                 <select name="membership_type" class="form-control">
                                     <option hidden value="">Select Membership Type</option>
                                     @foreach ($membershipList as $membership)
@@ -46,9 +49,11 @@
                             </div>
 
                             <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Email <span class="text-danger">*</span></label>
-                                <input type="email" class="form-control" name="email" value="{{ old('email', $user->email) }}"
-                                    placeholder="Enter email" maxlength="50" readonly disabled>
+                                <label for="validationTooltip01" class="form-label">Email <span
+                                        class="text-danger">*</span></label>
+                                <input type="email" class="form-control" name="email"
+                                    value="{{ old('email', $user->email) }}" placeholder="Enter email" maxlength="50"
+                                    readonly disabled>
 
                                 @error('email')
                                     <span class="text-danger">{{ $message }}</span>
@@ -56,7 +61,8 @@
                             </div>
 
                             <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Contact Number <span class="text-danger">*</span></label>
+                                <label for="validationTooltip01" class="form-label">Contact Number <span
+                                        class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="contact"
                                     value="{{ old('contact', $user->mobile_number) }}" placeholder="Enter contact"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
@@ -68,7 +74,8 @@
 
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Upload Filled Form</label>
-                                <input type="file" id="form_pdf" class="form-control" name="form_pdf" accept="application/pdf">
+                                <input type="file" id="form_pdf" class="form-control" name="form_pdf"
+                                    accept="application/pdf">
 
                                 @error('form_pdf')
                                     <span class="text-danger">{{ $message }}</span>
@@ -77,7 +84,8 @@
 
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Upload Supporting Documents</label>
-                                <input type="file" id="supporting_document" class="form-control" name="supporting_document[]" accept="application/pdf" multiple>
+                                <input type="file" id="supporting_document" class="form-control"
+                                    name="supporting_document[]" accept="application/pdf" multiple>
 
                                 @error('supported_files')
                                     <span class="text-danger">{{ $message }}</span>
@@ -97,9 +105,10 @@
                                         {{-- <button class="btn btn-sm btn-outline-danger mt-2 deleteDocBtn" type="button" id="{{ $user->id }}" doc_url="{{ $user->form_pdf }}" doc_type="form">
                                             Delete
                                         </button> --}}
-                                       <div class="ghy deleteDocBtn" id="{{ $user->id }}" doc_url="{{ $user->form_pdf }}" doc_type="form">
+                                        <div class="ghy deleteDocBtn" id="{{ $user->id }}"
+                                            doc_url="{{ $user->form_pdf }}" doc_type="form">
                                             <div class="cross-m"><i class="fa fa-close bg-danger"></i></div>
-                                       </div>
+                                        </div>
                                     </div>
                                 @endif
                             </div>
@@ -116,16 +125,17 @@
                                                     <input type="hidden" name="old_doc[]" value="{{ $docVal }}">
                                                     <span class="text-center pdf-files">
                                                         <a href="{{ $docVal ? asset('storage/' . $docVal) : '' }}"
-                                                        target="_blank" title="Filled Form">
+                                                            target="_blank" title="Filled Form">
                                                             <i class="fa fa-file text-dark"></i>
                                                         </a>
                                                     </span>
                                                     {{-- <button class="btn btn-sm btn-outline-danger mt-2 deleteDocBtn" type="button" id="{{ $user->id }}" doc_url="{{ $docVal }}" doc_type="supporting">
                                                         Delete
                                                     </button> --}}
-                                                   <div class="ghy deleteDocBtn" id="{{ $user->id }}" doc_url="{{ $docVal }}" doc_type="supporting">
+                                                    <div class="ghy deleteDocBtn" id="{{ $user->id }}"
+                                                        doc_url="{{ $docVal }}" doc_type="supporting">
                                                         <div class="cross-m"><i class="fa fa-close bg-danger"></i></div>
-                                                   </div>
+                                                    </div>
                                                 </div>
                                             @endif
                                         @endforeach
@@ -134,7 +144,8 @@
                             </div>
 
                             <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Status <span class="text-danger">*</span></label>
+                                <label for="validationTooltip01" class="form-label">Status <span
+                                        class="text-danger">*</span></label>
                                 <select name="status" class="form-control">
                                     <option hidden value="">Status</option>
                                     @foreach (config('site.status') as $status)
@@ -152,8 +163,8 @@
 
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Update Password </label>
-                                <input type="password" id="password" class="form-control" name="password" value=""
-                                    placeholder="Update password" maxlength="50">
+                                <input type="password" id="password" class="form-control" name="password"
+                                    value="" placeholder="Update password" maxlength="50">
 
                                 @error('password')
                                     <span class="text-danger">{{ $message }}</span>
@@ -214,7 +225,8 @@
                             },
                             success: function(response) {
                                 if (response.error === false) {
-                                    $('div.editFileWrapper[doc_row_url="'+doc_url+'"]').remove();
+                                    $('div.editFileWrapper[doc_row_url="' + doc_url +
+                                        '"]').remove();
 
                                     toastr.success(response.msg);
                                 } else {

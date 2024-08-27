@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">Update Press Release</div>
     </div>
 
@@ -14,14 +14,17 @@
             <div class="card radius-10">
                 <div class="card-body">
                     <div class="p-4 border rounded">
-                        <form action="{{ route('admin.media-center.press-release.update', $press_release->id) }}" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+                        <form action="{{ route('admin.media-center.press-release.update', $press_release->id) }}"
+                            method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
                             @csrf
                             @method('patch')
 
                             <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Title <span class="text-danger">*</span></label>
-                                <input type="text" id="name" class="form-control" name="title" placeholder="Enter title"
-                                    value="{{ old('title', $press_release->title) }}" maxlength="50">
+                                <label for="validationTooltip01" class="form-label">Title <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" id="name" class="form-control" name="title"
+                                    placeholder="Enter title" value="{{ old('title', $press_release->title) }}"
+                                    maxlength="50">
 
                                 @error('title')
                                     <span class="text-danger">{{ $message }}</span>
@@ -30,7 +33,8 @@
 
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Files </label>
-                                <input type="file" class="form-control" name="files[]" accept="image/*,application/pdf" multiple>
+                                <input type="file" class="form-control" name="files[]" accept="image/*,application/pdf"
+                                    multiple>
 
                                 @if ($errors->has('files.*'))
                                     @foreach ($errors->get('files.*') as $error)
@@ -67,12 +71,16 @@
                                                 <div class="editFileWrapper" file_row_url="{{ $fileValue }}">
                                                     <input type="hidden" name="old_files[]" value="{{ $fileValue }}">
                                                     @if (in_array($extension, ['jpg', 'jpeg', 'gif', 'png']))
-                                                        <img class="li_img pop_up_image" src="{{ asset('storage/' . $fileValue) }}">
+                                                        <img class="li_img pop_up_image"
+                                                            src="{{ asset('storage/' . $fileValue) }}">
                                                     @endif
                                                     @if (in_array($extension, ['pdf']))
-                                                        <img class="li_img pop_up_doc" src="{{ asset('storage/default/pdf.png') }}">
+                                                        <img class="li_img pop_up_doc"
+                                                            src="{{ asset('storage/default/pdf.png') }}">
                                                     @endif
-                                                    <button class="btn btn-sm btn-outline-danger mt-2 deleteFileBtn" type="button" id="{{ $press_release->id }}" file_url="{{ $fileValue }}">
+                                                    <button class="btn btn-sm btn-outline-danger mt-2 deleteFileBtn"
+                                                        type="button" id="{{ $press_release->id }}"
+                                                        file_url="{{ $fileValue }}">
                                                         Delete
                                                     </button>
                                                 </div>
@@ -83,7 +91,8 @@
                             </div>
 
                             <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Status <span class="text-danger">*</span></label>
+                                <label for="validationTooltip01" class="form-label">Status <span
+                                        class="text-danger">*</span></label>
                                 <select name="status" class="form-control">
                                     <option hidden value="">Status</option>
                                     @foreach (config('site.status') as $status)
@@ -115,61 +124,62 @@
 
 @section('scripts')
 
-<script type="text/javascript">
-    $(document).ready(function() {
+    <script type="text/javascript">
+        $(document).ready(function() {
 
-        $(document).on('click', '.deleteFileBtn', function(e) {
-            e.preventDefault();
+            $(document).on('click', '.deleteFileBtn', function(e) {
+                e.preventDefault();
 
-            var id = $(this).attr('id');
-            var file_url = $(this).attr('file_url');
+                var id = $(this).attr('id');
+                var file_url = $(this).attr('file_url');
 
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Yes, delete it!",
-                cancelButtonText: "No, cancel!",
-                reverseButtons: true,
-                confirmButtonColor: '#24695c',
-                cancelButtonColor: '#d22d3d',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: "{{ route('admin.media-center.press-release.delete-file') }}",
-                        method: 'POST',
-                        data: {
-                            _method: 'post',
-                            _token: '{{ csrf_token() }}',
-                            id: id,
-                            file_url: file_url,
-                        },
-                        dataType: "json",
-                        beforeSend: function() {
-                            // $('.preloader').show();
-                        },
-                        success: function(response) {
-                            if (response.error === false) {
-                                $('div.editFileWrapper[file_row_url="'+file_url+'"]').remove();
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: "Yes, delete it!",
+                    cancelButtonText: "No, cancel!",
+                    reverseButtons: true,
+                    confirmButtonColor: '#24695c',
+                    cancelButtonColor: '#d22d3d',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ route('admin.media-center.press-release.delete-file') }}",
+                            method: 'POST',
+                            data: {
+                                _method: 'post',
+                                _token: '{{ csrf_token() }}',
+                                id: id,
+                                file_url: file_url,
+                            },
+                            dataType: "json",
+                            beforeSend: function() {
+                                // $('.preloader').show();
+                            },
+                            success: function(response) {
+                                if (response.error === false) {
+                                    $('div.editFileWrapper[file_row_url="' + file_url +
+                                        '"]').remove();
 
-                                toastr.success(response.msg);
-                            } else {
-                                toastr.error(response.msg);
+                                    toastr.success(response.msg);
+                                } else {
+                                    toastr.error(response.msg);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                toastr.error(error);
+                            },
+                            complete: function(xhr, status) {
+                                // $('.preloader').hide();
                             }
-                        },
-                        error: function(xhr, status, error) {
-                            toastr.error(error);
-                        },
-                        complete: function(xhr, status) {
-                            // $('.preloader').hide();
-                        }
-                    });
-                }
-            });
+                        });
+                    }
+                });
 
+            });
         });
-    });
-</script>
+    </script>
 
 @endsection

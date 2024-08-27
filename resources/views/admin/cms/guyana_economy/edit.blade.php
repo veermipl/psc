@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">Update Guyana Economy</div>
     </div>
 
@@ -13,14 +13,16 @@
             <div class="card radius-10">
                 <div class="card-body">
                     <div class="p-4 border rounded">
-                        <form action="{{ route('admin.cms.guyana-economy.update') }}" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+                        <form action="{{ route('admin.cms.guyana-economy.update') }}" method="post"
+                            enctype="multipart/form-data" class="row g-3 needs-validation">
                             @csrf
                             @method('patch')
 
                             <input type="hidden" name="id" value="{{ $ge_data->id }}">
 
                             <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Title <span class="text-danger">*</span></label>
+                                <label for="validationTooltip01" class="form-label">Title <span
+                                        class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="title" placeholder="Title"
                                     value="{{ old('title', $ge_data->title) }}" maxlength="50">
 
@@ -39,7 +41,8 @@
                             </div>
 
                             <div class="col-md-12 position-relative">
-                                <label for="validationTooltip01" class="form-label">Content <span class="text-danger">*</span></label>
+                                <label for="validationTooltip01" class="form-label">Content <span
+                                        class="text-danger">*</span></label>
                                 <textarea name="content" id="editor" cols="5" rows="5" class="form-control">{{ old('content', $ge_data->content) }}</textarea>
 
                                 @error('content')
@@ -58,8 +61,11 @@
                                             @if ($imgName)
                                                 <div class="editImgWrapper" img_row_url="{{ $imgName }}">
                                                     <input type="hidden" name="old_images[]" value="{{ $imgName }}">
-                                                    <img class="ge_img pop_up_image" src="{{ asset('storage/' . $imgName) }}">
-                                                    <button class="btn btn-sm btn-outline-danger mt-2 deleteImgBtn" type="button" id="{{ $ge_data->id }}" img_url="{{ $imgName }}">
+                                                    <img class="ge_img pop_up_image"
+                                                        src="{{ asset('storage/' . $imgName) }}">
+                                                    <button class="btn btn-sm btn-outline-danger mt-2 deleteImgBtn"
+                                                        type="button" id="{{ $ge_data->id }}"
+                                                        img_url="{{ $imgName }}">
                                                         Delete
                                                     </button>
                                                 </div>
@@ -140,7 +146,8 @@
                             },
                             success: function(response) {
                                 if (response.error === false) {
-                                    $('div.editImgWrapper[img_row_url="'+img_url+'"]').remove();
+                                    $('div.editImgWrapper[img_row_url="' + img_url +
+                                        '"]').remove();
 
                                     toastr.success(response.msg);
                                 } else {

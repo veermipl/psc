@@ -5,8 +5,8 @@
 
 @section('content')
 
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">User List</div>
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">Member List</div>
     </div>
 
     <div class="row">

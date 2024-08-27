@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">Social Media</div>
     </div>
 
@@ -14,17 +14,21 @@
             <div class="card radius-10">
                 <div class="card-body">
                     <div class="p-4 border rounded">
-                        <form action="{{ route('admin.media-center.social-media.filter') }}" method="post" class="row g-3 needs-validation">
+                        <form action="{{ route('admin.media-center.social-media.filter') }}" method="post"
+                            class="row g-3 needs-validation">
                             @csrf
                             @method('post')
 
                             <div class="col-12 text-end">
-                                <a href="{{ route('admin.media-center.social-media.index') }}" class="btn btn-danger btn-sm">
-                                    <ion-icon name="reload" role="img" class="md hydrated" aria-label="reload"></ion-icon>
+                                <a href="{{ route('admin.media-center.social-media.index') }}"
+                                    class="btn btn-danger btn-sm">
+                                    <ion-icon name="reload" role="img" class="md hydrated"
+                                        aria-label="reload"></ion-icon>
                                     Reset
                                 </a>
                                 <button class="btn btn-primary btn-sm">
-                                    <ion-icon name="funnel" role="img" class="md hydrated" aria-label="funnel"></ion-icon>Filter
+                                    <ion-icon name="funnel" role="img" class="md hydrated"
+                                        aria-label="funnel"></ion-icon>Filter
                                 </button>
                             </div>
                         </form>
@@ -39,7 +43,8 @@
         <div class="col-lg-12 mb-3">
             <div class="d-flex justify-content-between">
                 <a href="{{ route('admin.media-center.social-media.create') }}" class="btn btn-primary btn-sm">
-                    <ion-icon name="add" role="img" class="md hydrated" aria-label="person add"></ion-icon>Create Social Media
+                    <ion-icon name="add" role="img" class="md hydrated" aria-label="person add"></ion-icon>Create
+                    Social Media
                 </a>
 
                 @if ($export_id && count($export_id) > 0)
@@ -85,13 +90,15 @@
 
                                             <td>
                                                 @if ($listValue->status == 1)
-                                                    <span class="badge alert-success" id="listStatus" lid="{{ $listValue->id }}"
-                                                        lstatus="{{ $listValue->status }}" lrow="{{ $listKey }}">
+                                                    <span class="badge alert-success" id="listStatus"
+                                                        lid="{{ $listValue->id }}" lstatus="{{ $listValue->status }}"
+                                                        lrow="{{ $listKey }}">
                                                         Active
                                                     </span>
                                                 @else
-                                                    <span class="badge alert-danger" id="listStatus" lid="{{ $listValue->id }}"
-                                                        lstatus="{{ $listValue->status }}" lrow="{{ $listKey }}">
+                                                    <span class="badge alert-danger" id="listStatus"
+                                                        lid="{{ $listValue->id }}" lstatus="{{ $listValue->status }}"
+                                                        lrow="{{ $listKey }}">
                                                         In Active
                                                     </span>
                                                 @endif
@@ -100,7 +107,8 @@
                                             <td>
                                                 <div class="tableOptions">
                                                     <span class="text-dark" title="Edit">
-                                                        <a href="{{ route('admin.media-center.social-media.edit', $listValue->id) }}"><i
+                                                        <a
+                                                            href="{{ route('admin.media-center.social-media.edit', $listValue->id) }}"><i
                                                                 class="fa fa-pencil"></i></a>
                                                     </span>
                                                     <span class="text-danger" title="Delete" lid="{{ $listValue->id }}"

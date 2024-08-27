@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">Guyana Economy</div>
     </div>
 
@@ -13,12 +13,14 @@
             <div class="card radius-10">
                 <div class="card-body">
                     <div class="p-4 border rounded">
-                        <form action="{{ route('admin.cms.guyana-economy.filter') }}" method="post" class="row g-3 needs-validation">
+                        <form action="{{ route('admin.cms.guyana-economy.filter') }}" method="post"
+                            class="row g-3 needs-validation">
                             @csrf
                             @method('post')
 
                             <div class="col-md-6 position-relative">
-                                <input type="text" class="form-control" name="title" placeholder="Title" value="{{ $filterValues['title'] }}">
+                                <input type="text" class="form-control" name="title" placeholder="Title"
+                                    value="{{ $filterValues['title'] }}">
                             </div>
 
                             <div class="col-md-6 position-relative">
@@ -34,16 +36,19 @@
                             </div>
 
                             <div class="col-md-4 position-relative d-none">
-                                <input type="date" class="form-control" name="created_at" value="{{ $filterValues['created_at'] }}">
+                                <input type="date" class="form-control" name="created_at"
+                                    value="{{ $filterValues['created_at'] }}">
                             </div>
 
                             <div class="col-12 text-end">
                                 <a href="{{ route('admin.cms.guyana-economy') }}" class="btn btn-danger btn-sm">
-                                    <ion-icon name="reload" role="img" class="md hydrated" aria-label="reload"></ion-icon>
+                                    <ion-icon name="reload" role="img" class="md hydrated"
+                                        aria-label="reload"></ion-icon>
                                     Reset
                                 </a>
                                 <button class="btn btn-primary btn-sm">
-                                    <ion-icon name="funnel" role="img" class="md hydrated" aria-label="funnel"></ion-icon>Filter
+                                    <ion-icon name="funnel" role="img" class="md hydrated"
+                                        aria-label="funnel"></ion-icon>Filter
                                 </button>
                             </div>
                         </form>
@@ -57,7 +62,8 @@
         <div class="col-lg-12 mb-3">
             <div class="d-flex justify-content-between">
                 <a href="{{ route('admin.cms.guyana-economy.create') }}" class="btn btn-primary btn-sm">
-                    <ion-icon name="add" role="img" class="md hydrated" aria-label="person add"></ion-icon>Create Guyana Economy
+                    <ion-icon name="add" role="img" class="md hydrated" aria-label="person add"></ion-icon>Create
+                    Guyana Economy
                 </a>
 
                 @if ($export_id && count($export_id) > 0)
@@ -103,7 +109,8 @@
                                             <th scope="row">{{ $listKey + 1 }}</th>
 
                                             <td>
-                                                <a href="{{ route('admin.cms.guyana-economy.show', $list->id) }}" class="text-secondary">
+                                                <a href="{{ route('admin.cms.guyana-economy.show', $list->id) }}"
+                                                    class="text-secondary">
                                                     {{ $list->title }}
                                                 </a>
                                             </td>
@@ -129,7 +136,8 @@
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
                                                     </span>
-                                                    <span class="text-danger delete" title="Delete" id="{{ $list->id }}" row="{{ $listKey }}">
+                                                    <span class="text-danger delete" title="Delete"
+                                                        id="{{ $list->id }}" row="{{ $listKey }}">
                                                         <i class="fa fa-trash"></i>
                                                     </span>
                                                 </div>
@@ -185,18 +193,24 @@
                             dataType: "json",
                             beforeSend: function() {
                                 // $('.preloader').show();
-                                $('span.status[row="'+row+'"]').prop('disabled', true).css({
-                                    'cursor':'not-allowed'
+                                $('span.status[row="' + row + '"]').prop('disabled',
+                                    true).css({
+                                    'cursor': 'not-allowed'
                                 });
                             },
                             success: function(response) {
                                 if (response.error === false) {
                                     toastr.success(response.msg);
 
-                                    if(parseInt(status) == 1){
-                                        $('span.status[row="'+row+'"]').attr('status', 0).removeClass('alert-success').addClass('alert-danger').html('In Active');
-                                    }else{
-                                        $('span.status[row="'+row+'"]').attr('status', 1).removeClass('alert-danger').addClass('alert-success').html('Active');
+                                    if (parseInt(status) == 1) {
+                                        $('span.status[row="' + row + '"]').attr(
+                                            'status', 0).removeClass(
+                                            'alert-success').addClass(
+                                            'alert-danger').html('In Active');
+                                    } else {
+                                        $('span.status[row="' + row + '"]').attr(
+                                                'status', 1).removeClass('alert-danger')
+                                            .addClass('alert-success').html('Active');
                                     }
                                 } else {
                                     toastr.error(response.msg);
@@ -207,8 +221,9 @@
                             },
                             complete: function(xhr, status) {
                                 // $('.preloader').hide();
-                                $('span.status[row="'+row+'"]').prop('disabled', false).css({
-                                    'cursor':'pointer'
+                                $('span.status[row="' + row + '"]').prop('disabled',
+                                    false).css({
+                                    'cursor': 'pointer'
                                 });
                             }
                         });
@@ -245,13 +260,14 @@
                             dataType: "json",
                             beforeSend: function() {
                                 // $('.preloader').show();
-                                $('span.delete[row="'+row+'"]').prop('disabled', true).css({
-                                    'cursor':'not-allowed'
+                                $('span.delete[row="' + row + '"]').prop('disabled',
+                                    true).css({
+                                    'cursor': 'not-allowed'
                                 });
                             },
                             success: function(response) {
                                 if (response.error === false) {
-                                    $('tr.tr_row_'+row+'').remove();
+                                    $('tr.tr_row_' + row + '').remove();
 
                                     toastr.success(response.msg);
                                 } else {
@@ -263,8 +279,9 @@
                             },
                             complete: function(xhr, status) {
                                 // $('.preloader').hide();
-                                $('span.delete[row="'+row+'"]').prop('disabled', false).css({
-                                    'cursor':'pointer'
+                                $('span.delete[row="' + row + '"]').prop('disabled',
+                                    false).css({
+                                    'cursor': 'pointer'
                                 });
                             }
                         });

@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">Business Directory</div>
     </div>
 
@@ -14,7 +14,8 @@
             <div class="card radius-10">
                 <div class="card-body">
                     <div class="p-4 border rounded">
-                        <form action="{{ route('admin.membership.business-directory.filter') }}" method="post" class="row g-3 needs-validation">
+                        <form action="{{ route('admin.membership.business-directory.filter') }}" method="post"
+                            class="row g-3 needs-validation">
                             @csrf
                             @method('post')
 
@@ -36,12 +37,15 @@
                             </div>
 
                             <div class="col-12 text-end">
-                                <a href="{{ route('admin.membership.business-directory.index') }}" class="btn btn-danger btn-sm">
-                                    <ion-icon name="reload" role="img" class="md hydrated" aria-label="reload"></ion-icon>
+                                <a href="{{ route('admin.membership.business-directory.index') }}"
+                                    class="btn btn-danger btn-sm">
+                                    <ion-icon name="reload" role="img" class="md hydrated"
+                                        aria-label="reload"></ion-icon>
                                     Reset
                                 </a>
                                 <button class="btn btn-primary btn-sm">
-                                    <ion-icon name="funnel" role="img" class="md hydrated" aria-label="funnel"></ion-icon>Filter
+                                    <ion-icon name="funnel" role="img" class="md hydrated"
+                                        aria-label="funnel"></ion-icon>Filter
                                 </button>
                             </div>
                         </form>
@@ -55,7 +59,8 @@
         <div class="col-lg-12 mb-3">
             <div class="d-flex justify-content-between">
                 <a href="{{ route('admin.membership.business-directory.create') }}" class="btn btn-primary btn-sm">
-                    <ion-icon name="add" role="img" class="md hydrated" aria-label="person add"></ion-icon>Create Business Directory
+                    <ion-icon name="add" role="img" class="md hydrated" aria-label="person add"></ion-icon>Create
+                    Business Directory
                 </a>
 
                 @if ($export_id && count($export_id) > 0)
@@ -69,7 +74,7 @@
                             <ion-icon name="document-outline"></ion-icon>Export
                         </button>
                     </form>
-                @endif 
+                @endif
             </div>
         </div>
     </div>
@@ -83,8 +88,8 @@
                     </div>
 
                     <div class="table-responsive">
-                        <table id="membershipBusinessDirectoryTable" class="table table-sm table-borderless table-light" data-toggle="table"
-                            data-search="true" data-buttons-prefix="btn-md btn" data-pagination="true">
+                        <table id="membershipBusinessDirectoryTable" class="table table-sm table-borderless table-light"
+                            data-toggle="table" data-search="true" data-buttons-prefix="btn-md btn" data-pagination="true">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -114,13 +119,15 @@
 
                                             <td>
                                                 @if ($listValue->status == 1)
-                                                    <span class="badge alert-success" id="listStatus" lid="{{ $listValue->id }}"
-                                                        lstatus="{{ $listValue->status }}" lrow="{{ $listKey }}">
+                                                    <span class="badge alert-success" id="listStatus"
+                                                        lid="{{ $listValue->id }}" lstatus="{{ $listValue->status }}"
+                                                        lrow="{{ $listKey }}">
                                                         Active
                                                     </span>
                                                 @else
-                                                    <span class="badge alert-danger" id="listStatus" lid="{{ $listValue->id }}"
-                                                        lstatus="{{ $listValue->status }}" lrow="{{ $listKey }}">
+                                                    <span class="badge alert-danger" id="listStatus"
+                                                        lid="{{ $listValue->id }}" lstatus="{{ $listValue->status }}"
+                                                        lrow="{{ $listKey }}">
                                                         In Active
                                                     </span>
                                                 @endif

@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">Update User</div>
     </div>
 
@@ -14,12 +14,14 @@
             <div class="card radius-10">
                 <div class="card-body">
                     <div class="p-4 border rounded">
-                        <form action="{{ route('admin.user.update', $user->id) }}" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+                        <form action="{{ route('admin.user.update', $user->id) }}" method="post" enctype="multipart/form-data"
+                            class="row g-3 needs-validation">
                             @csrf
                             @method('patch')
 
                             <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Name <span class="text-danger">*</span></label>
+                                <label for="validationTooltip01" class="form-label">Name <span
+                                        class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="name" placeholder="Enter name"
                                     value="{{ old('name', $user->name) }}" maxlength="50">
 
@@ -29,9 +31,11 @@
                             </div>
 
                             <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Email <span class="text-danger">*</span></label>
-                                <input type="email" class="form-control" name="email" value="{{ old('email', $user->email) }}"
-                                    placeholder="Enter email" maxlength="50" readonly disabled>
+                                <label for="validationTooltip01" class="form-label">Email <span
+                                        class="text-danger">*</span></label>
+                                <input type="email" class="form-control" name="email"
+                                    value="{{ old('email', $user->email) }}" placeholder="Enter email" maxlength="50"
+                                    readonly disabled>
 
                                 @error('email')
                                     <span class="text-danger">{{ $message }}</span>
@@ -39,7 +43,8 @@
                             </div>
 
                             <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Status <span class="text-danger">*</span></label>
+                                <label for="validationTooltip01" class="form-label">Status <span
+                                        class="text-danger">*</span></label>
                                 <select name="status" class="form-control">
                                     <option hidden value="">Status</option>
                                     @foreach (config('site.status') as $status)
@@ -56,11 +61,13 @@
                             </div>
 
                             <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Role <span class="text-danger">*</span></label>
+                                <label for="validationTooltip01" class="form-label">Role <span
+                                        class="text-danger">*</span></label>
                                 <select name="role" class="form-control">
                                     <option hidden value="">Role</option>
                                     @foreach ($roleList as $role)
-                                        <option value="{{ $role['id'] }}" {{ in_array($role['id'], $userRoles) ? 'selected' : '' }}>
+                                        <option value="{{ $role['id'] }}"
+                                            {{ in_array($role['id'], $userRoles) ? 'selected' : '' }}>
                                             {{ $role['name'] }}
                                         </option>
                                     @endforeach

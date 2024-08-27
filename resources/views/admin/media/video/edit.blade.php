@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">Update Video</div>
     </div>
 
@@ -14,19 +14,23 @@
             <div class="card radius-10">
                 <div class="card-body">
                     <div class="p-4 border rounded">
-                        <form action="{{ route('admin.media-center.video.update', $video->id) }}" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+                        <form action="{{ route('admin.media-center.video.update', $video->id) }}" method="post"
+                            enctype="multipart/form-data" class="row g-3 needs-validation">
                             @csrf
                             @method('patch')
 
                             <input type="hidden" name="id" value="{{ $video->id }}">
 
                             <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Type <span class="text-danger">*</span></label>
+                                <label for="validationTooltip01" class="form-label">Type <span
+                                        class="text-danger">*</span></label>
                                 <select name="type" id="type" class="form-control">
                                     <option hidden value="">Type</option>
-                                    <option value="external" {{ old('type', $video->type) == 'external' ? 'selected' : '' }}>
+                                    <option value="external"
+                                        {{ old('type', $video->type) == 'external' ? 'selected' : '' }}>
                                         External</option>
-                                    <option value="internal" {{ old('type', $video->type) == 'internal' ? 'selected' : '' }}>
+                                    <option value="internal"
+                                        {{ old('type', $video->type) == 'internal' ? 'selected' : '' }}>
                                         Internal</option>
                                 </select>
 
@@ -36,7 +40,8 @@
                             </div>
 
                             <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Status <span class="text-danger">*</span></label>
+                                <label for="validationTooltip01" class="form-label">Status <span
+                                        class="text-danger">*</span></label>
                                 <select name="status" class="form-control">
                                     <option hidden value="">Status</option>
                                     @foreach (config('site.status') as $status)
@@ -78,7 +83,8 @@
                                     @if ($video->type == 'internal')
                                         <div class="">
                                             <input type="hidden" name="old_video" value="{{ $video->name }}">
-                                            <video class="li_img_ pop_up_video" src="{{ asset('storage/' . $video->name) }}" width="500px" controls>
+                                            <video class="li_img_ pop_up_video"
+                                                src="{{ asset('storage/' . $video->name) }}" width="500px" controls>
                                         </div>
                                     @endif
                                 </div>

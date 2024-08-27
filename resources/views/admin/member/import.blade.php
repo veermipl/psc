@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">Import Member</div>
     </div>
 
@@ -24,10 +24,13 @@
                                 </div>
                                 <div class="col-md-3 text-right">
                                     <button type="submit" class="btn btn-primary btn-sm" id="excelImportMemberBtn">
-                                        <ion-icon name="document-outline" role="img" class="md hydrated" aria-label="document"></ion-icon>Import
+                                        <ion-icon name="document-outline" role="img" class="md hydrated"
+                                            aria-label="document"></ion-icon>Import
                                     </button>
-                                    <a href="{{ route('admin.member.import-sample') }}" class="btn btn-primary btn-sm align-content-center">
-                                        <ion-icon name="download-outline" role="img" class="md hydrated" aria-label="document"></ion-icon>Sample
+                                    <a href="{{ route('admin.member.import-sample') }}"
+                                        class="btn btn-primary btn-sm align-content-center">
+                                        <ion-icon name="download-outline" role="img" class="md hydrated"
+                                            aria-label="document"></ion-icon>Sample
                                     </a>
                                 </div>
                             </div>
@@ -45,7 +48,8 @@
                             @method('post')
 
                             <div class="table-responsive">
-                                <table id="excelAddMemberTable" class="table table-sm table-borderless table-light" data-toggle="table" data-search="true" data-pagination="true">
+                                <table id="excelAddMemberTable" class="table table-sm table-borderless table-light"
+                                    data-toggle="table" data-search="true" data-pagination="true">
                                     <thead>
                                         <tr>
                                             <th data-field="id" data-sortable="true">#</th>
@@ -64,7 +68,8 @@
                             </div>
 
                             <div class="col-12 text-end">
-                                <button type="submit" class="btn btn-primary btn-sm text-light disabled" disabled id="excelAddMemberBtn">
+                                <button type="submit" class="btn btn-primary btn-sm text-light disabled" disabled
+                                    id="excelAddMemberBtn">
                                     Create
                                 </button>
                             </div>
@@ -111,7 +116,9 @@
                     contentType: false,
                     processData: false,
                     beforeSend: function() {
-                        $('#excelImportMemberBtn').removeClass('btn-primary').addClass('btn-danger disabled').text('Importing...').prop('disabled', true);
+                        $('#excelImportMemberBtn').removeClass('btn-primary').addClass(
+                            'btn-danger disabled').text('Importing...').prop('disabled',
+                            true);
                         $("#importMemberErr").text("").fadeOut();
                         $("#importMemberRowErr").children().remove();
                         $("#importMemberRowErr").fadeOut();
@@ -127,8 +134,10 @@
                                 var invalidRowStr = '';
 
                                 for (let index = 0; index < invalidRowArr.length; index++) {
-                                    $("#importMemberRowErr").append('<p>' + invalidRowArr[index] + '</p>');
-                                    invalidRowStr +='<h6 class="pb-1">' + invalidRowArr[index] + '</h6>';
+                                    $("#importMemberRowErr").append('<p>' + invalidRowArr[
+                                        index] + '</p>');
+                                    invalidRowStr += '<h6 class="pb-1">' + invalidRowArr[
+                                        index] + '</h6>';
                                 }
 
                                 // $("#importMemberRowErr").fadeIn();
@@ -149,20 +158,22 @@
 
                             if (res.importedData.length > 0) {
                                 var data = res.importedData;
-								$('#excelAddMemberTable').bootstrapTable({
-									data: data
-								});
+                                $('#excelAddMemberTable').bootstrapTable({
+                                    data: data
+                                });
 
-                                $('#excelAddMemberBtn').removeClass('disabled').prop('disabled', false);
+                                $('#excelAddMemberBtn').removeClass('disabled').prop('disabled',
+                                    false);
                             } else {
-                                $('#excelAddMemberBtn').addClass('disabled').prop('disabled', true);
+                                $('#excelAddMemberBtn').addClass('disabled').prop('disabled',
+                                    true);
                             }
                         }
                     },
                     error: function(xhr, status, error) {
-                        if(error == 'Forbidden'){
+                        if (error == 'Forbidden') {
                             toastr.error(error);
-                        }else{
+                        } else {
                             Swal.fire({
                                 title: 'Required Fields',
                                 html: error.responseJSON.errors.excelDoc,
@@ -171,7 +182,10 @@
                         }
                     },
                     complete: function(xhr, status) {
-                        $('#excelImportMemberBtn').removeClass('btn-danger disabled').addClass('btn-primary').html('<ion-icon name="document-outline" role="img" class="md hydrated" aria-label="document"></ion-icon>Import').prop('disabled', false);
+                        $('#excelImportMemberBtn').removeClass('btn-danger disabled').addClass(
+                            'btn-primary').html(
+                            '<ion-icon name="document-outline" role="img" class="md hydrated" aria-label="document"></ion-icon>Import'
+                            ).prop('disabled', false);
                     }
                 });
             });
@@ -192,7 +206,8 @@
                     contentType: false,
                     processData: false,
                     beforeSend: function() {
-                        $('#excelAddMemberBtn').removeClass('btn-custom').addClass('btn-danger disabled').text('Adding...').prop('disabled', true);
+                        $('#excelAddMemberBtn').removeClass('btn-custom').addClass(
+                            'btn-danger disabled').text('Adding...').prop('disabled', true);
                         $("#importMemberErr").text("").fadeOut();
                     },
                     success: function(res) {
@@ -207,9 +222,9 @@
                         }
                     },
                     error: function(xhr, status, error) {
-                        if(error == 'Forbidden'){
+                        if (error == 'Forbidden') {
                             toastr.error(error);
-                        }else{
+                        } else {
                             Swal.fire({
                                 title: 'Required Fields',
                                 html: error.responseJSON.errors.excelDoc,
@@ -218,7 +233,8 @@
                         }
                     },
                     complete: function(xhr, status) {
-                        $('#excelAddMemberBtn').removeClass('btn-danger disabled').addClass('btn-custom').text('Add').prop('disabled', false);
+                        $('#excelAddMemberBtn').removeClass('btn-danger disabled').addClass(
+                            'btn-custom').text('Add').prop('disabled', false);
                     }
                 });
             });

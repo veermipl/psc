@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">Profile</div>
     </div>
 
@@ -24,7 +24,8 @@
                             <p>157 Waterloo St, Georgetown, Guyana</p>
                         </div>
                         <div class="d-none">
-                            <a href="{{ route('profile') }}" class="btn btn-primary btn-sm"><ion-icon name="pencil"></ion-icon>
+                            <a href="{{ route('profile') }}" class="btn btn-primary btn-sm"><ion-icon
+                                    name="pencil"></ion-icon>
                                 Edit
                             </a>
                         </div>
@@ -67,17 +68,19 @@
             </div>
 
             @if (auth()->user()->id !== 1)
-            <div class="card radius-10">
-                <div class="card-body">
-                    <h5 class="mb-3">Settings</h5>
-                    <button class="btn btn-danger btn-sm text-light mb-3" id="statusProfileBtn"><ion-icon name="close"></ion-icon>
-                        De-active Account
-                    </button>
-                    <button class="btn btn-danger btn-sm text-light mb-3" id="deleteProfileBtn"><ion-icon name="trash"></ion-icon>
-                        Delete Account
-                    </button>
+                <div class="card radius-10">
+                    <div class="card-body">
+                        <h5 class="mb-3">Settings</h5>
+                        <button class="btn btn-danger btn-sm text-light mb-3" id="statusProfileBtn"><ion-icon
+                                name="close"></ion-icon>
+                            De-active Account
+                        </button>
+                        <button class="btn btn-danger btn-sm text-light mb-3" id="deleteProfileBtn"><ion-icon
+                                name="trash"></ion-icon>
+                            Delete Account
+                        </button>
+                    </div>
                 </div>
-            </div>
             @endif
 
         </div>

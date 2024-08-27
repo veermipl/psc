@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">Update COTED - Entrepreneurship Development</div>
     </div>
 
@@ -14,7 +14,8 @@
             <div class="card radius-10">
                 <div class="card-body">
                     <div class="p-4 border rounded">
-                        <form action="{{ route('admin.data.coted.update-entrepreneurship-development') }}" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+                        <form action="{{ route('admin.data.coted.update-entrepreneurship-development') }}" method="post"
+                            enctype="multipart/form-data" class="row g-3 needs-validation">
                             @csrf
                             @method('post')
 
@@ -24,8 +25,8 @@
 
                             <div class="col-md-6 position-relative">
                                 <label for="title">Title <span class="text-danger">*</span></label>
-                                <input type="text" id="title" class="form-control" name="title" placeholder="Enter title"
-                                    value="{{ old('title', $source->title) }}" maxlength="50">
+                                <input type="text" id="title" class="form-control" name="title"
+                                    placeholder="Enter title" value="{{ old('title', $source->title) }}" maxlength="50">
 
                                 @error('title')
                                     <span class="text-danger">{{ $message }}</span>
@@ -93,8 +94,7 @@
 @section('scripts')
 
     <script type="text/javascript">
-        $(document).ready(function() {
-        });
+        $(document).ready(function() {});
     </script>
 
 @endsection

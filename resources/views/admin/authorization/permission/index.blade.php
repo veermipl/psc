@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">Pemission List</div>
     </div>
 
@@ -16,19 +16,23 @@
                     <div class="accordion" id="accordionExample">
                         @foreach ($permissionModule as $key => $module)
                             @php
-                                $module_str = Str::of($module)->replace([' ', '-'], '_')->lower();
+                                $module_str = Str::of($module)
+                                    ->replace([' ', '-'], '_')
+                                    ->lower();
                             @endphp
-                            
+
                             <div class="accordion-item">
                                 <h5 class="accordion-header" id="heading{{ $module_str }}">
-                                    <button class="accordion-button {{ $key !== 0 ? 'collapsed' : '' }}" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#collapse{{ $module_str }}" aria-expanded="{{ $key == 0 ? 'true' : 'false' }}"
+                                    <button class="accordion-button {{ $key !== 0 ? 'collapsed' : '' }}" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapse{{ $module_str }}"
+                                        aria-expanded="{{ $key == 0 ? 'true' : 'false' }}"
                                         aria-controls="collapse{{ $module_str }}">
                                         {{ $module }}
                                     </button>
                                 </h5>
 
-                                <div id="collapse{{ $module_str }}" class="accordion-collapse collapse {{ $key == 0 ? 'show' : '' }}"
+                                <div id="collapse{{ $module_str }}"
+                                    class="accordion-collapse collapse {{ $key == 0 ? 'show' : '' }}"
                                     aria-labelledby="heading{{ $module_str }}" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
                                         <div class="persWrapper row">

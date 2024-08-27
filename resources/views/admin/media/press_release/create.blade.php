@@ -5,7 +5,7 @@
 
 @section('content')
 
-    <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-3">Create Press Release</div>
     </div>
 
@@ -14,14 +14,16 @@
             <div class="card radius-10">
                 <div class="card-body">
                     <div class="p-4 border rounded">
-                        <form action="{{ route('admin.media-center.press-release.store') }}" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+                        <form action="{{ route('admin.media-center.press-release.store') }}" method="post"
+                            enctype="multipart/form-data" class="row g-3 needs-validation">
                             @csrf
                             @method('post')
 
                             <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Title <span class="text-danger">*</span></label>
-                                <input type="text" id="name" class="form-control" name="title" placeholder="Enter title"
-                                    value="{{ old('title') }}" maxlength="50">
+                                <label for="validationTooltip01" class="form-label">Title <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" id="name" class="form-control" name="title"
+                                    placeholder="Enter title" value="{{ old('title') }}" maxlength="50">
 
                                 @error('title')
                                     <span class="text-danger">{{ $message }}</span>
@@ -30,7 +32,8 @@
 
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Files </label>
-                                <input type="file" class="form-control" name="files[]" accept="image/*,application/pdf" multiple>
+                                <input type="file" class="form-control" name="files[]" accept="image/*,application/pdf"
+                                    multiple>
 
                                 @if ($errors->has('files.*'))
                                     @foreach ($errors->get('files.*') as $error)
@@ -51,7 +54,8 @@
                             </div>
 
                             <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Status <span class="text-danger">*</span></label>
+                                <label for="validationTooltip01" class="form-label">Status <span
+                                        class="text-danger">*</span></label>
                                 <select name="status" class="form-control">
                                     <option hidden value="">Status</option>
                                     @foreach (config('site.status') as $status)
