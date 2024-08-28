@@ -16,13 +16,14 @@ class UserDetails extends Model
         'user_id',
         'profile_image',
         'background_image',
+        'date_of_birth',
+        'gender',
         'connect_url',
         'connect_fb',
         'connect_twitter',
         'connect_linkedin',
-        'location',
         'address',
+        'location',
         'about_me',
-        'gender',
     ];
 }

@@ -6,7 +6,7 @@
 @section('content')
 
     <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Update Profile</div> {{ print_r($errors->all()) }}
+        <div class="breadcrumb-title pe-3">Update Profile</div>
     </div>
 
     <div class="row">
@@ -20,6 +20,8 @@
                             @method('post')
 
                             <input type="hidden" name="user_id" value="{{ $user->id }}">
+                            <input type="hidden" name="old_profile_image" value="{{ @$UserDetails['profile_image'] }}">
+                            <input type="hidden" name="old_background_image" value="{{ @$UserDetails['background_image'] }}">
 
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Name <span class="text-danger">*</span></label>
@@ -50,25 +52,78 @@
 
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Mobile </label>
-                                <input type="text" class="form-control" name="mobile_number" placeholder="Enter mobile number" value="{{ old('mobile_number', $user->mobile_number) }}" maxlength="50">
+                                <input type="text" class="form-control" name="mobile_number" placeholder="Enter mobile number" value="{{ old('mobile_number', $user->mobile_number) }}" maxlength="50" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 
                                 @error('mobile_number')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
-                            <div class="col-md-12 position-relative">
-                                <label for="validationTooltip01" class="form-label">About Me</label>
-                                <textarea name="about_me" id="editor" cols="2" rows="2" class="form-control">{{ old('about_me', @$UserDetails['about_me']) }}</textarea>
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">DOB </label>
+                                <input type="date" class="form-control" name="date_of_birth" value="{{ old('date_of_birth', @$UserDetails['date_of_birth']) }}" maxlength="50">
 
-                                @error('about_me')
+                                @error('date_of_birth')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Gender </label>
+                                <select name="gender" class="form-control">
+                                    <option hidden value="">Gender</option>
+                                    @foreach (config('site.gender') as $gender)
+                                        <option value="{{ $gender['value'] }}"
+                                            {{ old('gender', @$UserDetails['gender']) == $gender['value'] ? 'selected' : '' }}>
+                                            {{ $gender['name'] }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @error('gender')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Website URL</label>
+                                <input type="text" class="form-control" name="connect_url" placeholder="Enter your website url" value="{{ old('connect_url', @$UserDetails['connect_url']) }}" maxlength="50">
+
+                                @error('connect_url')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Facebook URL</label>
+                                <input type="text" class="form-control" name="connect_fb" placeholder="Enter your facebook url" value="{{ old('connect_fb', @$UserDetails['connect_fb']) }}" maxlength="50">
+
+                                @error('connect_fb')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Twitter URL</label>
+                                <input type="text" class="form-control" name="connect_twitter" placeholder="Enter your website url" value="{{ old('connect_twitter', @$UserDetails['connect_twitter']) }}" maxlength="50">
+
+                                @error('connect_twitter')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Linkedin URL</label>
+                                <input type="text" class="form-control" name="connect_linkedin" placeholder="Enter your linkedin url" value="{{ old('connect_linkedin', @$UserDetails['connect_linkedin']) }}" maxlength="50">
+
+                                @error('connect_linkedin')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Address </label>
-                                <input type="text" class="form-control" name="address" placeholder="Enter address" value="{{ old('address', @$UserDetails['address']) }}" maxlength="50">
+                                <input type="text" class="form-control" name="address" placeholder="Enter address" value="{{ old('address', @$UserDetails['address']) }}" maxlength="200">
 
                                 @error('address')
                                     <span class="text-danger">{{ $message }}</span>
@@ -77,9 +132,18 @@
 
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Location </label>
-                                <input type="text" class="form-control" name="location" placeholder="Enter location" value="{{ old('location', @$UserDetails['location']) }}" maxlength="50">
+                                <input type="text" class="form-control" name="location" placeholder="Enter location" value="{{ old('location', @$UserDetails['location']) }}" maxlength="100">
 
                                 @error('location')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-12 position-relative">
+                                <label for="validationTooltip01" class="form-label">About Me</label>
+                                <textarea name="about_me" id="editor" class="form-control">{{ old('about_me', @$UserDetails['about_me']) }}</textarea>
+
+                                @error('about_me')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

@@ -56,6 +56,7 @@ use App\Http\Controllers\Admin\MemberController as AdminMemberController;
 Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
     Artisan::call('route:clear');
+    Artisan::call('optimize');
     return "Cache cleared successfully";
 });
 
@@ -294,12 +295,21 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         Route::patch('contact-us', [SettingsController::class, 'updateContactUs']);
     });
 
-    Route::prefix('notification')->name('notification.')->group(function () {
-        Route::get('reload-table', [NotificationController::class, 'reloadTable'])->name('reload-table');
-        Route::post('mark-as-read', [NotificationController::class, 'markAsRead'])->name('mark-as-read');
-        Route::get('mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('mark-all-as-read');
+    Route::prefix('authorization')->name('authorization.')->group(function () {
+        Route::post('role/export', [RoleController::class, 'export'])->name('role.export');
+        Route::post('role/filter', [RoleController::class, 'index'])->name('role.filter');
+        Route::resource('role', RoleController::class);
+
+        Route::resource('permission', PermissionController::class);
     });
-    Route::resource('notification', NotificationController::class);
+
+    Route::prefix('system')->name('system.')->group(function () {
+        Route::get('notification/reload-table', [NotificationController::class, 'reloadTable'])->name('notification.reload-table');
+        Route::post('notification/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notification.mark-as-read');
+        Route::get('notification/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('notification.mark-all-as-read');
+        Route::resource('notification', NotificationController::class);
+
+    });
 
     Route::controller(StaffController::class)->prefix('staff')->name('staff.')->group(function () {
         Route::get('create', 'create')->name('create');

@@ -1,3 +1,11 @@
+@php
+    if(auth()->check()){
+        $user_details = helper_getUserDetails(auth()->user()->id);
+    }
+    $settings_app_name = helper_getSettings('app_name');
+    $settings_app_logo = helper_getSettings('app_logo');
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -128,7 +136,7 @@
                                         <div class="ml-2">
                                             <div class="dropdownt">
                                                 <div class="drop-img dropbtnt" id="myBtnt">
-                                                    <img src="https://i.postimg.cc/ydFvrvbN/slider3.png" alt="user-picture">
+                                                    <img src="{{ asset('storage/' . ($user_details ? $user_details['profile_image'] : 'default/user.png'))}}" class="user-img" alt="user-picture">
                                                     <i class="fas fa-chevron-down"></i>
                                                 </div>
                                                 <div id="myDropdownt" class="dropdown-contentt">
@@ -143,7 +151,7 @@
                                                     <form action="{{ route('logout') }}" method="post">
                                                         @csrf
                                                         @method('post')
-                                                        <button class=" btn-sm btn-block" style="padding-left: 15px; text-align:start;">
+                                                        <button class=" btn-sm btn-block" style="padding-left: 18px; text-align:start;">
                                                             <i class="far fa-lock"></i> Logout
                                                         </button>
                                                     </form>
@@ -549,7 +557,12 @@
     <script src="{{ asset('js/parallax.min.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
 
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
     <script type="text/javascript" src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         // Get the button, and when the user clicks on it, execute myFunction

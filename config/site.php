@@ -10,9 +10,22 @@ return [
             'value' => '0'
         ]
     ],
+    'gender' => [
+        [
+            'name' => 'Male',
+            'value' => 'male'
+        ], [
+            'name' => 'Female',
+            'value' => 'female'
+        ]
+    ],
     'membership_type' => ['Corporate', 'Sectoral Corporate'],
     'settings' => [
         [
+            'name' => 'app_name',
+            'value' => 'PSCGY Admin',
+            'type' => 'general',
+        ],[
             'name' => 'admin_mail',
             'value' => 'admin@yopmail.com',
             'type' => 'general',

@@ -22,8 +22,7 @@ class UpdateProfileStatusRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'lid' => ['required', 'exists:users,id'],
-            'lstatus' => ['required', 'in:0,1'],
+            'uid' => ['required', 'exists:users,id'],
         ];
     }
 }

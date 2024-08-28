@@ -1,5 +1,8 @@
 @php
-    $notifications = App\Models\Notifications::where('read', '0')->get() ?? [];
+    $notifications = helper_getUnreadNotifications();
+    $user_details = helper_getUserDetails(auth()->user()->id);
+    $settings_app_name = helper_getSettings('app_name');
+    $settings_app_logo = helper_getSettings('app_logo');
 @endphp
 
 
@@ -61,10 +64,10 @@
         <aside class="sidebar-wrapper" data-simplebar="true">
             <div class="sidebar-header">
                 <div>
-                    <img src="{{ asset('admin/images/logo-icon-2.png') }}" class="logo-icon" alt="logo icon">
+                    <img src="{{ asset('storage/' . ($settings_app_logo ? $settings_app_logo : 'default/logo.png'))}}" class="logo-icon" alt="">
                 </div>
                 <div>
-                    <h6 class="logo-text">PSCGY Admin</h6>
+                    <h6 class="logo-text">{{ $settings_app_name }}</h6>
                 </div>
                 <div class="toggle-icon ms-auto"><ion-icon name="menu-sharp"></ion-icon>
                 </div>
@@ -314,14 +317,17 @@
                     </ul>
                 </li>
 
-                <li class="{{ request()->is('admin/notification/*') ? 'mm-active' : '' }}">
+                <li class="{{ request()->is('admin/system/*') ? 'mm-active' : '' }}">
                     <a class="has-arrow" href="javascript:;">
                         <div class="parent-icon"><ion-icon name="hammer-sharp"></ion-icon></div>
                         <div class="menu-title">System</div>
                     </a>
                     <ul>
                         <li>
-                            <a href="{{ route('admin.notification.index') }}"><ion-icon name="ellipse-outline"></ion-icon>Notifications</a>
+                            <a href="{{ route('admin.system.notification.index') }}"><ion-icon name="ellipse-outline"></ion-icon>Notifications</a>
+                        </li>
+                        <li>
+                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>Recover Account</a>
                         </li>
                     </ul>
                 </li>
@@ -365,7 +371,7 @@
                                     <a href="javascript:;">
                                         <div class="msg-header">
                                             <p class="msg-header-title">Notifications</p>
-                                            <a href="{{ route('admin.notification.mark-all-as-read') }}" class="msg-header-clear ms-auto">
+                                            <a href="{{ route('admin.system.notification.mark-all-as-read') }}" class="msg-header-clear ms-auto">
                                                 Marks all as read
                                             </a>
                                         </div>
@@ -392,7 +398,7 @@
                                             </a>
                                         @endforeach
                                     </div>
-                                    <a href="{{ route('admin.notification.index') }}">
+                                    <a href="{{ route('admin.system.notification.index') }}">
                                         <div class="text-center msg-footer">View All Notifications</div>
                                     </a>
                                 </div>
@@ -416,7 +422,7 @@
                             <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;"
                                 data-bs-toggle="dropdown">
                                 <div class="user-setting">
-                                    <img src="{{ asset('admin/images/avatars/06.png') }}" class="user-img" alt="">
+                                    <img src="{{ asset('storage/' . ($user_details ? $user_details['profile_image'] : 'default/user.png'))}}" class="user-img" alt="">
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">

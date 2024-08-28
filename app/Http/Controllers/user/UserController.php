@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\User;
+use App\Models\UserDetails;
+use App\Traits\ImageTraits;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\user\DeleteProfileRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use App\Http\Requests\user\DeleteProfileRequest;
 use App\Http\Requests\user\UpdateProfileRequest;
 use App\Http\Requests\user\UpdateProfileStatusRequest;
-use App\Models\UserDetails;
 
 class UserController extends Controller
 {
+    use ImageTraits;
+
     public function profile()
     {
         $this->authorize('profile_view');
@@ -42,7 +47,11 @@ class UserController extends Controller
         $data['UserDetails'] = $userDetails;
         $data['userRole'] = $userRole;
 
-        return view('user.profile_edit', $data);
+        if (in_array('Admin', $userRole)) {
+            return view('user.profile_edit', $data);
+        }
+
+        return view('user.member_profile_edit', $data);
     }
 
     public function profileUpdate(UpdateProfileRequest $request)
@@ -51,15 +60,25 @@ class UserController extends Controller
 
         $validated = $request->validated();
 
-        $profileImage = null;
+        $profileImage = $validated['old_profile_image'] ?? null;
         if ($request->hasFile('profile_image')) {
             $file = $request->file('profile_image');
 
             $profileImage = $file->store('user_profile', 'public');
+
+            $this->deleteFromStorage('public', $validated['old_profile_image'], $isArray = false);
         }
         $validated['profile_image'] = $profileImage;
 
+        $bgImage = $validated['old_background_image'] ?? null;
+        $validated['background_image'] = $bgImage;
+
         DB::transaction(function () use ($validated) {
+            User::where('id', $validated['user_id'])->update([
+                'name' => $validated['name'],
+                'mobile_number' => $validated['mobile_number'],
+            ]);
+
             UserDetails::updateOrCreate(
                 [
                     'user_id' => $validated['user_id']
@@ -67,15 +86,15 @@ class UserController extends Controller
                 [
                     'profile_image' => $validated['profile_image'],
                     'background_image' => $validated['background_image'],
-                    'mobile_number' => $validated['mobile_number'],
+                    'date_of_birth' => $validated['date_of_birth'],
+                    'gender' => $validated['gender'],
                     'connect_url' => $validated['connect_url'],
                     'connect_fb' => $validated['connect_fb'],
                     'connect_twitter' => $validated['connect_twitter'],
                     'connect_linkedin' => $validated['connect_linkedin'],
-                    'location' => $validated['location'],
                     'address' => $validated['address'],
+                    'location' => $validated['location'],
                     'about_me' => $validated['about_me'],
-                    'gender' => $validated['gender'],
                 ]
             );
         });
@@ -88,12 +107,24 @@ class UserController extends Controller
         $this->authorize('profile_active_deactive');
 
         $validated = $request->validated();
-        dd($validated);
 
-        DB::transaction(function () {});
+        DB::transaction(function () use ($validated) {
+            User::where('id', $validated['uid'])->update([
+                'status' => '0'
+            ]);
+        });
+
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
 
         $data['error'] = false;
-        $data['msg'] = 'Account de-activated';
+        $data['msg'] = 'Your account has been de-activated!';
+        $data['redirect'] = route('login');
+
+        Session::flash('success', $data['msg']);
 
         return response()->json($data, 200);
     }
@@ -103,12 +134,22 @@ class UserController extends Controller
         $this->authorize('profile_delete');
 
         $validated = $request->validated();
-        dd($validated);
 
-        DB::transaction(function () {});
+        DB::transaction(function () use ($validated) {
+            User::where('id', $validated['uid'])->delete();
+        });
+
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
 
         $data['error'] = false;
-        $data['msg'] = 'Account Deleted';
+        $data['msg'] = 'Your account has been deleted!';
+        $data['redirect'] = route('login');
+
+        Session::flash('success', $data['msg']);
 
         return response()->json($data, 200);
     }

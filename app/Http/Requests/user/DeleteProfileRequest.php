@@ -22,7 +22,7 @@ class DeleteProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'lid' => ['required', 'exists:users,id'],
+            'uid' => ['required', 'exists:users,id'],
         ];
     }
 }
