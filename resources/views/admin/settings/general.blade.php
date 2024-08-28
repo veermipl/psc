@@ -37,6 +37,10 @@
                                         class="badge alert-primary text-dark" target="_blank">
                                         View Logo
                                     </a>
+                                @else
+                                    <a href="{{ asset('storage/default/logo.png')  }}" class="badge alert-primary text-dark" target="_blank">
+                                        View Logo
+                                    </a>
                                 @endif
 
                                 <input type="file" class="form-control" name="app_logo">

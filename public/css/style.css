@@ -61,7 +61,7 @@ body {
     line-height: 26px;
     color: var(--thm-gray);
     font-weight: 400;
-    background: white;
+    background: #f7f8fa;
     font-family: var(--body-font);
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: antialiased;
@@ -6746,7 +6746,7 @@ textarea.input {
     display: none;
     position: absolute;
     background-color: #ffffff;
-    min-width: 160px;
+    min-width: max-content;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     right: 0px;
@@ -6756,6 +6756,7 @@ textarea.input {
     top: 50px;
 }
 
+.dropdown-contentt button,
 .dropdown-contentt a {
     color: black;
     padding: 7px 16px;
@@ -7007,3 +7008,40 @@ button.btn-block:hover {
 .vs-btn1:hover {
     background-color: #ecbd00;
 }
+
+.me-2 {
+    margin-right: .5rem !important;
+}
+
+.radius-10 {
+    border-radius: 10px !important;
+}
+
+.card {
+    border: 0;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075);
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #072d74 !important;
+    border-color: #072d74 !important;
+}
+
+.position-relative {
+    position: relative !important;
+}
+
+.g-3,
+.gy-3 {
+    --bs-gutter-y: 1rem;
+}
+
+.g-3,
+.gx-3 {
+    --bs-gutter-x: 1rem;
+}
+.custom-width-popup {
+    width: 600px;
+  }

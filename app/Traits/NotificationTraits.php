@@ -51,4 +51,12 @@ trait NotificationTraits
 
         return $info;
     }
+
+    public function getUnreadNotifications(){
+        $list = [];
+
+        $list = Notifications::where('read', '0')->get();
+
+        return $list;
+    }
 }

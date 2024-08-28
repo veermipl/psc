@@ -111,7 +111,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "{{ route('admin.notification.mark-as-read') }}",
+                            url: "{{ route('admin.system.notification.mark-as-read') }}",
                             method: 'POST',
                             data: {
                                 _method: 'post',
@@ -162,7 +162,7 @@
 
                 var lid = $(this).attr('lid');
                 var lrow = $(this).attr('lrow');
-                var url = `{{ url('/admin/notification/${lid}') }}`;
+                var url = `{{ url('/admin/system/notification/${lid}') }}`;
 
                 Swal.fire({
                     title: "Are you sure?",
@@ -196,7 +196,7 @@
                                     $('tr.tr_row_' + lrow + '').remove();
 
                                     $('#notificationTable').bootstrapTable('refresh', {
-                                        url: '{{ route("admin.notification.reload-table") }}'
+                                        url: '{{ route("admin.system.notification.reload-table") }}'
                                     });
 
                                     toastr.success(response.msg);
