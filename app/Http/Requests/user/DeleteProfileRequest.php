@@ -4,7 +4,7 @@ namespace App\Http\Requests\user;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateProfileStatusRequest extends FormRequest
+class DeleteProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,6 @@ class UpdateProfileStatusRequest extends FormRequest
     {
         return [
             'lid' => ['required', 'exists:users,id'],
-            'lstatus' => ['required', 'in:0,1'],
         ];
     }
 }

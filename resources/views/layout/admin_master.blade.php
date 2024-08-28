@@ -1,3 +1,8 @@
+@php
+    $notifications = App\Models\Notifications::where('read', '0')->get() ?? [];
+@endphp
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +12,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon" />
 
     <!-- loader-->
     <link href="{{ asset('admin/css/pace.min.css') }}" rel="stylesheet" />
@@ -296,15 +303,26 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="{{ route('admin.settings.general') }}"><ion-icon name="ellipse-outline"></ion-icon>General Settings</a>
+                            <a href="{{ route('admin.settings.general') }}"><ion-icon name="ellipse-outline"></ion-icon>General</a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.settings.email') }}"><ion-icon name="ellipse-outline"></ion-icon>Email Settings</a>
+                            <a href="{{ route('admin.settings.email') }}"><ion-icon name="ellipse-outline"></ion-icon>Email</a>
                         </li>
                         <li>
                             <a href="{{ route('admin.settings.contact-us') }}"><ion-icon name="ellipse-outline"></ion-icon>Contact Us</a>
                         </li>
+                    </ul>
+                </li>
 
+                <li class="{{ request()->is('admin/notification/*') ? 'mm-active' : '' }}">
+                    <a class="has-arrow" href="javascript:;">
+                        <div class="parent-icon"><ion-icon name="hammer-sharp"></ion-icon></div>
+                        <div class="menu-title">System</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.notification.index') }}"><ion-icon name="ellipse-outline"></ion-icon>Notifications</a>
+                        </li>
                     </ul>
                 </li>
 
@@ -336,136 +354,62 @@
                             <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;"
                                 data-bs-toggle="dropdown">
                                 <div class="position-relative">
-                                    <span class="notify-badge">8</span>
+                                    @if (count($notifications) > 0)
+                                        <span class="notify-badge">{{ count($notifications) }}</span>
+                                    @endif
                                     <ion-icon name="notifications-sharp"></ion-icon>
                                 </div>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="javascript:;">
-                                    <div class="msg-header">
-                                        <p class="msg-header-title">Notifications</p>
-                                        <p class="msg-header-clear ms-auto">Marks all as read</p>
+                            @if (count($notifications) > 0)
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a href="javascript:;">
+                                        <div class="msg-header">
+                                            <p class="msg-header-title">Notifications</p>
+                                            <a href="{{ route('admin.notification.mark-all-as-read') }}" class="msg-header-clear ms-auto">
+                                                Marks all as read
+                                            </a>
+                                        </div>
+                                    </a>
+                                    <div class="header-notifications-list">
+                                        @foreach($notifications as $notKey => $notVal)
+                                            @php
+                                                $notVal_time = $notVal->created_at->diffForHumans();
+                                            @endphp
+                                            <a class="dropdown-item notification_link" href="{{ $notVal['link'] }}">
+                                                <div class="d-flex align-items-center">
+                                                    @if(in_array($notVal['type'], ['user_created', 'member_created', 'member_registration']))
+                                                        <div class="notify text-danger">
+                                                            <ion-icon name="person-outline"></ion-icon>
+                                                        </div>
+                                                    @endif
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="msg-name">{{ $notVal['title'] }}
+                                                            <span class="msg-time float-end">{{ $notVal_time }}</span>
+                                                        </h6>
+                                                        <p class="msg-info">{{ $notVal['message'] }}</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        @endforeach
                                     </div>
-                                </a>
-                                <div class="header-notifications-list">
-                                    <a class="dropdown-item" href="javascript:;">
-                                        <div class="d-flex align-items-center">
-                                            <div class="notify text-primary"><ion-icon name="cart-outline"></ion-icon>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <h6 class="msg-name">New Orders <span class="msg-time float-end">2 min
-                                                        ago</span></h6>
-                                                <p class="msg-info">You have recived new orders</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item" href="javascript:;">
-                                        <div class="d-flex align-items-center">
-                                            <div class="notify text-danger"><ion-icon
-                                                    name="person-outline"></ion-icon>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <h6 class="msg-name">New Customers<span class="msg-time float-end">14
-                                                        Sec
-                                                        ago</span></h6>
-                                                <p class="msg-info">5 new user registered</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item" href="javascript:;">
-                                        <div class="d-flex align-items-center">
-                                            <div class="notify text-success"><ion-icon
-                                                    name="document-outline"></ion-icon>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <h6 class="msg-name">24 PDF File<span class="msg-time float-end">19
-                                                        min
-                                                        ago</span></h6>
-                                                <p class="msg-info">The pdf files generated</p>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <a class="dropdown-item" href="javascript:;">
-                                        <div class="d-flex align-items-center">
-                                            <div class="notify text-info"><ion-icon
-                                                    name="checkmark-done-outline"></ion-icon>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <h6 class="msg-name">New Product Approved <span
-                                                        class="msg-time float-end">2 hrs ago</span></h6>
-                                                <p class="msg-info">Your new product has approved</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item" href="javascript:;">
-                                        <div class="d-flex align-items-center">
-                                            <div class="notify text-warning"><ion-icon name="send-outline"></ion-icon>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <h6 class="msg-name">Time Response <span class="msg-time float-end">28
-                                                        min
-                                                        ago</span></h6>
-                                                <p class="msg-info">5.1 min avarage time response</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item" href="javascript:;">
-                                        <div class="d-flex align-items-center">
-                                            <div class="notify text-danger"><ion-icon
-                                                    name="chatbox-ellipses-outline"></ion-icon>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <h6 class="msg-name">New Comments <span class="msg-time float-end">4
-                                                        hrs
-                                                        ago</span></h6>
-                                                <p class="msg-info">New customer comments recived</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item" href="javascript:;">
-                                        <div class="d-flex align-items-center">
-                                            <div class="notify text-primary"><ion-icon
-                                                    name="albums-outline"></ion-icon>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <h6 class="msg-name">New 24 authors<span class="msg-time float-end">1
-                                                        day
-                                                        ago</span></h6>
-                                                <p class="msg-info">24 new authors joined last week</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item" href="javascript:;">
-                                        <div class="d-flex align-items-center">
-                                            <div class="notify text-success"><ion-icon
-                                                    name="shield-outline"></ion-icon>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <h6 class="msg-name">Your item is shipped <span
-                                                        class="msg-time float-end">5 hrs
-                                                        ago</span></h6>
-                                                <p class="msg-info">Successfully shipped your item</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item" href="javascript:;">
-                                        <div class="d-flex align-items-center">
-                                            <div class="notify text-warning"><ion-icon name="cafe-outline"></ion-icon>
-                                            </div>
-                                            <div class="flex-grow-1">
-                                                <h6 class="msg-name">Defense Alerts <span class="msg-time float-end">2
-                                                        weeks
-                                                        ago</span></h6>
-                                                <p class="msg-info">45% less alerts last 4 weeks</p>
-                                            </div>
-                                        </div>
+                                    <a href="{{ route('admin.notification.index') }}">
+                                        <div class="text-center msg-footer">View All Notifications</div>
                                     </a>
                                 </div>
-                                <a href="javascript:;">
-                                    <div class="text-center msg-footer">View All Notifications</div>
-                                </a>
-                            </div>
+                            @else
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a href="javascript:;">
+                                        <div class="msg-header">
+                                            <p class="msg-header-title">Notifications</p>
+                                        </div>
+                                    </a>
+                                    <div class="header-notifications-list">
+                                        <div class="text-center mt-3">
+                                            <p class="m-0 p-0">No Notifications</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </li>
 
                         <li class="nav-item dropdown dropdown-user-setting">
@@ -493,7 +437,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="authentication-sign-in-basic.html">
+                                    <span class="dropdown-item">
                                         <div class="d-flex align-items-center">
                                             <div class=""><ion-icon name="log-out-outline"></ion-icon></div>
                                             <div class="ms-3">
@@ -504,7 +448,7 @@
                                                 </form>
                                             </div>
                                         </div>
-                                    </a>
+                                    </span>
                                 </li>
                             </ul>
                         </li>

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->longText('location')->nullable()->default(null);
             $table->longText('address')->nullable()->default(null);
             $table->longText('about_me')->nullable()->default(null);
+            $table->enum('gender', ['male', 'female'])->nullable()->default(null);
             $table->timestamps();
         });
     }

@@ -16,8 +16,10 @@ return new class extends Migration
             $table->text('title')->nullable()->default(null);
             $table->longText('message')->nullable()->default(null);
             $table->longText('link')->nullable()->default(null);
+            $table->text('type')->nullable()->default(null);
             $table->enum('read', [0, 1])->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

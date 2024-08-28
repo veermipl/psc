@@ -139,7 +139,6 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        $this->authorize('role_create');
 
         $role->load('permissions');
         

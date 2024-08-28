@@ -17,6 +17,7 @@ trait NotificationTraits
                 'title' => $gettypeInfo['title'],
                 'message' => $gettypeInfo['message'],
                 'link' => $gettypeInfo['link'],
+                'type' => $gettypeInfo['type'],
             ]);
         }
 
@@ -31,18 +32,21 @@ trait NotificationTraits
             $info['title'] = 'New User';
             $info['message'] = 'A new user has been created';
             $info['link'] = $userData ? route('admin.user.show', $userData['id']) : null;
+            $info['type'] = 'user_created';
         }
 
         if ($type == 'member_created') {
             $info['title'] = 'New Member';
             $info['message'] = 'A new member has been created';
             $info['link'] = $userData ? route('admin.member.show', $userData['id']) : null;
+            $info['type'] = 'member_created';
         }
 
         if ($type == 'member_registration') {
             $info['title'] = 'New Member';
             $info['message'] = 'New member registration';
             $info['link'] = $userData ? route('admin.member.show', $userData['id']) : null;
+            $info['type'] = 'member_registration';
         }
 
         return $info;
