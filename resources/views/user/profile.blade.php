@@ -24,9 +24,8 @@
                             <p class="mb-1">{{ @$UserDetails['gender'] }}</p>
                             <p class="mb-1">{{ @$UserDetails['address'] }}</p>
                         </div>
-                        <div class="d-none-">
-                            <a href="{{ route('profile.edit') }}" class="btn btn-primary btn-sm"><ion-icon
-                                    name="pencil"></ion-icon>
+                        <div class="d-none">
+                            <a href="{{ route('profile.edit') }}" class="btn btn-primary btn-sm">
                                 Edit
                             </a>
                         </div>
