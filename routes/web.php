@@ -197,161 +197,6 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         Route::post('caricom-cet/delete-objective', [CaricomCETController::class, 'deleteObjective'])->name('caricom-cet.delete-objective');
     });
 
-    Route::prefix('resource')->name('resource.')->group(function () {
-    });
-
-    Route::prefix('media-center')->name('media-center.')->group(function () {
-        Route::post('news/filter', [NewsController::class, 'index'])->name('news.filter');
-        Route::post('news/status', [NewsController::class, 'statusToggle'])->name('news.status');
-        Route::post('news/delete-file', [NewsController::class, 'deleteFile'])->name('news.delete-file');
-        Route::resource('news', NewsController::class);
-
-        Route::post('press-release/filter', [PressReleaseController::class, 'index'])->name('press-release.filter');
-        Route::post('press-release/status', [PressReleaseController::class, 'statusToggle'])->name('press-release.status');
-        Route::post('press-release/delete-file', [PressReleaseController::class, 'deleteFile'])->name('press-release.delete-file');
-        Route::resource('press-release', PressReleaseController::class);
-
-        Route::post('social-media/filter', [SocialMediaController::class, 'index'])->name('social-media.filter');
-        Route::post('social-media/status', [SocialMediaController::class, 'statusToggle'])->name('social-media.status');
-        Route::resource('social-media', SocialMediaController::class);
-
-        Route::post('photo/filter', [PhotoController::class, 'index'])->name('photo.filter');
-        Route::post('photo/status', [PhotoController::class, 'statusToggle'])->name('photo.status');
-        Route::resource('photo', PhotoController::class);
-
-        Route::post('video/filter', [VideoController::class, 'index'])->name('video.filter');
-        Route::post('video/status', [VideoController::class, 'statusToggle'])->name('video.status');
-        Route::resource('video', VideoController::class);
-
-    });
-
-    Route::prefix('membership')->name('membership.')->group(function () {
-        Route::post('type/filter', [MembershipTypeController::class, 'index'])->name('type.filter');
-        Route::post('type/export', [MembershipTypeController::class, 'export'])->name('type.export');
-        Route::post('type/status', [MembershipTypeController::class, 'statusToggle'])->name('type.status');
-        Route::resource('type', MembershipTypeController::class);
-
-        Route::post('business-directory/filter', [BusinessDirectoryController::class, 'index'])->name('business-directory.filter');
-        Route::post('business-directory/export', [BusinessDirectoryController::class, 'export'])->name('business-directory.export');
-        Route::post('business-directory/status', [BusinessDirectoryController::class, 'statusToggle'])->name('business-directory.status');
-        Route::resource('business-directory', BusinessDirectoryController::class);
-
-        Route::get('member-benefit', [MemberBenefitController::class, 'index'])->name('member-benefit');
-        Route::post('member-benefit/update', [MemberBenefitController::class, 'update'])->name('member-benefit.update');
-        // Route::resource('member-benefit', MemberBenefitController::class);
-    });
-
-    Route::prefix('cms')->name('cms.')->group(function () {
-        Route::get('guyana-economy', [CMSController::class, 'guyanaEconomy'])->name('guyana-economy');
-        Route::get('guyana-economy/create', [CMSController::class, 'guyanaEconomyCreate'])->name('guyana-economy.create');
-        Route::post('guyana-economy/store', [CMSController::class, 'guyanaEconomyStore'])->name('guyana-economy.store');
-        Route::get('guyana-economy/show/{id}', [CMSController::class, 'guyanaEconomyShow'])->name('guyana-economy.show');
-        Route::get('guyana-economy/edit/{id}', [CMSController::class, 'guyanaEconomyEdit'])->name('guyana-economy.edit');
-        Route::patch('guyana-economy/update', [CMSController::class, 'guyanaEconomyUpdate'])->name('guyana-economy.update');
-        Route::delete('guyana-economy/delete/{id}', [CMSController::class, 'guyanaEconomyDelete'])->name('guyana-economy.delete');
-        Route::post('guyana-economy/delete-image', [CMSController::class, 'guyanaEconomyDeleteImage'])->name('guyana-economy.delete-image');
-        Route::post('guyana-economy/filter', [CMSController::class, 'guyanaEconomy'])->name('guyana-economy.filter');
-        Route::post('guyana-economy/export', [CMSController::class, 'guyanaEconomyExport'])->name('guyana-economy.export');
-        Route::post('guyana-economy/status', [CMSController::class, 'guyanaEconomyStatusToggle'])->name('guyana-economy.status');
-      
-     
-
-
-    });
-
-    Route::prefix('authorization')->name('authorization.')->group(function () {
-        Route::post('role/export', [RoleController::class, 'export'])->name('role.export');
-        Route::post('role/filter', [RoleController::class, 'index'])->name('role.filter');
-        Route::resource('role', RoleController::class);
-
-        Route::resource('permission', PermissionController::class);
-    });
-
-    Route::prefix('settings')->name('settings.')->group(function () {
-        Route::get('general', [SettingsController::class, 'general'])->name('general');
-        Route::patch('general', [SettingsController::class, 'updateGeneral']);
-        Route::get('email', [SettingsController::class, 'email'])->name('email');
-        Route::patch('email', [SettingsController::class, 'updateEmail']);
-        Route::get('contact-us', [SettingsController::class, 'contactUs'])->name('contact-us');
-        Route::patch('contact-us', [SettingsController::class, 'updateContactUs']);
-    });
-    
-    Route::prefix('about-us/')->group(function () {
-
-    Route::controller(StaffController::class)->prefix('staff')->name('staff.')->group(function () {
-        Route::get('create', 'create')->name('create');
-        Route::Post('store', 'store')->name('store');
-        Route::get('list', 'list')->name('list');
-        Route::Post('status', 'status')->name('status');
-        Route::get('destroy/{id}', 'destroy')->name('destroy');
-        Route::get('edit/{id}', 'edit')->name('edit');
-        Route::patch('update/{id}', 'Update')->name('update');
-        
-    });
-
-    Route::controller(CommitteessController::class)->prefix('committeess')->name('committeess.')->group(function () {
-        Route::get('create', 'create')->name('create');
-        Route::Post('store', 'store')->name('store');
-        Route::get('list', 'list')->name('list');
-        Route::Post('status', 'status')->name('status');
-        Route::get('destroy/{id}', 'destroy')->name('destroy');
-        Route::get('edit/{id}', 'edit')->name('edit');
-        Route::patch('update/{id}', 'Update')->name('update');
-        
-    });
-
-    Route::controller(AboutController::class)->prefix('about')->name('about.')->group(function () {
-
-        Route::get('introduction', 'Introduction')->name('introduction');
-        Route::Post('introduction', 'Introduction_update')->name('introduction_update');
-        Route::get('mission', 'Mission')->name('mission');
-        Route::post('mission', 'Mission_update')->name('mission_update');
-
-        Route::get('council', 'Council')->name('council');
-        Route::post('council', 'Council_update')->name('council_update');
-        Route::get('history', 'History')->name('history');
-        Route::Post('history', 'History_update')->name('history_update');
-
-
-     
-    });
-
-    Route::controller(TestimonialController::class)->prefix('testimonial')->name('testimonial.')->group(function(){
-        Route::get('list', 'Index')->name('list');
-        Route::get('create', 'create')->name('create');
-        Route::post('store', 'Store')->name('store');
-        Route::Post('status', 'status')->name('status');
-        Route::Post('destroy', 'destroy')->name('destroy');
-        Route::get('edit/{id}', 'edit')->name('edit');
-        Route::Post('update/{id}', 'Update')->name('update');
-
-    });
-
-    Route::controller(PerformanceController::class)->group(function(){
-        Route::get('performance', 'Index')->name('performance');
-        Route::get('create-performance', 'add_performance')->name('add_performance');
-        Route::Post('store-performance', 'store_performance')->name('store_performance');
-        Route::Post('status-performance', 'status')->name('performance_status');
-        Route::post('destroy-performance', 'destroy')->name('performance_destroy');
-        Route::get('edit-performance/{id}', 'edit')->name('performance_edit');
-        Route::post('update-performance/{id}', 'Update')->name('performance_update');
-    });
-
-
-    Route::controller(CoreValueController::class)->group(function(){
-        Route::get('core-value', 'Index')->name('corevalue');
-        Route::get('create-corevalue', 'add')->name('add_corevalue');
-        Route::Post('store-corevalue', 'store')->name('store_corevalue');
-        Route::Post('status-corevalue', 'status')->name('status_corevalue');
-        Route::Post('destroy-corevalue', 'destroy')->name('destroy_corevalue');
-        Route::get('edit-corevalue/{id}', 'edit')->name('edit_corevalue');
-        Route::post('update-corevalue/{id}', 'Update')->name('update_corevalue');
-    });
-
-    });
-
-
-
     Route::prefix('readines/')->name('readines.')->group(function () {
         Route::get('business', [BusinessController::class, 'business'])->name('business');
         Route::Post('update-business', [BusinessController::class, 'business_update'])->name('update_business');
@@ -467,8 +312,165 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
 
 
     });
-    // Certificate
-//
+
+    Route::prefix('media-center')->name('media-center.')->group(function () {
+        Route::post('news/filter', [NewsController::class, 'index'])->name('news.filter');
+        Route::post('news/status', [NewsController::class, 'statusToggle'])->name('news.status');
+        Route::post('news/delete-file', [NewsController::class, 'deleteFile'])->name('news.delete-file');
+        Route::resource('news', NewsController::class);
+
+        Route::post('press-release/filter', [PressReleaseController::class, 'index'])->name('press-release.filter');
+        Route::post('press-release/status', [PressReleaseController::class, 'statusToggle'])->name('press-release.status');
+        Route::post('press-release/delete-file', [PressReleaseController::class, 'deleteFile'])->name('press-release.delete-file');
+        Route::resource('press-release', PressReleaseController::class);
+
+        Route::post('social-media/filter', [SocialMediaController::class, 'index'])->name('social-media.filter');
+        Route::post('social-media/status', [SocialMediaController::class, 'statusToggle'])->name('social-media.status');
+        Route::resource('social-media', SocialMediaController::class);
+
+        Route::post('photo/filter', [PhotoController::class, 'index'])->name('photo.filter');
+        Route::post('photo/status', [PhotoController::class, 'statusToggle'])->name('photo.status');
+        Route::resource('photo', PhotoController::class);
+
+        Route::post('video/filter', [VideoController::class, 'index'])->name('video.filter');
+        Route::post('video/status', [VideoController::class, 'statusToggle'])->name('video.status');
+        Route::resource('video', VideoController::class);
+
+    });
+
+    Route::prefix('membership')->name('membership.')->group(function () {
+        Route::post('type/filter', [MembershipTypeController::class, 'index'])->name('type.filter');
+        Route::post('type/export', [MembershipTypeController::class, 'export'])->name('type.export');
+        Route::post('type/status', [MembershipTypeController::class, 'statusToggle'])->name('type.status');
+        Route::resource('type', MembershipTypeController::class);
+
+        Route::post('business-directory/filter', [BusinessDirectoryController::class, 'index'])->name('business-directory.filter');
+        Route::post('business-directory/export', [BusinessDirectoryController::class, 'export'])->name('business-directory.export');
+        Route::post('business-directory/status', [BusinessDirectoryController::class, 'statusToggle'])->name('business-directory.status');
+        Route::resource('business-directory', BusinessDirectoryController::class);
+
+        Route::get('member-benefit', [MemberBenefitController::class, 'index'])->name('member-benefit');
+        Route::post('member-benefit/update', [MemberBenefitController::class, 'update'])->name('member-benefit.update');
+        // Route::resource('member-benefit', MemberBenefitController::class);
+    });
+
+    Route::prefix('about-us/')->group(function () {
+
+        Route::controller(StaffController::class)->prefix('staff')->name('staff.')->group(function () {
+            Route::get('create', 'create')->name('create');
+            Route::Post('store', 'store')->name('store');
+            Route::get('list', 'list')->name('list');
+            Route::Post('status', 'status')->name('status');
+            Route::get('destroy/{id}', 'destroy')->name('destroy');
+            Route::get('edit/{id}', 'edit')->name('edit');
+            Route::patch('update/{id}', 'Update')->name('update');
+            
+        });
+
+        Route::controller(CommitteessController::class)->prefix('committeess')->name('committeess.')->group(function () {
+            Route::get('create', 'create')->name('create');
+            Route::Post('store', 'store')->name('store');
+            Route::get('list', 'list')->name('list');
+            Route::Post('status', 'status')->name('status');
+            Route::get('destroy/{id}', 'destroy')->name('destroy');
+            Route::get('edit/{id}', 'edit')->name('edit');
+            Route::patch('update/{id}', 'Update')->name('update');
+            
+        });
+
+        Route::controller(AboutController::class)->prefix('about')->name('about.')->group(function () {
+
+            Route::get('introduction', 'Introduction')->name('introduction');
+            Route::Post('introduction', 'Introduction_update')->name('introduction_update');
+            Route::get('mission', 'Mission')->name('mission');
+            Route::post('mission', 'Mission_update')->name('mission_update');
+
+            Route::get('council', 'Council')->name('council');
+            Route::post('council', 'Council_update')->name('council_update');
+            Route::get('history', 'History')->name('history');
+            Route::Post('history', 'History_update')->name('history_update');
+
+
+        
+        });
+
+        Route::controller(TestimonialController::class)->prefix('testimonial')->name('testimonial.')->group(function(){
+            Route::get('list', 'Index')->name('list');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'Store')->name('store');
+            Route::Post('status', 'status')->name('status');
+            Route::Post('destroy', 'destroy')->name('destroy');
+            Route::get('edit/{id}', 'edit')->name('edit');
+            Route::Post('update/{id}', 'Update')->name('update');
+
+        });
+
+        Route::controller(PerformanceController::class)->group(function(){
+            Route::get('performance', 'Index')->name('performance');
+            Route::get('create-performance', 'add_performance')->name('add_performance');
+            Route::Post('store-performance', 'store_performance')->name('store_performance');
+            Route::Post('status-performance', 'status')->name('performance_status');
+            Route::post('destroy-performance', 'destroy')->name('performance_destroy');
+            Route::get('edit-performance/{id}', 'edit')->name('performance_edit');
+            Route::post('update-performance/{id}', 'Update')->name('performance_update');
+        });
+
+
+        Route::controller(CoreValueController::class)->group(function(){
+            Route::get('core-value', 'Index')->name('corevalue');
+            Route::get('create-corevalue', 'add')->name('add_corevalue');
+            Route::Post('store-corevalue', 'store')->name('store_corevalue');
+            Route::Post('status-corevalue', 'status')->name('status_corevalue');
+            Route::Post('destroy-corevalue', 'destroy')->name('destroy_corevalue');
+            Route::get('edit-corevalue/{id}', 'edit')->name('edit_corevalue');
+            Route::post('update-corevalue/{id}', 'Update')->name('update_corevalue');
+        });
+
+    }); 
+
+    Route::prefix('cms')->name('cms.')->group(function () {
+        Route::get('guyana-economy', [CMSController::class, 'guyanaEconomy'])->name('guyana-economy');
+        Route::get('guyana-economy/create', [CMSController::class, 'guyanaEconomyCreate'])->name('guyana-economy.create');
+        Route::post('guyana-economy/store', [CMSController::class, 'guyanaEconomyStore'])->name('guyana-economy.store');
+        Route::get('guyana-economy/show/{id}', [CMSController::class, 'guyanaEconomyShow'])->name('guyana-economy.show');
+        Route::get('guyana-economy/edit/{id}', [CMSController::class, 'guyanaEconomyEdit'])->name('guyana-economy.edit');
+        Route::patch('guyana-economy/update', [CMSController::class, 'guyanaEconomyUpdate'])->name('guyana-economy.update');
+        Route::delete('guyana-economy/delete/{id}', [CMSController::class, 'guyanaEconomyDelete'])->name('guyana-economy.delete');
+        Route::post('guyana-economy/delete-image', [CMSController::class, 'guyanaEconomyDeleteImage'])->name('guyana-economy.delete-image');
+        Route::post('guyana-economy/filter', [CMSController::class, 'guyanaEconomy'])->name('guyana-economy.filter');
+        Route::post('guyana-economy/export', [CMSController::class, 'guyanaEconomyExport'])->name('guyana-economy.export');
+        Route::post('guyana-economy/status', [CMSController::class, 'guyanaEconomyStatusToggle'])->name('guyana-economy.status');
+      
+     
+
+
+    });
+
+    Route::prefix('authorization')->name('authorization.')->group(function () {
+        Route::post('role/export', [RoleController::class, 'export'])->name('role.export');
+        Route::post('role/filter', [RoleController::class, 'index'])->name('role.filter');
+        Route::resource('role', RoleController::class);
+
+        Route::resource('permission', PermissionController::class);
+    });
+
+    Route::prefix('settings')->name('settings.')->group(function () {
+        Route::get('general', [SettingsController::class, 'general'])->name('general');
+        Route::patch('general', [SettingsController::class, 'updateGeneral']);
+        Route::get('email', [SettingsController::class, 'email'])->name('email');
+        Route::patch('email', [SettingsController::class, 'updateEmail']);
+        Route::get('contact-us', [SettingsController::class, 'contactUs'])->name('contact-us');
+        Route::patch('contact-us', [SettingsController::class, 'updateContactUs']);
+    });
+
+    Route::prefix('system')->name('system.')->group(function () {
+        Route::get('notification/reload-table', [NotificationController::class, 'reloadTable'])->name('notification.reload-table');
+        Route::post('notification/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notification.mark-as-read');
+        Route::get('notification/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('notification.mark-all-as-read');
+        Route::resource('notification', NotificationController::class);
+
+    });
+
 });
 
 // Route::get('test', [TestController::class, 'test'])->name('test');
