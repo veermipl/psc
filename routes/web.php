@@ -195,6 +195,13 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         Route::post('caricom-cet/update-objective', [CaricomCETController::class, 'updateObjective'])->name('caricom-cet.update-objective');
         Route::post('caricom-cet/update-objective-status', [CaricomCETController::class, 'updateObjectiveStatus'])->name('caricom-cet.update-objective-status');
         Route::post('caricom-cet/delete-objective', [CaricomCETController::class, 'deleteObjective'])->name('caricom-cet.delete-objective');
+
+        Route::get('caricom-cet/create-how-it-works', [CaricomCETController::class, 'createHowItWorks'])->name('caricom-cet.create-how-it-works');
+        Route::post('caricom-cet/save-how-it-works', [CaricomCETController::class, 'saveHowItWorks'])->name('caricom-cet.save-how-it-works');
+        Route::get('caricom-cet/edit-how-it-works/{id}', [CaricomCETController::class, 'editHowItWorks'])->name('caricom-cet.edit-how-it-works');
+        Route::post('caricom-cet/update-how-it-works', [CaricomCETController::class, 'updateHowItWorks'])->name('caricom-cet.update-how-it-works');
+        Route::post('caricom-cet/update-how-it-works-status', [CaricomCETController::class, 'updateHowItWorksStatus'])->name('caricom-cet.update-how-it-works-status');
+        Route::post('caricom-cet/delete-how-it-works', [CaricomCETController::class, 'deleteHowItWorks'])->name('caricom-cet.delete-how-it-works');
     });
 
     Route::prefix('readines/')->name('readines.')->group(function () {

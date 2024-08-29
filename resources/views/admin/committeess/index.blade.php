@@ -1,4 +1,3 @@
-
 @extends('layout.admin_master')
 
 @section('title', 'Committeess Members - List')
@@ -18,9 +17,9 @@
                     <div class="d-flex align-items-center">
                         <!-- <h6 class="mb-0">Recent List</h6> -->
                         <a href="{{ route('admin.committeess.create') }}" class="btn btn-primary btn-sm">
-                    <ion-icon name="person-add-outline" role="img" class="md hydrated"
-                        aria-label="person add"></ion-icon>Create Committees Member
-                </a>
+                            <ion-icon name="person-add-outline" role="img" class="md hydrated"
+                                aria-label="person add"></ion-icon>Create Committees Member
+                        </a>
                     </div>
 
                     <div class="table-responsive">
@@ -31,30 +30,29 @@
                                     <th scope="col">#</th>
                                     <th scope="col" data-sortable="true">Profile</th>
                                     <th scope="col" data-sortable="true">Name</th>
-                                    <th scope="col" data-sortable="true">Office</th>
-                                    <th scope="col" data-sortable="true">facebook link</th>
+                                    <th scope="col" data-sortable="true">Designation</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if (@$data && count(@$data) > 0)
-                                 @foreach ($data as $userKey => $user)
-                                    @php
-                                      $userRoles = $user->role ? $user->role->pluck('name')->toArray() : [];
-                                    @endphp
-                                    <tr class="tr_row_{{ $userKey }}">
-                                        <th scope="row">{{ $userKey + 1 }}</th>
-                                        <td><img style="height:40px; width:50px" src="{{asset('storage/'.$user->image)}}" > </td>
-                                        <td>
-                                            <a href="#" class="text-secondary">
-                                                {{ $user->name }}
-                                            </a>
-                                        </td>
-                                        <td>{{ $user->office }}</td>
-                                        <td>{{ $user->facebook }}</td>
-                                        <td>
-                                        @if ($user->status == 1)
+                                    @foreach ($data as $userKey => $user)
+                                        @php
+                                            $userRoles = $user->role ? $user->role->pluck('name')->toArray() : [];
+                                        @endphp
+                                        <tr class="tr_row_{{ $userKey }}">
+                                            <th scope="row">{{ $userKey + 1 }}</th>
+                                            <td><img style="height:40px; width:50px"
+                                                    src="{{ asset('storage/' . $user->image) }}"> </td>
+                                            <td>
+                                                <a href="#" class="text-secondary">
+                                                    {{ $user->name }}
+                                                </a>
+                                            </td>
+                                            <td>{{ $user->office }}</td>
+                                            <td>
+                                                @if ($user->status == 1)
                                                     <span class="badge alert-success" id="userStatus"
                                                         uid="{{ $user->id }}" ustatus="{{ $user->status }}"
                                                         urow="{{ $userKey }}">
@@ -66,22 +64,22 @@
                                                         urow="{{ $userKey }}">
                                                         In Active
                                                     </span>
-                                         @endif
-                                        </td>
+                                                @endif
+                                            </td>
 
-                                        <td>
-                                            <div class="tableOptions">
-                                                <span class="text-dark" title="Edit">
-                                                    <a href="{{ route('admin.committeess.edit', $user->id) }}"><i
-                                                            class="fa fa-edit"></i></a>
-                                                </span>
-                                                <span class="text-danger" title="Delete" uid="{{ $user->id }}" urow="{{ $userKey }}"
-                                                    id="deleteUserBtn">
-                                                    <i class="fa fa-trash"></i>
-                                                </span>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            <td>
+                                                <div class="tableOptions">
+                                                    <span class="text-dark" title="Edit">
+                                                        <a href="{{ route('admin.committeess.edit', $user->id) }}"><i
+                                                                class="fa fa-pencil"></i></a>
+                                                    </span>
+                                                    <span class="text-danger" title="Delete" uid="{{ $user->id }}"
+                                                        urow="{{ $userKey }}" id="deleteUserBtn">
+                                                        <i class="fa fa-trash"></i>
+                                                    </span>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 @endif
                             </tbody>

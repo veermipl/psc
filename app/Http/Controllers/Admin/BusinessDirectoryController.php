@@ -24,6 +24,7 @@ class BusinessDirectoryController extends Controller
 
         $filterValues = [
             'name' => $request->name ?? null,
+            'type' => $request->type ?? null,
             'status' => $request->status ?? null,
         ];
         $list = BusinessDirectory::orderBy('id', 'desc')
@@ -31,12 +32,17 @@ class BusinessDirectoryController extends Controller
                 $query->when($request->filled('name'), function (Builder $q) use ($filterValues) {
                     $q->where('name', 'like', '%' . $filterValues['name'] . '%');
                 })
+                    ->when($request->filled('type'), function (Builder $q) use ($filterValues) {
+                        $q->where('type', $filterValues['type']);
+                    })
                     ->when($request->filled('status'), function (Builder $q) use ($filterValues) {
                         $q->where('status', $filterValues['status']);
                     });
             })
             ->get();
+        $membershipList = MembershipType::orderBy('name', 'asc')->get();
 
+        $data['membershipList'] = $membershipList;
         $data['filterValues'] = $filterValues;
         $data['list'] = $list;
         $data['export_id'] = $list->pluck('id')->toArray();

@@ -4,7 +4,7 @@ namespace App\Http\Requests\admin\data\caricom_cet;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DeleteCaricomCETObjectiveRequest extends FormRequest
+class DeleteCaricomCETHowItWorksRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,7 @@ class DeleteCaricomCETObjectiveRequest extends FormRequest
     {
         return [
             'lid' => ['required', 'exists:caricom_cet,id'],
-            'ltype' => ['required', 'in:objective'],
+            'ltype' => ['required', 'in:how_it_works'],
         ];
     }
 }

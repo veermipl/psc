@@ -6,7 +6,7 @@
 @section('content')
 
     <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Updadte Caricom CET - Objective</div>
+        <div class="breadcrumb-title pe-3">Update Caricom CET - Objective</div>
     </div>
 
     <div class="row">

@@ -19,12 +19,24 @@
                             @csrf
                             @method('post')
 
-                            <div class="col-md-6 position-relative">
+                            <div class="col-md-4 position-relative">
                                 <input type="text" class="form-control" name="name" placeholder="Name"
                                     value="{{ $filterValues['name'] }}">
                             </div>
 
-                            <div class="col-md-6 position-relative">
+                            <div class="col-md-4 position-relative">
+                                <select name="type" class="form-control">
+                                    <option hidden value="">Type</option>
+                                    @foreach ($membershipList as $mKey => $mType)
+                                        <option value="{{ $mType['id'] }}"
+                                            {{ $filterValues['type'] == $mType['id'] ? 'selected' : '' }}>
+                                            {{ $mType['name'] }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-md-4 position-relative">
                                 <select name="status" class="form-control">
                                     <option hidden value="">Status</option>
                                     @foreach (config('site.status') as $status)

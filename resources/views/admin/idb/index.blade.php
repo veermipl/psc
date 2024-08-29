@@ -6,7 +6,7 @@
 @section('content')
 
     <div class="p-3 bg-white">
-        <h5 class="fw-bold">IDB Investment Services  List</h5>
+        <h5 class="fw-bold">IDB Investment Services List</h5>
 
         <div class="filter-wrapper my-3 p-3">
             <form action="#" method="post">
@@ -64,20 +64,19 @@
                 <tbody>
                     @if ($data && count($data) > 0)
                         @foreach ($data as $userKey => $user)
-                           
                             <tr class="tr_row_{{ $userKey }}">
                                 <th scope="row">{{ $userKey + 1 }}</th>
                                 <td>
-                                    @if($user->image != '')
-                                    <img style="height:40px; width:50px" src="{{asset('storage/'.$user->image)}}" > 
-                                    @else 
-                                    <img style="height:50px; width:50px" src="{{asset('images/team/commeties.png')}}" > 
+                                    @if ($user->image != '')
+                                        <img style="height:40px; width:50px" src="{{ asset('storage/' . $user->image) }}">
+                                    @else
+                                        <img style="height:50px; width:50px" src="{{ asset('images/team/commeties.png') }}">
                                     @endif
-                                
-                                </td>
-                                <td>   {{ $user->title }}  </td>
 
-                                <td>{!! strip_tags(substr($user->contant, 0,40)) !!}....</td>
+                                </td>
+                                <td> {{ $user->title }} </td>
+
+                                <td>{!! strip_tags(substr($user->contant, 0, 40)) !!}....</td>
                                 <td>
                                     @if ($user->status == 1)
                                         <span class="badge badge-success" id="userStatus" uid="{{ $user->id }}"
@@ -96,10 +95,10 @@
                                     <div class="tableOptions">
                                         <span class="text-dark" title="Edit">
                                             <a href="{{ route('admin.readines.IDB.edit', $user->id) }}"><i
-                                                    class="fa fa-edit"></i></a>
+                                                    class="fa fa-pencil"></i></a>
                                         </span>
-                                        <span class="text-danger" title="Delete" uid="{{ $user->id }}" urow="{{ $userKey }}"
-                                            id="deleteUserBtn">
+                                        <span class="text-danger" title="Delete" uid="{{ $user->id }}"
+                                            urow="{{ $userKey }}" id="deleteUserBtn">
                                             <i class="fa fa-trash"></i>
                                         </span>
                                     </div>
@@ -147,18 +146,25 @@
                             dataType: "json",
                             beforeSend: function() {
                                 // $('.preloader').show();
-                                $('span#userStatus[urow="'+urow+'"]').prop('disabled', true).css({
-                                    'cursor':'not-allowed'
+                                $('span#userStatus[urow="' + urow + '"]').prop(
+                                    'disabled', true).css({
+                                    'cursor': 'not-allowed'
                                 });
                             },
                             success: function(response) {
                                 if (response.error === false) {
                                     toastr.success(response.msg);
 
-                                    if(parseInt(ustatus) == 1){
-                                        $('span#userStatus[urow="'+urow+'"]').attr('ustatus', 0).removeClass('badge-success').addClass('badge-danger').html('In Active');
-                                    }else{
-                                        $('span#userStatus[urow="'+urow+'"]').attr('ustatus', 1).removeClass('badge-danger').addClass('badge-success').html('Active');
+                                    if (parseInt(ustatus) == 1) {
+                                        $('span#userStatus[urow="' + urow + '"]').attr(
+                                            'ustatus', 0).removeClass(
+                                            'badge-success').addClass(
+                                            'badge-danger').html('In Active');
+                                    } else {
+                                        $('span#userStatus[urow="' + urow + '"]').attr(
+                                            'ustatus', 1).removeClass(
+                                            'badge-danger').addClass(
+                                            'badge-success').html('Active');
                                     }
                                 } else {
                                     toastr.error(response.msg);
@@ -169,8 +175,9 @@
                             },
                             complete: function(xhr, status) {
                                 // $('.preloader').hide();
-                                $('span#userStatus[urow="'+urow+'"]').prop('disabled', false).css({
-                                    'cursor':'pointer'
+                                $('span#userStatus[urow="' + urow + '"]').prop(
+                                    'disabled', false).css({
+                                    'cursor': 'pointer'
                                 });
                             }
                         });
@@ -203,13 +210,14 @@
                             dataType: "json",
                             beforeSend: function() {
                                 // $('.preloader').show();
-                                $('span#deleteUserBtn[urow="'+urow+'"]').prop('disabled', true).css({
-                                    'cursor':'not-allowed'
+                                $('span#deleteUserBtn[urow="' + urow + '"]').prop(
+                                    'disabled', true).css({
+                                    'cursor': 'not-allowed'
                                 });
                             },
                             success: function(response) {
                                 if (response.error === false) {
-                                    $('tr.tr_row_'+urow+'').remove();
+                                    $('tr.tr_row_' + urow + '').remove();
                                     toastr.success(response.msg);
                                 } else {
                                     toastr.error(response.msg);
@@ -220,8 +228,9 @@
                             },
                             complete: function(xhr, status) {
                                 // $('.preloader').hide();
-                                $('span#deleteUserBtn[urow="'+urow+'"]').prop('disabled', false).css({
-                                    'cursor':'pointer'
+                                $('span#deleteUserBtn[urow="' + urow + '"]').prop(
+                                    'disabled', false).css({
+                                    'cursor': 'pointer'
                                 });
                             }
                         });
