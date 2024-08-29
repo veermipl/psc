@@ -10,9 +10,20 @@ use App\Http\Controllers\Controller;
 class CertificateController extends Controller
 {
 
-    public function certificate(){
-        $data = Business::where('type', 'Origins')->first();
-        return view('admin.origins.edit', compact('data'));
+    public function certificate(Request $request){
+
+        $main = Business::where('type', 'Origins')->first();
+        $top_partner = Business::where('type', 'Origins_certificate')->orderby('id', 'desc')->get(); 
+        $top_country = Business::where('type', 'Origins_of_certificates')->orderby('id', 'desc')->get(); 
+        $data['tab'] = $request->filled('tab') ? $request->tab : 'main';
+        $data['main'] = $main;
+        $data['top_partner'] = $top_partner;
+        $data['top_country'] = $top_country;
+
+
+
+        // $data = Business::where('type', 'Origins')->first();
+        return view('admin.origins.edit', $data);
     }
 
     public function certificate_update(Request $request){
@@ -20,7 +31,7 @@ class CertificateController extends Controller
         $this->validate($request,[
             'title'  => 'required',
             'content'  => 'required',
-            'status' => 'required',
+            // 'status' => 'required',
             'images'  => 'nullable|mimes:jpeg,jpg,png',
         ]);
         $data = Business::where('type', $request->type)->first();
@@ -34,7 +45,7 @@ class CertificateController extends Controller
             'title' => $request->title ,
             'contant' => $request->content ,
             'image' => $profile,
-            'status' => $request->status,
+            'status' => $request->status ?? '1',
             'type' => $request->type,
         ];
         if($data != ''){
@@ -45,10 +56,10 @@ class CertificateController extends Controller
         return redirect()->route('admin.readines.certificate.origins')->with('status', 'Certificate of Origins update successfully');
     }
 
-    public function type_certificate(){
-        $data = Business::where('type', 'Origins_certificate')->orderby('id', 'desc')->get(); 
-        return view('admin.origins.type.index', compact('data'));
-    }
+    // public function type_certificate(){
+    //     $data = Business::where('type', 'Origins_certificate')->orderby('id', 'desc')->get(); 
+    //     return view('admin.origins.type.index', compact('data'));
+    // }
     public function type_add()
     {
         return view('admin.origins.type.create');
@@ -73,12 +84,12 @@ class CertificateController extends Controller
             'status' => $request->status,
         ];
         Business::create($array);
-        return redirect()->route('admin.readines.origins.type.certificate')->with('status', 'Type certificate create successfully');
+        return redirect()->route('admin.readines.certificate.origins', ['tab' => $request->type])->with('status', 'Type certificate create successfully');
     }
 
     public function type_status(Request $request){
-        $user = Business::find($request->uid);
-        $status = $request->ustatus == 1 ? '0' : '1';
+        $user = Business::find($request->lid);
+        $status = $request->lstatus == 1 ? '0' : '1';
         DB::transaction(function () use ($user, $status) {
             $user->update([
                 'status' => $status
@@ -88,8 +99,8 @@ class CertificateController extends Controller
         $data['msg'] = 'Certificates status updated';
         return response()->json($data, 200);
     }
-    public function type_destroy($id){
-        $user = Business::find($id);
+    public function type_destroy(Request $request){
+        $user = Business::find($request->lid);
         $user->delete();
         $data['error'] = false; 
         $data['msg'] = 'Certificate Deleted';
@@ -123,15 +134,15 @@ class CertificateController extends Controller
             'status' => $request->status,
         ];
         $test->Update($array);
-        return redirect()->route('admin.readines.origins.type.certificate')->with('status', 'certificate update successfully');
+        return redirect()->route('admin.readines.certificate.origins', ['tab' => $request->type])->with('status', 'certificate update successfully');
 
     }
 
 
-    public function certificatess(){
-        $data = Business::where('type', 'Origins_certificates')->orderby('id', 'desc')->get(); 
-        return view('admin.origins.certificate.index', compact('data'));
-    }
+    // public function certificatess(){
+    //     $data = Business::where('type', 'Origins_certificates')->orderby('id', 'desc')->get(); 
+    //     return view('admin.origins.certificate.index', compact('data'));
+    // }
     public function origins_add() {
         return view('admin.origins.certificate.create');
     }
@@ -148,19 +159,19 @@ class CertificateController extends Controller
             $profile = $file->store('/images/business', 'public');
         }
         $array = [
-            'type' => 'Origins_certificates',
+            'type' => 'Origins_of_certificates',
             'title' => $request->title ,
             'contant' => $request->content ,
             'image' => $profile ?? '' ,
             'status' => $request->status,
         ];
         Business::create($array);
-        return redirect()->route('admin.readines.origins.certificate')->with('status', 'Type certificate create successfully');
+        return redirect()->route('admin.readines.certificate.origins', ['tab' => $request->type])->with('status', 'Type certificate create successfully');
     }
     
 
     public function origins_status(Request $request){
-        $user = Business::find($request->uid);
+        $user = Business::find($request->lid);
         $status = $request->ustatus == 1 ? '0' : '1';
         DB::transaction(function () use ($user, $status) {
             $user->update([
@@ -171,8 +182,8 @@ class CertificateController extends Controller
         $data['msg'] = 'certificates status updated';
         return response()->json($data, 200);
     }
-    public function origins_destroy($id){
-        $user = Business::find($id);
+    public function origins_destroy(Request $request){
+        $user = Business::find($request->lid);
         $user->delete();
         $data['error'] = false; 
         $data['msg'] = 'certificates Deleted';
@@ -206,7 +217,7 @@ class CertificateController extends Controller
             'status' => $request->status,
         ];
         $test->Update($array);
-        return redirect()->route('admin.readines.origins.certificate')->with('status', 'certificate update successfully');
+        return redirect()->route('admin.readines.certificate.origins', ['tab' => $request->type])->with('status', 'certificate update successfully');
 
     }
 

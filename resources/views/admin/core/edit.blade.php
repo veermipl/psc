@@ -1,70 +1,61 @@
 @extends('layout.admin_master')
 
-@section('title', 'About -  core value')
+@section('title', 'Edit core value')
+@section('header', 'Edit core value')
 
 @section('content')
 
-    <div class="p-3 bg-white">
-        <h5 class="fw-bold">Edit Corevalue</h5>
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">Edit Core Value </div>
+    </div>
 
-        <div class="pt-5">
-            <form action="{{ route('admin.cms.update_corevalue', $data->id) }}" method="post" enctype="multipart/form-data">
-                @csrf
-                @method('patch')
-                <div class="d-flex">
-                    <div class="form-group col-md-6">
-                        <label for="name">Title <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="title" placeholder="Title"
-                            value="{{ old('title', @$data->title) }}" maxlength="50">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card radius-10">
+                <div class="card-body">
+                    <div class="p-4 border rounded">
+                        <form action="{{  route('admin.update_corevalue', $data->id) }}" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+                            @csrf
+                            @method('post')
 
-                        @error('title')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="name">Images <span class="text-danger">*</span></label>
-                        <input type="file" class="form-control" name="images"  accept="image/*" multiple>
+                            <input type="hidden" name="type" value="top_partner">
 
-                        @error('images')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="form-group col-md-2">
-                        @if(@$data->image != '')
-                        <img style="width: 50px; height: 58px;  margin-top: 15px;" src="{{asset('storage/'.@$data->image)}}">
-                        @else
-                        <img style="width: 50px; height: 58px;  margin-top: 15px;" src="{{asset('images/team/commeties.png')}}">
-                        @endif
-                    </div>
-                </div>
+                            <div class="col-md-6 position-relative">
+                                <label for="title">Title <span class="text-danger">*</span></label>
+                                <input type="text" id="title" class="form-control" name="title"
+                                    placeholder="Enter title" value="{{ old('title', @$data->title) }}" maxlength="50">
 
+                                @error('title')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
 
-                <div class="d-flex">
-                    <div class="form-group col-md-6">
-                        <label for="membership_type">Status <span class="text-danger">*</span></label>
-                        <select name="status" class="form-control">
-                            <option hidden value="">Status</option>
-                            @foreach (config('site.status') as $status)
-                                <option value="{{ $status['value'] }}"
-                                    {{ old('status', @$data->status) == $status['value'] ? 'selected' : '' }}>
-                                    {{ $status['name'] }}
-                                </option>
-                            @endforeach
-                        </select>
+                           
 
-                        @error('status')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
+                            <div class="col-md-6 position-relative">
+                                <label for="membership_type">Status <span class="text-danger">*</span></label>
+                                <select name="status" class="form-control">
+                                    <option hidden value="">Status</option>
+                                    @foreach (config('site.status') as $status)
+                                        <option value="{{ $status['value'] }}"
+                                        {{ old('status', @$data->status) == $status['value'] ? 'selected' : '' }}>
+                                            {{ $status['name'] }}
+                                        </option>
+                                    @endforeach
+                                </select>
 
-                    <div class="form-group col-md-6">
+                                @error('status')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            
+                            <div class="col-12 text-end mt-5">
+                                <button class="btn btn-sm btn-primary" type="submit">Update</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-
-                <div class="form-group col-md-12 text-right">
-                    <button class="btn btn-sm btn-custom" type="submit">Update</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 

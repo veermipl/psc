@@ -1,13 +1,13 @@
 
 @extends('layout.admin_master')
 
-@section('title', 'Staff - List')
-@section('header', 'Staff - List')
+@section('title', 'Committeess Members - List')
+@section('header', 'Committeess Members - List')
 
 @section('content')
 
     <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Staff List</div>
+        <div class="breadcrumb-title pe-3">Committees Members List</div>
     </div>
 
 
@@ -17,9 +17,9 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <!-- <h6 class="mb-0">Recent List</h6> -->
-                        <a href="{{ route('admin.staff.create') }}" class="btn btn-primary btn-sm">
+                        <a href="{{ route('admin.committeess.create') }}" class="btn btn-primary btn-sm">
                     <ion-icon name="person-add-outline" role="img" class="md hydrated"
-                        aria-label="person add"></ion-icon>Create Staff
+                        aria-label="person add"></ion-icon>Create Committees Member
                 </a>
                     </div>
 
@@ -72,7 +72,7 @@
                                         <td>
                                             <div class="tableOptions">
                                                 <span class="text-dark" title="Edit">
-                                                    <a href="{{ route('admin.staff.edit', $user->id) }}"><i
+                                                    <a href="{{ route('admin.committeess.edit', $user->id) }}"><i
                                                             class="fa fa-edit"></i></a>
                                                 </span>
                                                 <span class="text-danger" title="Delete" uid="{{ $user->id }}" urow="{{ $userKey }}"
@@ -120,7 +120,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "{{ route('admin.staff.status') }}",
+                            url: "{{ route('admin.committeess.status') }}",
                             method: 'POST',
                             data: {
                                 _method: 'post',
@@ -175,7 +175,7 @@
 
                 var uid = $(this).attr('uid');
                 var urow = $(this).attr('urow');
-                var url = `{{ url('/admin/about-us/staff/destroy/${uid}') }}`;
+                var url = `{{ url('/admin/about-us/committeess/destroy/${uid}') }}`;
 
                 Swal.fire({
                     title: "Are you sure?",

@@ -1,119 +1,127 @@
 @extends('layout.admin_master')
 
-<!-- @section('title', 'Saff - Create')
-@section('header', 'Create Saff') -->
+@section('title', 'Staff - Create')
+@section('header', 'Create Staff')
 
 @section('content')
 
-<div class="p-3 bg-white">
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
+        <div class="breadcrumb-title pe-3">Create Staff</div>
+    </div>
 
-    <h5 class="fw-bold">Create Saff</h5>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card radius-10">
+                <div class="card-body">
+                    <div class="p-4 border rounded">
+                        <form action="{{ route('admin.staff.store') }}" method="post" enctype="multipart/form-data"
+                            class="row g-3 needs-validation">
+                            @csrf
+                            @method('post')
 
-    <div class="pt-5">
-        <form action="{{ route('admin.staff.store') }}" method="post" enctype="multipart/form-data">
-            @csrf
-            @method('post')
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Name <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" id="name" class="form-control" name="name"
+                                    placeholder="Enter name" value="{{ old('name') }}" maxlength="50">
 
-            <div class="d-flex">
-                <div class="form-group col-md-6">
-                    <label for="name">Name <span class="text-danger">*</span></label>
-                    <input type="text" id="name" class="form-control" name="name" placeholder="Enter name"
-                        value="{{ old('name') }}" maxlength="50">
+                                @error('name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
 
-                    @error('name')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
+                            <div class="col-md-6 position-relative">
+                                    <label for="validationTooltip01" class="form-label">Office <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" id="office" class="form-control" name="office"
+                                            placeholder="Enter office" value="{{ old('office') }}" maxlength="50">
 
-                <div class="form-group col-md-6">
-                    <label for="office">Office <span class="text-danger">*</span></label>
-                    <input type="text" id="office" class="form-control" name="office" placeholder="Office"
-                        value="{{ old('office') }}" maxlength="50">
+                                        @error('office')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                            </div>
 
-                    @error('office')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-            </div>
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Facebook link </label>
+                                <input type="text" id="facebook" class="form-control" name="facebook"
+                                    value="{{ old('facebook') }}" placeholder="Enter Facebook link" maxlength="50">
 
-            <div class="d-flex">
-                <div class="form-group col-md-6">
-                    <label for="facebook">Facebook link </label>
-                    <input type="text" id="facebook" class="form-control" name="facebook" placeholder="Enter Facebook link"
-                        value="{{ old('facebook') }}" maxlength="50">
+                                @error('facebook')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
 
-                    @error('facebook')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Twitter Link </label>
+                                <input type="text" id="twitter" class="form-control" name="twitter"
+                                    value="{{ old('twitter') }}" placeholder="Enter Twitter Link" maxlength="50">
 
-                <div class="form-group col-md-6">
-                    <label for="twitter">Twitter Link </label>
-                    <input type="text" id="twitter" class="form-control" name="twitter" placeholder="Twitter Link"
-                        value="{{ old('twitter') }}" maxlength="50">
-                    @error('twitter')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-            </div>
+                                @error('twitter')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
 
-            <div class="d-flex">
-                <div class="form-group col-md-6">
-                    <label for="instagram">Instagram Link </label>
-                    <input type="text" id="instagram" class="form-control" name="instagram" placeholder="Instagram Link"
-                        value="{{ old('instagram') }}" maxlength="50">
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Instagram Link </label>
+                                <input type="text" id="instagram" class="form-control" name="instagram"
+                                    value="{{ old('instagram') }}" placeholder="Enter Instagram Link" maxlength="50">
 
-                    @error('instagram')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
+                                @error('instagram')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
 
-                <div class="form-group col-md-6">
-                    <label for="dribbble">Dribbble Link</label>
-                    <input type="text" id="dribbble" class="form-control" name="dribbble" placeholder="Dribbble Link"
-                        value="{{ old('dribbble') }}" maxlength="50">
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Dribbble Link </label>
+                                <input type="text" id="dribbble" class="form-control" name="dribbble"
+                                    value="{{ old('dribbble') }}" placeholder="Enter dribbble Link" maxlength="50">
 
-                    @error('dribbble')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
-            </div>
-            <div class="d-flex">
-                <div class="form-group col-md-6">
-                    <label for="form">Upload profile <span class="text-danger">*</span></label>
-                    <input type="file" id="profile" class="form-control" name="profile" accept="application/jpge/jig/png">
+                                @error('dribbble')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
 
-                    @error('profile')
-                    <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Upload Profile Image <span
+                                        class="text-danger">*</span></label>
+                                <input type="file" id="profile" class="form-control" name="profile" accept="application/jpge/jig/png">
 
-                <div class="form-group col-md-6">
-                        <label for="membership_type">Status <span class="text-danger">*</span></label>
-                        <select name="status" class="form-control">
-                            <option hidden value="">Status</option>
-                            @foreach (config('site.status') as $status)
-                                <option value="{{ $status['value'] }}"
-                                    {{ old('status') == $status['value'] ? 'selected' : '' }}>
-                                    {{ $status['name'] }}
-                                </option>
-                            @endforeach
-                        </select>
+                                @error('profile')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
 
-                        @error('status')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
+                  
+
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Status <span
+                                        class="text-danger">*</span></label>
+                                <select name="status" class="form-control">
+                                    <option hidden value="">Status</option>
+                                    @foreach (config('site.status') as $status)
+                                        <option value="{{ $status['value'] }}"
+                                            {{ old('status') == $status['value'] ? 'selected' : '' }}>
+                                            {{ $status['name'] }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @error('status')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 position-relative">
+                            </div>
+
+                            <div class="col-12 text-end mt-5">
+                                <button class="btn btn-sm btn-primary" type="submit">Create</button>
+                            </div>
+                        </form>
                     </div>
+                </div>
             </div>
-
-            
+        </div>
     </div>
-
-    <div class="form-group col-md-12 text-right">
-        <button class="btn btn-sm btn-custom" type="submit">Create Staff</button>
-    </div>
-    </form>
-</div>
-</div>
 
 @endsection

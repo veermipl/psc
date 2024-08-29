@@ -9,16 +9,25 @@ use App\Http\Controllers\Controller;
 
 class IDBInvestController extends Controller
 {
-    public function idb_inves(){
-        $data = Business::where('type', 'IDBInvest')->first();
-        return view('admin.invest.edit', compact('data'));
+    public function idb_inves(Request $request){
+
+        $main = Business::where('type', 'IDBInvest')->first();
+        $top_partner = Business::where('type', 'key_areas')->orderby('id', 'desc')->get(); 
+        $top_country = Business::where('type', 'idb_investment')->orderby('id', 'desc')->get(); 
+
+        $data['tab'] = $request->filled('tab') ? $request->tab : 'main';
+        $data['main'] = $main;
+        $data['top_partner'] = $top_partner;
+        $data['top_country'] = $top_country;
+
+        return view('admin.invest.edit', $data);
     }
 
     public function inves_update(Request $request){
         $this->validate($request,[
             'title'  => 'required',
             'content'  => 'required',
-            'status' => 'required',
+            // 'status' => 'required',
             'images'  => 'nullable|mimes:jpeg,jpg,png',
         ]);
         $data = Business::where('type', $request->type)->first();
@@ -32,27 +41,29 @@ class IDBInvestController extends Controller
             'title' => $request->title ,
             'contant' => $request->content ,
             'image' => $profile,
-            'status' => $request->status,
+            'status' => $request->status ?? '1',
             'type'  => $request->type,
         ];
         if($data  != ''){
         $data->Update($array);
         }else{
-            Business::crete($array);
+            Business::create($array);
         }
         return redirect()->route('admin.readines.idbinves')->with('status', 'IDB Invest update successfully');
     }
 
 
 
-    public function key_areas(){
-        $data = Business::where('type', 'key_areas')->orderby('id', 'desc')->get(); 
-        return view('admin.areas.index', compact('data'));
-    }
+    // public function key_areas(){
+    //     $data = Business::where('type', 'key_areas')->orderby('id', 'desc')->get(); 
+    //     return view('admin.areas.index', compact('data'));
+    // }
+
     public function areas_add()
     {
         return view('admin.areas.create');
     }
+
     public function areas_store(Request $request){
 
         $this->validate($request,[
@@ -73,11 +84,11 @@ class IDBInvestController extends Controller
             'status' => $request->status,
         ];
         Business::create($array);
-        return redirect()->route('admin.readines.key_areas')->with('status', 'Investment Create successfully');
+        return redirect()->route('admin.readines.idbinves', ['tab' => $request->type])->with('status', 'Investment Create successfully');
     }
 
     public function areas_status(Request $request){
-        $user = Business::find($request->uid);
+        $user = Business::find($request->lid);
         $status = $request->ustatus == 1 ? '0' : '1';
         DB::transaction(function () use ($user, $status) {
             $user->update([
@@ -88,8 +99,8 @@ class IDBInvestController extends Controller
         $data['msg'] = 'Investment status updated';
         return response()->json($data, 200);
     }
-    public function areas_destroy($id){
-        $user = Business::find($id);
+    public function areas_destroy(Request $request){
+        $user = Business::find($request->lid);
         $user->delete();
         $data['error'] = false; 
         $data['msg'] = 'Investment Deleted';
@@ -123,17 +134,17 @@ class IDBInvestController extends Controller
             'status' => $request->status,
         ];
         $test->Update($array);
-        return redirect()->route('admin.readines.key_areas')->with('status', 'Key Areas of Focus update successfully');
+        return redirect()->route('admin.readines.idbinves', ['tab' => $request->type])->with('status', 'Key Areas of Focus update successfully');
 
     }
 
 
 
 
-    public function IDB_Investment(){
-        $data = Business::where('type', 'idb_investment')->orderby('id', 'desc')->get(); 
-        return view('admin.idb.index', compact('data'));
-    }
+    // public function IDB_Investment(){
+    //     $data = Business::where('type', 'idb_investment')->orderby('id', 'desc')->get(); 
+    //     return view('admin.idb.index', compact('data'));
+    // }
     public function idb_investment_add()
     {
         return view('admin.idb.create');
@@ -158,12 +169,12 @@ class IDBInvestController extends Controller
             'status' => $request->status,
         ];
         Business::create($array);
-        return redirect()->route('admin.readines.IDB_Investment')->with('status', 'Create IDB Investment Services successfully');
+        return redirect()->route('admin.readines.idbinves', ['tab' => $request->type])->with('status', 'Create IDB Investment Services successfully');
     }
 
     public function idb_investment_status(Request $request){
-        $user = Business::find($request->uid);
-        $status = $request->ustatus == 1 ? '0' : '1';
+        $user = Business::find($request->lid);
+        $status = $request->lstatus == 1 ? '0' : '1';
         DB::transaction(function () use ($user, $status) {
             $user->update([
                 'status' => $status
@@ -173,9 +184,9 @@ class IDBInvestController extends Controller
         $data['msg'] = 'Investment status updated';
         return response()->json($data, 200);
     }
-    public function idb_investment_destroy($id){
+    public function idb_investment_destroy(Request $request){
 
-        $user = Business::find($id);
+        $user = Business::find($request->lid);
         $user->delete();
         $data['error'] = false; 
         $data['msg'] = 'IDB Investment Services Deleted';
@@ -209,7 +220,7 @@ class IDBInvestController extends Controller
             'status' => $request->status,
         ];
         $test->Update($array);
-        return redirect()->route('admin.readines.IDB_Investment')->with('status', 'IDB Investment Services update successfully');
+        return redirect()->route('admin.readines.idbinves', ['tab' => $request->type])->with('status', 'IDB Investment Services update successfully');
 
     }
 

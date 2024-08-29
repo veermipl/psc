@@ -9,16 +9,24 @@ use Illuminate\Support\Facades\DB;
 class ProcurementController extends Controller
 {
 
-    public function procurement(){
-        $data = Business::where('type', 'Procurement')->first();
-        return view('admin.procurement.edit', compact('data'));
+    public function procurement(Request $request){
+        $main = Business::where('type', 'Procurement')->first();
+        $top_partner = Business::where('type', 'Procurement_methods')->orderby('id', 'desc')->get(); 
+        $top_country = Business::where('type', 'Procurement_services')->orderby('id', 'desc')->get(); 
+
+        $data['tab'] = $request->filled('tab') ? $request->tab : 'main';
+        $data['main'] = $main;
+        $data['top_partner'] = $top_partner;
+        $data['top_country'] = $top_country;
+
+        return view('admin.procurement.edit', $data);
     }
 
     public function procurement_update(Request $request){
         $this->validate($request,[
             'title'  => 'required',
             'content'  => 'required',
-            'status' => 'required',
+            // 'status' => 'required',
             'images'  => 'nullable|mimes:jpeg,jpg,png',
         ]);
         $data = Business::where('type', $request->type)->first();
@@ -33,7 +41,7 @@ class ProcurementController extends Controller
             'title' => $request->title ,
             'contant' => $request->content ,
             'image' => $profile,
-            'status' => $request->status,
+            'status' => $request->status ?? '1',
             'type' => $request->type,
         ];
         if($data != ''){
@@ -45,10 +53,10 @@ class ProcurementController extends Controller
     }
     
 
-    public function methods(){
-        $data = Business::where('type', 'Procurement_methods')->orderby('id', 'desc')->get(); 
-        return view('admin.methods.index', compact('data'));
-    }
+    // public function methods(){
+    //     $data = Business::where('type', 'Procurement_methods')->orderby('id', 'desc')->get(); 
+    //     return view('admin.methods.index', compact('data'));
+    // }
     public function methods_add()
     {
         return view('admin.methods.create');
@@ -73,11 +81,11 @@ class ProcurementController extends Controller
             'status' => $request->status,
         ];
         Business::create($array);
-        return redirect()->route('admin.readines.methods')->with('status', 'Methods Create successfully');
+        return redirect()->route('admin.readines.procurement',['tab' => $request->type] )->with('status', 'Methods Create successfully');
     }
 
     public function methods_status(Request $request){
-        $user = Business::find($request->uid);
+        $user = Business::find($request->lid);
         $status = $request->ustatus == 1 ? '0' : '1';
         DB::transaction(function () use ($user, $status) {
             $user->update([
@@ -88,8 +96,8 @@ class ProcurementController extends Controller
         $data['msg'] = 'Methods status updated';
         return response()->json($data, 200);
     }
-    public function methods_destroy($id){
-        $user = Business::find($id);
+    public function methods_destroy(Request $request){
+        $user = Business::find($request->lid);
         $user->delete();
         $data['error'] = false; 
         $data['msg'] = 'Methods Deleted';
@@ -103,6 +111,8 @@ class ProcurementController extends Controller
     }
 
     public function methods_update(Request $request, $id){
+
+        // dd($request->all());
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',
@@ -123,17 +133,12 @@ class ProcurementController extends Controller
             'status' => $request->status,
         ];
         $test->Update($array);
-        return redirect()->route('admin.readines.methods')->with('status', 'Methods update successfully');
+        return redirect()->route('admin.readines.procurement',['tab' => $request->type] )->with('status', 'Methods update successfully');
 
     }
 
 
 
-
-    public function methods_services(){
-        $data = Business::where('type', 'Procurement_services')->orderby('id', 'desc')->get(); 
-        return view('admin.serves.index', compact('data'));
-    }
     public function methods_services_add()
     {
         return view('admin.serves.create');
@@ -158,11 +163,11 @@ class ProcurementController extends Controller
             'status' => $request->status,
         ];
         Business::create($array);
-        return redirect()->route('admin.readines.services')->with('status', 'Services Create successfully');
+        return redirect()->route('admin.readines.procurement',['tab' => $request->type])->with('status', 'Services Create successfully');
     }
 
     public function methods_services_status(Request $request){
-        $user = Business::find($request->uid);
+        $user = Business::find($request->lid);
         $status = $request->ustatus == 1 ? '0' : '1';
         DB::transaction(function () use ($user, $status) {
             $user->update([
@@ -173,8 +178,10 @@ class ProcurementController extends Controller
         $data['msg'] = 'Services status updated';
         return response()->json($data, 200);
     }
-    public function methods_services_destroy($id){
-        $user = Business::find($id);
+    public function methods_services_destroy(Request $request){
+
+        // dd($request->all());
+        $user = Business::find($request->lid);
         $user->delete();
         $data['error'] = false; 
         $data['msg'] = 'Services Deleted';
@@ -188,6 +195,7 @@ class ProcurementController extends Controller
     }
 
     public function methods_services_update(Request $request, $id){
+
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',
@@ -208,7 +216,7 @@ class ProcurementController extends Controller
             'status' => $request->status,
         ];
         $test->Update($array);
-        return redirect()->route('admin.readines.services')->with('status', 'Services update successfully');
+        return redirect()->route('admin.readines.procurement',['tab' => $request->type])->with('status', 'Services update successfully');
 
     }
 }

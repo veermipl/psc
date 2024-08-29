@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\MemberBenefitController;
 use App\Http\Controllers\Admin\MembershipTypeController;
 use App\Http\Controllers\Admin\BusinessDirectoryController;
 use App\Http\Controllers\Admin\CaricomCETController;
+use App\Http\Controllers\Admin\CommitteessController;
 use App\Http\Controllers\Admin\CotedController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\MemberController as AdminMemberController;
@@ -102,8 +103,6 @@ Route::prefix('media')->name('media.')->group(function () {
     Route::get('videos', [FrontController::class, 'media_Videos'])->name('videos');
 });
 //end front-route
-
-
 
 
 //member routes
@@ -248,25 +247,7 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         Route::post('guyana-economy/export', [CMSController::class, 'guyanaEconomyExport'])->name('guyana-economy.export');
         Route::post('guyana-economy/status', [CMSController::class, 'guyanaEconomyStatusToggle'])->name('guyana-economy.status');
       
-        Route::controller(PerformanceController::class)->group(function(){
-            Route::get('performance', 'Index')->name('performance');
-            Route::get('create-performance', 'add_performance')->name('add_performance');
-            Route::Post('store-performance', 'store_performance')->name('store_performance');
-            Route::Post('status-performance', 'status')->name('performance_status');
-            Route::get('destroy-performance/{id}', 'destroy')->name('performance_destroy');
-            Route::get('edit-performance/{id}', 'edit')->name('performance_edit');
-            Route::patch('update-performance/{id}', 'Update')->name('performance_update');
-        });
-
-        Route::controller(CoreValueController::class)->group(function(){
-            Route::get('core-value', 'Index')->name('corevalue');
-            Route::get('create-corevalue', 'add')->name('add_corevalue');
-            Route::Post('store-corevalue', 'store')->name('store_corevalue');
-            Route::Post('status-corevalue', 'status')->name('status_corevalue');
-            Route::get('destroy-corevalue/{id}', 'destroy')->name('destroy_corevalue');
-            Route::get('edit-corevalue/{id}', 'edit')->name('edit_corevalue');
-            Route::patch('update-corevalue/{id}', 'Update')->name('update_corevalue');
-        });
+     
 
 
     });
@@ -287,6 +268,9 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         Route::get('contact-us', [SettingsController::class, 'contactUs'])->name('contact-us');
         Route::patch('contact-us', [SettingsController::class, 'updateContactUs']);
     });
+    
+    Route::prefix('about-us/')->group(function () {
+
     Route::controller(StaffController::class)->prefix('staff')->name('staff.')->group(function () {
         Route::get('create', 'create')->name('create');
         Route::Post('store', 'store')->name('store');
@@ -298,27 +282,68 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         
     });
 
-    Route::controller(AboutController::class)->prefix('about')->name('about.')->group(function () {
-        Route::get('council', 'Council')->name('council');
-        Route::post('council', 'Council_update')->name('council_update');
-        Route::get('history', 'History')->name('history');
-        Route::Post('history', 'History_update')->name('history_update');
-        Route::get('introduction', 'Introduction')->name('introduction');
-        Route::Post('introduction', 'Introduction_update')->name('introduction_update');
-        Route::get('mission', 'Mission')->name('mission');
-        Route::post('mission', 'Mission_update')->name('mission_update');
-    });
-
-    Route::controller(TestimonialController::class)->name('testimonial.')->group(function(){
-        Route::get('list', 'Index')->name('list');
+    Route::controller(CommitteessController::class)->prefix('committeess')->name('committeess.')->group(function () {
         Route::get('create', 'create')->name('create');
-        Route::post('store', 'Store')->name('store');
+        Route::Post('store', 'store')->name('store');
+        Route::get('list', 'list')->name('list');
         Route::Post('status', 'status')->name('status');
         Route::get('destroy/{id}', 'destroy')->name('destroy');
         Route::get('edit/{id}', 'edit')->name('edit');
         Route::patch('update/{id}', 'Update')->name('update');
+        
+    });
+
+    Route::controller(AboutController::class)->prefix('about')->name('about.')->group(function () {
+
+        Route::get('introduction', 'Introduction')->name('introduction');
+        Route::Post('introduction', 'Introduction_update')->name('introduction_update');
+        Route::get('mission', 'Mission')->name('mission');
+        Route::post('mission', 'Mission_update')->name('mission_update');
+
+        Route::get('council', 'Council')->name('council');
+        Route::post('council', 'Council_update')->name('council_update');
+        Route::get('history', 'History')->name('history');
+        Route::Post('history', 'History_update')->name('history_update');
+
+
+     
+    });
+
+    Route::controller(TestimonialController::class)->prefix('testimonial')->name('testimonial.')->group(function(){
+        Route::get('list', 'Index')->name('list');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'Store')->name('store');
+        Route::Post('status', 'status')->name('status');
+        Route::Post('destroy', 'destroy')->name('destroy');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::Post('update/{id}', 'Update')->name('update');
 
     });
+
+    Route::controller(PerformanceController::class)->group(function(){
+        Route::get('performance', 'Index')->name('performance');
+        Route::get('create-performance', 'add_performance')->name('add_performance');
+        Route::Post('store-performance', 'store_performance')->name('store_performance');
+        Route::Post('status-performance', 'status')->name('performance_status');
+        Route::post('destroy-performance', 'destroy')->name('performance_destroy');
+        Route::get('edit-performance/{id}', 'edit')->name('performance_edit');
+        Route::post('update-performance/{id}', 'Update')->name('performance_update');
+    });
+
+
+    Route::controller(CoreValueController::class)->group(function(){
+        Route::get('core-value', 'Index')->name('corevalue');
+        Route::get('create-corevalue', 'add')->name('add_corevalue');
+        Route::Post('store-corevalue', 'store')->name('store_corevalue');
+        Route::Post('status-corevalue', 'status')->name('status_corevalue');
+        Route::Post('destroy-corevalue', 'destroy')->name('destroy_corevalue');
+        Route::get('edit-corevalue/{id}', 'edit')->name('edit_corevalue');
+        Route::post('update-corevalue/{id}', 'Update')->name('update_corevalue');
+    });
+
+    });
+
+
 
     Route::prefix('readines/')->name('readines.')->group(function () {
         Route::get('business', [BusinessController::class, 'business'])->name('business');
@@ -328,18 +353,19 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         Route::get('certificate-add', [BusinessController::class, 'certificate_add'])->name('certificate.add');
         Route::post('certificate-store', [BusinessController::class, 'certificate_store'])->name('certificate.store');
         Route::post('certificate-status', [BusinessController::class, 'certificate_status'])->name('certificate.status');
-        Route::get('certificate-destroy/{id}', [BusinessController::class, 'certificate_destroy'])->name('certificate.destroy');
+        Route::post('certificate-destroy', [BusinessController::class, 'certificate_destroy'])->name('certificate.destroy');
         Route::get('certificate-edit/{id}', [BusinessController::class, 'certificate_edit'])->name('certificate.edit');
-        Route::patch('certificate-update/{id}', [BusinessController::class, 'certificate_update'])->name('certificate.update');
-        // Route::post('certificate-edit/{id}', [BusinessController::class, 'certificate_store'])->name('certificate.edit');
+        Route::post('certificate-update/{id}', [BusinessController::class, 'certificate_update'])->name('certificate.update');
+
 
         Route::get('benefits-certificate', [BusinessController::class, 'benefits'])->name('benefits');
         Route::get('benefits-add', [BusinessController::class, 'benefits_add'])->name('benefits.add');
         Route::post('benefits-store', [BusinessController::class, 'benefits_store'])->name('benefits.store');
         Route::post('benefits-status', [BusinessController::class, 'benefits_status'])->name('benefits.status');
-        Route::get('benefits-destroy/{id}', [BusinessController::class, 'benefits_destroy'])->name('benefits.destroy');
+        Route::post('benefits-destroy', [BusinessController::class, 'benefits_destroy'])->name('benefits.destroy');
         Route::get('benefits-edit/{id}', [BusinessController::class, 'benefits_edit'])->name('benefits.edit');
-        Route::patch('benefits-update/{id}', [BusinessController::class, 'benefits_update'])->name('benefits.update');
+        Route::post('benefits-update/{id}', [BusinessController::class, 'benefits_update'])->name('benefits.update');
+
 
         Route::controller(GoInvestController::class)->group(function(){
             Route::get('go-invest', 'GoInves')->name('goinvest');
@@ -348,9 +374,9 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::get('investment-add', 'Investment_add')->name('investment.add');
             Route::post('investment-store',  'Investment_store')->name('investment.store');
             Route::post('investment-status', 'Investment_status')->name('investment.status');
-            Route::get('investment-destroy/{id}', 'Investment_destroy')->name('investment.destroy');
+            Route::Post('investment-destroy', 'Investment_destroy')->name('investment.destroy');
             Route::get('investment-edit/{id}',  'Investment_edit')->name('investment.edit');
-            Route::patch('investment-update/{id}', 'Investment_update')->name('investment.update');
+            Route::post('investment-update/{id}', 'Investment_update')->name('investment.update');
         });
 
         Route::controller(IDBInvestController::class)->group(function(){
@@ -361,38 +387,38 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::get('key-areas-add', 'areas_add')->name('areas.add');
             Route::post('key-areas-store',  'areas_store')->name('areas.store');
             Route::post('key-areas-status', 'areas_status')->name('areas.status');
-            Route::get('key-areas-destroy/{id}', 'areas_destroy')->name('areas.destroy');
+            Route::post('key-areas-destroy', 'areas_destroy')->name('areas.destroy');
             Route::get('key-areas-edit/{id}',  'areas_edit')->name('areas.edit');
-            Route::patch('key-areas-update/{id}', 'areas_update')->name('areas.update');
+            Route::post('key-areas-update/{id}', 'areas_update')->name('areas.update');
 
-            Route::get('idb-investment',  'IDB_Investment')->name('IDB_Investment');
+            // Route::get('idb-investment',  'IDB_Investment')->name('IDB_Investment');
             Route::get('idb-investment-add', 'idb_investment_add')->name('IDB.add');
             Route::post('idb-investment-store',  'idb_investment_store')->name('IDB.store');
             Route::post('idb-investment-status', 'idb_investment_status')->name('IDB.status');
-            Route::get('idb-investment-destroy/{id}', 'idb_investment_destroy')->name('IDB.destroy');
+            Route::post('idb-investment-destroy', 'idb_investment_destroy')->name('IDB.destroy');
             Route::get('idb-investment-edit/{id}',  'idb_investment_edit')->name('IDB.edit');
-            Route::patch('idb-investment-update/{id}', 'idb_investment_update')->name('IDB.update');
+            Route::post('idb-investment-update/{id}', 'idb_investment_update')->name('IDB.update');
         });
         
         Route::controller(ProcurementController::class)->group(function(){
             Route::get('procurement', 'procurement')->name('procurement');
             Route::Post('update-procurement',  'procurement_update')->name('procurement_update');
 
-            Route::get('methods',  'methods')->name('methods');
+            // Route::get('methods',  'methods')->name('methods');
             Route::get('methods-add', 'methods_add')->name('methods.add');
             Route::post('methods-store',  'methods_store')->name('methods.store');
             Route::post('methods-status', 'methods_status')->name('methods.status');
-            Route::get('methods-destroy/{id}', 'methods_destroy')->name('methods.destroy');
+            Route::post('methods-destroy', 'methods_destroy')->name('methods.destroy');
             Route::get('methods-edit/{id}',  'methods_edit')->name('methods.edit');
-            Route::patch('methods-update/{id}', 'methods_update')->name('methods.update');
+            Route::post('methods-update/{id}', 'methods_update')->name('methods.update');
 
             Route::get('methods-services',  'methods_services')->name('services');
             Route::get('methods-services-add', 'methods_services_add')->name('services.add');
             Route::post('methods-services-store',  'methods_services_store')->name('services.store');
             Route::post('methods-services-status', 'methods_services_status')->name('services.status');
-            Route::get('methods-services-destroy/{id}', 'methods_services_destroy')->name('services.destroy');
+            Route::post('methods-services-destroy', 'methods_services_destroy')->name('services.destroy');
             Route::get('methods-services-edit/{id}',  'methods_services_edit')->name('services.edit');
-            Route::patch('methods-services-update/{id}', 'methods_services_update')->name('services.update');
+            Route::post('methods-services-update/{id}', 'methods_services_update')->name('services.update');
 
         });
 
@@ -405,17 +431,17 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::get('origins/type-add','type_add')->name('origins.add');
             Route::post('origins/type-store',  'type_store')->name('origins.store');
             Route::post('origins/type-status',  'type_status')->name('origins.status');
-            Route::get('origins/type-destroy/{id}',  'type_destroy')->name('origins.destroy');
+            Route::post('origins/type-destroy',  'type_destroy')->name('origins.destroy');
             Route::get('origins/type-edit/{id}',  'type_edit')->name('origins.edit');
-            Route::patch('origins/type-update/{id}', 'type_update')->name('origins.update');
+            Route::post('origins/type-update/{id}', 'type_update')->name('origins.update');
 
             Route::get('origins/certificates',  'certificatess')->name('origins.certificate');
             Route::get('origins/certificate-add','origins_add')->name('origins.certificate.add');
             Route::post('origins/certificate-store',  'origins_store')->name('origins.certificate.store');
             Route::post('origins/certificate-status',  'origins_status')->name('origins.certificate.status');
-            Route::get('origins/certificate-destroy/{id}',  'origins_destroy')->name('origins.certificate.destroy');
+            Route::post('origins/certificate-destroy',  'origins_destroy')->name('origins.certificate.destroy');
             Route::get('origins/certificate-edit/{id}',  'origins_edit')->name('origins.certificate.edit');
-            Route::patch('origins/certificate-update/{id}', 'origins_update')->name('origins.certificate.update');
+            Route::post('origins/certificate-update/{id}', 'origins_update')->name('origins.certificate.update');
 
         });
 
@@ -428,7 +454,7 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::post('annual-status',  'annual_status')->name('annul.status');
             Route::get('annual-destroy/{id}', 'annual_destroy')->name('annul.destroy');
             Route::get('annual-edit/{id}',  'annual_edit')->name('annul.edit');
-            Route::patch('annual-update/{id}', 'annual_update')->name('annul.update');
+            Route::post('annual-update/{id}', 'annual_update')->name('annul.update');
 
         });
 
