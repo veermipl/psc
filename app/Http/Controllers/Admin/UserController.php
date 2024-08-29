@@ -243,6 +243,8 @@ class UserController extends Controller
         $user = User::find($validated['uid']);
         $status = $validated['ustatus'] == 1 ? '0' : '1';
 
+        sleep(5);
+
         DB::transaction(function () use ($user, $status) {
             $user->update([
                 'status' => $status

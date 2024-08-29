@@ -40,10 +40,11 @@ class SendMemberRegistrationMailToAdmin extends Mailable implements ShouldQueue
         return new Content(
             markdown: 'mail.auth.new_member_registration',
             with: [
+                'id' => $this->user->id,
                 'name' => $this->user->name,
                 'email' => $this->user->email,
                 'contact' => $this->user->mobile_number,
-                'membership_type' => $this->user->membership->name,
+                'membership_type' => $this->user->membership ? $this->user->membership->name : '',
                 'created_at' => $this->user->created_at,
             ]
         );

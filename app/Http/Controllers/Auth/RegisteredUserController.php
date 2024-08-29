@@ -105,7 +105,6 @@ class RegisteredUserController extends Controller
                 $admin_mail = $this->getSettings('admin_mail');
                 if ($admin_mail) {
                     $user->load('membership');
-                    dd($user);
                     Mail::to($admin_mail)->queue((new SendMemberRegistrationMailToAdmin($user))->afterCommit());
                 }
 
