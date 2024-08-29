@@ -12,6 +12,8 @@ class CertificateController extends Controller
 
     public function certificate(Request $request){
 
+        $this->authorize('resource');
+
         $main = Business::where('type', 'Origins')->first();
         $top_partner = Business::where('type', 'Origins_certificate')->orderby('id', 'desc')->get(); 
         $top_country = Business::where('type', 'Origins_of_certificates')->orderby('id', 'desc')->get(); 
@@ -27,7 +29,7 @@ class CertificateController extends Controller
     }
 
     public function certificate_update(Request $request){
-
+        $this->authorize('resource_edit');
         $this->validate($request,[
             'title'  => 'required',
             'content'  => 'required',
@@ -65,7 +67,7 @@ class CertificateController extends Controller
         return view('admin.origins.type.create');
     }
     public function type_store(Request $request){
-
+        $this->authorize('resource_create');
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',
@@ -114,6 +116,7 @@ class CertificateController extends Controller
     }
 
     public function type_update(Request $request, $id){
+        $this->authorize('resource_edit');
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',
@@ -148,6 +151,7 @@ class CertificateController extends Controller
     }
 
     public function origins_store(Request $request){
+        $this->authorize('resource_create');
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',
@@ -197,6 +201,7 @@ class CertificateController extends Controller
     }
 
     public function origins_update(Request $request, $id){
+        $this->authorize('resource_edit');
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',

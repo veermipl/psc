@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class GoInvestController extends Controller
 {
     public function GoInves(Request $request){
-
+        $this->authorize('resource');
         $main = Business::where('type', 'Go_Invest')->first();
         $top_partner = Business::where('type', 'Investment')->orderby('id', 'desc')->get(); 
 
@@ -21,7 +21,7 @@ class GoInvestController extends Controller
     }
 
     public function GoInvest_update(Request $request){
-       
+        $this->authorize('resource_edit');
         $this->validate($request,[
             'title'  => 'required',
             'content'  => 'required',

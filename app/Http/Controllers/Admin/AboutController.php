@@ -13,6 +13,7 @@ class AboutController extends Controller
 {
 
     public function Introduction(Request $request){
+        $this->authorize('about_us');
 
         $About = About::where('type', 'About')->first();
         $top_mission= About::where('type', 'Mission')->first();
@@ -31,7 +32,7 @@ class AboutController extends Controller
 
 
     public function Introduction_update(Request $request){
-
+        $this->authorize('about_us_edit');
         $this->validate($request,[
             'title'  => 'required',
             'content'  => 'required',
@@ -63,7 +64,8 @@ class AboutController extends Controller
         return redirect()->route('admin.about.introduction')->with('status', 'Introduction update successfully');
     }
 
-    public function Council(Request $request){        
+    public function Council(Request $request){   
+        $this->authorize('about_us');
         $About = About::where('type', 'Council')->first();
         $data['tab'] = $request->filled('tab') ? $request->tab : 'About';
         $data['About'] = $About;
@@ -71,6 +73,7 @@ class AboutController extends Controller
     }
 
     public function Council_update(Request $request){
+        $this->authorize('about_us_edit');
         $this->validate($request,[
             'title'  => 'required',
             'content'  => 'required',
@@ -106,7 +109,7 @@ class AboutController extends Controller
     }
 
     public function History(Request $request){
-
+        $this->authorize('about_us');
         $About = About::where('type', 'History')->first();
         $data['tab'] = $request->filled('tab') ? $request->tab : 'About';
         $data['About'] = $About;
@@ -114,6 +117,7 @@ class AboutController extends Controller
     }
 
     public function History_update(Request $request ){
+        $this->authorize('about_us_edit');
         $this->validate($request,[
             'title'  => 'required',
             'content'  => 'required',

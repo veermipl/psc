@@ -31,10 +31,10 @@
                             </div>
 
                             <div class="col-md-6 position-relative">
-                                    <label for="validationTooltip01" class="form-label">Office <span
+                                    <label for="validationTooltip01" class="form-label">Designation <span
                                                 class="text-danger">*</span></label>
                                         <input type="text" id="office" class="form-control" name="office"
-                                            placeholder="Enter office" value="{{ old('office') }}" maxlength="50">
+                                            placeholder="Enter Designation" value="{{ old('office') }}" maxlength="50">
 
                                         @error('office')
                                             <span class="text-danger">{{ $message }}</span>

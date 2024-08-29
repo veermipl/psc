@@ -12,11 +12,11 @@ class StaffController extends Controller
 {
     use  ImageTraits;
     public function create(){
-
+        $this->authorize('about_us');
         return view('admin.staff.create');
     }
     public function store(Request $request){
-
+        $this->authorize('about_us_create');
         // dd($request->all());
         $this->validate($request,[
             'name'  => 'required',
@@ -49,12 +49,15 @@ class StaffController extends Controller
     }
 
     public function list(){
+
+        $this->authorize('about_us_view');
         $data = Staff::where('deleted_at', '0')->orderby('id', 'desc')->get();
         return view('admin.staff.index', compact('data'));
 
     }
 
     public function status(Request $request) {
+        $this->authorize('about_us_status_edit');
         $user = Staff::find($request->uid);
         $status = $request->lstatus == 1 ? '0' : '1';
 
@@ -70,8 +73,9 @@ class StaffController extends Controller
     }
 
     public function destroy(Request $request, $id){
-        $user = Staff::find($id);
 
+        
+        $user = Staff::find($id);
         $user->delete();
         $data['error'] = false; 
         $data['msg'] = 'User Deleted';
@@ -85,7 +89,7 @@ class StaffController extends Controller
     }
 
     public function Update (Request $request, $id){
-
+        $this->authorize('about_us_edit');
         // dd($request->all());
         $this->validate($request,[
             'name'  => 'required',

@@ -10,6 +10,7 @@ class ProcurementController extends Controller
 {
 
     public function procurement(Request $request){
+        $this->authorize('resource');
         $main = Business::where('type', 'Procurement')->first();
         $top_partner = Business::where('type', 'Procurement_methods')->orderby('id', 'desc')->get(); 
         $top_country = Business::where('type', 'Procurement_services')->orderby('id', 'desc')->get(); 
@@ -23,6 +24,7 @@ class ProcurementController extends Controller
     }
 
     public function procurement_update(Request $request){
+        $this->authorize('resource_edit');
         $this->validate($request,[
             'title'  => 'required',
             'content'  => 'required',
@@ -106,12 +108,11 @@ class ProcurementController extends Controller
 
     public function methods_edit($id){
         $data = Business::find($id); 
-
         return view('admin.methods.edit', compact('data'));
     }
 
     public function methods_update(Request $request, $id){
-
+        $this->authorize('resource_edit');
         // dd($request->all());
         $this->validate($request,[
             'title'     => 'required',
