@@ -1,12 +1,12 @@
 @extends('layout.admin_master')
 
-@section('title', 'Staff - Create')
-@section('header', 'Create Staff')
+@section('title', 'Committeess Members - Edit')
+@section('header', 'Edit Committees')
 
 @section('content')
 
     <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Create Staff</div>
+        <div class="breadcrumb-title pe-3">Edit Committeess Members        </div>
     </div>
 
     <div class="row">
@@ -14,7 +14,7 @@
             <div class="card radius-10">
                 <div class="card-body">
                     <div class="p-4 border rounded">
-                        <form action="{{ route('admin.staff.update', $data->id) }}" method="post" enctype="multipart/form-data"
+                        <form action="{{ route('admin.committeess.update', $data->id) }}" method="post" enctype="multipart/form-data"
                             class="row g-3 needs-validation">
                             @csrf
                               @method('PATCH')
@@ -90,8 +90,6 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-
-                  
 
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Status <span

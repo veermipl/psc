@@ -136,39 +136,39 @@
                     </ul>
                 </li>
 
-                <li>
+                <li class="{{ request()->is('admin/readines/*') ? 'mm-active' : '' }}">
                     <a class="has-arrow" href="javascript:;">
                         <div class="parent-icon"><ion-icon name="document-sharp"></ion-icon></div>
                         <div class="menu-title">Resources</div>
                     </a>
                     <ul>
                         <li>
-                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{route('admin.readines.business')}}"><ion-icon name="ellipse-outline"></ion-icon>
                                 Business Readinedss Desk
                             </a>
                         </li>
                         <li>
-                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{route('admin.readines.goinvest')}}"><ion-icon name="ellipse-outline"></ion-icon>
                                 Go Invest
                             </a>
                         </li>
                         <li>
-                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{route('admin.readines.idbinves')}}"><ion-icon name="ellipse-outline"></ion-icon>
                                 IDB Invest
                             </a>
                         </li>
                         <li>
-                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{route('admin.readines.procurement')}}"><ion-icon name="ellipse-outline"></ion-icon>
                                 Procurement Process In Guyana
                             </a>
                         </li>
                         <li>
-                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{route('admin.readines.certificate.origins')}}"><ion-icon name="ellipse-outline"></ion-icon>
                                 Certificate Of Origins
                             </a>
                         </li>
                         <li>
-                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{route('admin.readines.annul')}}"><ion-icon name="ellipse-outline"></ion-icon>
                                 Annual Reports
                             </a>
                         </li>
@@ -237,29 +237,36 @@
                     </ul>
                 </li>
 
-                <li>
+                <li class="{{ request()->is('admin/about-us/*') ? 'mm-active' : '' }}">
                     <a class="has-arrow" href="javascript:;">
                         <div class="parent-icon"><ion-icon name="server-sharp"></ion-icon></div>
                         <div class="menu-title">About us</div>
                     </a>
-                    <ul>
+                    <ul> 
+
+
+                      <li>
+                            <a href="{{route('admin.about.introduction')}}"><ion-icon name="ellipse-outline"></ion-icon>
+                                Introduction
+                            </a>
+                        </li>
                         <li>
-                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{route('admin.staff.list')}}"><ion-icon name="ellipse-outline"></ion-icon>
                                 Staff
                             </a>
                         </li>
                         <li>
-                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{route('admin.about.council')}}"><ion-icon name="ellipse-outline"></ion-icon>
                                 Council
                             </a>
                         </li>
                         <li>
-                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{route('admin.about.history')}}"><ion-icon name="ellipse-outline"></ion-icon>
                                 History
                             </a>
                         </li>
                         <li>
-                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{route('admin.committeess.list')}}"><ion-icon name="ellipse-outline"></ion-icon>
                                 Committees
                             </a>
                         </li>

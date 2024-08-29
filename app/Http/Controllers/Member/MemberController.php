@@ -149,7 +149,6 @@ class MemberController extends Controller
 					'msg' => 'Missing parameters',
 				], 400);
 			}
-
 			$response_data = $response->json();
 
 			return response()->json([
