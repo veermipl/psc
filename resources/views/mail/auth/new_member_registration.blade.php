@@ -11,8 +11,8 @@ A new member has just registered on your platform.
 - **Membership:** {{ $membership_type ?? 'N/A' }}
 - **Registered At:** {{ $created_at->format('Y-m-d H:i:s') }}
 
-@component('mail::button', ['url' => route('admin.member.index')])
-View Member
+@component('mail::button', ['url' => route('admin.member.show', $id)])
+View Member  
 @endcomponent
 
 Thank you for managing the platform!
