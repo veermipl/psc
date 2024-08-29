@@ -313,6 +313,43 @@ return [
         ],
 
         [
+            'name_key' => 'about_us',
+            'name' => 'About Us',
+            'roles' => ['Admin', 'User'],
+            'module' => 'About Us',
+        ],[
+            'name_key' => 'about_us_export',
+            'name' => 'Export About Us',
+            'roles' => ['Admin', 'User'],
+            'module' => 'About Us',
+        ], [
+            'name_key' => 'about_us_create',
+            'name' => 'Create About Us',
+            'roles' => ['Admin', 'User'],
+            'module' => 'About Us',
+        ], [
+            'name_key' => 'about_us_view',
+            'name' => 'View About Us',
+            'roles' => ['Admin', 'User'],
+            'module' => 'About Us',
+        ], [
+            'name_key' => 'about_us_edit',
+            'name' => 'Edit About Us',
+            'roles' => ['Admin', 'User'],
+            'module' => 'About Us',
+        ], [
+            'name_key' => 'about_us_delete',
+            'name' => 'Delete About Us',
+            'roles' => ['Admin', 'User'],
+            'module' => 'About Us',
+        ],[
+            'name_key' => 'about_us_status_edit',
+            'name' => 'Edit About Us Status',
+            'roles' => ['Admin', 'User'],
+            'module' => 'About Us',
+        ],
+
+        [
             'name_key' => 'cms',
             'name' => 'CMS',
             'roles' => ['Admin', 'User'],

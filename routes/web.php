@@ -390,8 +390,6 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::get('history', 'History')->name('history');
             Route::Post('history', 'History_update')->name('history_update');
 
-
-        
         });
 
         Route::controller(TestimonialController::class)->prefix('testimonial')->name('testimonial.')->group(function(){

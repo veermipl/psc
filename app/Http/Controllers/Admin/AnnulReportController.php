@@ -10,17 +10,18 @@ use App\Http\Controllers\Controller;
 class AnnulReportController extends Controller
 {
 
-    
     public function annual(){
+        $this->authorize('resource');
         $data = Business::where('type', 'Annual_Reports')->orderby('id', 'desc')->get(); 
         return view('admin.annual.index', compact('data'));
     }
     public function annual_add()
     {
+        $this->authorize('resource_create');
         return view('admin.annual.create');
     }
     public function annual_store(Request $request){
-
+        $this->authorize('resource_create');
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',
@@ -43,6 +44,7 @@ class AnnulReportController extends Controller
     }
 
     public function annual_status(Request $request){
+        $this->authorize('resource_status_edit');
         $user = Business::find($request->uid);
         $status = $request->ustatus == 1 ? '0' : '1';
         DB::transaction(function () use ($user, $status) {
@@ -55,6 +57,7 @@ class AnnulReportController extends Controller
         return response()->json($data, 200);
     }
     public function annual_destroy($id){
+        $this->authorize('resource_delete');
         $user = Business::find($id);
         $user->delete();
         $data['error'] = false; 
@@ -63,11 +66,15 @@ class AnnulReportController extends Controller
     }
 
     public function annual_edit($id){
+        $this->authorize('resource_edit');
+
         $data = Business::find($id); 
         return view('admin.annual.edit', compact('data'));
     }
 
     public function annual_update(Request $request, $id){
+        $this->authorize('resource_edit');
+
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',

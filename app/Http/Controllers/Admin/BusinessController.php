@@ -11,6 +11,8 @@ class BusinessController extends Controller
 {
 
     public function business(Request $request){
+        $this->authorize('resource');
+
         $main = Business::where('type', 'Business')->first();
         $top_partner = Business::where('type', 'Business_certificate')->orderby('id', 'desc')->get(); 
         $top_country = Business::where('type', 'Business_benefits')->orderby('id', 'desc')->get(); 
@@ -23,6 +25,7 @@ class BusinessController extends Controller
     }
 
     public function business_update(Request $request){
+        $this->authorize('resource_edit');
 
         $this->validate($request,[
             'title'  => 'required',
@@ -54,10 +57,13 @@ class BusinessController extends Controller
 
     public function certificate_add()
     {
+        $this->authorize('resource_create');
+
         return view('admin.certificate.create');
     }
     public function certificate_store(Request $request){
         // dd('jkkjkj');
+        $this->authorize('resource_create');
 
         $this->validate($request,[
             'title'     => 'required',
@@ -82,6 +88,8 @@ class BusinessController extends Controller
     }
 
     public function certificate_status(Request $request){
+        $this->authorize('resource_status_edit');
+
         $user = Business::find($request->lid);
         $status = $request->lstatus == 1 ? '0' : '1';
         DB::transaction(function () use ($user, $status) {
@@ -95,6 +103,7 @@ class BusinessController extends Controller
     }
 
     public function certificate_destroy(Request $request){
+        $this->authorize('resource_delete');
         // dd($request->all());
 
         $user = Business::find($request->lid);
@@ -105,12 +114,16 @@ class BusinessController extends Controller
     }
 
     public function certificate_edit($id){
+        $this->authorize('resource_edit');
+
         $data = Business::find($id); 
 
         return view('admin.certificate.edit', compact('data'));
     }
 
     public function certificate_update(Request $request, $id){
+        $this->authorize('resource_edit');
+
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',
@@ -140,9 +153,13 @@ class BusinessController extends Controller
     // }
     public function benefits_add()
     {
+        $this->authorize('resource_create');
+
         return view('admin.benefits.create');
     }
     public function benefits_store(Request $request){
+        $this->authorize('resource_create');
+
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',
@@ -166,7 +183,7 @@ class BusinessController extends Controller
     }
 
     public function benefits_status(Request $request){
-
+        $this->authorize('resource_status_edit');
 
         $user = Business::find($request->lid);
         $status = $request->ustatus == 1 ? '0' : '1';
@@ -180,6 +197,8 @@ class BusinessController extends Controller
         return response()->json($data, 200);
     }
     public function benefits_destroy(Request $request){
+        $this->authorize('resource_delete');
+
         $user = Business::find($request->lid);
         $user->delete();
         $data['error'] = false; 
@@ -188,12 +207,16 @@ class BusinessController extends Controller
     }
 
     public function benefits_edit($id){
+        $this->authorize('resource_edit');
+
         $data = Business::find($id); 
 
         return view('admin.benefits.edit', compact('data'));
     }
 
     public function benefits_update(Request $request, $id){
+        $this->authorize('resource_edit');
+        
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',

@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class IDBInvestController extends Controller
 {
     public function idb_inves(Request $request){
-
+        $this->authorize('resource');
         $main = Business::where('type', 'IDBInvest')->first();
         $top_partner = Business::where('type', 'key_areas')->orderby('id', 'desc')->get(); 
         $top_country = Business::where('type', 'idb_investment')->orderby('id', 'desc')->get(); 
@@ -24,6 +24,7 @@ class IDBInvestController extends Controller
     }
 
     public function inves_update(Request $request){
+        $this->authorize('resource_edit');
         $this->validate($request,[
             'title'  => 'required',
             'content'  => 'required',
@@ -61,11 +62,13 @@ class IDBInvestController extends Controller
 
     public function areas_add()
     {
+        $this->authorize('resource_create');
+
         return view('admin.areas.create');
     }
 
     public function areas_store(Request $request){
-
+        $this->authorize('resource_create');
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',
@@ -88,6 +91,7 @@ class IDBInvestController extends Controller
     }
 
     public function areas_status(Request $request){
+        $this->authorize('resource_status_edit');
         $user = Business::find($request->lid);
         $status = $request->ustatus == 1 ? '0' : '1';
         DB::transaction(function () use ($user, $status) {
@@ -100,6 +104,7 @@ class IDBInvestController extends Controller
         return response()->json($data, 200);
     }
     public function areas_destroy(Request $request){
+        $this->authorize('resource_delete');
         $user = Business::find($request->lid);
         $user->delete();
         $data['error'] = false; 
@@ -108,12 +113,16 @@ class IDBInvestController extends Controller
     }
 
     public function areas_edit($id){
+        $this->authorize('resource_edit');
+
         $data = Business::find($id); 
 
         return view('admin.areas.edit', compact('data'));
     }
 
     public function areas_update(Request $request, $id){
+        $this->authorize('resource_edit');
+
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',
@@ -147,9 +156,12 @@ class IDBInvestController extends Controller
     // }
     public function idb_investment_add()
     {
+        $this->authorize('resource_create');
+
         return view('admin.idb.create');
     }
     public function idb_investment_store(Request $request){
+        $this->authorize('resource_create');
 
         $this->validate($request,[
             'title'     => 'required',
@@ -173,6 +185,8 @@ class IDBInvestController extends Controller
     }
 
     public function idb_investment_status(Request $request){
+        $this->authorize('resource_status_edit');
+
         $user = Business::find($request->lid);
         $status = $request->lstatus == 1 ? '0' : '1';
         DB::transaction(function () use ($user, $status) {
@@ -185,6 +199,7 @@ class IDBInvestController extends Controller
         return response()->json($data, 200);
     }
     public function idb_investment_destroy(Request $request){
+        $this->authorize('resource_delete');
 
         $user = Business::find($request->lid);
         $user->delete();
@@ -194,12 +209,16 @@ class IDBInvestController extends Controller
     }
 
     public function idb_investment_edit($id){
+        $this->authorize('resource_edit');
+
         $data = Business::find($id); 
 
         return view('admin.idb.edit', compact('data'));
     }
 
     public function idb_investment_update(Request $request, $id){
+        $this->authorize('resource_edit');
+        
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',

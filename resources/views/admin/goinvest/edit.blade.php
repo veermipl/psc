@@ -6,7 +6,7 @@
 @section('content')
 
     <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Go Inves Data </div>
+        <div class="breadcrumb-title pe-3">Go Invest Data </div>
     </div>
 
     <div class="row">
@@ -18,7 +18,7 @@
                             <button
                                 class="btn btn-sm sub_page_link {{ $tab == 'main' ? 'btn-custom' : 'btn-outline-custom' }}"
                                 id="sub_page_link_main" type="button" data-target="main">
-                                Go Inves
+                                Go Invest
                             </button>
 
                             <button

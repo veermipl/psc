@@ -12,6 +12,8 @@ class CertificateController extends Controller
 
     public function certificate(Request $request){
 
+        $this->authorize('resource');
+
         $main = Business::where('type', 'Origins')->first();
         $top_partner = Business::where('type', 'Origins_certificate')->orderby('id', 'desc')->get(); 
         $top_country = Business::where('type', 'Origins_of_certificates')->orderby('id', 'desc')->get(); 
@@ -27,7 +29,7 @@ class CertificateController extends Controller
     }
 
     public function certificate_update(Request $request){
-
+        $this->authorize('resource_edit');
         $this->validate($request,[
             'title'  => 'required',
             'content'  => 'required',
@@ -62,10 +64,11 @@ class CertificateController extends Controller
     // }
     public function type_add()
     {
+        $this->authorize('resource_create');
         return view('admin.origins.type.create');
     }
     public function type_store(Request $request){
-
+        $this->authorize('resource_create');
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',
@@ -88,6 +91,7 @@ class CertificateController extends Controller
     }
 
     public function type_status(Request $request){
+        $this->authorize('resource_status_edit');
         $user = Business::find($request->lid);
         $status = $request->lstatus == 1 ? '0' : '1';
         DB::transaction(function () use ($user, $status) {
@@ -100,6 +104,7 @@ class CertificateController extends Controller
         return response()->json($data, 200);
     }
     public function type_destroy(Request $request){
+        $this->authorize('resource_delete');
         $user = Business::find($request->lid);
         $user->delete();
         $data['error'] = false; 
@@ -108,12 +113,14 @@ class CertificateController extends Controller
     }
 
     public function type_edit($id){
+        $this->authorize('resource_edit');
         $data = Business::find($id); 
 
         return view('admin.origins.type.edit', compact('data'));
     }
 
     public function type_update(Request $request, $id){
+        $this->authorize('resource_edit');
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',
@@ -144,10 +151,12 @@ class CertificateController extends Controller
     //     return view('admin.origins.certificate.index', compact('data'));
     // }
     public function origins_add() {
+        $this->authorize('resource_create');
         return view('admin.origins.certificate.create');
     }
 
     public function origins_store(Request $request){
+        $this->authorize('resource_create');
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',
@@ -171,6 +180,8 @@ class CertificateController extends Controller
     
 
     public function origins_status(Request $request){
+        $this->authorize('resource_status_edit');
+
         $user = Business::find($request->lid);
         $status = $request->ustatus == 1 ? '0' : '1';
         DB::transaction(function () use ($user, $status) {
@@ -183,6 +194,8 @@ class CertificateController extends Controller
         return response()->json($data, 200);
     }
     public function origins_destroy(Request $request){
+        $this->authorize('resource_delete');
+
         $user = Business::find($request->lid);
         $user->delete();
         $data['error'] = false; 
@@ -191,12 +204,13 @@ class CertificateController extends Controller
     }
 
     public function origins_edit($id){
+        $this->authorize('resource_edit');
         $data = Business::find($id); 
-
         return view('admin.origins.certificate.edit', compact('data'));
     }
 
     public function origins_update(Request $request, $id){
+        $this->authorize('resource_edit');
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',

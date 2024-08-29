@@ -10,16 +10,18 @@ use App\Http\Controllers\Controller;
 class CoreValueController extends Controller
 {
     public function Index(){
-
+        $this->authorize('about_us');
         $data = CoreValue::orderby('id', 'desc')->get();
         return view('admin.core.index', compact('data'));
         // dd('ok');
     }
     public function add(){
+        $this->authorize('about_us_create');
         return view ('admin.core.create');
     }
 
     public function store(Request $request){
+        $this->authorize('about_us_create');
         $this->validate($request,[
             'title'     => 'required',
             'status'    => 'required',
@@ -42,6 +44,8 @@ class CoreValueController extends Controller
 
 
     public function status(Request $request) {
+        $this->authorize('about_us_status_edit');
+
         $user = CoreValue::find($request->lid);
         $status = $request->lstatus == 1 ? '0' : '1';
         DB::transaction(function () use ($user, $status) {
@@ -55,6 +59,8 @@ class CoreValueController extends Controller
     }
 
     public function destroy(Request $request){
+        $this->authorize('about_us_delete');
+
         $user = CoreValue::find($request->lid);
         $user->delete();
         $data['error'] = false; 
@@ -63,11 +69,13 @@ class CoreValueController extends Controller
     }
 
     public function edit($id){
+        $this->authorize('about_us_edit');
         $data = CoreValue::find($id);
         return view('admin.core.edit', compact('data'));
 
     }
     public function Update(Request $request, $id){
+        $this->authorize('about_us_edit');
 
         $this->validate($request,[
             'title'     => 'required',

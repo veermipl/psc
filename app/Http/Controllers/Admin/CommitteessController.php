@@ -13,10 +13,12 @@ class CommitteessController extends Controller
     use  ImageTraits;
     public function create(){
 
+        $this->authorize('about_us');
+
         return view('admin.committeess.create');
     }
     public function store(Request $request){
-
+        $this->authorize('about_us_edit');
         // dd($request->all());
         $this->validate($request,[
             'name'  => 'required',
@@ -49,12 +51,14 @@ class CommitteessController extends Controller
     }
 
     public function list(){
+        $this->authorize('about_us_view');
         $data = Committeess::where('deleted_at', '0')->orderby('id', 'desc')->get();
         return view('admin.committeess.index', compact('data'));
 
     }
 
     public function status(Request $request) {
+        $this->authorize('about_us_status_edit');
         $user = Committeess::find($request->uid);
         $status = $request->lstatus == 1 ? '0' : '1';
 
@@ -70,6 +74,8 @@ class CommitteessController extends Controller
     }
 
     public function destroy(Request $request, $id){
+        $this->authorize('about_us_delete');
+
         $user = Committeess::find($id);
 
         $user->delete();
@@ -80,12 +86,14 @@ class CommitteessController extends Controller
     }
 
     public function edit($id) {
+        $this->authorize('about_us_edit');
+
     $data = Committeess::find($id);
         return view('admin.committeess.edit', compact('data'));
     }
 
     public function Update (Request $request, $id){
-
+        $this->authorize('about_us_edit');
         // dd($request->all());
         $this->validate($request,[
             'name'  => 'required',
