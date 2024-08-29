@@ -55,7 +55,7 @@ trait NotificationTraits
     public function getUnreadNotifications(){
         $list = [];
 
-        $list = Notifications::where('read', '0')->get();
+        $list = Notifications::where('read', '0')->orderBy('id', 'desc')->get();
 
         return $list;
     }

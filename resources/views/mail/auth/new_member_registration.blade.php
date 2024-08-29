@@ -12,7 +12,7 @@ A new member has just registered on your platform.
 - **Registered At:** {{ $created_at->format('Y-m-d H:i:s') }}
 
 @component('mail::button', ['url' => route('admin.member.index')])
-View Members
+View Member
 @endcomponent
 
 Thank you for managing the platform!
