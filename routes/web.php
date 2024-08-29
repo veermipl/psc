@@ -29,7 +29,7 @@ use App\Http\Controllers\Admin\AnnulReportController;
 use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\TestimonialController;
-use App\Http\Controllers\admin\NotificationController;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\PressReleaseController;
 use App\Http\Controllers\Admin\MemberBenefitController;
 use App\Http\Controllers\Admin\MembershipTypeController;
