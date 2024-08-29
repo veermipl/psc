@@ -34,15 +34,16 @@ class CoreValueController extends Controller
             'contant' => $request->content ?? '' ,
             'image' => $profile ?? '',
             'status' => $request->status,
+            'type' => 'core_value',
         ];
         CoreValue::create($array);
-        return redirect()->route('admin.cms.corevalue')->with('status', 'Core value create successfully');
+        return redirect()->route('admin.about.introduction',['tab' => $request->type] )->with('status', 'Core value create successfully');
     }
 
 
     public function status(Request $request) {
-        $user = CoreValue::find($request->uid);
-        $status = $request->ustatus == 1 ? '0' : '1';
+        $user = CoreValue::find($request->lid);
+        $status = $request->lstatus == 1 ? '0' : '1';
         DB::transaction(function () use ($user, $status) {
             $user->update([
                 'status' => $status
@@ -53,8 +54,8 @@ class CoreValueController extends Controller
         return response()->json($data, 200);
     }
 
-    public function destroy(Request $request, $id){
-        $user = CoreValue::find($id);
+    public function destroy(Request $request){
+        $user = CoreValue::find($request->lid);
         $user->delete();
         $data['error'] = false; 
         $data['msg'] = 'Performance Deleted';
@@ -87,7 +88,7 @@ class CoreValueController extends Controller
             'status' => $request->status,
         ];
         $data->Update($array);
-        return redirect()->route('admin.cms.corevalue')->with('status', 'core value update successfully');
+        return redirect()->route('admin.about.introduction',['tab' => $request->type] )->with('status', 'core value update successfully');
 
     }
 }

@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Staff;
+use App\Models\Committeess;
 use App\Traits\ImageTraits;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
-class StaffController extends Controller
+class CommitteessController extends Controller
 {
     use  ImageTraits;
     public function create(){
 
-        return view('admin.staff.create');
+        return view('admin.committeess.create');
     }
     public function store(Request $request){
 
@@ -44,18 +44,18 @@ class StaffController extends Controller
             'status' => $request->status,
             'image' => $profile ?? '',
         ];
-        Staff::create($create);
-        return redirect()->route('admin.staff.list')->withSuccess('Staff create successfully!');
+        Committeess::create($create);
+        return redirect()->route('admin.committeess.list')->withSuccess('Committeess create successfully!');
     }
 
     public function list(){
-        $data = Staff::where('deleted_at', '0')->orderby('id', 'desc')->get();
-        return view('admin.staff.index', compact('data'));
+        $data = Committeess::where('deleted_at', '0')->orderby('id', 'desc')->get();
+        return view('admin.committeess.index', compact('data'));
 
     }
 
     public function status(Request $request) {
-        $user = Staff::find($request->uid);
+        $user = Committeess::find($request->uid);
         $status = $request->lstatus == 1 ? '0' : '1';
 
         DB::transaction(function () use ($user, $status) {
@@ -64,24 +64,24 @@ class StaffController extends Controller
             ]);
         });
         $data['error'] = false;
-        $data['msg'] = 'Staff status updated';
+        $data['msg'] = 'Committeess status updated';
 
         return response()->json($data, 200);
     }
 
     public function destroy(Request $request, $id){
-        $user = Staff::find($id);
+        $user = Committeess::find($id);
 
         $user->delete();
         $data['error'] = false; 
-        $data['msg'] = 'User Deleted';
+        $data['msg'] = 'committeess Deleted';
 
         return response()->json($data, 200);  
     }
 
     public function edit($id) {
-    $data = Staff::find($id);
-        return view('admin.staff.edit', compact('data'));
+    $data = Committeess::find($id);
+        return view('admin.committeess.edit', compact('data'));
     }
 
     public function Update (Request $request, $id){
@@ -94,7 +94,7 @@ class StaffController extends Controller
             'status' => 'required',
             'profile'  => 'nullable|mimes:jpeg,jpg,png',
         ]);
-        $staff = Staff::find($id);
+        $staff = Committeess::find($id);
         if ($request->hasFile('profile')) {
             $file = $request->file('profile');
             $profile = $file->store('/images/team', 'public');
@@ -113,7 +113,8 @@ class StaffController extends Controller
             'image' => $profile,
         ];
         $staff->Update($array);
-        return redirect()->route('admin.staff.list')->with('status', 'Staff update successfully');
+        return redirect()->route('admin.committeess.list')->with('status', 'Committeess update successfully');
     }
 
+    
 }

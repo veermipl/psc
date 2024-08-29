@@ -34,15 +34,16 @@ class PerformanceController extends Controller
             'contant' => $request->content ,
             'image' => $profile ,
             'status' => $request->status,
+            'type'  => 'performance_driverss'
         ];
         Performance::create($array);
-        return redirect()->route('admin.cms.performance')->with('status', 'Performance Create successfully');
+        return redirect()->route('admin.about.introduction',['tab' => $request->type])->with('status', 'Performance Create successfully');
     }
 
 
     public function status(Request $request) {
-        $user = Performance::find($request->uid);
-        $status = $request->ustatus == 1 ? '0' : '1';
+        $user = Performance::find($request->lid);
+        $status = $request->lstatus == 1 ? '0' : '1';
         DB::transaction(function () use ($user, $status) {
             $user->update([
                 'status' => $status
@@ -53,8 +54,8 @@ class PerformanceController extends Controller
         return response()->json($data, 200);
     }
 
-    public function destroy(Request $request, $id){
-        $user = Performance::find($id);
+    public function destroy(Request $request){
+        $user = Performance::find($request->lid);
         $user->delete();
         $data['error'] = false; 
         $data['msg'] = 'Performance Deleted';
@@ -88,7 +89,7 @@ class PerformanceController extends Controller
             'status' => $request->status,
         ];
         $data->Update($array);
-        return redirect()->route('admin.cms.performance')->with('status', 'Performance update successfully');
+        return redirect()->route('admin.about.introduction',['tab' => $request->type])->with('status', 'Performance update successfully');
 
     }
 

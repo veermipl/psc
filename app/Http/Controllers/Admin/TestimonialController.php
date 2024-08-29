@@ -24,7 +24,7 @@ class TestimonialController extends Controller
             'title'     => 'required',
             'content'   => 'required',
             'status'    => 'required',
-            'images'    => 'required|mimes:jpeg,jpg,png'
+            'images'    => 'nullable|mimes:jpeg,jpg,png'
         ]);
         if ($request->hasFile('images')) {
             $file = $request->file('images');
@@ -33,32 +33,34 @@ class TestimonialController extends Controller
         $array = [
             'title' => $request->title ,
             'contant' => $request->content ,
-            'image' => $profile ,
+            'image' => $profile ?? '' ,
             'status' => $request->status,
+            'type' => 'testimonials',
         ];
         Testimonials::create($array);
-        return redirect()->route('admin.testimonial.list')->with('status', 'Testimonial Create successfully');
+        return redirect()->route('admin.about.introduction',['tab' => $request->type])->with('status', 'Strategic Priority Areas Create successfully');
 
     }
 
     public function status(Request $request) {
-        $user = Testimonials::find($request->uid);
-        $status = $request->ustatus == 1 ? '0' : '1';
+        // dd($request->all());
+        $user = Testimonials::find($request->lid);
+        $status = $request->lstatus == 1 ? '0' : '1';
         DB::transaction(function () use ($user, $status) {
             $user->update([
                 'status' => $status
             ]);
         });
         $data['error'] = false;
-        $data['msg'] = 'Testimonials status updated';
+        $data['msg'] = 'Strategic Priority Areas status updated';
         return response()->json($data, 200);
     }
 
-    public function destroy(Request $request, $id){
-        $user = Testimonials::find($id);
+    public function destroy(Request $request, ){
+        $user = Testimonials::find($request->lid);
         $user->delete();
         $data['error'] = false; 
-        $data['msg'] = 'Testimonials Deleted';
+        $data['msg'] = 'Strategic Priority Areas Deleted';
         return response()->json($data, 200);  
     }
     
@@ -88,7 +90,7 @@ class TestimonialController extends Controller
             'status' => $request->status,
         ];
         $test->Update($array);
-        return redirect()->route('admin.testimonial.list')->with('status', 'Testimonial update successfully');
+        return redirect()->route('admin.about.introduction',['tab' => $request->type])->with('status', 'Strategic Priority Areas update successfully');
 
     }
 
