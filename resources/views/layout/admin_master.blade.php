@@ -64,7 +64,7 @@
         <aside class="sidebar-wrapper" data-simplebar="true">
             <div class="sidebar-header">
                 <div>
-                    <img src="{{ asset('storage/' . ($settings_app_logo ? $settings_app_logo : 'default/logo.png'))}}" class="logo-icon" alt="">
+                    <img src="{{ asset('storage/' . ($settings_app_logo ? $settings_app_logo : 'default/logo.png')) }}" class="logo-icon" alt="">
                 </div>
                 <div>
                     <h6 class="logo-text">{{ $settings_app_name }}</h6>
@@ -88,10 +88,14 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="{{ route('admin.user.index') }}"><ion-icon name="ellipse-outline"></ion-icon>List</a>
+                            <a href="{{ route('admin.user.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>List
+                            </a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.user.create') }}"><ion-icon name="ellipse-outline"></ion-icon>Create User</a>
+                            <a href="{{ route('admin.user.create') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>Create User
+                            </a>
                         </li>
 
                     </ul>
@@ -104,13 +108,19 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="{{ route('admin.member.index') }}"><ion-icon name="ellipse-outline"></ion-icon>List</a>
+                            <a href="{{ route('admin.member.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>List
+                            </a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.member.create') }}"><ion-icon name="ellipse-outline"></ion-icon>Create Member</a>
+                            <a href="{{ route('admin.member.create') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>Create Member
+                            </a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.member.import') }}"><ion-icon name="ellipse-outline"></ion-icon>Import Members</a>
+                            <a href="{{ route('admin.member.import') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>Import Members
+                            </a>
                         </li>
                     </ul>
                 </li>
@@ -122,16 +132,24 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="{{ route('admin.data.national-budget') }}"><ion-icon name="ellipse-outline"></ion-icon>National Budgets</a>
+                            <a href="{{ route('admin.data.national-budget') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>National Budgets
+                            </a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.data.trade-data') }}"><ion-icon name="ellipse-outline"></ion-icon>Trade Data</a>
+                            <a href="{{ route('admin.data.trade-data') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>Trade Data
+                            </a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.data.coted') }}"><ion-icon name="ellipse-outline"></ion-icon>COTED</a>
+                            <a href="{{ route('admin.data.coted') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>COTED
+                            </a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.data.caricom-cet') }}"><ion-icon name="ellipse-outline"></ion-icon>Caricom CET</a>
+                            <a href="{{ route('admin.data.caricom-cet') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>Caricom CET
+                            </a>
                         </li>
                     </ul>
                 </li>
@@ -143,36 +161,41 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="{{route('admin.readines.business')}}"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{ route('admin.readines.business') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 Business Readinedss Desk
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('admin.readines.goinvest')}}"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{ route('admin.readines.goinvest') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 Go Invest
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('admin.readines.idbinves')}}"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{ route('admin.readines.idbinves') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 IDB Invest
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('admin.readines.procurement')}}"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{ route('admin.readines.procurement') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 Procurement Process In Guyana
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('admin.readines.certificate.origins')}}"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{ route('admin.readines.certificate.origins') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 Certificate Of Origins
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('admin.readines.annul')}}"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{ route('admin.readines.annul') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 Annual Reports
                             </a>
                         </li>
-
                     </ul>
                 </li>
 
@@ -184,27 +207,32 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="{{ route('admin.media-center.news.index') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{ route('admin.media-center.news.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 News
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.media-center.press-release.index') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{ route('admin.media-center.press-release.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 Press Release
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.media-center.social-media.index') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{ route('admin.media-center.social-media.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 Social Media
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.media-center.photo.index') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{ route('admin.media-center.photo.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 Photos
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.media-center.video.index') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{ route('admin.media-center.video.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 Videos
                             </a>
                         </li>
@@ -219,17 +247,20 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="{{ route('admin.membership.type.index') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{ route('admin.membership.type.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 Type
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.membership.business-directory.index') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{ route('admin.membership.business-directory.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 Business Directory
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.membership.member-benefit') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{ route('admin.membership.member-benefit') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 Member Benefits
                             </a>
                         </li>
@@ -242,31 +273,34 @@
                         <div class="parent-icon"><ion-icon name="server-sharp"></ion-icon></div>
                         <div class="menu-title">About us</div>
                     </a>
-                    <ul> 
-
-
-                      <li>
-                            <a href="{{route('admin.about.introduction')}}"><ion-icon name="ellipse-outline"></ion-icon>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.about.introduction') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 Introduction
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('admin.staff.list')}}"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{ route('admin.staff.list') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 Staff
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('admin.about.council')}}"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{ route('admin.about.council') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 Council
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('admin.about.history')}}"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{ route('admin.about.history') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 History
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('admin.committeess.list')}}"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{ route('admin.committeess.list') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 Committees
                             </a>
                         </li>
@@ -280,7 +314,8 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="{{ route('admin.cms.guyana-economy') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{ route('admin.cms.guyana-economy') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 Guyana Economy
                             </a>
                         </li>
@@ -294,12 +329,14 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="{{ route('admin.authorization.role.index') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{ route('admin.authorization.role.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 Roles
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.authorization.permission.index') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                            <a href="{{ route('admin.authorization.permission.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
                                 Permissions
                             </a>
                         </li>
@@ -313,13 +350,16 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="{{ route('admin.settings.general') }}"><ion-icon name="ellipse-outline"></ion-icon>General</a>
+                            <a href="{{ route('admin.settings.general') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>General</a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.settings.email') }}"><ion-icon name="ellipse-outline"></ion-icon>Email</a>
+                            <a href="{{ route('admin.settings.email') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>Email</a>
                         </li>
                         <li>
-                            <a href="{{ route('admin.settings.contact-us') }}"><ion-icon name="ellipse-outline"></ion-icon>Contact Us</a>
+                            <a href="{{ route('admin.settings.contact-us') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>Contact Us</a>
                         </li>
                     </ul>
                 </li>
@@ -331,7 +371,8 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="{{ route('admin.system.notification.index') }}"><ion-icon name="ellipse-outline"></ion-icon>Notifications</a>
+                            <a href="{{ route('admin.system.notification.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>Notifications</a>
                         </li>
                         <li>
                             <a href="#"><ion-icon name="ellipse-outline"></ion-icon>Recover Account</a>
@@ -378,26 +419,28 @@
                                     <a href="javascript:;">
                                         <div class="msg-header">
                                             <p class="msg-header-title">Notifications</p>
-                                            <a href="{{ route('admin.system.notification.mark-all-as-read') }}" class="msg-header-clear ms-auto">
+                                            <a href="{{ route('admin.system.notification.mark-all-as-read') }}"
+                                                class="msg-header-clear ms-auto">
                                                 Marks all as read
                                             </a>
                                         </div>
                                     </a>
                                     <div class="header-notifications-list">
-                                        @foreach($notifications as $notKey => $notVal)
+                                        @foreach ($notifications as $notKey => $notVal)
                                             @php
                                                 $notVal_time = $notVal->created_at->diffForHumans();
                                             @endphp
                                             <a class="dropdown-item notification_link" href="{{ $notVal['link'] }}">
                                                 <div class="d-flex align-items-center">
-                                                    @if(in_array($notVal['type'], ['user_created', 'member_created', 'member_registration']))
+                                                    @if (in_array($notVal['type'], ['user_created', 'member_created', 'member_registration']))
                                                         <div class="notify text-danger">
                                                             <ion-icon name="person-outline"></ion-icon>
                                                         </div>
                                                     @endif
                                                     <div class="flex-grow-1">
                                                         <h6 class="msg-name">{{ $notVal['title'] }}
-                                                            <span class="msg-time float-end">{{ $notVal_time }}</span>
+                                                            <span
+                                                                class="msg-time float-end">{{ $notVal_time }}</span>
                                                         </h6>
                                                         <p class="msg-info">{{ $notVal['message'] }}</p>
                                                     </div>
@@ -429,7 +472,8 @@
                             <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;"
                                 data-bs-toggle="dropdown">
                                 <div class="user-setting">
-                                    <img src="{{ asset('storage/' . ($user_details ? $user_details['profile_image'] : 'default/user.png'))}}" class="user-img" alt="">
+                                    <img src="{{ asset('storage/' . ($user_details ? $user_details['profile_image'] : 'default/user.png')) }}"
+                                        class="user-img" alt="">
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -457,7 +501,8 @@
                                                 <form action="{{ route('logout') }}" method="post">
                                                     @csrf
                                                     @method('post')
-                                                    <button class="btn-sm btn btn-light p-0"><span>Logout</span></button>
+                                                    <button
+                                                        class="btn-sm btn btn-light p-0"><span>Logout</span></button>
                                                 </form>
                                             </div>
                                         </div>
@@ -507,12 +552,13 @@
     <script src="{{ asset('admin/plugins/simplebar/js/simplebar.min.js') }}"></script>
     <script src="{{ asset('admin/plugins/metismenu/js/metisMenu.min.js') }}"></script>
     <script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <!--plugins-->
     <script src="{{ asset('admin/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
     <script src="{{ asset('admin/plugins/chartjs/chart.min.js') }}"></script>
     <script src="{{ asset('admin/plugins/apexcharts-bundle/js/apexcharts.min.js') }}"></script>
-    <script src="{{ asset('admin/js/index2.js') }}"></script>
+    @if (request()->is('admin/dashboard'))
+        <script src="{{ asset('admin/js/index2.js') }}"></script>
+    @endif
     <!-- Main JS-->
     <script src="{{ asset('admin/js/main.js') }}"></script>
 
@@ -572,6 +618,8 @@
             .catch( /* ... */ );
     </script>
 
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+
 
     @if (session('success'))
         <script>
@@ -586,9 +634,9 @@
     @endif
 
     @if (session('status'))
-    <script>
-        toastr.success("{{ session('status') }}");
-    </script>
+        <script>
+            toastr.success("{{ session('status') }}");
+        </script>
     @endif
 
     <script>

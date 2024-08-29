@@ -17,9 +17,9 @@
                     <div class="d-flex align-items-center">
                         <!-- <h6 class="mb-0">Recent List</h6> -->
                         <a href="{{ route('admin.readines.annul.add') }}" class="btn btn-primary btn-sm">
-                    <ion-icon name="person-add-outline" role="img" class="md hydrated"
-                        aria-label="person add"></ion-icon>Create Annual Reports
-                </a>
+                            <ion-icon name="person-add-outline" role="img" class="md hydrated"
+                                aria-label="person add"></ion-icon>Create Annual Reports
+                        </a>
                     </div>
 
                     <div class="table-responsive">
@@ -30,7 +30,6 @@
                                     <th scope="col">#</th>
                                     <th scope="col" data-sortable="true">Image</th>
                                     <th scope="col" data-sortable="true">Title</th>
-                                    <th scope="col" data-sortable="true">Contact</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -41,22 +40,23 @@
                                         <tr class="tr_row_{{ $userKey }}">
                                             <th scope="row">{{ $userKey + 1 }}</th>
                                             <td>
-                                                @if($user->image != '')
-                                                <img style="height:40px; width:50px" src="{{asset('storage/'.$user->image)}}" >
+                                                @if ($user->image != '')
+                                                    <img style="height:40px; width:50px"
+                                                        src="{{ asset('storage/' . $user->image) }}">
                                                 @else
-                                                <img style="height:50px; width:50px" src="{{asset('images/team/commeties.png')}}" >
+                                                    <img style="height:50px; width:50px"
+                                                        src="{{ asset('images/team/commeties.png') }}">
                                                 @endif
 
-                                            
+
                                             </td>
                                             <td>
                                                 <a href="#" class="text-secondary">
                                                     {{ $user->title }}
                                                 </a>
                                             </td>
-                                            <td>{!! strip_tags(substr($user->contant, 0,40)) !!}....</td>
                                             <td>
-                                            @if ($user->status == 1)
+                                                @if ($user->status == 1)
                                                     <span class="badge alert-success" id="userStatus"
                                                         uid="{{ $user->id }}" ustatus="{{ $user->status }}"
                                                         urow="{{ $userKey }}">
@@ -75,10 +75,10 @@
                                                 <div class="tableOptions">
                                                     <span class="text-dark" title="Edit">
                                                         <a href="{{ route('admin.readines.annul.edit', $user->id) }}"><i
-                                                                class="fa fa-edit"></i></a>
+                                                                class="fa fa-pencil"></i></a>
                                                     </span>
-                                                    <span class="text-danger" title="Delete" uid="{{ $user->id }}" urow="{{ $userKey }}"
-                                                        id="deleteUserBtn">
+                                                    <span class="text-danger" title="Delete" uid="{{ $user->id }}"
+                                                        urow="{{ $userKey }}" id="deleteUserBtn">
                                                         <i class="fa fa-trash"></i>
                                                     </span>
                                                 </div>

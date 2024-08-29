@@ -24,6 +24,7 @@ class UpdateCaricomCETObjectiveStatusRequest extends FormRequest
         return [
             'lid' => ['required', 'exists:caricom_cet,id'],
             'lstatus' => ['required', 'in:0,1'],
+            'ltype' => ['required', 'in:objective'],
         ];
     }
 }

@@ -23,7 +23,7 @@
                             <div class="col-md-6 position-relative">
                                 <label for="title">Title <span class="text-danger">*</span></label>
                                 <input type="text" id="title" class="form-control" name="title"
-                                    placeholder="Enter title" value="{{ old('title', @$data->title) }}" maxlength="50">
+                                    placeholder="Enter title" value="{{ old('title', @$data->title) }}" maxlength="100">
 
                                 @error('title')
                                     <span class="text-danger">{{ $message }}</span>
