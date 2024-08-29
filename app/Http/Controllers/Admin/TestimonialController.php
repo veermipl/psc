@@ -10,14 +10,18 @@ use App\Http\Controllers\Controller;
 class TestimonialController extends Controller
 {
     public function Index(){
+        $this->authorize('about_us');
+
         $data = Testimonials::orderby('id', 'desc')->get();
         return view('admin.testimonial.list', compact('data'));
     }
 
     public function create(){
+        $this->authorize('about_us_create');
         return view('admin.testimonial.create');
     }
     public function Store(Request $request){
+        $this->authorize('about_us_create');
         // dd($request->all());
 
         $this->validate($request,[
@@ -43,7 +47,7 @@ class TestimonialController extends Controller
     }
 
     public function status(Request $request) {
-        // dd($request->all());
+        $this->authorize('about_us_status_edit');
         $user = Testimonials::find($request->lid);
         $status = $request->lstatus == 1 ? '0' : '1';
         DB::transaction(function () use ($user, $status) {
@@ -57,6 +61,8 @@ class TestimonialController extends Controller
     }
 
     public function destroy(Request $request, ){
+        $this->authorize('about_us_delete');
+
         $user = Testimonials::find($request->lid);
         $user->delete();
         $data['error'] = false; 
@@ -65,11 +71,14 @@ class TestimonialController extends Controller
     }
     
     public function edit($id) {
+        $this->authorize('about_us_edit');
+
     $data = Testimonials::find($id);
         return view('admin.testimonial.edit', compact('data'));
     }
 
     public function Update(Request $request, $id){
+        $this->authorize('about_us_edit');
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',

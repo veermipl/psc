@@ -64,6 +64,7 @@ class CertificateController extends Controller
     // }
     public function type_add()
     {
+        $this->authorize('resource_create');
         return view('admin.origins.type.create');
     }
     public function type_store(Request $request){
@@ -90,6 +91,7 @@ class CertificateController extends Controller
     }
 
     public function type_status(Request $request){
+        $this->authorize('resource_status_edit');
         $user = Business::find($request->lid);
         $status = $request->lstatus == 1 ? '0' : '1';
         DB::transaction(function () use ($user, $status) {
@@ -102,6 +104,7 @@ class CertificateController extends Controller
         return response()->json($data, 200);
     }
     public function type_destroy(Request $request){
+        $this->authorize('resource_delete');
         $user = Business::find($request->lid);
         $user->delete();
         $data['error'] = false; 
@@ -110,6 +113,7 @@ class CertificateController extends Controller
     }
 
     public function type_edit($id){
+        $this->authorize('resource_edit');
         $data = Business::find($id); 
 
         return view('admin.origins.type.edit', compact('data'));
@@ -147,6 +151,7 @@ class CertificateController extends Controller
     //     return view('admin.origins.certificate.index', compact('data'));
     // }
     public function origins_add() {
+        $this->authorize('resource_create');
         return view('admin.origins.certificate.create');
     }
 
@@ -175,6 +180,8 @@ class CertificateController extends Controller
     
 
     public function origins_status(Request $request){
+        $this->authorize('resource_status_edit');
+
         $user = Business::find($request->lid);
         $status = $request->ustatus == 1 ? '0' : '1';
         DB::transaction(function () use ($user, $status) {
@@ -187,6 +194,8 @@ class CertificateController extends Controller
         return response()->json($data, 200);
     }
     public function origins_destroy(Request $request){
+        $this->authorize('resource_delete');
+
         $user = Business::find($request->lid);
         $user->delete();
         $data['error'] = false; 
@@ -195,8 +204,8 @@ class CertificateController extends Controller
     }
 
     public function origins_edit($id){
+        $this->authorize('resource_edit');
         $data = Business::find($id); 
-
         return view('admin.origins.certificate.edit', compact('data'));
     }
 

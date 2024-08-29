@@ -17,7 +17,7 @@ class AnnulReportController extends Controller
     }
     public function annual_add()
     {
-        $this->authorize('resource_view');
+        $this->authorize('resource_create');
         return view('admin.annual.create');
     }
     public function annual_store(Request $request){
@@ -57,6 +57,7 @@ class AnnulReportController extends Controller
         return response()->json($data, 200);
     }
     public function annual_destroy($id){
+        $this->authorize('resource_delete');
         $user = Business::find($id);
         $user->delete();
         $data['error'] = false; 
@@ -65,11 +66,15 @@ class AnnulReportController extends Controller
     }
 
     public function annual_edit($id){
+        $this->authorize('resource_edit');
+
         $data = Business::find($id); 
         return view('admin.annual.edit', compact('data'));
     }
 
     public function annual_update(Request $request, $id){
+        $this->authorize('resource_edit');
+
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',

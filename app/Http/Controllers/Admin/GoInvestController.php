@@ -60,9 +60,13 @@ class GoInvestController extends Controller
 
     public function Investment_add()
     {
+        $this->authorize('resource_create');
+
         return view('admin.investment.create');
     }
     public function Investment_store(Request $request){
+        $this->authorize('resource_create');
+
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',
@@ -87,6 +91,8 @@ class GoInvestController extends Controller
     }
 
     public function Investment_status(Request $request){
+        $this->authorize('resource_status_edit');
+        
         $user = Business::find($request->lid);
         $status = $request->lstatus == 1 ? '0' : '1';
         DB::transaction(function () use ($user, $status) {
@@ -99,6 +105,8 @@ class GoInvestController extends Controller
         return response()->json($data, 200);
     }
     public function Investment_destroy(Request $request){
+        $this->authorize('resource_delete');
+
         $user = Business::find($request->lid);
         $user->delete();
         $data['error'] = false; 
@@ -107,12 +115,16 @@ class GoInvestController extends Controller
     }
 
     public function Investment_edit($id){
+        $this->authorize('resource_edit');
+
         $data = Business::find($id); 
 
         return view('admin.investment.edit', compact('data'));
     }
 
     public function Investment_update(Request $request, $id){
+        $this->authorize('resource_edit');
+        
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',

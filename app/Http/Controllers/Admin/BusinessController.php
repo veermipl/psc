@@ -114,12 +114,16 @@ class BusinessController extends Controller
     }
 
     public function certificate_edit($id){
+        $this->authorize('resource_edit');
+
         $data = Business::find($id); 
 
         return view('admin.certificate.edit', compact('data'));
     }
 
     public function certificate_update(Request $request, $id){
+        $this->authorize('resource_edit');
+
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',
@@ -149,9 +153,13 @@ class BusinessController extends Controller
     // }
     public function benefits_add()
     {
+        $this->authorize('resource_create');
+
         return view('admin.benefits.create');
     }
     public function benefits_store(Request $request){
+        $this->authorize('resource_create');
+
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',
@@ -175,7 +183,7 @@ class BusinessController extends Controller
     }
 
     public function benefits_status(Request $request){
-
+        $this->authorize('resource_status_edit');
 
         $user = Business::find($request->lid);
         $status = $request->ustatus == 1 ? '0' : '1';
@@ -189,6 +197,8 @@ class BusinessController extends Controller
         return response()->json($data, 200);
     }
     public function benefits_destroy(Request $request){
+        $this->authorize('resource_delete');
+
         $user = Business::find($request->lid);
         $user->delete();
         $data['error'] = false; 
@@ -197,12 +207,16 @@ class BusinessController extends Controller
     }
 
     public function benefits_edit($id){
+        $this->authorize('resource_edit');
+
         $data = Business::find($id); 
 
         return view('admin.benefits.edit', compact('data'));
     }
 
     public function benefits_update(Request $request, $id){
+        $this->authorize('resource_edit');
+        
         $this->validate($request,[
             'title'     => 'required',
             'content'   => 'required',

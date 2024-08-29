@@ -58,6 +58,7 @@ class CommitteessController extends Controller
     }
 
     public function status(Request $request) {
+        $this->authorize('about_us_status_edit');
         $user = Committeess::find($request->uid);
         $status = $request->lstatus == 1 ? '0' : '1';
 
@@ -73,6 +74,8 @@ class CommitteessController extends Controller
     }
 
     public function destroy(Request $request, $id){
+        $this->authorize('about_us_delete');
+
         $user = Committeess::find($id);
 
         $user->delete();
@@ -83,6 +86,8 @@ class CommitteessController extends Controller
     }
 
     public function edit($id) {
+        $this->authorize('about_us_edit');
+
     $data = Committeess::find($id);
         return view('admin.committeess.edit', compact('data'));
     }

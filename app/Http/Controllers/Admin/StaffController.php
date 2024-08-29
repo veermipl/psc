@@ -49,7 +49,6 @@ class StaffController extends Controller
     }
 
     public function list(){
-
         $this->authorize('about_us_view');
         $data = Staff::where('deleted_at', '0')->orderby('id', 'desc')->get();
         return view('admin.staff.index', compact('data'));
@@ -73,7 +72,7 @@ class StaffController extends Controller
     }
 
     public function destroy(Request $request, $id){
-
+        $this->authorize('about_us_delete');
         
         $user = Staff::find($id);
         $user->delete();
@@ -84,7 +83,8 @@ class StaffController extends Controller
     }
 
     public function edit($id) {
-    $data = Staff::find($id);
+        $this->authorize('about_us_edit');
+        $data = Staff::find($id);
         return view('admin.staff.edit', compact('data'));
     }
 
