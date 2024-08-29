@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\user;
+namespace App\Http\Requests\admin\notification;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateProfileStatusRequest extends FormRequest
+class UpdateNotificationStatusRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,8 @@ class UpdateProfileStatusRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'uid' => ['required', 'exists:users,id'],
+            'lid' => ['required', 'exists:notifications,id'],
+            'lstatus' => ['required', 'in:0,1'],
         ];
     }
 }

@@ -117,12 +117,14 @@
 
                                             <td>
                                                 <div class="tableOptions">
-                                                    <span class="text-dark" title="Edit">
-                                                        <a
-                                                            href="{{ route('admin.authorization.role.edit', $listValue->id) }}">
-                                                            <i class="fa fa-pencil"></i>
-                                                        </a>
-                                                    </span>
+                                                    @if ($listValue->id !== 1)
+                                                        <span class="text-dark" title="Edit">
+                                                            <a
+                                                                href="{{ route('admin.authorization.role.edit', $listValue->id) }}">
+                                                                <i class="fa fa-pencil"></i>
+                                                            </a>
+                                                        </span>
+                                                    @endif
                                                     @if ($listValue->type === 'custom')
                                                         <span class="text-danger" title="Delete" lid="{{ $listValue->id }}"
                                                             lrow="{{ $listKey }}" id="deleteListBtn">

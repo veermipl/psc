@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\AboutController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\TestController;
@@ -8,35 +7,39 @@ use App\Http\Controllers\Admin\CMSController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\AnnulReportController;
-use App\Http\Controllers\Admin\BusinessController;
-use App\Http\Controllers\Admin\CertificateController;
-use App\Http\Controllers\Admin\CoreValueController;
-use App\Http\Controllers\Admin\GoInvestController;
-use App\Http\Controllers\Admin\IDBInvestController;
+use App\Http\Controllers\Admin\CotedController;
 use App\Http\Controllers\Admin\PhotoController;
+use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\Front\FrontController;
+use App\Http\Controllers\PerformanceController;
+use App\Http\Controllers\ProcurementController;
 use App\Http\Controllers\Member\MemberController;
+use App\Http\Controllers\Admin\BusinessController;
+use App\Http\Controllers\Admin\GoInvestController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\CoreValueController;
+use App\Http\Controllers\Admin\IDBInvestController;
+use App\Http\Controllers\Admin\TradeDataController;
+use App\Http\Controllers\Admin\CaricomCETController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\AnnulReportController;
+use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\SocialMediaController;
+use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\admin\NotificationController;
 use App\Http\Controllers\Admin\PressReleaseController;
 use App\Http\Controllers\Admin\MemberBenefitController;
 use App\Http\Controllers\Admin\MembershipTypeController;
+use App\Http\Controllers\Admin\NationalBudgetController;
 use App\Http\Controllers\Admin\BusinessDirectoryController;
 use App\Http\Controllers\Admin\CaricomCETController;
 use App\Http\Controllers\Admin\CommitteessController;
 use App\Http\Controllers\Admin\CotedController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\MemberController as AdminMemberController;
-use App\Http\Controllers\Admin\NationalBudgetController;
-use App\Http\Controllers\Admin\StaffController;
-use App\Http\Controllers\Admin\TestimonialController;
-use App\Http\Controllers\PerformanceController;
-use App\Http\Controllers\ProcurementController;
-use App\Http\Controllers\Admin\TradeDataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,7 +59,12 @@ use App\Http\Controllers\Admin\TradeDataController;
 Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
     Artisan::call('route:clear');
+    Artisan::call('optimize');
     return "Cache cleared successfully";
+});
+
+Route::get('/phpinfo', function () {
+    return phpinfo();
 });
 
 Route::get('/', [FrontController::class, 'index']);
@@ -122,6 +130,7 @@ Route::middleware(['auth', 'role_per'])->group(function () {
     Route::get('profile/edit', [UserController::class, 'profileEdit'])->name('profile.edit');
     Route::post('profile/update', [UserController::class, 'profileUpdate'])->name('profile.update');
     Route::post('profile/status', [UserController::class, 'profileStatus'])->name('profile.status');
+    Route::post('profile/delete', [UserController::class, 'profileDelete'])->name('profile.delete');
 });
 //
 
