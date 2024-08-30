@@ -29,16 +29,7 @@ class UserSeeder extends Seeder
         $this->InitialUserRolePermission($admin);
         $this->logNotification('user_created', $admin);
 
-        # create user of id(2)
-        $user = User::factory()->create([
-            'name' => 'Demo User',
-            'email' => 'demouser@yopmail.com',
-        ]);
-        $user->role()->sync(Role::where('name', 'User')->pluck('id')->toArray());
-        $this->InitialUserRolePermission($user);
-        $this->logNotification('user_created', $user);
-
-        # create members of id(3)
+        # create members of id(2)
         $member = User::factory()->create([
             'name' => 'Demo Member',
             'email' => 'demomember@yopmail.com',

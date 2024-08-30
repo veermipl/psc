@@ -322,6 +322,21 @@
                     </ul>
                 </li>
 
+                <li class="{{ request()->is('admin/queries/*') ? 'mm-active' : '' }}">
+                    <a class="has-arrow" href="javascript:;">
+                        <div class="parent-icon"><ion-icon name="help-circle"></ion-icon></div>
+                        <div class="menu-title">Queries</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.queries.contact-us') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Contact Us
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
                 <li class="{{ request()->is('admin/authorization/*') ? 'mm-active' : '' }}">
                     <a class="has-arrow" href="javascript:;">
                         <div class="parent-icon"><ion-icon name="lock-closed-sharp"></ion-icon></div>
@@ -375,7 +390,9 @@
                                 <ion-icon name="ellipse-outline"></ion-icon>Notifications</a>
                         </li>
                         <li>
-                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>Recover Account</a>
+                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                                Recover Account
+                            </a>
                         </li>
                     </ul>
                 </li>
