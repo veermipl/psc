@@ -12,7 +12,6 @@ use App\Models\TradeData;
 use App\Models\CaricomCET;
 use App\Models\SocialMedia;
 use App\Models\PressRelease;
-use App\Http\Controllers\Controller;
 use App\Models\About;
 use App\Models\Business;
 use App\Models\Committeess;
@@ -49,30 +48,35 @@ class FrontController extends Controller
         $strategic =  Testimonials::where('status', '1')->orderby('id', 'desc')->get();
         $corevalue = CoreValue::where('status', '1')->orderby('id', 'desc')->get();
         $performance = Performance::where('status', '1')->orderby('id', 'desc')->get();
-        return view('front.about_us.introduction', compact('introduction', 'mission', 'strategic', 'corevalue', 'performance') );
+
+        return view('front.about_us.introduction', compact('introduction', 'mission', 'strategic', 'corevalue', 'performance'));
     }
 
     public function aboutUs_Staff()
     {
         $staff =  Staff::where('status', '1')->orderby('id', 'desc')->get();
+
         return view('front.about_us.staff', compact('staff'));
     }
 
     public function aboutUs_Council()
     {
         $council =  About::where('type', 'Council')->where('status', '1')->first();
+
         return view('front.about_us.council', compact('council'));
     }
 
     public function aboutUs_History()
     {
         $history =  About::where('type', 'History')->where('status', '1')->first();
+
         return view('front.about_us.history', compact('history'));
     }
 
     public function aboutUs_Committeess()
     {
         $committees = Committeess::where('status', '0')->orderby('id', 'desc')->get();
+
         return view('front.about_us.committeess', compact('committees'));
     }
 
@@ -214,8 +218,8 @@ class FrontController extends Controller
     public function resources_BusinessReadinessDesk()
     {
         $business = Business::where('type', 'Business')->where('status', '1')->first();
-        $certificate = Business::where('type', 'Business_certificate')->where('status', '1')->orderby('id', 'desc')->get(); 
-        $benefits = Business::where('type', 'Business_benefits')->where('status', '1')->orderby('id', 'desc')->get(); 
+        $certificate = Business::where('type', 'Business_certificate')->where('status', '1')->orderby('id', 'desc')->get();
+        $benefits = Business::where('type', 'Business_benefits')->where('status', '1')->orderby('id', 'desc')->get();
 
         return view('front.resources.business_readiness_desk', compact('business', 'certificate', 'benefits'));
     }
@@ -223,15 +227,15 @@ class FrontController extends Controller
     public function resources_GoInvest()
     {
         $invest = Business::where('type', 'Go_Invest')->where('status', '1')->first();
-        $investment  = Business::where('type', 'Investment')->where('status', '1')->orderby('id', 'desc')->get(); 
+        $investment  = Business::where('type', 'Investment')->where('status', '1')->orderby('id', 'desc')->get();
         return view('front.resources.go_invest', compact('invest', 'investment'));
     }
 
     public function resources_IDBInvest()
     {
         $invest = Business::where('type', 'IDBInvest')->where('status', '1')->first();
-        $about = Business::where('type', 'key_areas')->where('status', '1')->orderby('id', 'desc')->get(); 
-        $services = Business::where('type', 'idb_investment')->where('status', '1')->orderby('id', 'desc')->get(); 
+        $about = Business::where('type', 'key_areas')->where('status', '1')->orderby('id', 'desc')->get();
+        $services = Business::where('type', 'idb_investment')->where('status', '1')->orderby('id', 'desc')->get();
 
         return view('front.resources.ibd_invest', compact('invest', 'about', 'services'));
     }
@@ -239,38 +243,38 @@ class FrontController extends Controller
     public function resources_ProcurementProcessInGuyana()
     {
         $overview = Business::where('type', 'Procurement')->where('status', '1')->first();
-        $methods = Business::where('type', 'Procurement_methods')->where('status', '1')->orderby('id', 'desc')->get(); 
-        $services = Business::where('type', 'Procurement_services')->where('status', '1')->orderby('id', 'desc')->get(); 
-        return view('front.resources.procurement_process_in_guyana', compact('overview', 'methods', 'services' ));
+        $methods = Business::where('type', 'Procurement_methods')->where('status', '1')->orderby('id', 'desc')->get();
+        $services = Business::where('type', 'Procurement_services')->where('status', '1')->orderby('id', 'desc')->get();
+        return view('front.resources.procurement_process_in_guyana', compact('overview', 'methods', 'services'));
     }
 
     public function resources_CertificateOfOrigins()
     {
         $origin = Business::where('type', 'Origins')->where('status', '1')->first();
-        $types  = Business::where('type', 'Origins_certificate')->where('status', '1')->orderby('id', 'desc')->get(); 
-        $certificate = Business::where('type', 'Origins_of_certificates')->where('status', '1')->orderby('id', 'desc')->get(); 
-        return view('front.resources.certificate_of_origins',compact('origin', 'types', 'certificate' ));
+        $types  = Business::where('type', 'Origins_certificate')->where('status', '1')->orderby('id', 'desc')->get();
+        $certificate = Business::where('type', 'Origins_of_certificates')->where('status', '1')->orderby('id', 'desc')->get();
+        return view('front.resources.certificate_of_origins', compact('origin', 'types', 'certificate'));
     }
 
     public function resources_AnnualReport()
     {
-        $data = Business::where('type', 'Annual_Reports')->where('status', '1')->orderby('id', 'desc')->get(); 
-        return view('front.resources.annual_report', compact('data' ));
+        $data = Business::where('type', 'Annual_Reports')->where('status', '1')->orderby('id', 'desc')->get();
+        return view('front.resources.annual_report', compact('data'));
     }
 
     public function resources_Annualdetails($id)
     {
-        $data = Business::where('type', 'Annual_Reports')->where('status', '1')->orderby('id', 'desc')->limit(5)->get( ); 
+        $data = Business::where('type', 'Annual_Reports')->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
 
-        $details = Business::where('type', 'Annual_Reports')->where('id', $id)->where('status', '1')->orderby('id', 'desc')->first(); 
+        $details = Business::where('type', 'Annual_Reports')->where('id', $id)->where('status', '1')->orderby('id', 'desc')->first();
 
 
-        return view('front.resources.annual-report-details', compact('data' , 'details'));
+        return view('front.resources.annual-report-details', compact('data', 'details'));
     }
 
 
 
-    
+
 
     public function media_News()
     {
