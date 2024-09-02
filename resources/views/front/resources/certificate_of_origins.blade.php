@@ -44,7 +44,7 @@
                     style="
                       background-image: url('{{asset('/images/about/about-2--pattern-2.png')}}');
                     "></div>
-                  <img src="{{asset('images/about/about-page-img-1e.png')}}" alt="" />
+                  <img src="{{ asset('storage/'.@$origin->image) }}" alt="" />
                 </div>
               </div>
             </div>
@@ -54,8 +54,10 @@
                   <h4 class="sub-title-shape-left section_title-subheading">
                     Certificate
                   </h4>
-                  <h2>of Origin</h2>
-                  <p class="about-two-title-text">
+                  <h2>{{@$origin->title}}</h2>
+                      {!! @$origin->contant !!}
+
+                  <!-- <p class="about-two-title-text">
                     A Certificate of Origin (COO) is an essential document in
                     international trade that certifies the country in which a
                     product was manufactured or processed. This document is
@@ -76,7 +78,7 @@
                     The COO allows businesses to benefit from trade agreements
                     that reduce or eliminate tariffs on goods from certain
                     countries.
-                  </p>
+                  </p> -->
                   <!-- <p>
                     It ensures compliance with rules of origin under various
                     trade agreements.
@@ -142,75 +144,37 @@
           </div>
 
           <div class="row">
-            <div class="col-xl-6 col-lg-6">
-              <!--Blog One Single-->
-              <div
-                class="blog-one-single guyana-wrap wow fadeInUp"
-                data-wow-delay="100ms">
-                <div class="blog-one-img guyana-imgg">
-                  <img src="{{asset('images/about/oil-10.png')}}" alt="" />
-                </div>
-                <div class="blog-one-content">
-                  <div class="blog-one-title">
-                    <h3><a href="#">Preferential Certificate of Origin</a></h3>
+            @if(isset($types) && count(@$types) > 0)
+
+              @foreach(@types as $type)
+                  <div class="col-xl-6 col-lg-6">
+                  
+                    <div
+                      class="blog-one-single guyana-wrap wow fadeInUp"
+                      data-wow-delay="100ms">
+                      <div class="blog-one-img guyana-imgg">
+                        <img src="{{asset('storage/'.$type->image) }}" alt="" />
+                      </div>
+                      <div class="blog-one-content">
+                        <div class="blog-one-title">
+                          <h3><a href="#">{{$type->title}}</a></h3>
+                        </div>
+                        <div class="blog-one-text">
+
+                        {!! $type->contant !!}
+                         
+                        </div>
+                        <a href="#" class="vs-btn1 style5 mt-3" tabindex="0"
+                          >Read More <i class="far fa-long-arrow-right"></i
+                        ></a>
+                      </div>
+                    </div>
                   </div>
-                  <div class="blog-one-text">
-                    <p>
-                      Used for goods that qualify for reduced tariffs or
-                      preferential treatment under trade agreements.
-                    </p>
-                    <p>
-                      Examples include the CARICOM Certificate of Origin and the
-                      EUR1 Certificate.
-                    </p>
-                  </div>
-                  <a href="#" class="vs-btn1 style5 mt-3" tabindex="0"
-                    >Read More <i class="far fa-long-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-6 col-lg-6">
-              <!--Blog One Single-->
-              <div
-                class="blog-one-single guyana-wrap wow fadeInUp"
-                data-wow-delay="100ms">
-                <div class="blog-one-img guyana-imgg">
-                  <img src="{{asset('images/about/oil-5.png')}}" alt="" />
-                </div>
-                <div class="blog-one-content">
-                  <!-- <ul class="blog-classic-meta">
-                    <li>
-                      <a href="#"><i class="fas fa-clock"></i> 07:10 AM</a>
-                    </li>
-                    <li>
-                      <a href="#"
-                        ><i class="fas fa-calendar-alt"></i> Mar 28, 2023</a
-                      >
-                    </li>
-                  </ul> -->
-                  <div class="blog-one-title">
-                    <h3>
-                      <a href="#"> Non-Preferential Certificate of Origin</a>
-                    </h3>
-                  </div>
-                  <div class="blog-one-text">
-                    <p>
-                      Used for goods that do not qualify for any preferential
-                      treatment.
-                    </p>
-                    <p>
-                      Provides standard information required by customs
-                      authorities worldwide.
-                    </p>
-                  </div>
-                  <br />
-                  <a href="#" class="vs-btn1 style5 mt-3" tabindex="0"
-                    >Read More <i class="far fa-long-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-            </div>
+              @endforeach
+
+            @endif
+
+
           </div>
         </div>
       </section>
@@ -224,16 +188,22 @@
             <h2>of Origin</h2>
           </div>
           <div class="row">
+
+        @if(isset($certificate) && count(@$certificate))
+
+          @foreach($certificate as $cert)
             <div class="col-md-6 col-lg-4 py-2">
               <div class="widget h-100">
-                <h3 class="widget_title">Application Submission</h3>
+                <h3 class="widget_title">{{$cert->title}}</h3>
                 <div class="recent-post-wrap">
                   <div class="recent-post">
-                    <!-- <div class="media-img"><a href="#"><img src="assets/img/blog/recent-post-1-1.jpg" alt="Blog Image"></a></div> -->
                     <div class="media-body">
                       <div class="recent-post-meta">
                         <ul class="table-list">
-                          <li>
+
+                        {!! $cert->contant !!}
+
+                          <!-- <li>
                             <p>Identifying needs and defining requirements.</p>
                           </li>
                           <li>
@@ -243,7 +213,8 @@
                             <p>
                               Developing specifications and terms of reference.
                             </p>
-                          </li>
+                          </li> -->
+
                         </ul>
                       </div>
                     </div>
@@ -254,67 +225,11 @@
                 ></a> -->
               </div>
             </div>
-            <div class="col-md-6 col-lg-4 py-2">
-              <div class="widget h-100">
-                <h3 class="widget_title">Solicitation and Advertisement</h3>
-                <div class="recent-post-wrap">
-                  <div class="recent-post">
-                    <!-- <div class="media-img"><a href="#"><img src="assets/img/blog/recent-post-1-1.jpg" alt="Blog Image"></a></div> -->
-                    <div class="media-body">
-                      <div class="recent-post-meta">
-                        <ul class="table-list">
-                          <li>
-                            <p>
-                              Preparing and publishing bid invitations or RFPs.
-                            </p>
-                          </li>
-                          <li>
-                            <p>
-                              Providing clear instructions and deadlines for
-                              submission.
-                            </p>
-                          </li>
-                          <li>
-                            <p>
-                              Hosting pre-bid meetings or site visits if
-                              necessary.
-                            </p>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-4 py-2">
-              <div class="widget h-100">
-                <h3 class="widget_title">Submission and Opening of Bids</h3>
-                <div class="recent-post-wrap">
-                  <div class="recent-post">
-                    <!-- <div class="media-img"><a href="#"><img src="assets/img/blog/recent-post-1-1.jpg" alt="Blog Image"></a></div> -->
-                    <div class="media-body">
-                      <div class="recent-post-meta">
-                        <ul class="table-list">
-                          <li>
-                            <p>Receiving bids by the specified deadline.</p>
-                          </li>
-                          <li>
-                            <p>
-                              Opening bids in a public session to ensure
-                              transparency.
-                            </p>
-                          </li>
-                          <li>
-                            <p>Recording and safeguarding all submissions.</p>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+          @endforeach
+        @endif
+
+
           </div>
         </div>
       </section>

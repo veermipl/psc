@@ -46,7 +46,7 @@
                     style="
                       background-image: url('{{asset('/images/about/about-2--pattern-2.png')}}');
                     "></div>
-                  <img src="{{asset('images/about/about-page-img-1c.png')}}" alt="" />
+                  <img src="{{ asset('storage/'.@$invest->image) }}" alt="" />
                 </div>
               </div>
             </div>
@@ -56,8 +56,11 @@
                   <h4 class="sub-title-shape-left section_title-subheading">
                     About
                   </h4>
-                  <h2>IDB Invest</h2>
-                  <p class="about-two-title-text">
+                  <h2>{{@$invest->title}}</h2>
+
+                  {{@$invest->contant}}
+
+                  <!-- <p class="about-two-title-text">
                     IDB Invest is a member of the Inter-American Development
                     Bank (IDB) Group, dedicated to advancing economic
                     development through the private sector in Latin America and
@@ -74,7 +77,7 @@
                     work with businesses, financial institutions, and
                     governments to develop and implement projects that have a
                     positive impact on communities and the broader economy.
-                  </p>
+                  </p> -->
                 </div>
                 
               </div>
@@ -90,46 +93,50 @@
           </div>
 
           <div class="row">
-            <div class="col-xl-4 col-lg-4">
-              <!--Blog One Single-->
-              <div
-                class="blog-one-single guyana-wrap wow fadeInUp"
-                data-wow-delay="100ms">
-                <div class="blog-one-img guyana-imgg">
-                  <img src="{{asset('images/about/oil-6.png')}}" alt="" />
-                </div>
-                <div class="blog-one-content">
-                  <!-- <ul class="blog-classic-meta">
-                    <li>
-                      <a href="#"><i class="fas fa-clock"></i> 07:10 AM</a>
-                    </li>
-                    <li>
-                      <a href="#"
-                        ><i class="fas fa-calendar-alt"></i> Mar 28, 2023</a
-                      >
-                    </li>
-                  </ul> -->
-                  <div class="blog-one-title">
-                    <h3><a href="#">Infrastructure Development</a></h3>
+
+          @if(isset($about) && @$about)
+
+          @foreach($about as $focus)
+              <div class="col-xl-4 col-lg-4">
+            
+                <div class="blog-one-single guyana-wrap wow fadeInUp"
+                  data-wow-delay="100ms">
+                  <div class="blog-one-img guyana-imgg">
+                    <img src="{{ asset('storage/'.@$focus->image) }}" alt="" />
                   </div>
-                  <div class="blog-one-text">
-                    <p>
-                      Supporting projects in transportation, energy, water, and
-                      sanitation.
-                    </p>
-                    <p>
-                      Enhancing connectivity and accessibility to spur economic
-                      activities.
-                    </p>
+                  <div class="blog-one-content">
+                    
+                    <div class="blog-one-title">
+                      <h3><a href="#"> {{$focus->title}} </a></h3>
+                    </div>
+                    <div class="blog-one-text">
+
+                    {{$focus->contant}}
+
+                      <!-- <p>
+                        Supporting projects in transportation, energy, water, and
+                        sanitation.
+                      </p>
+                      <p>
+                        Enhancing connectivity and accessibility to spur economic
+                        activities.
+                      </p> -->
+
+
+                    </div>
+                    <a href="#" class="vs-btn1 style5 mt-3" tabindex="0"
+                      >Read More <i class="far fa-long-arrow-right"></i
+                    ></a>
                   </div>
-                  <a href="#" class="vs-btn1 style5 mt-3" tabindex="0"
-                    >Read More <i class="far fa-long-arrow-right"></i
-                  ></a>
                 </div>
               </div>
-            </div>
-            <div class="col-xl-4 col-lg-4">
-              <!--Blog One Single-->
+
+            @endforeach
+          @endif
+
+
+            <!-- <div class="col-xl-4 col-lg-4">
+              
               <div
                 class="blog-one-single guyana-wrap wow fadeInUp"
                 data-wow-delay="100ms">
@@ -139,16 +146,7 @@
                   </div>
                 </div>
                 <div class="blog-one-content">
-                  <!-- <ul class="blog-classic-meta">
-                    <li>
-                      <a href="#"><i class="fas fa-clock"></i> 07:10 AM</a>
-                    </li>
-                    <li>
-                      <a href="#"
-                        ><i class="fas fa-calendar-alt"></i> Mar 28, 2023</a
-                      >
-                    </li>
-                  </ul> -->
+                 
                   <div class="blog-one-title">
                     <h3><a href="#"> Sustainable Agriculture</a></h3>
                   </div>
@@ -169,7 +167,7 @@
               </div>
             </div>
             <div class="col-xl-4 col-lg-4">
-              <!--Blog One Single-->
+          
               <div
                 class="blog-one-single guyana-wrap wow fadeInUp"
                 data-wow-delay="200ms">
@@ -179,16 +177,7 @@
                   </div>
                 </div>
                 <div class="blog-one-content">
-                  <!-- <ul class="blog-classic-meta">
-                    <li>
-                      <a href="#"><i class="fas fa-clock"></i> 09:10 AM</a>
-                    </li>
-                    <li>
-                      <a href="#"
-                        ><i class="fas fa-calendar-alt"></i> Mar 28, 2023</a
-                      >
-                    </li>
-                  </ul> -->
+                  
                   <div class="blog-one-title">
                     <h3>
                       <a href="#">Renewable Energy</a>
@@ -209,7 +198,7 @@
                   ></a>
                 </div>
               </div>
-            </div>
+            </div> -->
            
           </div>
         </div>
@@ -224,30 +213,34 @@
             <h2>IDB Investment Services</h2>
           </div>
           <div class="row">
+
+
+          @if(isset($services) && @$services)
+
+          @foreach($services as $ids )
             <div class="col-md-6 col-lg-4 py-2">
               <div class="widget h-100">
-                <h3 class="widget_title">Investment Services</h3>
+                <h3 class="widget_title">{{$ids->title}}</h3>
                 <div class="recent-post-wrap">
                   <div class="recent-post">
                     <!-- <div class="media-img"><a href="#"><img src="assets/img/blog/recent-post-1-1.jpg" alt="Blog Image"></a></div> -->
                     <div class="media-body">
-                      <h4 class="post-title">
+                      <!-- <h4 class="post-title">
                         <a class="text-inherit" href="#"
-                          >IDB Invest offers a range of investment services
+                          > IDB Invest offers a range of investment services
                           designed to meet the diverse needs of private sector
-                          clients:</a
-                        >
-                      </h4>
+                          clients:</a>
+                      </h4> -->
                       <div class="recent-post-meta">
                         <ul class="table-list">
+
                           <li>
                             <p>
-                              <b>Direct Lending:</b> Providing loans and credit
-                              facilities to support business growth and
-                              expansion.
-                            </p>
+
+                           {{$ids->contant}}
                           </li>
-                          <li>
+
+                          <!-- <li>
                             <p>
                               <b> Equity Investments:</b> Investing in companies
                               to support their development and scalability.
@@ -266,7 +259,7 @@
                               reduce investment risks and enhance
                               creditworthiness.
                             </p>
-                          </li>
+                          </li> -->
                         </ul>
                       </div>
                     </div>
@@ -277,12 +270,18 @@
                 ></a> -->
               </div>
             </div>
+          @endforeach
+
+          @endif
+
+
+<!--             
             <div class="col-md-6 col-lg-4 py-2">
               <div class="widget h-100">
                 <h3 class="widget_title">Advisory Services</h3>
                 <div class="recent-post-wrap">
                   <div class="recent-post">
-                    <!-- <div class="media-img"><a href="#"><img src="assets/img/blog/recent-post-1-1.jpg" alt="Blog Image"></a></div> -->
+                  
                     <div class="media-body">
                       <h4 class="post-title">
                         <a class="text-inherit" href="#"
@@ -323,7 +322,7 @@
                 <h3 class="widget_title">Success Stories</h3>
                 <div class="recent-post-wrap">
                   <div class="recent-post">
-                    <!-- <div class="media-img"><a href="#"><img src="assets/img/blog/recent-post-1-1.jpg" alt="Blog Image"></a></div> -->
+                 
                     <div class="media-body">
                       <h4 class="post-title">
                         <a class="text-inherit" href="#">
@@ -360,11 +359,11 @@
                     </div>
                   </div>
                 </div>
-                <!-- <a href="#" class="vs-btn style5 mt-4" tabindex="0"
-                  >Read More<i class="far fa-long-arrow-right"></i
-                ></a> -->
+        
               </div>
-            </div>
+            </div> -->
+
+
           </div>
         </div>
       </section>

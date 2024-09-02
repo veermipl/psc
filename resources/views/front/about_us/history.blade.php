@@ -46,8 +46,10 @@
             <div class="col-xl-12">
               <div class="about-two-right-content">
                 <div class="about-two-title text-justify">
+
+                 {!! @$history-> contant !!}
                 
-                  <p class=" mt-30">
+                  <!-- <p class=" mt-30">
                     The Private Sector Commission (PSC) indirectly grew out of the Economic Recovery Programme introduced in the late nineteen eighties by President Desmond Hoyte. This programme led to what was virtually a renaissance period for private sector business in Guyana as the focus shifted from state hegemony of the economic environment to divestment of state enterprises and incentives to boost private enterprise.
                   </p>
                   <p class="">
@@ -67,7 +69,7 @@
                   </p>
                   <p class="">
                     The Commission now has Corporate Members representing a wide range of industries from large-scale gold and bauxite mining to aviation, construction and agriculture.
-                  </p>
+                  </p> -->
                 </div>
               
 

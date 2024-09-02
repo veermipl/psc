@@ -43,7 +43,7 @@
                     style="
                       background-image: url('{{asset('/images/about/about-2--pattern-2.png')}}');
                     "></div>
-                  <img src="{{asset('images/about/about-page-img-1b.png')}}" alt="" />
+                  <img src="{{ asset('storage/'.@$invest->image) }}" alt="" />
                 </div>
               </div>
             </div>
@@ -53,8 +53,11 @@
                   <h4 class="sub-title-shape-left section_title-subheading">
                     Why?
                   </h4>
-                  <h2>Invest in Guyana</h2>
-                  <p class="about-two-title-text">
+                  <h2>{{ @$invest->title}}</h2>
+
+
+                  {!! @$invest->contant !!}
+                  <!-- <p class="about-two-title-text">
                     Guyana, located on the northeastern coast of South America,
                     is an emerging hub for investment with vast potential and
                     opportunities.
@@ -68,7 +71,7 @@
                     The Guyana Office for Investment (Go-Invest) serves as the
                     gateway for investors looking to capitalize on the country's
                     economic growth and development.
-                  </p>
+                  </p> -->
                 </div>
                 <!-- <div class="row">
                   <div class="col-md-6">
@@ -118,46 +121,47 @@
           </div>
 
           <div class="row">
-            <div class="col-xl-4 col-lg-4">
-              <!--Blog One Single-->
-              <div
-                class="blog-one-single guyana-wrap wow fadeInUp"
-                data-wow-delay="100ms">
-                <div class="blog-one-img guyana-imgg">
-                  <img src="{{asset('images/about/oil-1.png')}}" alt="" />
-                </div>
-                <div class="blog-one-content">
-                  <!-- <ul class="blog-classic-meta">
-                    <li>
-                      <a href="#"><i class="fas fa-clock"></i> 07:10 AM</a>
-                    </li>
-                    <li>
-                      <a href="#"
-                        ><i class="fas fa-calendar-alt"></i> Mar 28, 2023</a
-                      >
-                    </li>
-                  </ul> -->
-                  <div class="blog-one-title">
-                    <h3><a href="#">Oil </a></h3>
+
+          @if(isset($investment) && @$investment )
+
+            @foreach($investment as $sectors)
+
+              <div class="col-xl-4 col-lg-4">
+              
+                <div
+                  class="blog-one-single guyana-wrap wow fadeInUp"
+                  data-wow-delay="100ms">
+                  <div class="blog-one-img guyana-imgg">
+                    <img src="{{ asset('storage/'.@$sectors->image) }}" alt="" />
                   </div>
-                  <div class="blog-one-text">
-                    <p>
-                      Guyana has discovered significant oil reserves, attracting
-                      major international oil companies.
-                    </p>
-                    <p>
-                      Opportunities exist in exploration, production, and
-                      support services.
-                    </p>
+                  <div class="blog-one-content">
+                    <div class="blog-one-title">
+                      <h3><a href="#">{{$sectors->title}} </a></h3>
+                    </div>
+                    <div class="blog-one-text">
+
+                     {!!$sectors->contant!!}
+                      <!-- <p>
+                        Guyana has discovered significant oil reserves, attracting
+                        major international oil companies.
+                      </p>
+                      <p>
+                        Opportunities exist in exploration, production, and
+                        support services.
+                      </p> -->
+                    </div>
+                    <a href="#" class="vs-btn1 style5 mt-3" tabindex="0"
+                      >Read More <i class="far fa-long-arrow-right"></i
+                    ></a>
                   </div>
-                  <a href="#" class="vs-btn1 style5 mt-3" tabindex="0"
-                    >Read More <i class="far fa-long-arrow-right"></i
-                  ></a>
                 </div>
               </div>
-            </div>
-            <div class="col-xl-4 col-lg-4">
-              <!--Blog One Single-->
+            @endforeach
+
+          @endif
+
+            <!-- <div class="col-xl-4 col-lg-4">
+          
               <div
                 class="blog-one-single guyana-wrap wow fadeInUp"
                 data-wow-delay="100ms">
@@ -165,16 +169,7 @@
                   <img src="{{asset('images/about/oil-2.png')}}" alt="" />
                 </div>
                 <div class="blog-one-content">
-                  <!-- <ul class="blog-classic-meta">
-                    <li>
-                      <a href="#"><i class="fas fa-clock"></i> 07:10 AM</a>
-                    </li>
-                    <li>
-                      <a href="#"
-                        ><i class="fas fa-calendar-alt"></i> Mar 28, 2023</a
-                      >
-                    </li>
-                  </ul> -->
+                 
                   <div class="blog-one-title">
                     <h3><a href="#"> Gas</a></h3>
                   </div>
@@ -195,7 +190,7 @@
               </div>
             </div>
             <div class="col-xl-4 col-lg-4">
-              <!--Blog One Single-->
+            
               <div
                 class="blog-one-single guyana-wrap wow fadeInUp"
                 data-wow-delay="200ms">
@@ -203,16 +198,7 @@
                   <img src="{{asset('images/about/oil-3.png')}}" alt="" />
                 </div>
                 <div class="blog-one-content">
-                  <!-- <ul class="blog-classic-meta">
-                    <li>
-                      <a href="#"><i class="fas fa-clock"></i> 09:10 AM</a>
-                    </li>
-                    <li>
-                      <a href="#"
-                        ><i class="fas fa-calendar-alt"></i> Mar 28, 2023</a
-                      >
-                    </li>
-                  </ul> -->
+                  
                   <div class="blog-one-title">
                     <h3>
                       <a href="#">Agriculture</a>
@@ -235,7 +221,7 @@
               </div>
             </div>
             <div class="col-xl-4 col-lg-4">
-              <!--Blog One Single-->
+             
               <div
                 class="blog-one-single guyana-wrap wow fadeInUp"
                 data-wow-delay="300ms">
@@ -243,16 +229,7 @@
                   <img src="{{asset('images/about/oil-4.png')}}" alt="" />
                 </div>
                 <div class="blog-one-content">
-                  <!-- <ul class="blog-classic-meta">
-                    <li>
-                      <a href="#"><i class="fas fa-clock"></i> 10:10 AM</a>
-                    </li>
-                    <li>
-                      <a href="#"
-                        ><i class="fas fa-calendar-alt"></i>Jan 25, 2024</a
-                      >
-                    </li>
-                  </ul> -->
+                  
                   <div class="blog-one-title">
                     <h3>
                       <a href="#">Mining</a>
@@ -273,7 +250,7 @@
               </div>
             </div>
             <div class="col-xl-4 col-lg-4">
-              <!--Blog One Single-->
+              
               <div
                 class="blog-one-single guyana-wrap wow fadeInUp"
                 data-wow-delay="100ms">
@@ -281,16 +258,7 @@
                   <img src="{{asset('images/about/oil-5.png')}}" alt="" />
                 </div>
                 <div class="blog-one-content">
-                  <!-- <ul class="blog-classic-meta">
-                    <li>
-                      <a href="#"><i class="fas fa-clock"></i> 07:10 AM</a>
-                    </li>
-                    <li>
-                      <a href="#"
-                        ><i class="fas fa-calendar-alt"></i> Mar 28, 2023</a
-                      >
-                    </li>
-                  </ul> -->
+                 
                   <div class="blog-one-title">
                     <h3><a href="#">Tourism</a></h3>
                   </div>
@@ -311,7 +279,7 @@
               </div>
             </div>
             <div class="col-xl-4 col-lg-4">
-              <!--Blog One Single-->
+             
               <div
                 class="blog-one-single guyana-wrap wow fadeInUp"
                 data-wow-delay="200ms">
@@ -319,16 +287,7 @@
                   <img src="{{asset('images/about/oil-6.png')}}" alt="" />
                 </div>
                 <div class="blog-one-content">
-                  <!-- <ul class="blog-classic-meta">
-                    <li>
-                      <a href="#"><i class="fas fa-clock"></i> 09:10 AM</a>
-                    </li>
-                    <li>
-                      <a href="#"
-                        ><i class="fas fa-calendar-alt"></i> Mar 28, 2023</a
-                      >
-                    </li>
-                  </ul> -->
+                 
                   <div class="blog-one-title">
                     <h3>
                       <a href="#">Infrastructure</a>
@@ -347,7 +306,9 @@
                   ></a>
                 </div>
               </div>
-            </div>
+            </div> -->
+
+
           </div>
         </div>
       </section>

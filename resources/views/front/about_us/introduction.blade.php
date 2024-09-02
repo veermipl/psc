@@ -51,7 +51,7 @@
                     <div class="about-two-sec-image">
                         <div class="about-two-sec-image-bg-1" style="background-image: url('{{ asset('images/about/about-2--pattern-1.png') }}');"></div>
                         <div class="about-two-sec-image-bg-2" style="background-image: url('{{ asset('images/about/about-2--pattern-2.png') }}');"></div>
-                        <img src="{{asset('images/about/about-page-img-1.png')}}" alt="" />
+                        <img src="{{ asset('storage/'.@$introduction->image) }}" alt="" />
                     </div>
                 </div>
                
@@ -62,9 +62,11 @@
                         <h4 class="sub-title-shape-left section_title-subheading">
                             Our
                         </h4>
-                        <h2>Introduction</h2>
+                        <h2>{{ @$introduction->title	}}</h2>
                         <p class="about-two-title-text mb-2">
-                            The Private Sector Commission of Guyana was established in 1992 by five Private Sector
+                        {!! @$introduction->contant !!}
+
+                            <!-- The Private Sector Commission of Guyana was established in 1992 by five Private Sector
                             Associations with the aim of bringing together all Private Sector Organs and Business
                             Entities under the purview of being one national body.
                         </p>
@@ -80,7 +82,7 @@
                             Committee which comprises the following elected officials: Chairman, Vice Chairman, Honorary
                             Secretary, and Honorary Treasurer. The Executive Director is a member of the Committee by
                             appointment.
-                        </p>
+                        </p> -->
                     </div>
 
 
@@ -106,11 +108,9 @@
                         <h4 class="sub-title-shape-left section_title-subheading">
                             Our
                         </h4>
-                        <h2>Mission Statement</h2>
+                        <h2>{{ @$introduction->title	}}</h2>
                         <p class="about-two-title-text mb-2">
-                            “To be the leading advocate for the private sector on articulated and shared positions on
-                            national issues which will promote socio-economic growth and development through the
-                            creation of strategic partnerships with the Government and other stakeholders.”
+                        {!! @$introduction->contant !!}
                         </p>
 
                     </div>
@@ -133,7 +133,7 @@
                         <div class="about-two-sec-image-bg-2" style="
                         background-image: url('{{ asset('images/about/about-2--pattern-2.png') }}');
                       "></div>
-                        <img src="{{asset('images/about/mission.png')}}" alt="mission-statement" />
+                        <img src="{{ asset('storage/'.@$introduction->image) }}" alt="mission-statement" />
                     </div>
                 </div>
             </div>
@@ -161,28 +161,39 @@
             <div class="col-xl-12">
                 <div class="testimonials-one-carousel owl-theme owl-carousel">
                     <!--Testimonials One Single-->
-                    <div class="testimonials-one-single stragy">
-                        <div class="client-info">
-                            <div class="client-img">
-                                <img src="{{asset('images/testimonial/trade-invesment.png')}}" alt="" />
+
+                    @if( @$strategic && count(@$strategic)> 0 )
+                    
+                        @foreach($strategic as $areas )
+                        <div class="testimonials-one-single stragy">
+                            <div class="client-info">
+                                <div class="client-img">
+                                    <img src="{{ asset('storage/'.@$areas->image) }}" alt="" />
+                                </div>
+                                <div class="client-content">
+                                    <h3>
+                                        {{$areas->title	}}
+                                        </h3>
+                                </div>
                             </div>
-                            <div class="client-content">
-                                <h3>
-                                    Economic Growth and Development</h3>
+                            <div class="text-box">
+                                     {!! $areas->contant !!}
+                                <!-- <p>
+                                    To advocate for, provide leadership and promote activities and projects for all members
+                                    and stakeholders that will create a platform to foster development in Guyana.
+                                </p> -->
+                            </div>
+                            <div class="testimonials-quote">
+                                <i class="fa fa-quote-left"></i>
                             </div>
                         </div>
-                        <div class="text-box">
-                            <p>
-                                To advocate for, provide leadership and promote activities and projects for all members
-                                and stakeholders that will create a platform to foster development in Guyana.
-                            </p>
-                        </div>
-                        <div class="testimonials-quote">
-                            <i class="fa fa-quote-left"></i>
-                        </div>
-                    </div>
-                    <!--Testimonials One Single-->
-                    <div class="testimonials-one-single stragy">
+                        @endforeach
+                    @endif
+
+
+           
+
+                    <!-- <div class="testimonials-one-single stragy">
                         <div class="client-info">
                             <div class="client-img">
                                 <img src="{{asset('images/testimonial/government-security.png')}}" alt="" />
@@ -202,7 +213,7 @@
                             <i class="fa fa-quote-left"></i>
                         </div>
                     </div>
-                    <!--Testimonials One Single-->
+        
                     <div class="testimonials-one-single stragy">
                         <div class="client-info">
                             <div class="client-img">
@@ -221,7 +232,7 @@
                             <i class="fa fa-quote-left"></i>
                         </div>
                     </div>
-                    <!--Testimonials One Single-->
+                  
                     <div class="testimonials-one-single stragy">
                         <div class="client-info">
                             <div class="client-img">
@@ -241,7 +252,7 @@
                             <i class="fa fa-quote-left"></i>
                         </div>
                     </div>
-                    <!--Testimonials One Single-->
+
                     <div class="testimonials-one-single stragy">
                         <div class="client-info">
                             <div class="client-img">
@@ -263,7 +274,7 @@
                             <i class="fa fa-quote-left"></i>
                         </div>
                     </div>
-                    <!--Testimonials One Single-->
+
                     <div class="testimonials-one-single stragy">
                         <div class="client-info">
                             <div class="client-img">
@@ -283,7 +294,7 @@
                             <i class="fa fa-quote-left"></i>
                         </div>
                     </div>
-                    <!--Testimonials One Single-->
+           -->
 
                 </div>
             </div>
@@ -304,13 +315,19 @@
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="c-features-con">
                     <ul>
-                        <li><span>1</span>
-                            <div class="c-features-list">
-                                <p>
-                                    Value our members
-                                </p>
-                            </div>
-                        </li>
+                        @if(@$corevalue && count(@$corevalue)> 0)
+                            @foreach($corevalue as $listKey => $core)
+                            <li><span>{{ $listKey + 1 }}</span>
+                                <div class="c-features-list">
+                                    <p>
+                                     {{ $core->title }}
+                                    </p>
+                                </div>
+                            </li>
+                            @endforeach
+
+                        @endif
+<!--                         
                         <li><span>2</span>
                             <div class="c-features-list">
                                 <p>
@@ -376,7 +393,8 @@
 
                                 </p>
                             </div>
-                        </li>
+                        </li> -->
+
                     </ul>
                 </div>
             </div>
@@ -394,17 +412,29 @@
             <h2>Performance Drivers</h2>
         </div>
         <div class="row">
-            <div class="col-md-4 col-lg-4 process-style2">
 
-                <div class="process-icon">
-                    <img src="{{asset('images/arrow-icon/team.png')}}" alt="icon">
-                    <span class="process-number">01</span>
-                </div>
-                <h3 class="process-title h5">Member Satisfaction</h3>
-                <p class="process-text">The PSC strives to provide an efficient and effective service to satisfy the
-                    needs of its members.</p>
-            </div>
+        @if(isset($performance) && count($performance) > 0 )
+            @foreach($performance as $countkey => $Drivers)
+
             <div class="col-md-4 col-lg-4 process-style2">
+                <div class="process-icon">
+                    <img src="{{ asset('storage/'.@$areas->image) }}" alt="icon">
+                    <span class="process-number">{{$Drivers + 1}}</span>
+                </div>
+                <h3 class="process-title h5">{{$Drivers->title	}}</h3>
+                <p class="process-text">
+                 {{$Drivers->contant}}
+                    <!-- The PSC strives to provide an efficient and effective service to satisfy the
+                    needs of its members. -->
+                </p>
+            </div>
+            @endforeach
+
+        @endif
+
+
+
+            <!-- <div class="col-md-4 col-lg-4 process-style2">
                 <div class="process-arrow"><img src="{{asset('images/arrow-icon/process-arrow-2-1.png')}}" alt="arrow"></div>
                 <div class="process-icon">
                     <img src="{{asset('images/arrow-icon/proactive.png')}}" alt="icon">
@@ -423,7 +453,7 @@
                 <h3 class="process-title h5">Advocacy</h3>
                 <p class="process-text">The PSC takes a leading role in advocating the interests of its members and the
                     private sector, with a view to fostering socioeconomic growth and development in Guyana.</p>
-            </div>
+            </div> -->
         </div>
     </div>
 </section>
