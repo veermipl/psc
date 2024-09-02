@@ -6809,6 +6809,7 @@ width:100%;
 
 /* --------dropdown-end------ */
 
+<<<<<<< Updated upstream
 
 .directory {
     margin-bottom: 15px;
@@ -6847,6 +6848,8 @@ width:100%;
 
 /* ------photo-------- */
 
+=======
+>>>>>>> Stashed changes
 .portfolio-one-img-box img {
     height: 250px;
     border-radius: 10px;
@@ -6859,6 +6862,7 @@ width:100%;
     padding: 70px 0 40px;
 }
 
+<<<<<<< Updated upstream
 .directory {
     margin-bottom: 15px;
     transition: transform 0.4s ease;
@@ -6988,3 +6992,9 @@ width:100%;
     background-color: #ecbd00;
 }
 
+=======
+.press-title a {
+    font-size: 14px;
+    line-height: 14px;
+}
+>>>>>>> Stashed changes

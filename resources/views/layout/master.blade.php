@@ -186,12 +186,21 @@
                                                             <a href="index.html">About Us <i class="fas fa-chevron-down"></i></a>
                                                             <ul>
 
+<<<<<<< Updated upstream
                                                                 <li><a  href="{{ route('about-us.introduction') }}">Introduction</a>
                                                                 </li>
                                                                 <li><a  href="{{ route('about-us.staff') }}">Staff</a>
                                                                 </li>
                                                                 <li>
                                                                     <a  href="{{ route('about-us.council') }}">Council</a>
+=======
+                                                                <li><a href="{{ route('about-us.introduction') }}">Introduction</a>
+                                                                </li>
+                                                                <li><a href="{{ route('about-us.staff') }}">Staff</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="{{ route('about-us.council') }}">Council</a>
+>>>>>>> Stashed changes
                                                                 </li>
                                                                 <li>
                                                                     <a href="{{ route('about-us.history') }}">History</a>
