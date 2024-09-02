@@ -1,3 +1,14 @@
+@php
+    if(auth()->check()){
+        $user_details = helper_getUserDetails(auth()->user()->id);
+    }
+    $settings_app_name = helper_getSettings('app_name');
+    $settings_app_logo = helper_getSettings('app_logo');
+    $settings_contact_us_address = helper_getSettings('address');
+    $settings_contact_us_email = helper_getSettings('email');
+    $settings_contact_us_phone = helper_getSettings('phone');
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,6 +38,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <style>
         body {
@@ -126,22 +139,22 @@
                                         <div class="ml-2">
                                             <div class="dropdownt">
                                                 <div class="drop-img dropbtnt" id="myBtnt">
-                                                    <img src="https://i.postimg.cc/ydFvrvbN/slider3.png" alt="user-picture">
+                                                    <img src="{{ asset('storage/' . ($user_details ? $user_details['profile_image'] : 'default/user.png'))}}" class="user-img" alt="user-picture">
                                                     <i class="fas fa-chevron-down"></i>
                                                 </div>
                                                 <div id="myDropdownt" class="dropdown-contentt">
                                                     <a href="{{ route('profile') }}"> <i class="far fa-user"></i> Profile</a>
                                                     @if (auth()->user()->hasPermission('admin_dashboard'))
-                                                        <a href="{{ route('admin.dashboard') }}"> <i class="far fa-dashboard"></i> Dashboard</a>
+                                                        <a href="{{ route('admin.dashboard') }}"> <i class="far fa-dashboard"></i> Admin Dashboard</a>
                                                     @endif
                                                     @if (auth()->user()->hasPermission('member_dashboard'))
-                                                        <a href="{{ route('member.dashboard') }}"> <i class="far fa-dashboard"></i> Dashboard</a>
+                                                        <a href="{{ route('member.dashboard') }}"> <i class="far fa-dashboard"></i> Member Dashboard</a>
                                                     @endif
 
                                                     <form action="{{ route('logout') }}" method="post">
                                                         @csrf
                                                         @method('post')
-                                                        <button class=" btn-sm btn-block" style="padding-left: 15px; text-align:start;">
+                                                        <button class=" btn-sm btn-block" style="padding-left: 18px; text-align:start;">
                                                             <i class="far fa-lock"></i> Logout
                                                         </button>
                                                     </form>
@@ -182,6 +195,7 @@
                                                         <li class="current">
                                                             <a href="{{ route('home') }}">Home</a>
                                                         </li>
+
                                                         <li class="dropdown">
                                                             <a href="index.html">About Us <i class="fas fa-chevron-down"></i></a>
                                                             <ul>
@@ -213,7 +227,6 @@
                                                             </ul>
                                                         </li>
 
-                                                        <!-- <li><a href="#">Members</a></li> -->
                                                         <li class="dropdown">
                                                             <a href="#">Membership
                                                                 <i class="fas fa-chevron-down"></i></a>
@@ -239,45 +252,12 @@
 
                                                             </ul>
                                                         </li>
-                                                        <!-- <li class="dropdown">
-                                                            <a href="#"
-                                                            >Sector Committees
-                                                            <i class="fas fa-chevron-down"></i
-                                                            ></a>
-                                                            <ul>
-                                                            <li>
-                                                                <a href="#"
-                                                                >Governance & Security</a
-                                                                >
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">Agriculture</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"
-                                                                >Trade & Investment</a
-                                                                >
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"
-                                                                >Natural Resoures</a
-                                                                >
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">Financial & Economics</a>
-                                                            </li>
-                                                            <li><a href="#">Energy</a></li>
-                                                            <li>
-                                                                <a href="#">Infrastructure</a>
-                                                            </li>
-                                                            <li><a href="#">Enviroment</a></li>
-                                                            <li><a href="#">Regional</a></li>
-                                                            </ul>
-                                                        </li> -->
+
                                                         <li>
                                                             <a href="{{ route('guyana-economy') }}"> Guyana's Economy
                                                             </a>
                                                         </li>
+
                                                         <li class="dropdown">
                                                             <a href="#">Data
                                                                 <i class="fas fa-chevron-down"></i>
@@ -301,6 +281,7 @@
 
                                                             </ul>
                                                         </li>
+
                                                         <li class="dropdown">
                                                             <a href="#">Resources
                                                                 <i class="fas fa-chevron-down"></i>
@@ -329,7 +310,7 @@
                                                                 </li>
                                                             </ul>
                                                         </li>
-                                                        <!-- <li><a href="#">News</a></li> -->
+
                                                         <li class="dropdown">
                                                             <a href="index.html">Media Center
                                                                 <i class="fas fa-chevron-down"></i>
@@ -353,6 +334,7 @@
 
                                                             </ul>
                                                         </li>
+
                                                         <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
                                                     </ul>
                                                 </div>
@@ -481,12 +463,16 @@
                             <div class="footer-widget_contact-info">
                                 <p style="display: flex; align-items: baseline">
                                     <i class="fas fa-map-marker-alt" style="margin-right: 10px"></i>
-                                    157 Waterloo St, Georgetown, Guyana
+                                    {{ $settings_contact_us_address }}
                                 </p>
-                                <a href="tel:+592-223-0875"><i class="fas fa-phone" style="margin-right: 10px"></i>+592-223-0875</a>
+                                <a href="tel:+592-223-0875"><i class="fas fa-phone" style="margin-right: 10px"></i>
+                                    {{ $settings_contact_us_phone }}
+                                </a>
                                 <br />
                                 <a href="mailto:office@psc.org.gy">
-                                    <i class="fas fa-envelope" style="margin-right: 10px"></i>office@psc.org.gy</a><br />
+                                    <i class="fas fa-envelope" style="margin-right: 10px"></i>
+                                    {{ $settings_contact_us_email }}
+                                </a><br />
                             </div>
                         </div>
                     </div>
@@ -556,7 +542,12 @@
     <script src="{{ asset('js/parallax.min.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
 
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
     <script type="text/javascript" src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         // Get the button, and when the user clicks on it, execute myFunction
@@ -585,6 +576,26 @@
             }
         }
     </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    @if (session('success'))
+    <script>
+        toastr.success("{{ session('success') }}");
+    </script>
+    @endif
+
+    @if (session('error'))
+    <script>
+        toastr.error("{{ session('error') }}");
+    </script>
+    @endif
+
+    @if (session('status'))
+    <script>
+        toastr.success("{{ session('status') }}");
+    </script>
+    @endif
 
     @yield('scripts')
 

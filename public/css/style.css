@@ -22,12 +22,12 @@
 @import url('animated-headline.css');
 
 /*** 
- 
- ====================================================================
-     Reset
- ====================================================================
- 
-  ***/
+  
+  ====================================================================
+      Reset
+  ====================================================================
+  
+   ***/
 
 * {
     margin: 0px;
@@ -38,12 +38,12 @@
 }
 
 /*** 
- 
- ====================================================================
-     Global Settings
- ====================================================================
- 
-  ***/
+  
+  ====================================================================
+      Global Settings
+  ====================================================================
+  
+   ***/
 
 :root {
     --body-font: 'Heebo', sans-serif;
@@ -61,7 +61,7 @@ body {
     line-height: 26px;
     color: var(--thm-gray);
     font-weight: 400;
-    background: white;
+    background: #f7f8fa;
     font-family: var(--body-font);
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: antialiased;
@@ -135,7 +135,8 @@ button {
 
 .auto-container {
     position: static;
-    max-width: 1210px;
+    /* max-width: 1210px; */
+    max-width: 100%;
     padding: 0px 20px;
     margin: 0 auto;
 }
@@ -349,10 +350,10 @@ li {
 
 
 /*** 
- =========================================
-     Mobile Menu
- =========================================
- ***/
+  =========================================
+      Mobile Menu
+  =========================================
+  ***/
 .mobile-menu {
     position: fixed;
     left: -350px;
@@ -558,9 +559,9 @@ li {
 
 /* ========= Menu Bar Style =========== */
 /* -------------------------------- 
-  Title: Animated Menu Button
-  Descr: A menu button w/ a morphing icon
-  -------------------------------- */
+   Title: Animated Menu Button
+   Descr: A menu button w/ a morphing icon
+   -------------------------------- */
 
 .navbar-btn-wrap {
     position: relative;
@@ -670,8 +671,8 @@ li {
 
 
 /*================================================
-             Sticky Header
- ==================================================*/
+              Sticky Header
+  ==================================================*/
 
 .sticky-header {
     position: fixed;
@@ -743,10 +744,10 @@ li {
 
 
 /*** 
- ==================================================
-     Main Header style
- ==================================================
- ***/
+  ==================================================
+      Main Header style
+  ==================================================
+  ***/
 .main-header {
     position: relative;
     left: 0;
@@ -1255,10 +1256,10 @@ li {
 
 
 /*** 
- ==================================================
-     Main Header Two Css
- ==================================================
- ***/
+  ==================================================
+      Main Header Two Css
+  ==================================================
+  ***/
 .main-header.two {
     position: absolute;
     background: none;
@@ -1419,10 +1420,10 @@ li {
 
 
 /*** 
- ====================================================================
-     Banner Section
- ====================================================================
- ***/
+  ====================================================================
+      Banner Section
+  ====================================================================
+  ***/
 
 .banner-section {
     position: relative;
@@ -1705,12 +1706,12 @@ li {
 
 
 /*** 
- 
- ====================================================================
-     Banner Section Two
- ====================================================================
- 
- ***/
+  
+  ====================================================================
+      Banner Section Two
+  ====================================================================
+  
+  ***/
 
 .banner-section.two {
     margin-top: 235px;
@@ -1736,12 +1737,12 @@ li {
 
 
 /*** 
- 
- ====================================================================
-         About Us One Section
- ====================================================================
- 
- ***/
+  
+  ====================================================================
+          About Us One Section
+  ====================================================================
+  
+  ***/
 .about-us-one-section {
     position: relative;
     display: block;
@@ -1867,12 +1868,12 @@ li {
 }
 
 /*** 
- 
- ====================================================================
-         Features One Section
- ====================================================================
- 
- ***/
+  
+  ====================================================================
+          Features One Section
+  ====================================================================
+  
+  ***/
 .features-one-section {
     position: relative;
     display: block;
@@ -1941,12 +1942,12 @@ span.flaticon-paint-roller:before {
 
 
 /*** 
- 
- ====================================================================
-         Features One Section
- ====================================================================
- 
- ***/
+  
+  ====================================================================
+          Features One Section
+  ====================================================================
+  
+  ***/
 .video-one-section {
     position: relative;
     display: block;
@@ -2020,12 +2021,12 @@ span.flaticon-paint-roller:before {
 }
 
 /*** 
- 
- ====================================================================
-         Main Sevice One Section
- ====================================================================
- 
- ***/
+  
+  ====================================================================
+          Main Sevice One Section
+  ====================================================================
+  
+  ***/
 .main-service-one-section {
     position: relative;
     display: block;
@@ -2122,12 +2123,12 @@ span.flaticon-paint-roller:before {
 }
 
 /*** 
- 
- ====================================================================
-         Funfacts One Section
- ====================================================================
- 
- ***/
+  
+  ====================================================================
+          Funfacts One Section
+  ====================================================================
+  
+  ***/
 .funfacts-one-section {
     position: relative;
     display: block;
@@ -2174,12 +2175,12 @@ span.flaticon-paint-roller:before {
 }
 
 /*** 
- 
- ====================================================================
-         Portfolio One Section
- ====================================================================
- 
- ***/
+  
+  ====================================================================
+          Portfolio One Section
+  ====================================================================
+  
+  ***/
 .portfolio-one-section {
     position: relative;
     display: block;
@@ -2330,14 +2331,13 @@ span.flaticon-paint-roller:before {
 
 .portfolio-text {
     position: absolute;
-    bottom: 10px;
+    bottom: 20px;
     left: 50%;
     right: 0;
     transform: translateX(-50%) translateY(80px);
     text-align: center;
     -webkit-transition: all 500ms ease;
     transition: all 500ms ease;
-    width: 100%;
 }
 
 .portfolio-one-single:hover .portfolio-text {
@@ -2354,7 +2354,7 @@ span.flaticon-paint-roller:before {
 
 .portfolio-text p {
     font-size: 16px;
-    color: #f3cf15;
+    color: var(--thm-primary);
     margin: 0;
 }
 
@@ -2379,12 +2379,12 @@ span.flaticon-paint-roller:before {
 
 
 /*** 
- 
- ====================================================================
-         Testimonials One Section
- ====================================================================
- 
- ***/
+  
+  ====================================================================
+          Testimonials One Section
+  ====================================================================
+  
+  ***/
 .testimonials-one-section {
     position: relative;
     display: block;
@@ -2480,12 +2480,12 @@ span.flaticon-paint-roller:before {
 }
 
 /*** 
- 
- ====================================================================
-         Factory Solutions One Section
- ====================================================================
- 
- ***/
+  
+  ====================================================================
+          Factory Solutions One Section
+  ====================================================================
+  
+  ***/
 .factory-solutions-one-section {
     position: relative;
     display: block;
@@ -2530,12 +2530,12 @@ span.flaticon-paint-roller:before {
 }
 
 /*** 
- 
- ====================================================================
-         Why Choose One Section
- ====================================================================
- 
- ***/
+  
+  ====================================================================
+          Why Choose One Section
+  ====================================================================
+  
+  ***/
 
 .why-choose-two-section.one {
     padding: 0 0 0;
@@ -2546,12 +2546,12 @@ span.flaticon-paint-roller:before {
 
 
 /*** 
- 
- ====================================================================
-         Team One Section
- ====================================================================
- 
- ***/
+  
+  ====================================================================
+          Team One Section
+  ====================================================================
+  
+  ***/
 .team-one-section {
     position: relative;
     display: block;
@@ -2663,12 +2663,12 @@ span.flaticon-paint-roller:before {
 }
 
 /*** 
- 
- ====================================================================
-         Blog One Section
- ====================================================================
- 
- ***/
+  
+  ====================================================================
+          Blog One Section
+  ====================================================================
+  
+  ***/
 .blog-one-section {
     position: relative;
     display: block;
@@ -2749,11 +2749,11 @@ span.flaticon-paint-roller:before {
 }
 
 /*** 
- ====================================================================
-         Brand One Section
- ====================================================================
- 
- ***/
+  ====================================================================
+          Brand One Section
+  ====================================================================
+  
+  ***/
 .brand-one {
     position: relative;
     display: block;
@@ -2774,11 +2774,11 @@ span.flaticon-paint-roller:before {
 
 
 /*** 
- ====================================================================
-         Footer Section
- ====================================================================
- 
- ***/
+  ====================================================================
+          Footer Section
+  ====================================================================
+  
+  ***/
 .footer-section {
     position: relative;
     display: block;
@@ -2959,11 +2959,11 @@ span.flaticon-paint-roller:before {
 }
 
 /*** 
- ====================================================================
-         Features Two Section
- ====================================================================
- 
- ***/
+  ====================================================================
+          Features Two Section
+  ====================================================================
+  
+  ***/
 
 .features-two-section {
     position: relative;
@@ -3037,10 +3037,10 @@ span.flaticon-paint-roller:before {
 }
 
 /*** 
- ====================================================================
-         About Two Section
- ====================================================================
- ***/
+  ====================================================================
+          About Two Section
+  ====================================================================
+  ***/
 .about-tow-section {
     position: relative;
     display: block;
@@ -3216,10 +3216,10 @@ span.flaticon-paint-roller:before {
 }
 
 /*** 
- ====================================================================
-         Main Service Two Section
- ====================================================================
- ***/
+  ====================================================================
+          Main Service Two Section
+  ====================================================================
+  ***/
 .main-service-one-section.two {
     padding: 100px 0 100px;
     margin-top: 0;
@@ -3230,10 +3230,10 @@ span.flaticon-paint-roller:before {
 }
 
 /*** 
- ====================================================================
-         Team Two Section
- ====================================================================
- ***/
+  ====================================================================
+          Team Two Section
+  ====================================================================
+  ***/
 
 .team-one-section.two {
     background: #f7f8f9;
@@ -3243,10 +3243,10 @@ span.flaticon-paint-roller:before {
 .team-one-section.two .thm-section-title h2 {}
 
 /*** 
- ====================================================================
-         Team Two Section
- ====================================================================
- ***/
+  ====================================================================
+          Team Two Section
+  ====================================================================
+  ***/
 .why-choose-two-section {
     position: relative;
     display: block;
@@ -3399,10 +3399,10 @@ span.flaticon-paint-roller:before {
 
 
 /*** 
- ====================================================================
-         Latest Projects One Section
- ====================================================================
- ***/
+  ====================================================================
+          Latest Projects One Section
+  ====================================================================
+  ***/
 .latest-projects-one-section {
     position: relative;
     display: block;
@@ -3558,8 +3558,8 @@ span.flaticon-paint-roller:before {
 
 
 /*--------------------------------------------------------------
- #  Page Header
- --------------------------------------------------------------*/
+  #  Page Header
+  --------------------------------------------------------------*/
 .page-header {
     position: relative;
     background-repeat: no-repeat;
@@ -3628,8 +3628,8 @@ span.flaticon-paint-roller:before {
 }
 
 /*--------------------------------------------------------------
- #  About Page
- --------------------------------------------------------------*/
+  #  About Page
+  --------------------------------------------------------------*/
 .about-tow-section.about-page {
     padding-bottom: 55px;
 }
@@ -3690,8 +3690,8 @@ span.flaticon-paint-roller:before {
 .about-tow-section.about-page .signature img {}
 
 /*--------------------------------------------------------------
- #  video Two Section
- --------------------------------------------------------------*/
+  #  video Two Section
+  --------------------------------------------------------------*/
 .video-two-section {
     position: relative;
     display: block;
@@ -3753,8 +3753,8 @@ span.flaticon-paint-roller:before {
 }
 
 /*--------------------------------------------------------------
- #  History One Section
- --------------------------------------------------------------*/
+  #  History One Section
+  --------------------------------------------------------------*/
 .history-one-section {
     position: relative;
     display: block;
@@ -3884,8 +3884,8 @@ span.flaticon-paint-roller:before {
 }
 
 /*--------------------------------------------------------------
- #  Newsletter One Section
- --------------------------------------------------------------*/
+  #  Newsletter One Section
+  --------------------------------------------------------------*/
 .newsletter-one-section {
     position: relative;
     display: block;
@@ -3969,8 +3969,8 @@ span.flaticon-paint-roller:before {
 }
 
 /*--------------------------------------------------------------
- #  Serviec Details Section
- --------------------------------------------------------------*/
+  #  Serviec Details Section
+  --------------------------------------------------------------*/
 .service-details-section {
     position: relative;
     display: block;
@@ -4329,8 +4329,8 @@ span.flaticon-paint-roller:before {
 
 
 /*--------------------------------------------------------------
- #  Project Details Image Box
- --------------------------------------------------------------*/
+  #  Project Details Image Box
+  --------------------------------------------------------------*/
 .project-details-image-box {
     position: relative;
     display: block;
@@ -4344,8 +4344,8 @@ span.flaticon-paint-roller:before {
 }
 
 /*--------------------------------------------------------------
- #  Project Details Content Section
- --------------------------------------------------------------*/
+  #  Project Details Content Section
+  --------------------------------------------------------------*/
 .project-details-content-section {}
 
 .project-details-left-content {}
@@ -4383,7 +4383,7 @@ span.flaticon-paint-roller:before {
     order: 1px solid #eeeeee;
     background: #ffffff;
     padding: 20px 20px 20px;
-   // margin-bottom: 20px;
+    // margin-bottom: 20px;
 }
 
 .project-details-right ul li:last-child {
@@ -4429,8 +4429,8 @@ span.flaticon-paint-roller:before {
 }
 
 /*--------------------------------------------------------------
- #  Testimonials Three
- --------------------------------------------------------------*/
+  #  Testimonials Three
+  --------------------------------------------------------------*/
 .testimonials-one-section.three {
     padding-bottom: 90px;
 }
@@ -4440,8 +4440,8 @@ span.flaticon-paint-roller:before {
 }
 
 /*--------------------------------------------------------------
- #  Faq One Section
- --------------------------------------------------------------*/
+  #  Faq One Section
+  --------------------------------------------------------------*/
 .faq-one-section {
     position: relative;
     display: block;
@@ -4472,8 +4472,8 @@ span.flaticon-paint-roller:before {
 .faq-one-right {}
 
 /*--------------------------------------------------------------
- #  Error Section
- --------------------------------------------------------------*/
+  #  Error Section
+  --------------------------------------------------------------*/
 .error-section {
     position: relative;
     display: block;
@@ -4518,8 +4518,8 @@ span.flaticon-paint-roller:before {
 }
 
 /*--------------------------------------------------------------
- #  Contact One Section
- --------------------------------------------------------------*/
+  #  Contact One Section
+  --------------------------------------------------------------*/
 .contact-one-section {
     position: relative;
     display: block;
@@ -4570,8 +4570,8 @@ span.flaticon-paint-roller:before {
 }
 
 /*--------------------------------------------------------------
- # Google_map
- --------------------------------------------------------------*/
+  # Google_map
+  --------------------------------------------------------------*/
 .google_map {
     position: relative;
     display: block;
@@ -4587,8 +4587,8 @@ span.flaticon-paint-roller:before {
 }
 
 /*--------------------------------------------------------------
- # Contactinfo
- --------------------------------------------------------------*/
+  # Contactinfo
+  --------------------------------------------------------------*/
 .contactinfo {
     position: relative;
     display: block;
@@ -4637,8 +4637,8 @@ span.flaticon-paint-roller:before {
 }
 
 /*--------------------------------------------------------------
- # Blog Page
- --------------------------------------------------------------*/
+  # Blog Page
+  --------------------------------------------------------------*/
 .blog-one-section.blog-page {
     background: #ffffff;
 }
@@ -4687,8 +4687,8 @@ span.flaticon-paint-roller:before {
 }
 
 /*--------------------------------------------------------------
- # Blog Classic
- --------------------------------------------------------------*/
+  # Blog Classic
+  --------------------------------------------------------------*/
 .blog-classic-section {
     position: relative;
     display: block;
@@ -4839,8 +4839,8 @@ span.flaticon-paint-roller:before {
 }
 
 /*--------------------------------------------------------------
- # Sidebar
- --------------------------------------------------------------*/
+  # Sidebar
+  --------------------------------------------------------------*/
 .sidebar-single {}
 
 .sidebar-single+.sidebar-single {
@@ -4986,7 +4986,7 @@ span.flaticon-paint-roller:before {
 
 .sidebar-latest-news-content h3 {
     line-height: 20px;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 600;
     margin-bottom: 6px;
 }
@@ -5130,8 +5130,8 @@ span.flaticon-paint-roller:before {
 }
 
 /*--------------------------------------------------------------
- # Blog Details
- --------------------------------------------------------------*/
+  # Blog Details
+  --------------------------------------------------------------*/
 .blog-details-section {
     position: relative;
     display: block;
@@ -5387,8 +5387,8 @@ span.flaticon-paint-roller:before {
 
 
 /*--------------------------------------------------------------
- ## Comments
- --------------------------------------------------------------*/
+  ## Comments
+  --------------------------------------------------------------*/
 
 .comment-one-title,
 .comment-form-title {
@@ -5590,15 +5590,15 @@ span.flaticon-paint-roller:before {
 }
 
 /* 
-.topbar-one__right:before {
-    position: absolute;
-    top: 6px;
-    right: 0;
-    bottom: 6px;
-    width: 1px;
-    background: rgba(255,255,255, 0.30);
-    content: "";
-} */
+ .topbar-one__right:before {
+     position: absolute;
+     top: 6px;
+     right: 0;
+     bottom: 6px;
+     width: 1px;
+     background: rgba(255,255,255, 0.30);
+     content: "";
+ } */
 .vs-btn {
     position: relative;
     display: inline-block;
@@ -6056,12 +6056,11 @@ tr:nth-child(even) {
 }
 
 .guyana-wrap .blog-one-title h3 {
-    font-size: 16px;
+    font-size: 19px;
 }
 
 .guyana-wrap .blog-one-content {
     padding: 20px 25px 20px;
-    min-height:170px;
 }
 
 .vs-btn1.style5 {
@@ -6726,17 +6725,17 @@ textarea.input {
 
 .dropbtnt {
     /* background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    font-size: 16px; */
+     color: white;
+     padding: 16px;
+     font-size: 16px; */
     border: none;
     cursor: pointer;
 }
 
 /* .dropbtnt:hover,
-.dropbtnt:focus {
-    background-color: #3e8e41;
-} */
+ .dropbtnt:focus {
+     background-color: #3e8e41;
+ } */
 
 .dropdownt {
     position: relative;
@@ -6748,7 +6747,7 @@ textarea.input {
     display: none;
     position: absolute;
     background-color: #ffffff;
-    min-width: 160px;
+    min-width: max-content;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     right: 0px;
@@ -6758,6 +6757,7 @@ textarea.input {
     top: 50px;
 }
 
+.dropdown-contentt button,
 .dropdown-contentt a {
     color: black;
     padding: 7px 16px;
@@ -6796,15 +6796,16 @@ button.btn-block:hover {
 
 @media screen and (max-width:767px) {
     .logo img {
-        width: 230px;
+        width: 260px;
     }
 
     .mobile-nav-toggler .icon {
         margin-right: 0px;
     }
-.c-features-con ul li{
-width:100%;
-}
+
+    .c-features-con ul li {
+        width: 100%;
+    }
 }
 
 /* --------dropdown-end------ */
@@ -6846,7 +6847,95 @@ width:100%;
 /* anjani */
 
 
-/* ------photo-------- */
+
+.wrapper {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.wrapper .page-content-wrapper {
+
+    margin-left: 65px;
+    margin-top: 17px;
+    padding-bottom: 20px;
+    transition: .3s all;
+
+}
+
+
+.wrapper .page-content {
+    padding: 1.5rem;
+}
+
+.wrapper .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: -300px;
+    background-color: #060505;
+    opacity: 0.5;
+    z-index: 1;
+    cursor: move;
+    transition: .7s all;
+}
+
+.user-profile-avatar {
+    background-color: #ffffff;
+    width: 160px;
+    height: 160px;
+    padding: 5px;
+    border-radius: 50%;
+    margin-left: 6.5rem;
+}
+
+.user-profile-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.profile-cover {
+    background-image: url(../admin/images/cards/profile-cover.png);
+    background-size: cover;
+    height: 10rem;
+    background-position: center;
+}
+
+.user-change-photo {
+    background-color: #ffffff;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.user-change-photo img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.translate-middle-x {
+    transform: translateX(-50%) !important;
+}
+
+.start-0 {
+    left: 0 !important;
+}
+
+.top-50 {
+    top: 50% !important;
+}
+
+.position-absolute {
+    position: absolute !important;
+}
+
+
+
 
 =======
 >>>>>>> Stashed changes
@@ -6915,73 +7004,6 @@ width:100%;
 
         padding: 50px 0 50px;
     }
-    .breadcrumbs ul li a {
-        font-size: 14px;
-        line-height: 25px;
-        font-weight: 400;
-        color: #fff;
-    }
-    .back-ground h2 {
-        -webkit-text-stroke: 1px #fff;
-        margin-bottom: 20px;
-        text-align: center;
-        font-size: 24px;
-    }
-    .about-tow-section {
-      
-        padding: 60px 0 50px;
-    }
-    .process-style2 .process-arrow {
-       
-        right: 30%;
-        top: -8%;
-    }
-    .footer-bottom p {
-        font-size: 13px;
-       
-    }
-    form, .contact-info {
-        padding: 1.7rem .6rem;
-    }
-    .login-box {
-      
-        width: 100%;
-        margin-bottom: 10px;
-    }
-    .vs-btn.style3 {
-        padding: 14px 13.5px;
-    }
-    .vs-btn-2 {
-       
-        font-size: 12px;
-    }
-    .login-box h1 {
-        text-align: center;
-        margin-bottom: 15px;
-        font-size: 18px;
-        color: #000;
-        font-weight: 700;
-    }
-    .Corporate-membership h3 {
-        font-size: 15px;
-       
-    }
-    .mobile-menu .menu-box {
-        position: absolute;
-        left: 0;
-        top: 30px;
-       
-    }
-    .features-two-sec-single h3 {
-        font-size: 16px;
-        
-    }
-    .about-two-title h2 {
-        font-size: 42px;
-        font-weight: 800;
-        line-height: 33px;
-        margin-bottom: 6px;
-    }
 }
 
 .scroll-to-top .icon {
@@ -6992,9 +7014,48 @@ width:100%;
     background-color: #ecbd00;
 }
 
+<<<<<<< HEAD
 =======
 .press-title a {
     font-size: 14px;
     line-height: 14px;
 }
 >>>>>>> Stashed changes
+=======
+.me-2 {
+    margin-right: .5rem !important;
+}
+
+.radius-10 {
+    border-radius: 10px !important;
+}
+
+.card {
+    border: 0;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075);
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #072d74 !important;
+    border-color: #072d74 !important;
+}
+
+.position-relative {
+    position: relative !important;
+}
+
+.g-3,
+.gy-3 {
+    --bs-gutter-y: 1rem;
+}
+
+.g-3,
+.gx-3 {
+    --bs-gutter-x: 1rem;
+}
+.custom-width-popup {
+    width: 600px;
+  }
+>>>>>>> 608fda8bd2cb2f97e3b8578df7c7c53a3bdf26a5

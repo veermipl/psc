@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('staffs', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable()->default(null);;
             $table->string('office')->nullable()->default(null);
             $table->bigInteger('mobile_number')->nullable()->default(null);
             // $table->string('membership_type')->nullable()->default(null);
@@ -26,7 +26,7 @@ return new class extends Migration
            
             $table->enum('status', [0, 1])->default(1);
             $table->timestamps();
-            $table->softDeletes();
+            $table->enum('deleted_at', [0, 1])->default(0);
         });
     }
 

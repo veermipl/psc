@@ -111,9 +111,9 @@
                 <div class="col-lg-1"></div>
                 <div class="col-lg-10">
 
-                    @if (session('status'))
+                    @if (session('statuss'))
                         <div class="alert alert-success main_thank">
-                            {{ session('status') }}
+                            {{ session('statuss') }}
                             <div class=" text-center my-4 pt-4">
                                 <a href="{{ route('login') }}" class="btn btn-primary vs-btn vs-btn-2 mx-3">Login <i
                                         class="far fa-long-arrow-right"></i></a>

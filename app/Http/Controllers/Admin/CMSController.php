@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Http\Requests\admin\cms\CreateGERequest;
 use App\Http\Requests\admin\cms\UpdateGERequest;
 use App\Http\Requests\admin\cms\DeleteGEImageRequest;
+use App\Http\Requests\admin\cms\ExportGERequest;
 use App\Http\Requests\admin\cms\UpdateGEStatusRequest;
 
 class CMSController extends Controller
@@ -84,7 +85,7 @@ class CMSController extends Controller
         return redirect()->route('admin.cms.guyana-economy')->with('success', 'Content Created');
     }
 
-    public function guyanaEconomyShow(Request $request, $id)
+    public function guyanaEconomyShow($id)
     {
         $this->authorize('cms_view');
 
@@ -194,15 +195,59 @@ class CMSController extends Controller
         });
 
         $data['error'] = false;
-        $data['msg'] = 'Updated';
+        $data['msg'] = 'Status updated';
 
         return response()->json($data, 200);
     }
 
-    public function guyanaEconomyExport(Request $request)
+    public function guyanaEconomyExport(ExportGERequest $request)
     {
         $this->authorize('cms_export');
 
-        dd($request->all());
+        $validated = $request->validated();
+
+        $fileName = 'cms_guyana_economy.csv';
+        $noData = 'NA';
+        $dataarray = array();
+        $data_ids = explode(',', $validated['export_id']);
+
+        $data = GuyanaEconomy::orderBy('id', 'asc')->whereIn('id', $data_ids)->get();
+
+        foreach ($data as $dataKey => $dataVal) {
+            $statusData = $dataVal->status == 1 ? 'Active' : 'InActive';
+
+            $dataarray[] = [
+                'id' => $dataVal->id,
+                'title' => $dataVal->title ?? $noData,
+                'content' => $dataVal->content ?? $noData,
+                'status' => $statusData,
+            ];
+        }
+
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+        $columns = array('ID', 'Title', 'Content', 'Status');
+        $callback = function () use ($dataarray, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            foreach ($dataarray as $task) {
+                $row['ID'] = $task['id'];
+                $row['Title'] = $task['title'];
+                $row['Content'] = $task['content'];
+                $row['Status'] = $task['status'];
+
+                fputcsv($file, array($row['ID'], $row['Title'], $row['Content'], $row['Status']));
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 }

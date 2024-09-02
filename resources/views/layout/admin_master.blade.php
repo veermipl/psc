@@ -1,25 +1,45 @@
+@php
+    $notifications = helper_getUnreadNotifications();
+    $user_details = helper_getUserDetails(auth()->user()->id);
+    $settings_app_name = helper_getSettings('app_name');
+    $settings_app_logo = helper_getSettings('app_logo');
+@endphp
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
     <title>@yield('title')</title>
 
-    <!-- Responsive -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/magnific-popup.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/admin.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/responsive.css') }}" rel="stylesheet" />
-    <link href="{{ asset('css/sidebars.css') }}" rel="stylesheet" />
+    <link rel="icon" href="{{ asset('images/favicon.png') }}" type="image/x-icon" />
 
-    <link rel="icon" href="images/favicon.png" type="image/x-icon" />
+    <!-- loader-->
+    <link href="{{ asset('admin/css/pace.min.css') }}" rel="stylesheet" />
+    <script src="{{ asset('admin/js/pace.min.js') }}"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+    <!--plugins-->
+    <link href="{{ asset('admin/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admin/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admin/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
+
+    <!-- CSS Files -->
+    <link href="{{ asset('admin/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/css/bootstrap-extended.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/css/icons.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+
+    <!--Theme Styles-->
+    <link href="{{ asset('admin/css/dark-theme.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admin/css/semi-dark.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admin/css/header-colors.css') }}" rel="stylesheet" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.css">
@@ -29,412 +49,535 @@
 
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.css" />
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css" rel="stylesheet">
-    <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet" />
+    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css" rel="stylesheet"> --}}
+    {{-- <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet" /> --}}
 
-    <style>
-        body {
-            top: 0 !important;
-        }
-
-        .goog-logo-link {
-            display: none !important;
-        }
-
-        .goog-te-gadget {
-            font-size: 0px !important;
-        }
-
-        #google_translate_element img {
-            display: none !important;
-        }
-
-        .VIpgJd-ZVi9od-l4eHX-hSRGPd,
-        .VIpgJd-ZVi9od-TvD9Pc-hSRGPd,
-        .VIpgJd-ZVi9od-ORHb-OEVmcd {
-            display: none !important;
-        }
-
-        .VIpgJd-ZVi9od-ORHb {
-            display: none !important;
-        }
-
-        .goog-te-combo {
-            padding: 6px;
-            border-radius: 5px;
-        }
-
-        .goog-te-combo option {
-            font-size: 15px;
-        }
-
-        .language-btn {
-            min-width: 130px;
-            position: relative;
-            top: 12px;
-        }
-    </style>
     @yield('css')
 </head>
 
 <body>
 
-    <div class="wrapper_box">
-        <!-- Preloader -->
-        <div class="loader-wrap">
-            <div class="preloader">
-                <i class="fa fa-spinner fa-spin"></i>
+
+    <!--start wrapper-->
+    <div class="wrapper">
+        <!--start sidebar -->
+        <aside class="sidebar-wrapper" data-simplebar="true">
+            <div class="sidebar-header">
+                <div>
+                    <img src="{{ asset('storage/' . ($settings_app_logo ? $settings_app_logo : 'default/logo.png')) }}" class="logo-icon" alt="">
+                </div>
+                <div>
+                    <h6 class="logo-text">{{ $settings_app_name }}</h6>
+                </div>
+                <div class="toggle-icon ms-auto"><ion-icon name="menu-sharp"></ion-icon>
+                </div>
             </div>
-        </div>
-        <!-- End Preloader -->
+            <!--navigation-->
+            <ul class="metismenu" id="menu">
+                <li>
+                    <a href="{{ route('admin.dashboard') }}" class="">
+                        <div class="parent-icon"><ion-icon name="home-sharp"></ion-icon></div>
+                        <div class="menu-title">Dashboard</div>
+                    </a>
+                </li>
 
-        <!-- Main Header-->
-        <header class="main-header">
-            <div class="header_top">
-                <div class="auto-container p-0">
-                    <div class="row">
-                        <div class="col-xl-12 p-0">
-                            <div class="header_top_inner clearfix">
-                                <div class="header_top_one_box pull-left">
-                                    <ul>
-                                        <li class="desk_logo">
-                                            <a href="{{ route('home') }}">
-                                                <img src="{{ asset('images/Gover-website/logo-other.png') }}" alt="logo" />
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                <li class="{{ request()->is('admin/user') || request()->is('admin/user/*') ? 'mm-active' : '' }}">
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><ion-icon name="people-sharp"></ion-icon></div>
+                        <div class="menu-title">Users</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.user.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>List
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.user.create') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>Create User
+                            </a>
+                        </li>
 
-                                <div class="header_top_two_box pull-right">
-                                    <div class="opening_hour">
-                                        <div class="js">
-                                            <div class="language-picker js-language-picker" data-trigger-class="btn btn--subtle">
-                                                <div id="google_translate_element"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @auth
-                                    <div class="d-flex">
-                                        <div class="ml-2">
-                                            <div class="dropdownt">
-                                                <div class="drop-img dropbtnt" id="myBtnt">
-                                                    <img src="https://i.postimg.cc/ydFvrvbN/slider3.png" alt="user-picture">
-                                                    <i class="fas fa-chevron-down"></i>
-                                                </div>
-                                                <div id="myDropdownt" class="dropdown-contentt">
-                                                    <a href="{{ route('profile') }}"> <i class="far fa-user"></i> Profile</a>
-                                                    <a href="{{ route('admin.dashboard') }}"> <i class="far fa-dashboard"> </i> Dashboard</a>
+                    </ul>
+                </li>
 
-                                                    <form action="{{ route('logout') }}" method="post">
-                                                        @csrf
-                                                        @method('post')
-                                                        <button class=" btn-block" style="padding-left: 15px; text-align:start;">
-                                                            <i class="far fa-lock"></i> Logout
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endauth
-                                </div>
-                            </div>
+                <li class="{{ request()->is('admin/member') || request()->is('admin/member/*') ? 'mm-active' : '' }}">
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><ion-icon name="people-sharp"></ion-icon></div>
+                        <div class="menu-title">Members</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.member.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>List
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.member.create') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>Create Member
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.member.import') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>Import Members
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ request()->is('admin/data/*') ? 'mm-active' : '' }}">
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><ion-icon name="bar-chart-sharp"></ion-icon></div>
+                        <div class="menu-title">Data</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.data.national-budget') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>National Budgets
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.data.trade-data') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>Trade Data
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.data.coted') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>COTED
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.data.caricom-cet') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>Caricom CET
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ request()->is('admin/readines/*') ? 'mm-active' : '' }}">
+                    <a class="has-arrow" href="javascript:;">
+                        <div class="parent-icon"><ion-icon name="document-sharp"></ion-icon></div>
+                        <div class="menu-title">Resources</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.readines.business') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Business Readinedss Desk
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.readines.goinvest') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Go Invest
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.readines.idbinves') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                IDB Invest
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.readines.procurement') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Procurement Process In Guyana
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.readines.certificate.origins') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Certificate Of Origins
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.readines.annul') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Annual Reports
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ request()->is('admin/media-center/*') ? 'mm-active' : '' }}">
+                    <a class="has-arrow" href="javascript:;">
+                        <div class="parent-icon"><ion-icon name="play-circle-sharp"></ion-icon>
                         </div>
-                    </div>
+                        <div class="menu-title">Media Center</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.media-center.news.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                News
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.media-center.press-release.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Press Release
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.media-center.social-media.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Social Media
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.media-center.photo.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Photos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.media-center.video.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Videos
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li class="{{ request()->is('admin/membership/*') ? 'mm-active' : '' }}">
+                    <a class="has-arrow" href="javascript:;">
+                        <div class="parent-icon"><ion-icon name="key-sharp"></ion-icon></div>
+                        <div class="menu-title">Membership</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.membership.type.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Type
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.membership.business-directory.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Business Directory
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.membership.member-benefit') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Member Benefits
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li class="{{ request()->is('admin/about-us/*') ? 'mm-active' : '' }}">
+                    <a class="has-arrow" href="javascript:;">
+                        <div class="parent-icon"><ion-icon name="server-sharp"></ion-icon></div>
+                        <div class="menu-title">About us</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.about.introduction') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Introduction
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.staff.list') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Staff
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.about.council') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Council
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.about.history') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                History
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.committeess.list') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Committees
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ request()->is('admin/cms/*') ? 'mm-active' : '' }}">
+                    <a class="has-arrow" href="javascript:;">
+                        <div class="parent-icon"><ion-icon name="create-sharp"></ion-icon></div>
+                        <div class="menu-title">CMS</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.cms.guyana-economy') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Guyana Economy
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ request()->is('admin/queries/*') ? 'mm-active' : '' }}">
+                    <a class="has-arrow" href="javascript:;">
+                        <div class="parent-icon"><ion-icon name="help-circle"></ion-icon></div>
+                        <div class="menu-title">Queries</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.queries.contact-us') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Contact Us
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ request()->is('admin/authorization/*') ? 'mm-active' : '' }}">
+                    <a class="has-arrow" href="javascript:;">
+                        <div class="parent-icon"><ion-icon name="lock-closed-sharp"></ion-icon></div>
+                        <div class="menu-title">Authorization</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.authorization.role.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Roles
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.authorization.permission.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Permissions
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ request()->is('admin/settings/*') ? 'mm-active' : '' }}">
+                    <a class="has-arrow" href="javascript:;">
+                        <div class="parent-icon"><ion-icon name="settings-sharp"></ion-icon></div>
+                        <div class="menu-title">Settings</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.settings.general') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>General</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.settings.email') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>Email</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.settings.contact-us') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>Contact Us</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="{{ request()->is('admin/system/*') ? 'mm-active' : '' }}">
+                    <a class="has-arrow" href="javascript:;">
+                        <div class="parent-icon"><ion-icon name="hammer-sharp"></ion-icon></div>
+                        <div class="menu-title">System</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.system.notification.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>Notifications</a>
+                        </li>
+                        <li>
+                            <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
+                                Recover Account
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+        </aside>
+        <!--end sidebar -->
+
+        <!--start top header-->
+        <header class="top-header">
+            <nav class="navbar navbar-expand gap-3">
+                <div class="mobile-menu-button"><ion-icon name="menu-sharp"></ion-icon></div>
+                <form class="searchbar">
+                    <div class="position-absolute top-50 translate-middle-y search-icon ms-3"><ion-icon
+                            name="search-sharp"></ion-icon></div>
+                    <input class="form-control" type="text" placeholder="Search for anything">
+                    <div class="position-absolute top-45 translate-middle-y search-close-icon"><ion-icon
+                            name="close-sharp"></ion-icon></div>
+                </form>
+                <div class="top-navbar-right ms-auto">
+                    <ul class="navbar-nav align-items-center">
+                        <li class="nav-item mobile-search-button">
+                            <a class="nav-link" href="javascript:;">
+                                <div class="">
+                                    <ion-icon name="search-sharp"></ion-icon>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="nav-item dropdown dropdown-large">
+                            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;"
+                                data-bs-toggle="dropdown">
+                                <div class="position-relative">
+                                    @if (count($notifications) > 0)
+                                        <span class="notify-badge">{{ count($notifications) }}</span>
+                                    @endif
+                                    <ion-icon name="notifications-sharp"></ion-icon>
+                                </div>
+                            </a>
+                            @if (count($notifications) > 0)
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a href="javascript:;">
+                                        <div class="msg-header">
+                                            <p class="msg-header-title">Notifications</p>
+                                            <a href="{{ route('admin.system.notification.mark-all-as-read') }}"
+                                                class="msg-header-clear ms-auto">
+                                                Marks all as read
+                                            </a>
+                                        </div>
+                                    </a>
+                                    <div class="header-notifications-list">
+                                        @foreach ($notifications as $notKey => $notVal)
+                                            @php
+                                                $notVal_time = $notVal->created_at->diffForHumans();
+                                            @endphp
+                                            <a class="dropdown-item notification_link" href="{{ $notVal['link'] }}">
+                                                <div class="d-flex align-items-center">
+                                                    @if (in_array($notVal['type'], ['user_created', 'member_created', 'member_registration']))
+                                                        <div class="notify text-danger">
+                                                            <ion-icon name="person-outline"></ion-icon>
+                                                        </div>
+                                                    @endif
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="msg-name">{{ $notVal['title'] }}
+                                                            <span
+                                                                class="msg-time float-end">{{ $notVal_time }}</span>
+                                                        </h6>
+                                                        <p class="msg-info">{{ $notVal['message'] }}</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                    <a href="{{ route('admin.system.notification.index') }}">
+                                        <div class="text-center msg-footer">View All Notifications</div>
+                                    </a>
+                                </div>
+                            @else
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a href="javascript:;">
+                                        <div class="msg-header">
+                                            <p class="msg-header-title">Notifications</p>
+                                        </div>
+                                    </a>
+                                    <div class="header-notifications-list">
+                                        <div class="text-center mt-3">
+                                            <p class="m-0 p-0">No Notifications</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        </li>
+
+                        <li class="nav-item dropdown dropdown-user-setting">
+                            <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;"
+                                data-bs-toggle="dropdown">
+                                <div class="user-setting">
+                                    <img src="{{ asset('storage/' . ($user_details ? $user_details['profile_image'] : 'default/user.png')) }}"
+                                        class="user-img" alt="">
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('profile') }}">
+                                        <div class="d-flex align-items-center">
+                                            <div class=""><ion-icon name="person-outline"></ion-icon></div>
+                                            <div class="ms-3"><span>Profile</span></div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                        <div class="d-flex align-items-center">
+                                            <div class=""><ion-icon name="speedometer-outline"></ion-icon></div>
+                                            <div class="ms-3"><span>Dashboard</span></div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <span class="dropdown-item">
+                                        <div class="d-flex align-items-center">
+                                            <div class=""><ion-icon name="log-out-outline"></ion-icon></div>
+                                            <div class="ms-3">
+                                                <form action="{{ route('logout') }}" method="post">
+                                                    @csrf
+                                                    @method('post')
+                                                    <button
+                                                        class="btn-sm btn btn-light p-0"><span>Logout</span></button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </span>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
                 </div>
-            </div>
-
-            <!-- Mobile Menu  -->
-            <div class="mobile-menu close-menu">
-                <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
-                <nav class="menu-box">
-                    <ul class="navigation"></ul>
-                </nav>
-            </div>
-            <!-- End Mobile Menu -->
-
-            <div class="nav-overlay"></div>
+            </nav>
         </header>
-        <!-- End Main Header -->
+        <!--end top header-->
 
-
-        <div class="flex-shrink-0 p-3 bg-white" id="side-bar">
-            <div class="d-flex_ text-right" id="close_side_bar_wrapper">
-                {{-- <a href="{{ route('home') }}">
-                <img src="{{ asset('images/Gover-website/logo-other.png') }}" alt="logo" width="50" height="50" />
-                </a> --}}
-                <button id="close_side_bar" toggle="open">
-                    <i class="fa fa-bars"></i>
-                </button>
+        <!-- start page content wrapper-->
+        <div class="page-content-wrapper">
+            <!-- start page content-->
+            <div class="page-content">
+                @yield('content')
             </div>
-            <li class="border-top my-1"></li>
-
-            <ul class="list-unstyled p-0" id="side-bar-full">
-                <li class="mb-1 rounded {{ request()->is('admin/dashboard') ? 'link-active' : '' }}">
-                    <a href="{{ route('admin.dashboard') }}" class="btn">
-                        <i class="fa fa-home pr-2"></i>Dashboard
-                    </a>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#users-collapse" aria-expanded="false">
-                        Users
-                    </button>
-                    <div class="collapse {{ request()->is('admin/user') || request()->is('admin/user/*') ? 'show' : '' }}" id="users-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/user') || request()->is('admin/user/filter') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.user.index') }}" class="link-dark rounded">List</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/user/create') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.user.create') }}" class="link-dark rounded">Create User</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#members-collapse" aria-expanded="false">
-                        Members
-                    </button>
-                    <div class="collapse {{ request()->is('admin/member') || request()->is('admin/member/*') ? 'show' : '' }}" id="members-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/member') || request()->is('admin/member/filter') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.member.index') }}" class="link-dark rounded">List</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/member/create') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.member.create') }}" class="link-dark rounded">Create Member</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#data-collapse" aria-expanded="false">
-                        Data
-                    </button>
-                    <div class="collapse {{ request()->is('admin/data/*') ? 'show' : '' }}" id="data-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">National Budgets</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Trade Data</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">COTED</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Caricom CET</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#resources-collapse" aria-expanded="false">
-                        Resources
-                    </button>
-                    <div class="collapse {{ request()->is('admin/resources/*') ? 'show' : '' }}" id="resources-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Business Readinedss Desk</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Go Invest</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">IDB Invest</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Procurement Process In Guyana</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Certificate Of Origins</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Annual Reports</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#media-collapse" aria-expanded="false">
-                        Media Center
-                    </button>
-                    <div class="collapse {{ request()->is('admin/media/*') ? 'show' : '' }}" id="media-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">News</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Press Release</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Social Media</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Photos</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Videos</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#membership-collapse" aria-expanded="false">
-                        Membership
-                    </button>
-                    <div class="collapse {{ request()->is('admin/membership/*') ? 'show' : '' }}" id="membership-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Type</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Business Directory</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Member Benefits</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#about_us-collapse" aria-expanded="false">
-                        About Us
-                    </button>
-                    <div class="collapse {{ request()->is('admin/about-us/*') ? 'show' : '' }}" id="about_us-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="{{route('admin.staff.create')}}" class="link-dark rounded">Staff</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Council</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">History</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/') ? 'link-active' : 'no' }}">
-                                <a href="#" class="link-dark rounded">Committees</a>
-                            </li>
-
-                            
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#cms-collapse" aria-expanded="false">
-                        CMS
-                    </button>
-                    <div class="collapse {{ request()->is('admin/cms/*') ? 'show' : '' }}" id="cms-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/cms/guyana-economy') || request()->is('admin/cms/guyana-economy/*') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.cms.guyana-economy') }}" class="link-dark rounded">Guyana Economy</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#authorization-collapse" aria-expanded="false">
-                        Authorization
-                    </button>
-                    <div class="collapse {{ request()->is('admin/authorization/*') ? 'show' : '' }}" id="authorization-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/authorization/role') ? 'link-active' : 'no' }}">
-                                <a href="" class="link-dark rounded">Roles</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/authorization/permission') ? 'link-active' : 'no' }}">
-                                <a href="" class="link-dark rounded">Permission</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1 pb-5">
-                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#settings-collapse" aria-expanded="false">
-                        Settings
-                    </button>
-                    <div class="collapse {{ request()->is('admin/settings/*') ? 'show' : '' }}" id="settings-collapse">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li class="rounded {{ request()->is('admin/settings/general') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.settings.general') }}" class="link-dark rounded">General Settings</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/settings/email') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.settings.email') }}" class="link-dark rounded">Email Settings</a>
-                            </li>
-                            <li class="rounded {{ request()->is('admin/settings/contact-us') ? 'link-active' : 'no' }}">
-                                <a href="{{ route('admin.settings.contact-us') }}" class="link-dark rounded">Contact
-                                    Us</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-
-            <ul class="list-unstyled p-0" id="side-bar-half">
-                <li class="mb-1 rounded {{ request()->is('admin/dashboard') ? 'link-active' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Home" data-bs-toggle="tooltip" data-bs-placement="right">
-                        <i class="fa fa-home"></i>
-                    </a>
-                </li>
-                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Users" data-bs-toggle="tooltip" data-bs-placement="right">
-                        <i class="fa fa-users"></i>
-                    </a>
-                </li>
-                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Membership" data-bs-toggle="tooltip" data-bs-placement="right">
-                        <i class="fa fa-bell"></i>
-                    </a>
-                </li>
-                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Data" data-bs-toggle="tooltip" data-bs-placement="right">
-                        <i class="fa fa-server"></i>
-                    </a>
-                </li>
-                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Resources" data-bs-toggle="tooltip" data-bs-placement="right">
-                        <i class="fa fa-database"></i>
-                    </a>
-                </li>
-                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Media" data-bs-toggle="tooltip" data-bs-placement="right">
-                        <i class="fa fa-rss"></i>
-                    </a>
-                </li>
-                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="About Us" data-bs-toggle="tooltip" data-bs-placement="right">
-                        <i class="fa fa-info"></i>
-                    </a>
-                </li>
-                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="CMS" data-bs-toggle="tooltip" data-bs-placement="right">
-                        <i class="fa fa-cogs"></i>
-                    </a>
-                </li>
-                <li class="mb-1 rounded {{ request()->is('admin/user') ? 'show' : '' }}">
-                    <a href="#" class="btn" aria-current="page" title="Settings" data-bs-toggle="tooltip" data-bs-placement="right">
-                        <i class="fa fa-cog"></i>
-                    </a>
-                </li>
-            </ul>
+            <!-- end page content-->
         </div>
+        <!--end page content wrapper-->
 
+        <!--start footer-->
+        <footer class="footer">
+            <div class="footer-text">
+                Copyright © 2024. All right reserved.
+            </div>
+        </footer>
+        <!--end footer-->
 
-        <div id="content">
-            {{-- <header class="bg-white shadow mb-3">
-                <div class="py-3 px-4">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight">@yield('header')</h2>
-                </div>
-            </header> --}}
+        <!--Start Back To Top Button-->
+        <a href="javaScript:;" class="back-to-top"><ion-icon name="arrow-up-outline"></ion-icon></a>
+        <!--End Back To Top Button-->
 
-            @yield('content')
-        </div>
-
-
-
-        <!--Scroll to top-->
-        <div class="scroll-to-top scroll-to-target" data-target="html">
-            <span class="icon fas fa-arrow-up"></span>
-        </div>
+        <!--start overlay-->
+        <div class="overlay"></div>
+        <!--end overlay-->
 
     </div>
+    <!--end wrapper-->
 
+
+    <!-- JS Files-->
+    <script src="{{ asset('admin/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/simplebar/js/simplebar.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/metismenu/js/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('admin/js/bootstrap.bundle.min.js') }}"></script>
+    <!--plugins-->
+    <script src="{{ asset('admin/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+    <script src="{{ asset('admin/plugins/chartjs/chart.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/apexcharts-bundle/js/apexcharts.min.js') }}"></script>
+    @if (request()->is('admin/dashboard'))
+        <script src="{{ asset('admin/js/index2.js') }}"></script>
+    @endif
+    <!-- Main JS-->
+    <script src="{{ asset('admin/js/main.js') }}"></script>
 
     <script type="text/javascript">
         function googleTranslateElementInit() {
@@ -442,40 +585,23 @@
                 pageLanguage: 'en',
                 includedLanguages: 'en,es,de,fr,it'
             }, 'google_translate_element');
-
-
         }
     </script>
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
     </script>
 
-    {{-- script --}}
-    <script src="{{ asset('js/jquery.js') }}"></script>
-    <script src="{{ asset('js/popper.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/swiper.min.js') }}"></script>
-    <script src="{{ asset('js/appear.js') }}"></script>
-    <script src="{{ asset('js/jquery.countTo.js') }}"></script>
-    <script src="{{ asset('js/isotope.js') }}"></script>
-    <script src="{{ asset('js/owl.js') }}"></script>
-    <script src="{{ asset('js/wow.js') }}"></script>
-    <script src="{{ asset('js/jquery.fancybox.js') }}"></script>
-    <script src="{{ asset('js/TweenMax.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
-    <script src="{{ asset('js/parallax.min.js') }}"></script>
-    <script src="{{ asset('js/custom.js') }}"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script> --}}
     <script type="text/javascript" src="https://cdn.datatables.net/2.1.2/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.23.2/dist/bootstrap-table.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script>
-    <script src="{{ asset('js/dropzone.js') }}"></script>
-
-    <script src="{{ asset('js/sidebars.js') }}"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script> --}}
+    {{-- <script src="{{ asset('js/dropzone.js') }}"></script> --}}
 
     <script type="importmap">
         {
@@ -494,21 +620,23 @@
             Font,
             Paragraph
         } from 'ckeditor5';
-    
+
         ClassicEditor
-            .create( document.querySelector( '#editor' ), {
-                plugins: [ Essentials, Bold, Italic, Font, Paragraph ],
+            .create(document.querySelector('#editor'), {
+                plugins: [Essentials, Bold, Italic, Font, Paragraph],
                 toolbar: {
                     items: [
                         'undo', 'redo', '|', 'bold', 'italic', '|',
                         'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
                     ]
                 }
-            } )
+            })
             .then( /* ... */ )
             .catch( /* ... */ );
     </script>
-    
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+
 
     @if (session('success'))
         <script>
@@ -522,30 +650,36 @@
         </script>
     @endif
 
+    @if (session('status'))
+        <script>
+            toastr.success("{{ session('status') }}");
+        </script>
+    @endif
+
     <script>
-        // Get the button, and when the user clicks on it, execute myFunction
-        document.getElementById("myBtnt").onclick = function() {
-            myFunction()
-        };
+        //sub_page_body
+        $(document).on('click', '.sub_page_link', function(e) {
+            e.preventDefault();
 
-        /* myFunction toggles between adding and removing the show class, which is used to hide and show the dropdown content */
-        function myFunction() {
-            document.getElementById("myDropdownt").classList.toggle("showt");
-        }
+            var target_id = $(this).data('target');
+            console.log(target_id);
 
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
+            if (target_id) {
+                toggle_sub_page(target_id);
+            }
 
-            if (!event.target.matches('.dropbtnt')) {
+        });
 
-                var dropdowns = document.getElementsByClassName("dropdown-contentt");
+        //sub_page_body_toggle
+        function toggle_sub_page(target_id = null) {
+            if (target_id) {
+                //btn
+                $('.sub_page_link').removeClass('btn-custom').addClass('btn-outline-custom');
+                $('#sub_page_link_' + target_id + '').removeClass('btn-outline-custom').addClass('btn-custom');
 
-                for (let i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('showt')) {
-                        openDropdown.classList.remove('showt');
-                    }
-                }
+                //body
+                $('.sub_page_body').removeClass('show').addClass('hide');
+                $('#sub_page_body_' + target_id + '').removeClass('hide').addClass('show');
             }
         }
     </script>

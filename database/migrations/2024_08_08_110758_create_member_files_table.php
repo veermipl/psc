@@ -17,7 +17,6 @@ return new class extends Migration
             $table->longText('file_name')->nullable()->default(null);
             $table->longText('file_for')->nullable()->default(null);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
