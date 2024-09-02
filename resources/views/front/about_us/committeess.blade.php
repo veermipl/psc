@@ -47,28 +47,46 @@
             <h2>Committees Members</h2>
           </div>
           <div class="row">
-            <div class="col-xl-3 col-lg-3 col-md-6">
-                <!--Team One Single-->
-                <div class="team-one-single wow fadeInLeft animated" data-wow-delay="100ms" style="visibility: visible; animation-delay: 100ms; animation-name: fadeInLeft;">
-                    <div class="team-one-img">
-                        <img src="{{asset('images/team/commeties.png')}}" alt="">
-                        <div class="team-one-hover">
-                            <div class="team-one-social">
-                                <a href="#"><i class="fab fa-facebook-square"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fab fa-dribbble"></i></a>
-                                <a href="#"><i class="fab fa-instagram"></i></a>
+
+          @if(isset($committees) && count(@$committees)> 0)
+            @foreach($committees as $members)
+                <div class="col-xl-3 col-lg-3 col-md-6">
+                    <div class="team-one-single wow fadeInLeft animated" data-wow-delay="100ms" style="visibility: visible; animation-delay: 100ms; animation-name: fadeInLeft;">
+                        <div class="team-one-img">
+                            @if($members != '')
+                            <img src="{{ asset('storage/'.$members->image) }}" alt="">
+                            @else
+                            <img src="{{asset('images/team/commeties.png')}}" alt="">
+                            @endif
+                            <div class="team-one-hover">
+                                <div class="team-one-social">
+                                @if($facebook != '')
+                                    <a href="{{$members->facebook}}"><i class="fab fa-facebook-square"></i></a>
+                                    @endif
+                                    @if($twitter != '')
+                                    <a href="{{$members->twitter}}"><i class="fab fa-twitter"></i></a>
+                                    @endif
+                                    @if($instra != '')
+                                    <a href="{{$members->instra}}"><i class="fab fa-dribbble"></i></a>
+                                    @endif
+                                    @if($dribbble != '')
+                                    <a href="{{$members->dribbble}}"><i class="fab fa-instagram"></i></a>
+                                    @endif
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="team-one-content">
-                        <h3>David Parker</h3>
-                        <p>PSC (Officer)</p>
+                        <div class="team-one-content">
+                            <h3>{{$members->name}}</h3>
+                            <p>{{$members->office}}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-6">
-                <!--Team One Single-->
+                @endforeach
+            @endif
+
+            <!-- <div class="col-xl-3 col-lg-3 col-md-6">
+               
                 <div class="team-one-single wow fadeInLeft animated" data-wow-delay="200ms" style="visibility: visible; animation-delay: 200ms; animation-name: fadeInLeft;">
                     <div class="team-one-img">
                            <img src="{{asset('images/team/commeties.png')}}" alt="">
@@ -88,7 +106,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-lg-3 col-md-6">
-                <!--Team One Single-->
+               
                 <div class="team-one-single wow fadeInLeft animated" data-wow-delay="300ms" style="visibility: visible; animation-delay: 300ms; animation-name: fadeInLeft;">
                     <div class="team-one-img">
                            <img src="{{asset('images/team/commeties.png')}}" alt="">
@@ -108,7 +126,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-lg-3 col-md-6">
-                <!--Team One Single-->
+               
                 <div class="team-one-single wow fadeInLeft animated" data-wow-delay="400ms" style="visibility: visible; animation-delay: 400ms; animation-name: fadeInLeft;">
                     <div class="team-one-img">
                         <img src="{{asset('images/team/commeties.png')}}" alt="">
@@ -128,7 +146,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-lg-3 col-md-6">
-                <!--Team One Single-->
+               
                 <div class="team-one-single wow fadeInLeft animated" data-wow-delay="100ms" style="visibility: visible; animation-delay: 100ms; animation-name: fadeInLeft;">
                     <div class="team-one-img">
                            <img src="{{asset('images/team/commeties.png')}}" alt="">
@@ -148,7 +166,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-lg-3 col-md-6">
-                <!--Team One Single-->
+               
                 <div class="team-one-single wow fadeInLeft animated" data-wow-delay="200ms" style="visibility: visible; animation-delay: 200ms; animation-name: fadeInLeft;">
                     <div class="team-one-img">
                         <img src="{{asset('images/team/commeties.png')}}" alt="">
@@ -168,7 +186,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-lg-3 col-md-6">
-                <!--Team One Single-->
+               
                 <div class="team-one-single wow fadeInLeft animated" data-wow-delay="300ms" style="visibility: visible; animation-delay: 300ms; animation-name: fadeInLeft;">
                     <div class="team-one-img">
                            <img src="{{asset('images/team/commeties.png')}}" alt="">
@@ -188,7 +206,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-lg-3 col-md-6">
-                <!--Team One Single-->
+               
                 <div class="team-one-single wow fadeInLeft animated" data-wow-delay="400ms" style="visibility: visible; animation-delay: 400ms; animation-name: fadeInLeft;">
                     <div class="team-one-img">
                         <img src="{{asset('images/team/commeties.png')}}" alt="">
@@ -206,7 +224,8 @@
                         <p>PSC (Officer)</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
+
         </div>
         </div>
       </section>

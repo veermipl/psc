@@ -43,7 +43,7 @@
             <h4 class="sub-title-shape-left section_title-subheading">
                 Our
             </h4>
-            <h2>Council Department</h2>
+            <h2>{{ @$council->title }}</h2>
           </div>
           
             <div class="row">
@@ -53,9 +53,10 @@
                     <div class="about-two-title text-justify">
                     
                       <p class=" mt-30">
-                        The Council of the Private Sector Commission (PSC) of Guyana is a key body that represents and advocates for the interests of the private sector in Guyana. The PSC serves as a platform for dialogue between the business community and the government, aiming to foster economic growth and development in the country. Here’s an overview of the typical content and functions of the PSC:
-                      </p>
-                     
+                      {!! @$council->contant !!}
+
+                        <!-- The Council of the Private Sector Commission (PSC) of Guyana is a key body that represents and advocates for the interests of the private sector in Guyana. The PSC serves as a platform for dialogue between the business community and the government, aiming to foster economic growth and development in the country. Here’s an overview of the typical content and functions of the PSC: -->
+                      </p>                   
                     </div>
                   
     

@@ -240,41 +240,7 @@
 
                                                             </ul>
                                                         </li>
-                                                        <!-- <li class="dropdown">
-                                                            <a href="#"
-                                                            >Sector Committees
-                                                            <i class="fas fa-chevron-down"></i
-                                                            ></a>
-                                                            <ul>
-                                                            <li>
-                                                                <a href="#"
-                                                                >Governance & Security</a
-                                                                >
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">Agriculture</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"
-                                                                >Trade & Investment</a
-                                                                >
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"
-                                                                >Natural Resoures</a
-                                                                >
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">Financial & Economics</a>
-                                                            </li>
-                                                            <li><a href="#">Energy</a></li>
-                                                            <li>
-                                                                <a href="#">Infrastructure</a>
-                                                            </li>
-                                                            <li><a href="#">Enviroment</a></li>
-                                                            <li><a href="#">Regional</a></li>
-                                                            </ul>
-                                                        </li> -->
+                                                     
                                                         <li>
                                                             <a href="{{ route('guyana-economy') }}"> Guyana's Economy
                                                             </a>
