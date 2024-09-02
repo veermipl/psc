@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Models\News;
 use App\Models\Coted;
 use App\Models\Query;
+use App\Models\Photos;
+use App\Models\Videos;
 use App\Models\Settings;
 use App\Models\TradeData;
 use App\Models\CaricomCET;
+use App\Models\SocialMedia;
+use App\Models\PressRelease;
 use Illuminate\Http\Request;
 use App\Models\GuyanaEconomy;
 use App\Models\MemberBenefit;
@@ -15,6 +20,7 @@ use App\Models\NationalBudget;
 use App\Models\BusinessDirectory;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
 class FrontController extends Controller
 {
@@ -220,26 +226,48 @@ class FrontController extends Controller
 
     public function media_News()
     {
-        return view('front.media.news');
+        $news_list = News::orderBy('id', 'desc')->where('status', '1')->get() ?? [];
+
+        $data['news_list'] = $news_list;
+
+        return view('front.media.news', $data);
     }
 
     public function media_PressRelease()
     {
-        return view('front.media.press_release');
+        $press_release_list = PressRelease::orderBy('id', 'desc')->where('status', '1')->get() ?? [];
+        $recent_press_release_list = PressRelease::orderBy('id', 'desc')->where('status', '1')->whereDate('created_at', Carbon::today())->get() ?? [];
+
+        $data['press_release_list'] = $press_release_list;
+        $data['recent_press_release_list'] = $recent_press_release_list;
+
+        return view('front.media.press_release', $data);
     }
 
     public function media_SocialMedia()
     {
-        return view('front.media.social_media');
+        $social_media_list = SocialMedia::orderBy('id', 'desc')->get() ?? [];
+
+        $data['social_media_list'] = $social_media_list;
+
+        return view('front.media.social_media', $data);
     }
 
     public function media_Photos()
     {
-        return view('front.media.photos');
+        $photo_list = Photos::orderBy('id', 'desc')->where('status', '1')->get() ?? [];
+
+        $data['photo_list'] = $photo_list;
+
+        return view('front.media.photos', $data);
     }
 
     public function media_Videos()
     {
-        return view('front.media.videos');
+        $video_list = Videos::orderBy('id', 'desc')->where('status', '1')->get() ?? [];
+
+        $data['video_list'] = $video_list;
+
+        return view('front.media.videos', $data);
     }
 }

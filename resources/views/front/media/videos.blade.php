@@ -12,7 +12,7 @@
                             <ul>
                                 <li><a href="{{ route('home') }}">Home</a></li>
                                 <span class="slash"> /</span>
-                                <li><a href="#">Videos</a></li>
+                                <li><a href="{{ route('media.videos') }}">Videos</a></li>
                             </ul>
                         </div>
                     </div>
@@ -25,115 +25,26 @@
         <div class="container">
             <div class="portfolio-one-content">
                 <div class="sortable-masonry">
-                    <div class="row items-container">
-                        <!--Single Case One-->
-
-                        <div class="col-xl-3 col-lg-3 col-md-6 masonry-item all mechanical chemical material">
-                            <div class="portfolio-one-single">
-                                <div class="portfolio-one-img-box">
-                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                                    </iframe>
-                                    <div class="portfolio-two-icon-box">
-                                        <a href="https://www.youtube.com/embed/tgbNymZ7vqY" target="_blank"><i
-                                                class="fa fa-link"></i></a>
+                    @if(count($video_list) > 0)
+                        <div class="row items-container">
+                            @foreach ($video_list as $listKey => $list )
+                                <div class="col-xl-3 col-lg-3 col-md-6 masonry-item all mechanical chemical material">
+                                    <div class="portfolio-one-single">
+                                        <div class="portfolio-one-img-box">
+                                            <img src="{{ asset('storage/default/video.png') }}"></img>
+                                            <div class="portfolio-two-icon-box">
+                                                <a href="{{ ($list['type'] == 'internal') ? asset('storage/'. $list['name']) : $list['link'] }}" target="_blank">
+                                                    <i class="fa fa-link"></i>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
-
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6 masonry-item all mechanical chemical material">
-                            <div class="portfolio-one-single">
-                                <div class="portfolio-one-img-box">
-                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                                    </iframe>
-                                    <div class="portfolio-two-icon-box">
-                                        <a href="https://www.youtube.com/embed/tgbNymZ7vqY" target="_blank"><i
-                                                class="fa fa-link"></i></a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6 masonry-item all mechanical chemical material">
-                            <div class="portfolio-one-single">
-                                <div class="portfolio-one-img-box">
-                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                                    </iframe>
-                                    <div class="portfolio-two-icon-box">
-                                        <a href="https://www.youtube.com/embed/tgbNymZ7vqY" target="_blank"><i
-                                                class="fa fa-link"></i></a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6 masonry-item all mechanical chemical material">
-                            <div class="portfolio-one-single">
-                                <div class="portfolio-one-img-box">
-                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                                    </iframe>
-                                    <div class="portfolio-two-icon-box">
-                                        <a href="https://www.youtube.com/embed/tgbNymZ7vqY" target="_blank"><i
-                                                class="fa fa-link"></i></a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6 masonry-item all mechanical chemical material">
-                            <div class="portfolio-one-single">
-                                <div class="portfolio-one-img-box">
-                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                                    </iframe>
-                                    <div class="portfolio-two-icon-box">
-                                        <a href="https://www.youtube.com/embed/tgbNymZ7vqY" target="_blank"><i
-                                                class="fa fa-link"></i></a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6 masonry-item all mechanical chemical material">
-                            <div class="portfolio-one-single">
-                                <div class="portfolio-one-img-box">
-                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                                    </iframe>
-                                    <div class="portfolio-two-icon-box">
-                                        <a href="https://www.youtube.com/embed/tgbNymZ7vqY" target="_blank"><i
-                                                class="fa fa-link"></i></a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6 masonry-item all mechanical chemical material">
-                            <div class="portfolio-one-single">
-                                <div class="portfolio-one-img-box">
-                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                                    </iframe>
-                                    <div class="portfolio-two-icon-box">
-                                        <a href="https://www.youtube.com/embed/tgbNymZ7vqY" target="_blank"><i
-                                                class="fa fa-link"></i></a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-3 col-md-6 masonry-item all mechanical chemical material">
-                            <div class="portfolio-one-single">
-                                <div class="portfolio-one-img-box">
-                                    <iframe width="100%" height="250" src="https://www.youtube.com/embed/tgbNymZ7vqY">
-                                    </iframe>
-                                    <div class="portfolio-two-icon-box">
-                                        <a href="https://www.youtube.com/embed/tgbNymZ7vqY" target="_blank"><i
-                                                class="fa fa-link"></i></a>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+                    @else
+                        <h6 class="text-center">No Data Found !</h6>
+                    @endif
                 </div>
             </div>
         </div>
