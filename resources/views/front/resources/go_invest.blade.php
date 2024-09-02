@@ -21,6 +21,7 @@
        </section>
       <!--Start Blog One Section -->
       <section class="about-tow-section about-page">
+    @if($invest)
         <div class="container">
           <div class="row">
             <div class="col-xl-6">
@@ -55,65 +56,21 @@
                   </h4>
                   <h2>{{ @$invest->title}}</h2>
 
-
                   {!! @$invest->contant !!}
-                  <!-- <p class="about-two-title-text">
-                    Guyana, located on the northeastern coast of South America,
-                    is an emerging hub for investment with vast potential and
-                    opportunities.
-                  </p>
-                  <p class="about-two-title-text">
-                    With its rich natural resources, strategic location, and
-                    pro-business government policies, Guyana is poised to become
-                    a key player in the global economy.
-                  </p>
-                  <p class="about-two-title-text">
-                    The Guyana Office for Investment (Go-Invest) serves as the
-                    gateway for investors looking to capitalize on the country's
-                    economic growth and development.
-                  </p> -->
                 </div>
-                <!-- <div class="row">
-                  <div class="col-md-6">
-                    <div class="about-tow-experience-years">
-                      <div class="about-tow-experience-years-icon">
-                        <span class="flaticon-check"></span>
-                      </div>
-                      <div class="about-tow-experience-years-text">
-                        <h2>
-                          30+ Years of <br />
-                          excellence
-                        </h2>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="about-tow-experience-years">
-                      <div class="about-tow-experience-years-icon">
-                        <span class="flaticon-check"></span>
-                      </div>
-                      <div class="about-tow-experience-years-text">
-                        <h2>
-                          Operating <br />
-                          in 9 Sectors
-                        </h2>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
-
-                <!-- <div class="about-two-bottom-content">
-                  <h3>John Franclin - <span>CEO & Founder</span></h3>
-                  <div class="signature">
-                    <img src="images/about/signature-1.png" alt="" />
-                  </div>
-                </div> -->
+              
               </div>
             </div>
           </div>
         </div>
+
+        @else
+        <p class="text-center">NO Data Found !</p>
+      @endif
       </section>
+
       <section class="blog-one-section">
+      @if(isset($investment) && count($investment)> 0 )
         <div class="container">
           <div class="thm-section-title text-center">
             <h4 class="sub-title-shape-left section_title-subheading">Key</h4>
@@ -159,158 +116,11 @@
             @endforeach
 
           @endif
-
-            <!-- <div class="col-xl-4 col-lg-4">
-          
-              <div
-                class="blog-one-single guyana-wrap wow fadeInUp"
-                data-wow-delay="100ms">
-                <div class="blog-one-img guyana-imgg">
-                  <img src="{{asset('images/about/oil-2.png')}}" alt="" />
-                </div>
-                <div class="blog-one-content">
-                 
-                  <div class="blog-one-title">
-                    <h3><a href="#"> Gas</a></h3>
-                  </div>
-                  <div class="blog-one-text">
-                    <p>
-                      Guyana has discovered significant oil reserves, attracting
-                      major international oil companies.
-                    </p>
-                    <p>
-                      Opportunities exist in exploration, production, and
-                      support services.
-                    </p>
-                  </div>
-                  <a href="#" class="vs-btn1 style5 mt-3" tabindex="0"
-                    >Read More <i class="far fa-long-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-4 col-lg-4">
-            
-              <div
-                class="blog-one-single guyana-wrap wow fadeInUp"
-                data-wow-delay="200ms">
-                <div class="blog-one-img guyana-imgg">
-                  <img src="{{asset('images/about/oil-3.png')}}" alt="" />
-                </div>
-                <div class="blog-one-content">
-                  
-                  <div class="blog-one-title">
-                    <h3>
-                      <a href="#">Agriculture</a>
-                    </h3>
-                  </div>
-                  <div class="blog-one-text">
-                    <p>
-                      Fertile lands and a favorable climate make Guyana ideal
-                      for agriculture.
-                    </p>
-                    <p>
-                      Investment opportunities in rice, sugar, fruits,
-                      vegetables, and agro-processing.
-                    </p>
-                  </div>
-                  <a href="#" class="vs-btn1 style5 mt-3" tabindex="0"
-                    >Read More <i class="far fa-long-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-4 col-lg-4">
-             
-              <div
-                class="blog-one-single guyana-wrap wow fadeInUp"
-                data-wow-delay="300ms">
-                <div class="blog-one-img guyana-imgg">
-                  <img src="{{asset('images/about/oil-4.png')}}" alt="" />
-                </div>
-                <div class="blog-one-content">
-                  
-                  <div class="blog-one-title">
-                    <h3>
-                      <a href="#">Mining</a>
-                    </h3>
-                  </div>
-                  <div class="blog-one-text">
-                    <p>Rich in minerals like gold, bauxite, and diamonds.</p>
-                    <p>
-                      Potential for investment in extraction, processing, and
-                      value-added <br />
-                      services.
-                    </p>
-                  </div>
-                  <a href="#" class="vs-btn1 style5 mt-3" tabindex="0"
-                    >Read More <i class="far fa-long-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-4 col-lg-4">
-              
-              <div
-                class="blog-one-single guyana-wrap wow fadeInUp"
-                data-wow-delay="100ms">
-                <div class="blog-one-img guyana-imgg">
-                  <img src="{{asset('images/about/oil-5.png')}}" alt="" />
-                </div>
-                <div class="blog-one-content">
-                 
-                  <div class="blog-one-title">
-                    <h3><a href="#">Tourism</a></h3>
-                  </div>
-                  <div class="blog-one-text">
-                    <p>
-                      Guyana’s pristine rainforests, waterfalls, and diverse
-                      wildlife offer unique tourism opportunities.
-                    </p>
-                    <p>
-                      Investment opportunities in eco-tourism, hotels, resorts,
-                      and adventure tourism.
-                    </p>
-                  </div>
-                  <a href="#" class="vs-btn1 style5 mt-3" tabindex="0"
-                    >Read More <i class="far fa-long-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-4 col-lg-4">
-             
-              <div
-                class="blog-one-single guyana-wrap wow fadeInUp"
-                data-wow-delay="200ms">
-                <div class="blog-one-img guyana-imgg">
-                  <img src="{{asset('images/about/oil-6.png')}}" alt="" />
-                </div>
-                <div class="blog-one-content">
-                 
-                  <div class="blog-one-title">
-                    <h3>
-                      <a href="#">Infrastructure</a>
-                    </h3>
-                  </div>
-                  <div class="blog-one-text">
-                    <p>Development of roads, bridges, ports, and airports.</p>
-                    <p>
-                      Public-private partnerships in urban development and
-                      renewable energy <br />
-                      projects.
-                    </p>
-                  </div>
-                  <a href="#" class="vs-btn1 style5 mt-3" tabindex="0"
-                    >Read More <i class="far fa-long-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-            </div> -->
-
-
           </div>
         </div>
+        @else
+        <p class="text-center">NO Data Found !</p>
+      @endif
       </section>
       <!--End Blog One Section -->
       

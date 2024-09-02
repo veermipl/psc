@@ -22,6 +22,7 @@
       <!--Start Blog One Section -->
 
       <section class="about-tow-section about-page">
+        @if($origin)
         <div class="container">
           <div class="row">
             <div class="col-xl-6">
@@ -56,85 +57,18 @@
                   </h4>
                   <h2>{{@$origin->title}}</h2>
                       {!! @$origin->contant !!}
-
-                  <!-- <p class="about-two-title-text">
-                    A Certificate of Origin (COO) is an essential document in
-                    international trade that certifies the country in which a
-                    product was manufactured or processed. This document is
-                    crucial for customs clearance and trade compliance, ensuring
-                    that goods meet the specific requirements of the importing
-                    country.
-                  </p>
-                  <h5 class="pt-3"><b>Customs Clearance</b></h5>
-                  <p>
-                    The COO helps customs authorities determine the duty rates
-                    and eligibility for preferential trade agreements.
-                  </p>
-                  <p>
-                    It is a key document required for the importation process.
-                  </p>
-                  <h5 class="pt-3"><b>Trade Agreements</b></h5>
-                  <p>
-                    The COO allows businesses to benefit from trade agreements
-                    that reduce or eliminate tariffs on goods from certain
-                    countries.
-                  </p> -->
-                  <!-- <p>
-                    It ensures compliance with rules of origin under various
-                    trade agreements.
-                  </p>
-                  <h5 class="pt-3"><b>Market Access</b></h5>
-                  <p>
-                    Facilitates smoother access to international markets by
-                    providing proof of origin.
-                  </p>
-                  <p>
-                    Enhances the credibility and legitimacy of the exported
-                    products.
-                  </p> -->
                 </div>
-                <!-- <div class="row">
-                  <div class="col-md-6">
-                    <div class="about-tow-experience-years">
-                      <div class="about-tow-experience-years-icon">
-                        <span class="flaticon-check"></span>
-                      </div>
-                      <div class="about-tow-experience-years-text">
-                        <h2>
-                          30+ Years of <br />
-                          excellence
-                        </h2>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="about-tow-experience-years">
-                      <div class="about-tow-experience-years-icon">
-                        <span class="flaticon-check"></span>
-                      </div>
-                      <div class="about-tow-experience-years-text">
-                        <h2>
-                          Operating <br />
-                          in 9 Sectors
-                        </h2>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
-
-                <!-- <div class="about-two-bottom-content">
-                  <h3>John Franclin - <span>CEO & Founder</span></h3>
-                  <div class="signature">
-                    <img src="images/about/signature-1.png" alt="" />
-                  </div>
-                </div> -->
               </div>
             </div>
           </div>
         </div>
+        @else
+        <p class="text-center">NO Data Found !</p>
+      @endif
       </section>
 
       <section class="blog-one-section">
+      @if(isset($types) && count(@$types) > 0)
         <div class="container">
           <div class="thm-section-title text-center">
             <h4 class="sub-title-shape-left section_title-subheading">
@@ -177,9 +111,14 @@
 
           </div>
         </div>
+        @else
+        <p class="text-center">NO Data Found !</p>
+      @endif
       </section>
 
       <section class="why-choose-two-section">
+      @if(isset($certificate) && count(@$certificate)> 0)
+
         <div class="container">
           <div class="thm-section-title text-center">
             <h4 class="sub-title-shape-left section_title-subheading">
@@ -189,7 +128,7 @@
           </div>
           <div class="row">
 
-        @if(isset($certificate) && count(@$certificate))
+        @if(isset($certificate) && count(@$certificate)> 0)
 
           @foreach($certificate as $cert)
             <div class="col-md-6 col-lg-4 py-2">
@@ -203,35 +142,23 @@
 
                         {!! $cert->contant !!}
 
-                          <!-- <li>
-                            <p>Identifying needs and defining requirements.</p>
-                          </li>
-                          <li>
-                            <p>Preparing procurement plans and budgets.</p>
-                          </li>
-                          <li>
-                            <p>
-                              Developing specifications and terms of reference.
-                            </p>
-                          </li> -->
-
                         </ul>
                       </div>
                     </div>
                   </div>
                 </div>
-                <!-- <a href="#" class="vs-btn style5 mt-4" tabindex="0"
-                  >Read More<i class="far fa-long-arrow-right"></i
-                ></a> -->
+          
               </div>
             </div>
 
           @endforeach
         @endif
-
-
           </div>
         </div>
+        @else
+        <p class="text-center">NO Data Found !</p>
+      @endif
+
       </section>
    
 

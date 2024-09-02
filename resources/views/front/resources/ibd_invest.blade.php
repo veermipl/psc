@@ -24,6 +24,8 @@
       <!--Start Blog One Section -->
    
       <section class="about-tow-section about-page">
+
+      @if($invest)
         <div class="container">
           <div class="row">
             <div class="col-xl-6">
@@ -60,32 +62,19 @@
 
                   {{@$invest->contant}}
 
-                  <!-- <p class="about-two-title-text">
-                    IDB Invest is a member of the Inter-American Development
-                    Bank (IDB) Group, dedicated to advancing economic
-                    development through the private sector in Latin America and
-                    the Caribbean. By partnering with private sector entities,
-                    IDB Invest aims to provide innovative financing solutions,
-                    advisory services, and strategic investments that foster
-                    sustainable growth and development.
-                  </p>
-                  <h5 class="pt-3"><b>Our Mission</b></h5>
-                  <p>
-                    IDB Invest's mission is to create opportunities for private
-                    sector investment that generate inclusive economic growth,
-                    improve social conditions, and protect the environment. We
-                    work with businesses, financial institutions, and
-                    governments to develop and implement projects that have a
-                    positive impact on communities and the broader economy.
-                  </p> -->
                 </div>
                 
               </div>
             </div>
           </div>
         </div>
+        @else
+        <p class="text-center">NO Data Found !</p>
+      @endif
       </section>
+
       <section class="blog-one-section">
+      @if(isset($about) && count(@$about)> 0)
         <div class="container">
           <div class="thm-section-title text-center">
             <h4 class="sub-title-shape-left section_title-subheading">Key</h4>
@@ -94,7 +83,7 @@
 
           <div class="row">
 
-          @if(isset($about) && @$about)
+          @if(isset($about) && count(@$about)> 0)
 
           @foreach($about as $focus)
               <div class="col-xl-4 col-lg-4">
@@ -202,9 +191,13 @@
            
           </div>
         </div>
+        @else
+        <p class="text-center">NO Data Found !</p>
+      @endif
       </section>
 
       <section class="why-choose-two-section">
+      @if(isset($services) && count(@$services)> 0)
         <div class="container">
           <div class="thm-section-title text-center">
             <h4 class="sub-title-shape-left section_title-subheading">
@@ -215,7 +208,7 @@
           <div class="row">
 
 
-          @if(isset($services) && @$services)
+          @if(isset($services) && count(@$services)> 0)
 
           @foreach($services as $ids )
             <div class="col-md-6 col-lg-4 py-2">
@@ -275,97 +268,14 @@
           @endif
 
 
-<!--             
-            <div class="col-md-6 col-lg-4 py-2">
-              <div class="widget h-100">
-                <h3 class="widget_title">Advisory Services</h3>
-                <div class="recent-post-wrap">
-                  <div class="recent-post">
-                  
-                    <div class="media-body">
-                      <h4 class="post-title">
-                        <a class="text-inherit" href="#"
-                          >Our advisory services are tailored to help businesses
-                          achieve their goals and address challenges:</a
-                        >
-                      </h4>
-                      <div class="recent-post-meta">
-                        <ul class="table-list">
-                          <li>
-                            <p>
-                              <b>Technical Assistance:</b> Offering expertise in
-                              project design, implementation, and management.
-                            </p>
-                          </li>
-                          <li>
-                            <p>
-                              <b>Capacity Building:</b> Strengthening the skills
-                              and capabilities of businesses and institutions.
-                            </p>
-                          </li>
-                          <li>
-                            <p>
-                              <b>Sustainability Advisory:</b> Guiding companies
-                              in adopting sustainable practices and
-                              technologies.
-                            </p>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-4 py-2">
-              <div class="widget h-100">
-                <h3 class="widget_title">Success Stories</h3>
-                <div class="recent-post-wrap">
-                  <div class="recent-post">
-                 
-                    <div class="media-body">
-                      <h4 class="post-title">
-                        <a class="text-inherit" href="#">
-                          IDB Invest has a proven track record of successful
-                          projects across various sectors in Guyana and the
-                          region. Some notable examples include:</a
-                        >
-                      </h4>
-                      <div class="recent-post-meta">
-                        <ul class="table-list">
-                          <li>
-                            <p>
-                              <b>Renewable Energy Projects:</b> Financing solar
-                              and wind energy initiatives that reduce carbon
-                              emissions and provide clean energy.
-                            </p>
-                          </li>
-                          <li>
-                            <p>
-                              <b> Agricultural Innovations: </b>Supporting
-                              agribusinesses in implementing modern farming
-                              techniques and improving supply chains.
-                            </p>
-                          </li>
-                          <li>
-                            <p>
-                              <b> Infrastructure Improvements: </b>Investing in
-                              transportation and logistics infrastructure to
-                              enhance trade and connectivity.
-                            </p>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-        
-              </div>
-            </div> -->
 
 
           </div>
         </div>
+
+        @else
+        <p class="text-center">NO Data Found !</p>
+      @endif
       </section>
 
 @endsection

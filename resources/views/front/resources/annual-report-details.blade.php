@@ -20,16 +20,16 @@
          </div>
         </div>
        </section>
-      <!--Start Blog One Section -->
+
        <section class="blog-classic-section">
         <div class="container">
             <div class="row">
                 <div class="col-xl-8 col-lg-7">
                     <div class="blog-classic-content">
-                        <!--Blog Classic Single-->
+                      
                         <div class="blog-classic-single">
                             <div class="blog-classic-image">
-                                <!-- <img src="{{asset('storage/'.@$details->image)}}" alt=""> -->
+                             
                                 <div class="blog-classic-date">
                                     <a href="#">{{ @$details->created_at->format('M d, Y') }} </a>
                                 </div>
