@@ -6,14 +6,15 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="back-ground">
-                        <h2>National Budgets</h2>
+                        <h2>COTED</h2>
                         <div class="breadcrumbs text-center wow animate__ animate__fadeInUp animate__delay-1s animated"
-                        style="visibility: visible; animation-name: fadeInUp;">
-                        <ul>
-                            <li><a href="{{ route('home') }}">Home</a></li>
-                            <span class="slash"> /</span>
-                            <li><a href="{{ route('data.national_budgets') }}">National Budgets</a></li>
-                        </ul>
+                            style="visibility: visible; animation-name: fadeInUp;">
+                            <ul>
+                                <li><a href="{{ route('home') }}">Home</a></li>
+                                <span class="slash"> /</span>
+                                <li><a href="{{ route('data.coted') }}">COTED</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -80,7 +81,7 @@
                                             </div>
                                             <div class="sidebar-latest-news-content">
                                                 <h3>
-                                                    <a href="{{ route('data.national-budgets-source-show', $post->id) }}">{{ $post->title }}</a>
+                                                    <a href="{{ route('data.coted-entrepreneurship-development-show', $post->id) }}">{{ $post->title }}</a>
                                                 </h3>
                                                 <p>{{ $post->created_at->format('d M, Y') }}</p>
                                             </div>

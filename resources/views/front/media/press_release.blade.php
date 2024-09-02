@@ -45,14 +45,14 @@
                                     <div class="blog-one-content">
                                         <ul class="blog-classic-meta">
                                             <li>
-                                                <a href="#"><i class="fas fa-clock"></i> {{ date('h:i A', strtotime($list->created_at)) }}</a>
+                                                <a><i class="fas fa-clock"></i> {{ date('h:i A', strtotime($list->created_at)) }}</a>
                                             </li>
                                             <li>
-                                                <a href="#"><i class="fas fa-calendar-alt"></i> {{ date('M d, Y', strtotime($list->created_at)) }}</a>
+                                                <a><i class="fas fa-calendar-alt"></i> {{ date('M d, Y', strtotime($list->created_at)) }}</a>
                                             </li>
                                         </ul>
                                         <div class="blog-one-title hei-65">
-                                            <h3><a href="#">{{ $list->title }}</a></h3>
+                                            <h3><a href="{{ route('media.press-release-show', $list->id) }}">{{ $list->title }}</a></h3>
                                         </div>
 
 

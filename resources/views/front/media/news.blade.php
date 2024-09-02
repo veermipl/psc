@@ -43,22 +43,22 @@
                                 <div class="blog-one-content">
                                     <ul class="blog-classic-meta">
                                         <li>
-                                            <a href="#"><i class="fas fa-clock"></i> {{ date('h:i A', strtotime($list->created_at)) }}</a>
+                                            <a><i class="fas fa-clock"></i> {{ date('h:i A', strtotime($list->created_at)) }}</a>
                                         </li>
                                         <li>
-                                            <a href="#"><i class="fas fa-calendar-alt"></i> {{ date('M d, Y', strtotime($list->created_at)) }}/a>
+                                            <a><i class="fas fa-calendar-alt"></i> {{ date('M d, Y', strtotime($list->created_at)) }}/a>
                                         </li>
                                     </ul>
                                     <div class="blog-one-title hei-65">
-                                        <h3><a href="#">{{ $list->title }}</a></h3>
+                                        <h3><a href="{{ route('media.news-show', $list->id) }}">{{ $list->title }}</a></h3>
                                     </div>
                                     <div class="blog-one-text">
                                         @php
-                                            $limitedContent = Str::limit($list->content, 200);
+                                            $limitedContent = Str::limit($list->content, 150);
                                         @endphp
                                         <p>{!! $limitedContent !!}</p>
                                     </div>
-                                    <a href="#" class="vs-btn1 style5 mt-3" tabindex="0">Read More
+                                    <a href="{{ route('media.news-show', $list->id) }}" class="vs-btn1 style5 mt-3" tabindex="0">Read More
                                         <i class="far fa-long-arrow-right"></i>
                                     </a>
                                 </div>

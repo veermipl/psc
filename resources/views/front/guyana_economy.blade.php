@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="blog-one-text">
                                     @php
-                                        $limitedContent = Str::limit($list->content, 100);
+                                        $limitedContent = Str::limit($list->content, 150);
                                     @endphp
                                     <p>{!! $limitedContent !!}</p>
                                 </div>
