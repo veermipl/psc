@@ -540,32 +540,39 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        // Get the button, and when the user clicks on it, execute myFunction
-        document.getElementById("myBtnt").onclick = function() {
-            myFunction()
-        };
+        
+var $affectedElements = $("p, h1, h2, h3, h4, h5, h6 ,span, a, td"); // Can be extended, ex. $("div, p, span.someClass")
 
-        /* myFunction toggles between adding and removing the show class, which is used to hide and show the dropdown content */
-        function myFunction() {
-            document.getElementById("myDropdownt").classList.toggle("showt");
-        }
+// Storing the original size in a data attribute so size can be reset
+$affectedElements.each(function () {
+    var $this = $(this);
+    $this.data("orig-size", $this.css("font-size"));
+});
 
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(event) {
+$("#btn-increase").click(function () {
+    changeFontSize(1);
+})
 
-            if (!event.target.matches('.dropbtnt')) {
+$("#btn-decrease").click(function () {
+    changeFontSize(-1);
+})
 
-                var dropdowns = document.getElementsByClassName("dropdown-contentt");
+$("#btn-origs").click(function () {
+    $affectedElements.each(function () {
+        var $this = $(this);
+        $this.css("font-size", $this.data("orig-size"));
+    });
+})
 
-                for (let i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('showt')) {
-                        openDropdown.classList.remove('showt');
-                    }
-                }
-            }
-        }
+function changeFontSize(direction) {
+    $affectedElements.each(function () {
+        var $this = $(this);
+        $this.css("font-size", parseInt($this.css("font-size")) + direction);
+    });
+}
     </script>
+
+ 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
