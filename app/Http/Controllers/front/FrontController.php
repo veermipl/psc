@@ -121,6 +121,17 @@ class FrontController extends Controller
         return view('front.guyana_economy', $data);
     }
 
+    public function show_guyanaEconomy($id)
+    {
+        $latest_list = GuyanaEconomy::orderBy('id', 'asc')->where('status', '1')->where('id', '!=', $id)->get() ?? [];
+        $details = GuyanaEconomy::where('status', '1')->findOrFail($id);
+
+        $data['latest_list'] = $latest_list;
+        $data['details'] = $details;
+
+        return view('front.guyana_economy_show', $data);
+    }
+
     public function membership_BusinessDirectory()
     {
         $membershipList = MembershipType::orderBy('name', 'asc')->where('status', '1')->get() ?? [];
@@ -161,6 +172,20 @@ class FrontController extends Controller
         $data['sources'] = $sources;
 
         return view('front.data.national_budgets', $data);
+    }
+
+    public function show_NationalBudgets($id)
+    {
+        $latest_list = NationalBudget::orderBy('id', 'asc')->where('id', '!=', $id)->where([
+            'type' => 'source',
+            'status' => '1'
+        ])->get() ?? [];
+        $details = NationalBudget::where('status', '1')->findOrFail($id);
+
+        $data['latest_list'] = $latest_list;
+        $data['details'] = $details;
+
+        return view('front.data.national_budgets_show_source', $data);
     }
 
     public function data_TradeData()
