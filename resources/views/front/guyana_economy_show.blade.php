@@ -30,23 +30,23 @@
                             <div class="blog-classic-image">
                               
                                 <div class="col-xl-12">
-                    <div class="brand-one-carousel-1 owl-carousel">
-                        <div class="single_brand_item detail-slide">
-                        <img src="{{ asset('storage/default/no_image.png') }}">
-                        </div>
-                        <div class="single_brand_item detail-slide">
-                        <img src="{{ asset('storage/default/no_image.png') }}">
-                        </div>
-                        <div class="single_brand_item detail-slide">
-                        <img src="{{ asset('storage/default/no_image.png') }}">
-                        </div>
-                        <div class="single_brand_item detail-slide">
-                        <img src="{{ asset('storage/default/no_image.png') }}">
-                        </div>
-                    
-                     
-                    </div>
-                </div>
+                                    <div class="brand-one-carousel-1 owl-carousel">
+                                        <div class="single_brand_item 21">
+                                        <img src="{{ asset('storage/default/no_image.png') }}">
+                                        </div>
+                                        <div class="single_brand_item detail-slide">
+                                        <img src="{{ asset('storage/default/no_image.png') }}">
+                                        </div>
+                                        <div class="single_brand_item detail-slide">
+                                        <img src="{{ asset('storage/default/no_image.png') }}">
+                                        </div>
+                                        <div class="single_brand_item detail-slide">
+                                        <img src="{{ asset('storage/default/no_image.png') }}">
+                                        </div>
+                                    
+                                    
+                                    </div>
+                                </div>
                                 <div class="blog-classic-date">
                                     <a class="btn-primary text-light">{{ @$details->created_at->format('M d, Y') }} </a>
                                 </div>
