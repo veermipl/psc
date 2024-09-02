@@ -4,6 +4,9 @@
     }
     $settings_app_name = helper_getSettings('app_name');
     $settings_app_logo = helper_getSettings('app_logo');
+    $settings_contact_us_address = helper_getSettings('address');
+    $settings_contact_us_email = helper_getSettings('email');
+    $settings_contact_us_phone = helper_getSettings('phone');
 @endphp
 
 <!DOCTYPE html>
@@ -192,6 +195,7 @@
                                                         <li class="current">
                                                             <a href="{{ route('home') }}">Home</a>
                                                         </li>
+
                                                         <li class="dropdown">
                                                             <a href="index.html">About Us <i class="fas fa-chevron-down"></i></a>
                                                             <ul>
@@ -214,7 +218,6 @@
                                                             </ul>
                                                         </li>
 
-                                                        <!-- <li><a href="#">Members</a></li> -->
                                                         <li class="dropdown">
                                                             <a href="#">Membership
                                                                 <i class="fas fa-chevron-down"></i></a>
@@ -240,11 +243,12 @@
 
                                                             </ul>
                                                         </li>
-                                                     
+
                                                         <li>
                                                             <a href="{{ route('guyana-economy') }}"> Guyana's Economy
                                                             </a>
                                                         </li>
+
                                                         <li class="dropdown">
                                                             <a href="#">Data
                                                                 <i class="fas fa-chevron-down"></i>
@@ -268,6 +272,7 @@
 
                                                             </ul>
                                                         </li>
+
                                                         <li class="dropdown">
                                                             <a href="#">Resources
                                                                 <i class="fas fa-chevron-down"></i>
@@ -296,7 +301,7 @@
                                                                 </li>
                                                             </ul>
                                                         </li>
-                                                        <!-- <li><a href="#">News</a></li> -->
+
                                                         <li class="dropdown">
                                                             <a href="index.html">Media Center
                                                                 <i class="fas fa-chevron-down"></i>
@@ -320,6 +325,7 @@
 
                                                             </ul>
                                                         </li>
+
                                                         <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
                                                     </ul>
                                                 </div>
@@ -448,12 +454,16 @@
                             <div class="footer-widget_contact-info">
                                 <p style="display: flex; align-items: baseline">
                                     <i class="fas fa-map-marker-alt" style="margin-right: 10px"></i>
-                                    157 Waterloo St, Georgetown, Guyana
+                                    {{ $settings_contact_us_address }}
                                 </p>
-                                <a href="tel:+592-223-0875"><i class="fas fa-phone" style="margin-right: 10px"></i>+592-223-0875</a>
+                                <a href="tel:+592-223-0875"><i class="fas fa-phone" style="margin-right: 10px"></i>
+                                    {{ $settings_contact_us_phone }}
+                                </a>
                                 <br />
                                 <a href="mailto:office@psc.org.gy">
-                                    <i class="fas fa-envelope" style="margin-right: 10px"></i>office@psc.org.gy</a><br />
+                                    <i class="fas fa-envelope" style="margin-right: 10px"></i>
+                                    {{ $settings_contact_us_email }}
+                                </a><br />
                             </div>
                         </div>
                     </div>

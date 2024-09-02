@@ -135,7 +135,8 @@ button {
 
 .auto-container {
     position: static;
-    max-width: 1210px;
+    /* max-width: 1210px; */
+    max-width: 100%;
     padding: 0px 20px;
     margin: 0 auto;
 }

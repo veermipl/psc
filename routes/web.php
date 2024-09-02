@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CotedController;
 use App\Http\Controllers\Admin\PhotoController;
+use App\Http\Controllers\Admin\QueryController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\Front\FrontController;
@@ -27,6 +28,7 @@ use App\Http\Controllers\Admin\CaricomCETController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\AnnulReportController;
 use App\Http\Controllers\Admin\CertificateController;
+use App\Http\Controllers\Admin\CommitteessController;
 use App\Http\Controllers\Admin\SocialMediaController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\NotificationController;
@@ -35,7 +37,6 @@ use App\Http\Controllers\Admin\MemberBenefitController;
 use App\Http\Controllers\Admin\MembershipTypeController;
 use App\Http\Controllers\Admin\NationalBudgetController;
 use App\Http\Controllers\Admin\BusinessDirectoryController;
-use App\Http\Controllers\Admin\CommitteessController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\MemberController as AdminMemberController;
 
@@ -68,6 +69,7 @@ Route::get('/phpinfo', function () {
 Route::get('/', [FrontController::class, 'index']);
 Route::get('home', [FrontController::class, 'index'])->name('home');
 Route::get('contact-us', [FrontController::class, 'contactUs'])->name('contact-us');
+Route::post('contact-us-save', [FrontController::class, 'save_contactUs'])->name('contact-us-save');
 Route::get('guyana-economy', [FrontController::class, 'guyanaEconomy'])->name('guyana-economy');
 
 Route::get('about-us', [FrontController::class, 'aboutUs'])->name('about-us');
@@ -75,7 +77,6 @@ Route::get('about-us', [FrontController::class, 'aboutUs'])->name('about-us');
 Route::prefix('about-us')->name('about-us.')->group(function () {
     Route::get('introduction', [FrontController::class, 'aboutUs_Introduction'])->name('introduction');
     Route::get('staff', [FrontController::class, 'aboutUs_Staff'])->name('staff');
-
     Route::get('council', [FrontController::class, 'aboutUs_Council'])->name('council');
     Route::get('history', [FrontController::class, 'aboutUs_History'])->name('history');
     Route::get('committeess', [FrontController::class, 'aboutUs_Committeess'])->name('committeess');
@@ -448,10 +449,15 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         Route::post('guyana-economy/filter', [CMSController::class, 'guyanaEconomy'])->name('guyana-economy.filter');
         Route::post('guyana-economy/export', [CMSController::class, 'guyanaEconomyExport'])->name('guyana-economy.export');
         Route::post('guyana-economy/status', [CMSController::class, 'guyanaEconomyStatusToggle'])->name('guyana-economy.status');
-      
-     
+    });
 
+    Route::prefix('queries')->name('queries.')->group(function () {
+        Route::get('contact-us', [QueryController::class, 'list_contactUs'])->name('contact-us');
+        Route::post('contact-us/filter', [QueryController::class, 'list_contactUs'])->name('contact-us.filter');
+        Route::get('contact-us/view/{id}', [QueryController::class, 'view_contactUs'])->name('contact-us.view');
 
+        Route::post('export', [QueryController::class, 'export'])->name('export');
+        Route::post('delete', [QueryController::class, 'delete'])->name('delete');
     });
 
     Route::prefix('authorization')->name('authorization.')->group(function () {

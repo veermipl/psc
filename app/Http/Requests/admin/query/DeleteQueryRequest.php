@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\admin\membership\business_directory;
+namespace App\Http\Requests\admin\query;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateBusinessDirectoryStatusRequest extends FormRequest
+class DeleteQueryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,7 @@ class UpdateBusinessDirectoryStatusRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'lid' => ['required', 'exists:business_directories,id'],
-            'lstatus' => ['required'],
+            'lid' => ['required', 'exists:queries,id'],
         ];
     }
 }
