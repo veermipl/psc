@@ -73,6 +73,7 @@ Route::post('contact-us-save', [FrontController::class, 'save_contactUs'])->name
 Route::get('guyana-economy', [FrontController::class, 'guyanaEconomy'])->name('guyana-economy');
 
 Route::get('about-us', [FrontController::class, 'aboutUs'])->name('about-us');
+
 Route::prefix('about-us')->name('about-us.')->group(function () {
     Route::get('introduction', [FrontController::class, 'aboutUs_Introduction'])->name('introduction');
     Route::get('staff', [FrontController::class, 'aboutUs_Staff'])->name('staff');
@@ -100,6 +101,8 @@ Route::prefix('resources')->name('resources.')->group(function () {
     Route::get('procurement-process-in-guyana', [FrontController::class, 'resources_ProcurementProcessInGuyana'])->name('procurement-process-in-guyana');
     Route::get('certificate-of-origins', [FrontController::class, 'resources_CertificateOfOrigins'])->name('certificate-of-origins');
     Route::get('annual-report', [FrontController::class, 'resources_AnnualReport'])->name('annual-report');
+
+    Route::get('annual-report-details/{id}', [FrontController::class, 'resources_Annualdetails'])->name('annual.report.details');
 });
 
 Route::prefix('media')->name('media.')->group(function () {
