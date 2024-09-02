@@ -572,6 +572,30 @@ function changeFontSize(direction) {
 }
     </script>
 
+    <script>
+        $(".brand-one-carousel-1").owlCarousel({
+    loop: true,
+    nav: false,
+    dots: false,
+    autoplay: true,
+    smartSpeed: 800,
+    responsive: {
+        0: {
+            items: 1,
+        },
+        576: {
+            items: 1,
+        },
+        768: {
+            items: 1,
+        },
+        992: {
+            items: 1,
+        },
+    },
+});
+    </script>
+
  
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

@@ -6978,7 +6978,10 @@ button.btn-block:hover {
 .custom-width-popup {
     width: 600px;
 }
-
+.detail-slide img {
+    height: 400px ;
+    width: 100%;
+}
 @media screen and (max-width: 767px) {
     .back-ground h2 {
         font-size: 30px;
