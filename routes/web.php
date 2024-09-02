@@ -80,6 +80,7 @@ Route::get('home', [FrontController::class, 'index'])->name('home');
 Route::get('contact-us', [FrontController::class, 'contactUs'])->name('contact-us');
 Route::post('contact-us-save', [FrontController::class, 'save_contactUs'])->name('contact-us-save');
 Route::get('guyana-economy', [FrontController::class, 'guyanaEconomy'])->name('guyana-economy');
+Route::get('guyana-economy-show/{id}', [FrontController::class, 'show_guyanaEconomy'])->name('guyana-economy-show');
 
 Route::get('about-us', [FrontController::class, 'aboutUs'])->name('about-us');
 
@@ -98,6 +99,7 @@ Route::prefix('membership')->name('membership.')->group(function () {
 
 Route::prefix('data')->name('data.')->group(function () {
     Route::get('national-budgets', [FrontController::class, 'data_NationalBudgets'])->name('national_budgets');
+    Route::get('national-budgets-show/{id}', [FrontController::class, 'show_NationalBudgets'])->name('national-budgets-show');
     Route::get('trade-data', [FrontController::class, 'data_TradeData'])->name('trade-data');
     Route::get('coted', [FrontController::class, 'data_Coted'])->name('coted');
     Route::get('caricom-cet', [FrontController::class, 'data_CaricomCet'])->name('caricom-cet');
