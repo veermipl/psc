@@ -23,6 +23,7 @@
       <!--Start Blog One Section -->
      
       <section class="about-tow-section about-page">
+        @if($overview)
         <div class="container">
           <div class="row">
             <div class="col-xl-6">
@@ -58,76 +59,20 @@
                   <h2>{{@$overview->title}}</h2>
 
                   {{@$overview->contant}}
-                  <!-- <p class="about-two-title-text">
-                    The procurement process in Guyana is governed by the
-                    Procurement Act, which establishes the framework for the
-                    acquisition of goods, services, and works by public sector
-                    entities. The process aims to ensure transparency, fairness,
-                    and efficiency in the use of public funds, fostering a
-                    competitive environment for businesses.
-                  </p>
-                  <h5 class="pt-3"><b>Key Principles</b></h5>
-                  <p>
-                    <b> 1 Transparency:</b> All procurement activities are
-                    conducted in an open manner, providing equal opportunity for
-                    all eligible suppliers and contractors.
-                  </p>
-                  <p>
-                    <b>2 Fairness:</b> The process ensures non-discrimination
-                    and equitable treatment of all participants.
-                  </p> -->
-                  <!-- <p>
-                    <b>3 FEfficiency:</b> Procurement procedures are designed to
-                    achieve the best value for money, balancing cost, quality,
-                    and timeliness.
-                  </p>
-                  <p>
-                    <b>4 Accountability:</b> Public officials involved in
-                    procurement are accountable for their decisions and actions.
-                  </p> -->
+        
                 </div>
-                <!-- <div class="row">
-                  <div class="col-md-6">
-                    <div class="about-tow-experience-years">
-                      <div class="about-tow-experience-years-icon">
-                        <span class="flaticon-check"></span>
-                      </div>
-                      <div class="about-tow-experience-years-text">
-                        <h2>
-                          30+ Years of <br />
-                          excellence
-                        </h2>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="about-tow-experience-years">
-                      <div class="about-tow-experience-years-icon">
-                        <span class="flaticon-check"></span>
-                      </div>
-                      <div class="about-tow-experience-years-text">
-                        <h2>
-                          Operating <br />
-                          in 9 Sectors
-                        </h2>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
-
-                <!-- <div class="about-two-bottom-content">
-                  <h3>John Franclin - <span>CEO & Founder</span></h3>
-                  <div class="signature">
-                    <img src="images/about/signature-1.png" alt="" />
-                  </div>
-                </div> -->
+                
               </div>
             </div>
           </div>
         </div>
+        @else
+        <p class="text-center">NO Data Found !</p>
+      @endif
       </section>
 
       <section class="blog-one-section">
+      @if(isset($methods) && count(@$methods)> 0)
         <div class="container">
           <div class="thm-section-title text-center">
             <h4 class="sub-title-shape-left section_title-subheading">
@@ -168,73 +113,18 @@
 
             @endforeach
           @endif
-            <!-- <div class="col-xl-4 col-lg-4">
-             
-              <div
-                class="blog-one-single guyana-wrap wow fadeInUp"
-                data-wow-delay="100ms">
-                <div class="blog-one-img guyana-imgg">
-                  <img src="{{asset('images/about/oil-10.png')}}" alt="" />
-                </div>
-                <div class="blog-one-content">
-                  
-                  <div class="blog-one-title">
-                    <h3><a href="#"> Restricted Tendering</a></h3>
-                  </div>
-                  <div class="blog-one-text">
-                    <p>Used when the number of suppliers is limited.</p>
-                    <p>
-                      Invitations are sent to a pre-selected list of qualified
-                      suppliers.
-                    </p>
-                    <p>Ensures quality and specialization in procurement.</p>
-                  </div>
-                  <br />
-                  <a href="#" class="vs-btn1 style5 mt-3" tabindex="0"
-                    >Read More <i class="far fa-long-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-4 col-lg-4">
-             
-              <div
-                class="blog-one-single guyana-wrap wow fadeInUp"
-                data-wow-delay="200ms">
-                <div class="blog-one-img guyana-imgg">
-                  <img src="{{asset('images/about/oil-11.png')}}" alt="" />
-                </div>
-                <div class="blog-one-content">
-                  
-                  <div class="blog-one-title">
-                    <h3>
-                      <a href="#">Request for Proposals (RFP)</a>
-                    </h3>
-                  </div>
-                  <div class="blog-one-text">
-                    <p>
-                      Financing renewable energy projects such as solar, wind,
-                      and hydroelectric power.
-                    </p>
-                    <p>
-                      Advancing energy efficiency and sustainability
-                      initiatives.
-                    </p>
-                  </div>
-                  <br />
-                  <br />
-                  <a href="#" class="vs-btn1 style5 mt-3" tabindex="0"
-                    >Read More <i class="far fa-long-arrow-right"></i
-                  ></a>
-                </div>
-              </div>
-            </div> -->
+
 
           </div>
+        
         </div>
+        @else
+        <p class="text-center">NO Data Found !</p>
+      @endif
       </section>
 
       <section class="why-choose-two-section">
+      @if(isset($services) && count(@$services)> 0)
         <div class="container">
           <div class="thm-section-title text-center">
             <h4 class="sub-title-shape-left section_title-subheading">
@@ -273,6 +163,9 @@
 
           </div>
         </div>
+        @else
+        <p class="text-center">NO Data Found !</p>
+      @endif
       </section>
       <!--End Blog -->
 @endsection

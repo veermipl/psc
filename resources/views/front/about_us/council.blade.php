@@ -38,6 +38,8 @@
        </section>
       <!--Start Blog One Section -->
       <section class="blog-one-section">
+
+    @if($council)
         <div class="container">
           <div class="thm-section-title text-center">
             <h4 class="sub-title-shape-left section_title-subheading">
@@ -60,17 +62,16 @@
                     </div>
                   
     
-                    <!-- <div class="about-two-bottom-content">
-                      <h3>John Franclin - <span>CEO & Founder</span></h3>
-                      <div class="signature">
-                        <img src="images/about/signature-1.png" alt="" />
-                      </div>
-                    </div> -->
+                   
                   </div>
                 </div>
               </div>
        
         </div>
+   @else
+        <p class="text-center">NO Data Found !</p>
+    @endif
+
       </section>
 
 

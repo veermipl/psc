@@ -23,6 +23,7 @@
       </section>
 
     <section class="about-tow-section about-page">
+      @if($business)
         <div class="container">
           <div class="row">
             <div class="col-xl-6">
@@ -126,9 +127,13 @@
             </div>
           </div>
         </div>
+        @else
+        <p class="text-center">NO Data Found !</p>
+       @endif
       </section>
 
       <section class="features-two-section">
+      @if(isset($certificate) && count(@$certificate)> 0)
         <div class="container">
           <div class="thm-section-title text-center">
             <h4 class="sub-title-shape-left section_title-subheading">
@@ -232,9 +237,14 @@
 
           </div>
         </div>
+
+        @else
+        <p class="text-center">NO Data Found !</p>
+    @endif
       </section>
 
       <section class="why-choose-two-section">
+      @if(isset($benefits) && count(@$benefits) > 0)
         <div class="container">
           <div class="thm-section-title text-center">
             <h4 class="sub-title-shape-left section_title-subheading">
@@ -278,76 +288,14 @@
 
             @endif
 
-<!-- 
-            <div class="col-md-6 col-lg-3 py-2">
-              <div class="widget h-100">
-                <h3 class="widget_title">Compliance</h3>
-                <div class="recent-post-wrap">
-                  <div class="recent-post">
-                    
-                    <div class="media-body">
-                      <div class="recent-post-meta">
-                        <ul class="table-list">
-                          <li>
-                            <p>
-                              Ensures adherence to international trade
-                              regulations and standards.
-                            </p>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-3 py-2">
-              <div class="widget h-100">
-                <h3 class="widget_title">Credibility</h3>
-                <div class="recent-post-wrap">
-                  <div class="recent-post">
-                   
-                    <div class="media-body">
-                      <div class="recent-post-meta">
-                        <ul class="table-list">
-                          <li>
-                            <p>
-                              Enhances the reputation of the exporter by
-                              providing authentic proof of origin.
-                            </p>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-3 py-2">
-              <div class="widget h-100">
-                <h3 class="widget_title">Efficiency</h3>
-                <div class="recent-post-wrap">
-                  <div class="recent-post">
-                    
-                    <div class="media-body">
-                      <div class="recent-post-meta">
-                        <ul class="table-list">
-                          <li>
-                            <p>
-                              Facilitates faster customs clearance and reduces
-                              shipping delays.
-                            </p>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
+
 
           </div>
         </div>
+        
+        @else
+        <p class="text-center">NO Data Found !</p>
+    @endif
       </section>
 
 

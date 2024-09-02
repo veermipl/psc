@@ -22,6 +22,7 @@
     
       <!--Start Blog One Section -->
       <section class="blog-one-section">
+      @if(isset($data) && count(@$data)> 0)
         <div class="container">
          
           <div class="row">
@@ -59,6 +60,10 @@
          @endif
             </div>
         </div>
+
+        @else
+        <p class="text-center">NO Data Found !</p>
+      @endif
       </section>
 
 @endsection
