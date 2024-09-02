@@ -28,23 +28,20 @@
 
                         <div class="blog-classic-single">
                             <div class="blog-classic-image">
-                              
                                 <div class="col-xl-12">
                                     <div class="brand-one-carousel-1 owl-carousel">
-                                        <div class="single_brand_item 21">
-                                        <img src="{{ asset('storage/default/no_image.png') }}">
-                                        </div>
-                                        <div class="single_brand_item detail-slide">
-                                        <img src="{{ asset('storage/default/no_image.png') }}">
-                                        </div>
-                                        <div class="single_brand_item detail-slide">
-                                        <img src="{{ asset('storage/default/no_image.png') }}">
-                                        </div>
-                                        <div class="single_brand_item detail-slide">
-                                        <img src="{{ asset('storage/default/no_image.png') }}">
-                                        </div>
-                                    
-                                    
+                                        @if ($details->images)
+                                            @php
+                                                $p_images = explode(',', $details->images);
+                                            @endphp
+                                            @foreach ($p_images as $pImgKey => $pImg)
+                                                <div class="single_brand_item detail-slide">
+                                                    <img src="{{ asset('storage/' .$pImg) }}">
+                                                </div>
+                                            @endforeach
+                                        @else
+                                            <img src="{{ asset('storage/default/no_image.png') }}">
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="blog-classic-date">

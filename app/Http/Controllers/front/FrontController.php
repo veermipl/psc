@@ -123,7 +123,7 @@ class FrontController extends Controller
 
     public function show_guyanaEconomy($id)
     {
-        $latest_list = GuyanaEconomy::orderBy('id', 'asc')->where('status', '1')->where('id', '!=', $id)->get() ?? [];
+        $latest_list = GuyanaEconomy::orderBy('id', 'asc')->where('status', '1')->where('id', '!=', $id)->limit(5)->get() ?? [];
         $details = GuyanaEconomy::where('status', '1')->findOrFail($id);
 
         $data['latest_list'] = $latest_list;
@@ -174,12 +174,12 @@ class FrontController extends Controller
         return view('front.data.national_budgets', $data);
     }
 
-    public function show_NationalBudgets($id)
+    public function show_NationalBudget_Source($id)
     {
         $latest_list = NationalBudget::orderBy('id', 'asc')->where('id', '!=', $id)->where([
             'type' => 'source',
             'status' => '1'
-        ])->get() ?? [];
+        ])->limit(5)->get() ?? [];
         $details = NationalBudget::where('status', '1')->findOrFail($id);
 
         $data['latest_list'] = $latest_list;
@@ -221,6 +221,20 @@ class FrontController extends Controller
         return view('front.data.coted', $data);
     }
 
+    public function show_Coted_EntrepreneurshipDevelopment($id)
+    {
+        $latest_list = Coted::orderBy('id', 'asc')->where('id', '!=', $id)->where([
+            'type' => 'entrepreneurship_development',
+            'status' => '1'
+        ])->limit(5)->get() ?? [];
+        $details = Coted::where('status', '1')->findOrFail($id);
+
+        $data['latest_list'] = $latest_list;
+        $data['details'] = $details;
+
+        return view('front.data.coted_show_entrepreneurship_development', $data);
+    }
+
     public function data_CaricomCet()
     {
         $main = CaricomCET::where('type', 'main')->first();
@@ -238,6 +252,20 @@ class FrontController extends Controller
         $data['how_it_works'] = $how_it_works;
 
         return view('front.data.caricom_cet', $data);
+    }
+
+    public function show_CaricomCet_Objective($id)
+    {
+        $latest_list = CaricomCET::orderBy('id', 'asc')->where('id', '!=', $id)->where([
+            'type' => 'objective',
+            'status' => '1'
+        ])->limit(5)->get() ?? [];
+        $details = CaricomCET::where('status', '1')->findOrFail($id);
+
+        $data['latest_list'] = $latest_list;
+        $data['details'] = $details;
+
+        return view('front.data.caricom_cet_show_objective', $data);
     }
 
     public function resources_BusinessReadinessDesk()
@@ -311,6 +339,19 @@ class FrontController extends Controller
         return view('front.media.news', $data);
     }
 
+    public function show_News($id)
+    {
+        $latest_list = News::orderBy('id', 'asc')->where('id', '!=', $id)->where([
+            'status' => '1'
+        ])->limit(5)->get() ?? [];
+        $details = News::where('status', '1')->findOrFail($id);
+
+        $data['latest_list'] = $latest_list;
+        $data['details'] = $details;
+
+        return view('front.media.news_show', $data);
+    }
+
     public function media_PressRelease()
     {
         $press_release_list = PressRelease::orderBy('id', 'desc')->where('status', '1')->get() ?? [];
@@ -320,6 +361,19 @@ class FrontController extends Controller
         $data['recent_press_release_list'] = $recent_press_release_list;
 
         return view('front.media.press_release', $data);
+    }
+
+    public function show_PressRelease($id)
+    {
+        $latest_list = PressRelease::orderBy('id', 'asc')->where('id', '!=', $id)->where([
+            'status' => '1'
+        ])->limit(5)->get() ?? [];
+        $details = PressRelease::where('status', '1')->findOrFail($id);
+
+        $data['latest_list'] = $latest_list;
+        $data['details'] = $details;
+
+        return view('front.media.press_release_show', $data);
     }
 
     public function media_SocialMedia()

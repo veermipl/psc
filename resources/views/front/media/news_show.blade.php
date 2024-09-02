@@ -6,14 +6,15 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="back-ground">
-                        <h2>National Budgets</h2>
+                        <h2>News</h2>
                         <div class="breadcrumbs text-center wow animate__ animate__fadeInUp animate__delay-1s animated"
-                        style="visibility: visible; animation-name: fadeInUp;">
-                        <ul>
-                            <li><a href="{{ route('home') }}">Home</a></li>
-                            <span class="slash"> /</span>
-                            <li><a href="{{ route('data.national_budgets') }}">National Budgets</a></li>
-                        </ul>
+                            style="visibility: visible; animation-name: fadeInUp;">
+                            <ul>
+                                <li><a href="{{ route('home') }}">Home</a></li>
+                                <span class="slash"> /</span>
+                                <li><a href="{{ route('media.news') }}">News</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -28,11 +29,22 @@
 
                         <div class="blog-classic-single">
                             <div class="blog-classic-image">
-                                @if ($details->file)
-                                    <img src="{{ asset('storage/' . $details->file) }}">
-                                @else
-                                    <img src="{{ asset('storage/default/no_image.png') }}">
-                                @endif
+                                <div class="col-xl-12">
+                                    <div class="brand-one-carousel-1 owl-carousel">
+                                        @if ($details->files)
+                                            @php
+                                                $p_images = explode(',', $details->files);
+                                            @endphp
+                                            @foreach ($p_images as $pImgKey => $pImg)
+                                                <div class="single_brand_item detail-slide">
+                                                    <img src="{{ asset('storage/' .$pImg) }}">
+                                                </div>
+                                            @endforeach
+                                        @else
+                                            <img src="{{ asset('storage/default/no_image.png') }}">
+                                        @endif
+                                    </div>
+                                </div>
                                 <div class="blog-classic-date">
                                     <a class="btn-primary text-light">{{ @$details->created_at->format('M d, Y') }} </a>
                                 </div>
@@ -72,15 +84,18 @@
                                     @foreach ($latest_list as $postKey => $post)
                                         <li>
                                             <div class="sidebar-latest-news-image">
-                                                @if ($post->file)
-                                                    <img src="{{ asset('storage/' . $post->file) }}">
+                                                @if ($post->files)
+                                                    @php
+                                                        $p_images = explode(',', $post->files);
+                                                    @endphp
+                                                    <img src="{{ asset('storage/' . $p_images[0]) }}">
                                                 @else
                                                     <img src="{{ asset('storage/default/no_image.png') }}">
                                                 @endif
                                             </div>
                                             <div class="sidebar-latest-news-content">
                                                 <h3>
-                                                    <a href="{{ route('data.national-budgets-source-show', $post->id) }}">{{ $post->title }}</a>
+                                                    <a href="{{ route('media.news-show', $post->id) }}">{{ $post->title }}</a>
                                                 </h3>
                                                 <p>{{ $post->created_at->format('d M, Y') }}</p>
                                             </div>
