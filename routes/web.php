@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\TestController;
@@ -59,11 +60,19 @@ Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
     Artisan::call('route:clear');
     Artisan::call('optimize');
-    return "Cache cleared successfully";
+    return "Cache cleared !";
 });
 
 Route::get('/phpinfo', function () {
     return phpinfo();
+});
+
+Route::get('storage_link', function () {
+    if (File::exists(public_path('storage'))) {
+        File::delete(public_path('storage'));
+    }
+    Artisan::call('storage:link');
+    return "Storage linked !";
 });
 
 Route::get('/', [FrontController::class, 'index']);

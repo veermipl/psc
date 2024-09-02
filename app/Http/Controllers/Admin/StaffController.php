@@ -68,7 +68,7 @@ class StaffController extends Controller
         $this->authorize('about_us_status_edit');
 
         $user = Staff::find($request->uid);
-        $status = $request->lstatus == 1 ? '0' : '1';
+        $status = $request->ustatus == 1 ? '0' : '1';
 
         DB::transaction(function () use ($user, $status) {
             $user->update([
