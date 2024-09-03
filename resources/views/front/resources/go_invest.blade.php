@@ -93,11 +93,11 @@
                   </div>
                   <div class="blog-one-content">
                     <div class="blog-one-title">
-                      <h3><a href="#">{{$sectors->title}} </a></h3>
+                      <h3><a href="{{route('resources.go-invest.details',  base64_encode($sectors->id) )}}">{{$sectors->title}} </a></h3>
                     </div>
                     <div class="blog-one-text">
 
-                     {!!$sectors->contant!!}
+                     {!! Str::limit($sectors->contant, 200)!!}
                       <!-- <p>
                         Guyana has discovered significant oil reserves, attracting
                         major international oil companies.
@@ -107,7 +107,7 @@
                         support services.
                       </p> -->
                     </div>
-                    <a href="#" class="vs-btn1 style5 mt-3" tabindex="0"
+                    <a href="{{route('resources.go-invest.details',  base64_encode($sectors->id) )}}" class="vs-btn1 style5 mt-3" tabindex="0"
                       >Read More <i class="far fa-long-arrow-right"></i
                     ></a>
                   </div>

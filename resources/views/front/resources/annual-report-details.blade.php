@@ -56,13 +56,13 @@
                 </div>
                 <div class="col-xl-4 col-lg-5">
                     <div class="sidebar">
-                        <div class="sidebar-single sidebar-search">
+                        <!-- <div class="sidebar-single sidebar-search">
                            <h3 class="sidebar-title">Search</h3>
                             <form action="#" class="sidebar-search-form">
                                 <input type="search" placeholder="Search">
                                 <button type="submit"><i class="fa fa-search"></i></button>
                             </form>
-                        </div>
+                        </div> -->
                     
                         <div class="sidebar-single sidebar-latest-news">
                             <h3 class="sidebar-title">Latest Posts</h3>
@@ -75,7 +75,7 @@
                                         <img src="{{asset('storage/'.$posts->image)}}" alt="">
                                     </div>
                                     <div class="sidebar-latest-news-content">
-                                       <h3><a href="#">{{$posts->title}}</a></h3>
+                                       <h3><a href="{{route('resources.annual.report.details', base64_encode($posts->id) )}}">{{$posts->title}}</a></h3>
                                        <p>{{ @$posts->created_at->format('d M, Y') }}</p> 
                                     </div>
                                 </li>

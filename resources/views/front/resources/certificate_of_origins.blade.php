@@ -78,9 +78,11 @@
           </div>
 
           <div class="row">
-            @if(isset($types) && count(@$types) > 0)
+    
+              @foreach(@$types as $type)
 
-              @foreach(@types as $type)
+    
+
                   <div class="col-xl-6 col-lg-6">
                   
                     <div
@@ -91,14 +93,15 @@
                       </div>
                       <div class="blog-one-content">
                         <div class="blog-one-title">
-                          <h3><a href="#">{{$type->title}}</a></h3>
+                          <h3><a href="{{route('resources.certificate-of-origins.deatils',base64_encode($type->id) )}}">{{$type->title}}</a></h3>
                         </div>
                         <div class="blog-one-text">
 
-                        {!! $type->contant !!}
+                        {!! Str::limit($type->contant, 200)!!}
+                       
                          
                         </div>
-                        <a href="#" class="vs-btn1 style5 mt-3" tabindex="0"
+                        <a href="{{route('resources.certificate-of-origins.deatils', base64_encode($type->id)  )}}" class="vs-btn1 style5 mt-3" tabindex="0"
                           >Read More <i class="far fa-long-arrow-right"></i
                         ></a>
                       </div>
@@ -106,7 +109,6 @@
                   </div>
               @endforeach
 
-            @endif
 
 
           </div>

@@ -58,71 +58,8 @@
                   </h4>
                   <h2>{{@$business->title}}</h2>
                   <p class="about-two-title-text">
-
-                  {{@$business->contant}}
-
-                    <!-- A Certificate of Origin (COO) is a crucial document in
-                    international trade that certifies the country where a
-                    product was manufactured or processed. It is required by
-                    customs authorities in the importing country to determine
-                    the appropriate tariffs, duties, and eligibility for
-                    preferential trade agreements. 
-                  </p>
-                  <h5 class="pt-3 pb-2">
-                    <b>Types of Certificates of Origin</b>
-                  </h5>
-                  <p>
-                    <b class="text-dark">Preferential Certificate of Origin</b>
-
-                    Used for goods eligible for reduced tariffs under trade
-                    agreements. Examples include the CARICOM Certificate of
-                    Origin and the EUR1 Certificate.
-                  </p>
-                  <p>
-                    <b class="text-dark">Non-Preferential Certificate of Origin</b >
-                    Used for goods that do not qualify for any preferential
-                    treatment. Provides standard information required by customs
-                    authorities worldwide.
-                  </p>
-                  --->
+                  {!! @$business->contant !!}
                 </div>
-
-                <!-- <div class="row">
-                  <div class="col-md-6">
-                    <div class="about-tow-experience-years">
-                      <div class="about-tow-experience-years-icon">
-                        <span class="flaticon-check"></span>
-                      </div>
-                      <div class="about-tow-experience-years-text">
-                        <h2>
-                          30+ Years of <br />
-                          excellence
-                        </h2>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="about-tow-experience-years">
-                      <div class="about-tow-experience-years-icon">
-                        <span class="flaticon-check"></span>
-                      </div>
-                      <div class="about-tow-experience-years-text">
-                        <h2>
-                          Operating <br />
-                          in 9 Sectors
-                        </h2>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
-
-                <!-- <div class="about-two-bottom-content">
-                  <h3>John Franclin - <span>CEO & Founder</span></h3>
-                  <div class="signature">
-                    <img src="images/about/signature-1.png" alt="" />
-                  </div>
-                </div> -->
-
               </div>
             </div>
           </div>
@@ -159,19 +96,11 @@
                       <img src="{{asset('images/about/custom-clearance.png')}}" alt="" />
                       
                     </div>
-                    <h3> {{ $origin->title}} </h3>
+                    <h3> {{ $origin->title}} </h3>   
 
-                    {{ $origin->contant}}
-                    <!-- <p>
-                      The COO helps customs authorities verify the origin of the
-                      goods and apply the correct tariff rates.
-                    </p>
-                    <p>
-                      It is a necessary document for the smooth clearance of goods
-                      at international borders.
-                    </p> -->
-
-                    <a href="#" class="vs-btn style3 mt-4" tabindex="0"
+                        {!! Str::limit($origin->contant, 200)!!}
+  
+                    <a href="{{route('resources.business.details',base64_encode($origin->id) )}}" class="vs-btn style3 mt-4" tabindex="0"
                       >Read More<i class="far fa-long-arrow-right"></i
                     ></a>
                   </div>
@@ -179,61 +108,6 @@
                 @endforeach
             @endif
 
-            <!-- <div class="col-lg-4 col-md-6">
-              
-              <div
-                class="features-two-sec-single wow fadeInUp h-100 animated"
-                data-wow-delay="600ms"
-                style="
-                  visibility: visible;
-                  animation-delay: 600ms;
-                  animation-name: fadeInUp;
-                ">
-                <div class="features-two-sec-icon">
-                  <img src="{{asset('images/about/custom-clearance-2.png')}}" alt="" />
-                  
-                </div>
-                <h3>Preferential Trade Agreements</h3>
-                <p>
-                  The COO enables exporters to benefit from reduced tariffs
-                  under various trade agreements.
-                </p>
-                <p>
-                  It ensures compliance with the rules of origin criteria set
-                  out in these agreements.
-                </p>
-                <a href="#" class="vs-btn style3 mt-4" tabindex="0"
-                  >Read More<i class="far fa-long-arrow-right"></i
-                ></a>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-              
-              <div
-                class="features-two-sec-single wow fadeInUp h-100 animated"
-                data-wow-delay="900ms"
-                style="
-                  visibility: visible;
-                  animation-delay: 900ms;
-                  animation-name: fadeInUp;
-                ">
-                <div class="features-two-sec-icon">
-                  <img src="{{asset('images/about/custom-clearance-3.png')}}" alt="" />
-                  
-                </div>
-                <h3>Market Access</h3>
-                <p>
-                  Facilitates easier access to international markets by
-                  providing proof of origin.
-                </p>
-                <p>
-                  Enhances the credibility and legitimacy of exported products.
-                </p>
-                <a href="#" class="vs-btn style3 mt-4" tabindex="0"
-                  >Read More<i class="far fa-long-arrow-right"></i
-                ></a>
-              </div>
-            </div> -->
 
           </div>
         </div>
@@ -254,9 +128,7 @@
           </div>
           <div class="row">
 
-
           @if(isset($benefits) && count(@$benefits) > 0)
-           
             @foreach($benefits as $origin)
           
               <div class="col-md-6 col-lg-3 py-2">

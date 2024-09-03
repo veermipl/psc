@@ -58,7 +58,7 @@
                   </h4>
                   <h2>{{@$overview->title}}</h2>
 
-                  {{@$overview->contant}}
+                  {!! @$overview->contant !!}
         
                 </div>
                 
@@ -97,14 +97,13 @@
                 <div class="blog-one-content">
                  
                   <div class="blog-one-title">
-                    <h3><a href="#">{{$method->title}}</a></h3>
+                    <h3><a href="{{route('resources.procurement.deatils', base64_encode($method->id) )}}">{{$method->title}}</a></h3>
                   </div>
                   <div class="blog-one-text">
-
-                  {$method->contant}
+                  {!! Str::limit($method->contant, 200)!!}
   
                   </div>
-                  <a href="#" class="vs-btn1 style5 mt-3" tabindex="0"
+                  <a href="{{route('resources.procurement.deatils', base64_encode($method->id) )}}" class="vs-btn1 style5 mt-3" tabindex="0"
                     >Read More <i class="far fa-long-arrow-right"></i
                   ></a>
                 </div>
@@ -145,7 +144,7 @@
                     <div class="media-body">
                       <div class="recent-post-meta">
                         <ul class="table-list">
-                         {{$procurement->contant}}
+                         {!! $procurement->contant !!}
                           
                         </ul>
                       </div>

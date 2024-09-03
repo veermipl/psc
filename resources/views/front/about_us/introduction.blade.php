@@ -248,7 +248,7 @@
                 </div>
                 <h3 class="process-title h5">{{$Drivers->title	}}</h3>
                 <p class="process-text">
-                 {{$Drivers->contant}}
+                 {!! $Drivers->contant !!}
 
                 </p>
             </div>

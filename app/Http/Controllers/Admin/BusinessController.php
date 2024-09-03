@@ -34,7 +34,9 @@ class BusinessController extends Controller
             'content'  => 'required',
             'images'  => 'nullable|mimes:jpeg,jpg,png',
         ]);
-        $data = Business::where('type', $request->type);
+
+        $data = Business::where('type', $request->type)->first();
+
         if ($request->hasFile('images')) {
             $file = $request->file('images');
             $profile = $file->store('/images/business', 'public');
@@ -48,9 +50,11 @@ class BusinessController extends Controller
             'status' => '1',
             'type'   => $request->type,
         ];
+
         if ($data != '') {
             $data->Update($array);
         } else {
+
             Business::create($array);
         }
         return redirect()->route('admin.readines.business')->with('status', 'Business readiness desk update successfully');

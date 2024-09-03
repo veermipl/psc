@@ -47,12 +47,12 @@
                     </li>
                   </ul>
                   <div class="blog-one-title hei-65">
-                    <h3><a href="#">{{$reports->title}}</a></h3>
+                    <h3><a href="{{route('resources.annual.report.details', base64_encode($reports->id) )}}">{{$reports->title}}</a></h3>
                   </div>
                   <div class="blog-one-text">
                       {!! Str::limit($reports->contant, 100)!!}
                   </div>
-                  <a href="{{route('resources.annual.report.details', $reports->id)}}" class="vs-btn1 style5 mt-3" tabindex="0">Read More <i class="far fa-long-arrow-right"></i></a>
+                  <a href="{{route('resources.annual.report.details', base64_encode($reports->id) )}}" class="vs-btn1 style5 mt-3" tabindex="0">Read More <i class="far fa-long-arrow-right"></i></a>
                 </div>
               </div>
             </div>

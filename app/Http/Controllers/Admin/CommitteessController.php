@@ -84,9 +84,7 @@ class CommitteessController extends Controller
     public function destroy(Request $request, $id)
     {
         $this->authorize('about_us_delete');
-
         $user = Committeess::find($id);
-
         $user->delete();
         $data['error'] = false;
         $data['msg'] = 'committeess Deleted';
@@ -97,9 +95,7 @@ class CommitteessController extends Controller
     public function edit($id)
     {
         $this->authorize('about_us_edit');
-
         $data = Committeess::find($id);
-
         return view('admin.committeess.edit', compact('data'));
     }
 
@@ -122,7 +118,7 @@ class CommitteessController extends Controller
         } else {
             $profile =  $staff->image;
         }
-
+ 
         $array = [
             'name' => $request->name,
             // 'email' => $request->status ?? '',
