@@ -364,12 +364,9 @@ class FrontController extends Controller
 
     public function resources_Annualdetails($id)
     {
-        $data = Business::orderby('id', 'desc')->where([
-            'type' => 'Annual_Reports',
-            'status' => '1',
-        ])->limit(5)->get();
-        $details = Business::findOrFail($id);
-
+        $ids = base64_decode($id);
+        $details = Business::where('type', 'Annual_Reports')->where('id', $ids )->where('status', '1')->first();
+        $data =Business::where('type', 'Annual_Reports')->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
         return view('front.resources.annual-report-details', compact('data', 'details'));
     }
 
