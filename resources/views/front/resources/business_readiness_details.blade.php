@@ -28,6 +28,11 @@
 
                         <div class="blog-classic-single">
                             <div class="blog-classic-image">
+                            @if ($certificate->image)
+                                    <img src="{{ asset('storage/' . $certificate->image) }}">
+                                @else
+                                    <img src="{{ asset('storage/default/no_image.png') }}">
+                                @endif
 
                                 <div class="blog-classic-date">
                                     <a class="btn-primary text-light">{{ @$certificate->created_at->format('M d, Y') }} </a>

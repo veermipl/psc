@@ -10,9 +10,9 @@
                      </h2>
                      <div class="breadcrumbs text-center wow animate__ animate__fadeInUp animate__delay-1s animated" style="visibility: visible; animation-name: fadeInUp;">
                          <ul>
-                             <li><a href="{{ url('/') }}">Home</a></li>
+                             <li><a href="url('/')">Home</a></li>
                               <span class="slash">   /</span>
-                             <li><a href="{{ route('resources.annual-report') }}">Annual Reports </a></li>
+                             <li><a href="#">Annual Reports </a></li>
                          </ul>
                      </div>
                  </div>
@@ -29,6 +29,11 @@
                       
                         <div class="blog-classic-single">
                             <div class="blog-classic-image">
+                            @if ($details->image)
+                                    <img src="{{ asset('storage/' . $details->image) }}">
+                                @else
+                                    <img src="{{ asset('storage/default/no_image.png') }}">
+                                @endif
                              
                                 <div class="blog-classic-date">
                                     <a href="#">{{ @$details->created_at->format('M d, Y') }} </a>
@@ -37,15 +42,18 @@
                             <div class="blog-classic-content-box">
                                 <ul class="blog-classic-meta">
                                     <li><a href="#"><i class="far fa-user-circle"></i> Admin</a></li>
-                                    {{-- <li><a href="#"><i class="far fa-comments"></i> 2 Comments</a> --}}
+                                    <li><a href="#"><i class="far fa-comments"></i> 2 Comments</a>
                                     </li>
                                 </ul>
                                 <div class="blog-classic-title">
                                     <h3>{{@$details->title}}</h3>
                                 </div>
                                 <div class="blog-classic-text">
-                                   {!! @$details->contant !!}
+                                   {!!@$details->contant !!}
                                 </div>
+                                <!-- <div class="blog-classic-btn">
+                                    <a href="#">Read More <i class="fa fa-arrow-circle-right"></i></a>
+                                </div> -->
                             </div>
                         </div>
                     
@@ -72,7 +80,7 @@
                                         <img src="{{asset('storage/'.$posts->image)}}" alt="">
                                     </div>
                                     <div class="sidebar-latest-news-content">
-                                       <h3><a href="{{ route('resources.annual.report.details', $posts->id) }}">{{$posts->title}}</a></h3>
+                                       <h3><a href="{{route('resources.annual.report.details', base64_encode($posts->id) )}}">{{$posts->title}}</a></h3>
                                        <p>{{ @$posts->created_at->format('d M, Y') }}</p> 
                                     </div>
                                 </li>

@@ -29,6 +29,11 @@
 
                         <div class="blog-classic-single">
                             <div class="blog-classic-image">
+                            @if ($details->image)
+                                    <img src="{{ asset('storage/' . $details->image) }}">
+                                @else
+                                    <img src="{{ asset('storage/default/no_image.png') }}">
+                                @endif
 
                                 <div class="blog-classic-date">
                                     <a class="btn-primary text-light">{{ @$details->created_at->format('M d, Y') }} </a>
