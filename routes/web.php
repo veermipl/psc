@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\TestController;
@@ -59,11 +60,19 @@ Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
     Artisan::call('route:clear');
     Artisan::call('optimize');
-    return "Cache cleared successfully";
+    return "Cache cleared !";
 });
 
 Route::get('/phpinfo', function () {
     return phpinfo();
+});
+
+Route::get('storage_link', function () {
+    if (File::exists(public_path('storage'))) {
+        File::delete(public_path('storage'));
+    }
+    Artisan::call('storage:link');
+    return "Storage linked !";
 });
 
 Route::get('/', [FrontController::class, 'index']);
@@ -71,6 +80,7 @@ Route::get('home', [FrontController::class, 'index'])->name('home');
 Route::get('contact-us', [FrontController::class, 'contactUs'])->name('contact-us');
 Route::post('contact-us-save', [FrontController::class, 'save_contactUs'])->name('contact-us-save');
 Route::get('guyana-economy', [FrontController::class, 'guyanaEconomy'])->name('guyana-economy');
+Route::get('guyana-economy-show/{id}', [FrontController::class, 'show_guyanaEconomy'])->name('guyana-economy-show');
 
 Route::get('about-us', [FrontController::class, 'aboutUs'])->name('about-us');
 
@@ -89,9 +99,12 @@ Route::prefix('membership')->name('membership.')->group(function () {
 
 Route::prefix('data')->name('data.')->group(function () {
     Route::get('national-budgets', [FrontController::class, 'data_NationalBudgets'])->name('national_budgets');
+    Route::get('national-budgets-source-show/{id}', [FrontController::class, 'show_NationalBudget_Source'])->name('national-budgets-source-show');
     Route::get('trade-data', [FrontController::class, 'data_TradeData'])->name('trade-data');
     Route::get('coted', [FrontController::class, 'data_Coted'])->name('coted');
+    Route::get('coted-entrepreneurship-development-show/{id}', [FrontController::class, 'show_Coted_EntrepreneurshipDevelopment'])->name('coted-entrepreneurship-development-show');
     Route::get('caricom-cet', [FrontController::class, 'data_CaricomCet'])->name('caricom-cet');
+    Route::get('caricom-cet-objective-show/{id}', [FrontController::class, 'show_CaricomCet_Objective'])->name('caricom-cet-objective-show');
 });
 
 Route::prefix('resources')->name('resources.')->group(function () {
@@ -111,7 +124,9 @@ Route::prefix('resources')->name('resources.')->group(function () {
 
 Route::prefix('media')->name('media.')->group(function () {
     Route::get('news', [FrontController::class, 'media_News'])->name('news');
+    Route::get('news-show/{id}', [FrontController::class, 'show_News'])->name('news-show');
     Route::get('press-release', [FrontController::class, 'media_PressRelease'])->name('press-release');
+    Route::get('press-release-show/{id}', [FrontController::class, 'show_PressRelease'])->name('press-release-show');
     Route::get('social-media', [FrontController::class, 'media_SocialMedia'])->name('social-media');
     Route::get('photos', [FrontController::class, 'media_Photos'])->name('photos');
     Route::get('videos', [FrontController::class, 'media_Videos'])->name('videos');
@@ -234,7 +249,7 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         Route::post('benefits-update/{id}', [BusinessController::class, 'benefits_update'])->name('benefits.update');
 
 
-        Route::controller(GoInvestController::class)->group(function(){
+        Route::controller(GoInvestController::class)->group(function () {
             Route::get('go-invest', 'GoInves')->name('goinvest');
             Route::Post('update-go-invest',  'GoInvest_update')->name('update_goinvest');
             Route::get('investment',  'Investment')->name('investment');
@@ -246,7 +261,7 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::post('investment-update/{id}', 'Investment_update')->name('investment.update');
         });
 
-        Route::controller(IDBInvestController::class)->group(function(){
+        Route::controller(IDBInvestController::class)->group(function () {
             Route::get('idb-inves', 'idb_inves')->name('idbinves');
             Route::Post('update-idb-inves',  'inves_update')->name('update_idbinves');
 
@@ -266,8 +281,8 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::get('idb-investment-edit/{id}',  'idb_investment_edit')->name('IDB.edit');
             Route::post('idb-investment-update/{id}', 'idb_investment_update')->name('IDB.update');
         });
-        
-        Route::controller(ProcurementController::class)->group(function(){
+
+        Route::controller(ProcurementController::class)->group(function () {
             Route::get('procurement', 'procurement')->name('procurement');
             Route::Post('update-procurement',  'procurement_update')->name('procurement_update');
 
@@ -286,16 +301,15 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::post('methods-services-destroy', 'methods_services_destroy')->name('services.destroy');
             Route::get('methods-services-edit/{id}',  'methods_services_edit')->name('services.edit');
             Route::post('methods-services-update/{id}', 'methods_services_update')->name('services.update');
-
         });
 
-        Route::controller(CertificateController::class)->group(function(){
+        Route::controller(CertificateController::class)->group(function () {
 
             Route::get('origins/certificate', 'certificate')->name('certificate.origins');
             Route::Post('origins/certificate',  'certificate_update')->name('origins.certificate_update');
 
             Route::get('origins/type-certificate',  'type_certificate')->name('origins.type.certificate');
-            Route::get('origins/type-add','type_add')->name('origins.add');
+            Route::get('origins/type-add', 'type_add')->name('origins.add');
             Route::post('origins/type-store',  'type_store')->name('origins.store');
             Route::post('origins/type-status',  'type_status')->name('origins.status');
             Route::post('origins/type-destroy',  'type_destroy')->name('origins.destroy');
@@ -303,29 +317,25 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::post('origins/type-update/{id}', 'type_update')->name('origins.update');
 
             Route::get('origins/certificates',  'certificatess')->name('origins.certificate');
-            Route::get('origins/certificate-add','origins_add')->name('origins.certificate.add');
+            Route::get('origins/certificate-add', 'origins_add')->name('origins.certificate.add');
             Route::post('origins/certificate-store',  'origins_store')->name('origins.certificate.store');
             Route::post('origins/certificate-status',  'origins_status')->name('origins.certificate.status');
             Route::post('origins/certificate-destroy',  'origins_destroy')->name('origins.certificate.destroy');
             Route::get('origins/certificate-edit/{id}',  'origins_edit')->name('origins.certificate.edit');
             Route::post('origins/certificate-update/{id}', 'origins_update')->name('origins.certificate.update');
-
         });
 
 
-        Route::controller(AnnulReportController::class)->group(function(){
+        Route::controller(AnnulReportController::class)->group(function () {
 
             Route::get('annual',  'annual')->name('annul');
-            Route::get('annual-add','annual_add')->name('annul.add');
+            Route::get('annual-add', 'annual_add')->name('annul.add');
             Route::post('annual-store',  'annual_store')->name('annul.store');
             Route::post('annual-status',  'annual_status')->name('annul.status');
             Route::get('annual-destroy/{id}', 'annual_destroy')->name('annul.destroy');
             Route::get('annual-edit/{id}',  'annual_edit')->name('annul.edit');
             Route::post('annual-update/{id}', 'annual_update')->name('annul.update');
-
         });
-
-
     });
 
     Route::prefix('media-center')->name('media-center.')->group(function () {
@@ -350,7 +360,6 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         Route::post('video/filter', [VideoController::class, 'index'])->name('video.filter');
         Route::post('video/status', [VideoController::class, 'statusToggle'])->name('video.status');
         Route::resource('video', VideoController::class);
-
     });
 
     Route::prefix('membership')->name('membership.')->group(function () {
@@ -379,7 +388,6 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::get('destroy/{id}', 'destroy')->name('destroy');
             Route::get('edit/{id}', 'edit')->name('edit');
             Route::patch('update/{id}', 'Update')->name('update');
-            
         });
 
         Route::controller(CommitteessController::class)->prefix('committeess')->name('committeess.')->group(function () {
@@ -390,7 +398,6 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::get('destroy/{id}', 'destroy')->name('destroy');
             Route::get('edit/{id}', 'edit')->name('edit');
             Route::patch('update/{id}', 'Update')->name('update');
-            
         });
 
         Route::controller(AboutController::class)->prefix('about')->name('about.')->group(function () {
@@ -404,10 +411,9 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::post('council', 'Council_update')->name('council_update');
             Route::get('history', 'History')->name('history');
             Route::Post('history', 'History_update')->name('history_update');
-
         });
 
-        Route::controller(TestimonialController::class)->prefix('testimonial')->name('testimonial.')->group(function(){
+        Route::controller(TestimonialController::class)->prefix('testimonial')->name('testimonial.')->group(function () {
             Route::get('list', 'Index')->name('list');
             Route::get('create', 'create')->name('create');
             Route::post('store', 'Store')->name('store');
@@ -415,10 +421,9 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::Post('destroy', 'destroy')->name('destroy');
             Route::get('edit/{id}', 'edit')->name('edit');
             Route::Post('update/{id}', 'Update')->name('update');
-
         });
 
-        Route::controller(PerformanceController::class)->group(function(){
+        Route::controller(PerformanceController::class)->group(function () {
             Route::get('performance', 'Index')->name('performance');
             Route::get('create-performance', 'add_performance')->name('add_performance');
             Route::Post('store-performance', 'store_performance')->name('store_performance');
@@ -429,7 +434,7 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         });
 
 
-        Route::controller(CoreValueController::class)->group(function(){
+        Route::controller(CoreValueController::class)->group(function () {
             Route::get('core-value', 'Index')->name('corevalue');
             Route::get('create-corevalue', 'add')->name('add_corevalue');
             Route::Post('store-corevalue', 'store')->name('store_corevalue');
@@ -438,8 +443,7 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::get('edit-corevalue/{id}', 'edit')->name('edit_corevalue');
             Route::post('update-corevalue/{id}', 'Update')->name('update_corevalue');
         });
-
-    }); 
+    });
 
     Route::prefix('cms')->name('cms.')->group(function () {
         Route::get('guyana-economy', [CMSController::class, 'guyanaEconomy'])->name('guyana-economy');
@@ -486,9 +490,7 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         Route::post('notification/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notification.mark-as-read');
         Route::get('notification/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('notification.mark-all-as-read');
         Route::resource('notification', NotificationController::class);
-
     });
-
 });
 
 // Route::get('test', [TestController::class, 'test'])->name('test');
