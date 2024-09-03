@@ -81,7 +81,7 @@
                                             </div>
                                             <div class="sidebar-latest-news-content">
                                                 <h3>
-                                                    <a href="{{ route('data.caricom-cet-objective-show', $post->id) }}">{{ $post->title }}</a>
+                                                    <a href="{{ route('data.caricom-cet-objective-show', base64_encode($post->id)) }}">{{ $post->title }}</a>
                                                 </h3>
                                                 <p>{{ $post->created_at->format('d M, Y') }}</p>
                                             </div>

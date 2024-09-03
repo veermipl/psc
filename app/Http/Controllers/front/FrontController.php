@@ -123,6 +123,7 @@ class FrontController extends Controller
 
     public function show_guyanaEconomy($id)
     {
+        $id = base64_decode($id);
         $latest_list = GuyanaEconomy::orderBy('id', 'asc')->where('status', '1')->where('id', '!=', $id)->limit(5)->get() ?? [];
         $details = GuyanaEconomy::where('status', '1')->findOrFail($id);
 
@@ -174,6 +175,7 @@ class FrontController extends Controller
 
     public function show_NationalBudget_Source($id)
     {
+        $id = base64_decode($id);
         $latest_list = NationalBudget::orderBy('id', 'asc')->where('id', '!=', $id)->where([
             'type' => 'source',
             'status' => '1'
@@ -221,6 +223,7 @@ class FrontController extends Controller
 
     public function show_Coted_EntrepreneurshipDevelopment($id)
     {
+        $id = base64_decode($id);
         $latest_list = Coted::orderBy('id', 'asc')->where('id', '!=', $id)->where([
             'type' => 'entrepreneurship_development',
             'status' => '1'
@@ -254,6 +257,7 @@ class FrontController extends Controller
 
     public function show_CaricomCet_Objective($id)
     {
+        $id = base64_decode($id);
         $latest_list = CaricomCET::orderBy('id', 'asc')->where('id', '!=', $id)->where([
             'type' => 'objective',
             'status' => '1'
@@ -298,7 +302,6 @@ class FrontController extends Controller
         return view('front.resources.go_invest_details', compact('details', 'data'));
     }
 
-
     public function resources_IDBInvest()
     {
         $invest = Business::where('type', 'IDBInvest')->where('status', '1')->first();
@@ -307,7 +310,6 @@ class FrontController extends Controller
 
         return view('front.resources.ibd_invest', compact('invest', 'about', 'services'));
     }
-
 
     public function resources_IDBDetails($id)
     {  
@@ -328,13 +330,11 @@ class FrontController extends Controller
 
     public function resources_ProcurementProcessDetails($id)
     {
-
         $ids = base64_decode($id);
         $details = Business::where('type', 'Procurement_methods')->where('id', $ids)->where('status', '1')->first();
         $data = Business::where('type', 'Procurement_methods')->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
         return view('front.resources.procurement_process_in_guyana_details', compact('details', 'data',));
     }
-
 
     public function resources_CertificateOfOrigins()
     {
@@ -353,7 +353,6 @@ class FrontController extends Controller
         $details  = Business::where('type', 'Origins_certificate')->where('id', $ids)->where('status', '1')->first();
         return view('front.resources.certificate_of_origins_details', compact('data', 'details'));
     }
-
 
     public function resources_AnnualReport()
     {
@@ -381,6 +380,7 @@ class FrontController extends Controller
 
     public function show_News($id)
     {
+        $id = base64_decode($id);
         $latest_list = News::orderBy('id', 'asc')->where('id', '!=', $id)->where([
             'status' => '1'
         ])->limit(5)->get() ?? [];
@@ -405,6 +405,7 @@ class FrontController extends Controller
 
     public function show_PressRelease($id)
     {
+        $id = base64_decode($id);
         $latest_list = PressRelease::orderBy('id', 'asc')->where('id', '!=', $id)->where([
             'status' => '1'
         ])->limit(5)->get() ?? [];

@@ -57,7 +57,7 @@
                                     @endphp
                                     <p>{!! $limitedContent !!}</p>
                                 </div>
-                                <a href="{{ route('guyana-economy-show', $list->id) }}" class="vs-btn1 style5 mt-3" tabindex="0">Read More
+                                <a href="{{ route('guyana-economy-show', base64_encode($list->id)) }}" class="vs-btn1 style5 mt-3" tabindex="0">Read More
                                     <i class="far fa-long-arrow-right"></i>
                                 </a>
                             </div>
