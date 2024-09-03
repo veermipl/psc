@@ -64,7 +64,8 @@
         <aside class="sidebar-wrapper" data-simplebar="true">
             <div class="sidebar-header">
                 <div>
-                    <img src="{{ asset('storage/' . ($settings_app_logo ? $settings_app_logo : 'default/logo.png')) }}" class="logo-icon" alt="">
+                    <img src="{{ asset('storage/' . ($settings_app_logo ? $settings_app_logo : 'default/logo.png')) }}"
+                        class="logo-icon" alt="">
                 </div>
                 <div>
                     <h6 class="logo-text">{{ $settings_app_name }}</h6>
@@ -674,8 +675,8 @@
         function toggle_sub_page(target_id = null) {
             if (target_id) {
                 //btn
-                $('.sub_page_link').removeClass('btn-custom').addClass('btn-outline-custom');
-                $('#sub_page_link_' + target_id + '').removeClass('btn-outline-custom').addClass('btn-custom');
+                $('.sub_page_link').removeClass('btn-primary').addClass('btn-outline-custom');
+                $('#sub_page_link_' + target_id + '').removeClass('btn-outline-custom').addClass('btn-primary');
 
                 //body
                 $('.sub_page_body').removeClass('show').addClass('hide');

@@ -206,7 +206,7 @@
                     contentType: false,
                     processData: false,
                     beforeSend: function() {
-                        $('#excelAddMemberBtn').removeClass('btn-custom').addClass(
+                        $('#excelAddMemberBtn').removeClass('btn-primary').addClass(
                             'btn-danger disabled').text('Adding...').prop('disabled', true);
                         $("#importMemberErr").text("").fadeOut();
                     },
@@ -234,7 +234,7 @@
                     },
                     complete: function(xhr, status) {
                         $('#excelAddMemberBtn').removeClass('btn-danger disabled').addClass(
-                            'btn-custom').text('Add').prop('disabled', false);
+                            'btn-primary').text('Add').prop('disabled', false);
                     }
                 });
             });

@@ -23,17 +23,19 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="name">Images </label>
-                        <input type="file" class="form-control" name="images"  accept="image/*" multiple>
+                        <input type="file" class="form-control" name="images" accept="image/*" multiple>
 
                         @error('images')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="form-group col-md-2">
-                        @if(@$data->image != '')
-                        <img style="width: 50px; height: 58px;  margin-top: 15px;" src="{{asset('storage/'.@$data->image)}}">
+                        @if (@$data->image != '')
+                            <img style="width: 50px; height: 58px;  margin-top: 15px;"
+                                src="{{ asset('storage/' . @$data->image) }}">
                         @else
-                        <img style="width: 50px; height: 58px;  margin-top: 15px;" src="{{asset('images/team/commeties.png')}}">
+                            <img style="width: 50px; height: 58px;  margin-top: 15px;"
+                                src="{{ asset('images/team/commeties.png') }}">
                         @endif
                     </div>
                 </div>
@@ -68,10 +70,10 @@
                     <div class="form-group col-md-6">
                     </div>
                 </div>
-                <input type="hidden" name="type" value="Mission" >
-                
+                <input type="hidden" name="type" value="Mission">
+
                 <div class="form-group col-md-12 text-right">
-                    <button class="btn btn-sm btn-custom" type="submit">Update</button>
+                    <button class="btn btn-sm btn-primary" type="submit">Update</button>
                 </div>
             </form>
         </div>
