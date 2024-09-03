@@ -110,12 +110,16 @@ Route::prefix('data')->name('data.')->group(function () {
 Route::prefix('resources')->name('resources.')->group(function () {
     Route::get('business-readiness-desk', [FrontController::class, 'resources_BusinessReadinessDesk'])->name('business-readiness-desk');
     Route::get('go-invest', [FrontController::class, 'resources_GoInvest'])->name('go-invest');
+    Route::get('go-invest-details/{id}', [FrontController::class, 'resources_Detils'])->name('go-invest.details');
     Route::get('idb-invest', [FrontController::class, 'resources_IDBInvest'])->name('idb-invest');
     Route::get('procurement-process-in-guyana', [FrontController::class, 'resources_ProcurementProcessInGuyana'])->name('procurement-process-in-guyana');
     Route::get('certificate-of-origins', [FrontController::class, 'resources_CertificateOfOrigins'])->name('certificate-of-origins');
     Route::get('annual-report', [FrontController::class, 'resources_AnnualReport'])->name('annual-report');
-
+    Route::get('resources-business-details/{id}', [FrontController::class, 'resources_Businessdetails'])->name('business.details');
+    Route::get('procurement-process-in-guyana-details/{id}', [FrontController::class, 'resources_ProcurementProcessDetails'])->name('procurement.deatils');
     Route::get('annual-report-details/{id}', [FrontController::class, 'resources_Annualdetails'])->name('annual.report.details');
+    Route::get('certificate-of-origins-details/{id}', [FrontController::class, 'resources_CertificateDetails'])->name('certificate-of-origins.deatils');
+    Route::get('idb-invest-details/{id}', [FrontController::class, 'resources_IDBDetails'])->name('idb-invest.details');
 });
 
 Route::prefix('media')->name('media.')->group(function () {

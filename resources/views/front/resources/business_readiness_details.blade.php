@@ -6,12 +6,12 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="back-ground">
-                        <h2>Certificate of Origins </h2>
+                        <h2>Business Readiness Desk</h2>
                         <div class="breadcrumbs text-center wow animate__ animate__fadeInUp animate__delay-1s animated" style="visibility: visible; animation-name: fadeInUp;">
                             <ul>
                                 <li><a href="{{ route('home') }}">Home</a></li>
                                 <span class="slash"> /</span>
-                                <li><a href="{{route('resources.certificate-of-origins')}}">Certificate of Origins </a></li>
+                                <li><a href="{{route('resources.business-readiness-desk')}}">Business Readiness Desk</a></li>
                             </ul>
                         </div>
                     </div>
@@ -28,9 +28,14 @@
 
                         <div class="blog-classic-single">
                             <div class="blog-classic-image">
+                            @if ($certificate->image)
+                                    <img src="{{ asset('storage/' . $certificate->image) }}">
+                                @else
+                                    <img src="{{ asset('storage/default/no_image.png') }}">
+                                @endif
 
                                 <div class="blog-classic-date">
-                                    <a class="btn-primary text-light">{{ @$details->created_at->format('M d, Y') }} </a>
+                                    <a class="btn-primary text-light">{{ @$certificate->created_at->format('M d, Y') }} </a>
                                 </div>
                             </div>
                             <div class="blog-classic-content-box">
@@ -40,10 +45,10 @@
                                     </li>
                                 </ul>
                                 <div class="blog-classic-title">
-                                    <h3>{{ @$details->title }}</h3>
+                                    <h3>{{ @$certificate->title }}</h3>
                                 </div>
                                 <div class="blog-classic-text">
-                                    {!! @$details->contant !!}
+                                    {!! @$certificate->contant !!}
                                 </div>
                             </div>
                         </div>
@@ -77,7 +82,7 @@
                                             </div>
                                             <div class="sidebar-latest-news-content">
                                                 <h3>
-                                                    <a href="{{ route('resources.certificate-of-origins.deatils',base64_encode($post->id)) }}">{{ $post->title }}</a>
+                                                    <a href="{{route('resources.business.details',base64_encode($post->id) )}}">{{ $post->title }}</a>
                                                 </h3>
                                                 <p>{{ $post->created_at->format('d M, Y') }}</p>
                                             </div>

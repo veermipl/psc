@@ -6,12 +6,13 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="back-ground">
-                        <h2>Certificate of Origins </h2>
+                        <h2>Procurement Process in Guyana
+                        </h2>
                         <div class="breadcrumbs text-center wow animate__ animate__fadeInUp animate__delay-1s animated" style="visibility: visible; animation-name: fadeInUp;">
                             <ul>
                                 <li><a href="{{ route('home') }}">Home</a></li>
                                 <span class="slash"> /</span>
-                                <li><a href="{{route('resources.certificate-of-origins')}}">Certificate of Origins </a></li>
+                                <li><a href="{{route('resources.procurement-process-in-guyana')}}">Procurement Process in Guyana                                </a></li>
                             </ul>
                         </div>
                     </div>
@@ -28,6 +29,11 @@
 
                         <div class="blog-classic-single">
                             <div class="blog-classic-image">
+                            @if ($details->image)
+                                    <img src="{{ asset('storage/' . $details->image) }}">
+                                @else
+                                    <img src="{{ asset('storage/default/no_image.png') }}">
+                                @endif
 
                                 <div class="blog-classic-date">
                                     <a class="btn-primary text-light">{{ @$details->created_at->format('M d, Y') }} </a>
@@ -77,7 +83,7 @@
                                             </div>
                                             <div class="sidebar-latest-news-content">
                                                 <h3>
-                                                    <a href="{{ route('resources.certificate-of-origins.deatils',base64_encode($post->id)) }}">{{ $post->title }}</a>
+                                                    <a href="{{ route('resources.procurement.deatils',  base64_encode($post->id)) }}">{{ $post->title }}</a>
                                                 </h3>
                                                 <p>{{ $post->created_at->format('d M, Y') }}</p>
                                             </div>

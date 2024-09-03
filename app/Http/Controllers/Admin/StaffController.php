@@ -65,6 +65,7 @@ class StaffController extends Controller
 
     public function status(Request $request)
     {
+
         $this->authorize('about_us_status_edit');
 
         $user = Staff::find($request->uid);
@@ -85,7 +86,6 @@ class StaffController extends Controller
     public function destroy(Request $request, $id)
     {
         $this->authorize('about_us_delete');
-
         $user = Staff::find($id);
         $user->delete();
         $data['error'] = false;
@@ -97,9 +97,7 @@ class StaffController extends Controller
     public function edit($id)
     {
         $this->authorize('about_us_edit');
-
         $data = Staff::find($id);
-
         return view('admin.staff.edit', compact('data'));
     }
 

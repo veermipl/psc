@@ -154,9 +154,7 @@ class FrontController extends Controller
     public function membership_MemberBenefits()
     {
         $main = MemberBenefit::where('type', 'main')->first();
-
         $data['main'] = $main;
-
         return view('front.membership.member_benefits', $data);
     }
 
@@ -273,8 +271,15 @@ class FrontController extends Controller
         $business = Business::where('type', 'Business')->where('status', '1')->first();
         $certificate = Business::where('type', 'Business_certificate')->where('status', '1')->orderby('id', 'desc')->get();
         $benefits = Business::where('type', 'Business_benefits')->where('status', '1')->orderby('id', 'desc')->get();
-
         return view('front.resources.business_readiness_desk', compact('business', 'certificate', 'benefits'));
+    }
+
+    public function resources_Businessdetails($id)
+    {
+        $ids = base64_decode($id);
+        $certificate = Business::where('type', 'Business_certificate')->where('status', '1')->where('id', $ids)->first();
+        $data = Business::where('type', 'Business_certificate')->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
+        return view('front.resources.business_readiness_details', compact( 'certificate', 'data'));
     }
 
     public function resources_GoInvest()
@@ -285,6 +290,15 @@ class FrontController extends Controller
         return view('front.resources.go_invest', compact('invest', 'investment'));
     }
 
+    public function resources_Detils($id)
+    {
+        $ids = base64_decode($id);
+        $details  = Business::where('type', 'Investment')->where('id', $ids)->where('status', '1')->first();
+        $data = Business::where('type', 'Investment')->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
+        return view('front.resources.go_invest_details', compact('details', 'data'));
+    }
+
+
     public function resources_IDBInvest()
     {
         $invest = Business::where('type', 'IDBInvest')->where('status', '1')->first();
@@ -292,6 +306,15 @@ class FrontController extends Controller
         $services = Business::where('type', 'idb_investment')->where('status', '1')->orderby('id', 'desc')->get();
 
         return view('front.resources.ibd_invest', compact('invest', 'about', 'services'));
+    }
+
+
+    public function resources_IDBDetails($id)
+    {  
+        $ids = base64_decode($id);
+        $data = Business::where('type', 'key_areas')->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
+        $details = Business::where('type', 'key_areas')->where('status', '1')->where('id', $ids)->first();
+        return view('front.resources.ibd_invest_deatils', compact('details', 'data'));
     }
 
     public function resources_ProcurementProcessInGuyana()
@@ -303,6 +326,16 @@ class FrontController extends Controller
         return view('front.resources.procurement_process_in_guyana', compact('overview', 'methods', 'services'));
     }
 
+    public function resources_ProcurementProcessDetails($id)
+    {
+
+        $ids = base64_decode($id);
+        $details = Business::where('type', 'Procurement_methods')->where('id', $ids)->where('status', '1')->first();
+        $data = Business::where('type', 'Procurement_methods')->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
+        return view('front.resources.procurement_process_in_guyana_details', compact('details', 'data',));
+    }
+
+
     public function resources_CertificateOfOrigins()
     {
         $origin = Business::where('type', 'Origins')->where('status', '1')->first();
@@ -311,6 +344,16 @@ class FrontController extends Controller
 
         return view('front.resources.certificate_of_origins', compact('origin', 'types', 'certificate'));
     }
+
+    public function resources_CertificateDetails($id)
+    {
+       $ids = base64_decode($id);
+
+        $data  = Business::where('type', 'Origins_certificate')->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
+        $details  = Business::where('type', 'Origins_certificate')->where('id', $ids)->where('status', '1')->first();
+        return view('front.resources.certificate_of_origins_details', compact('data', 'details'));
+    }
+
 
     public function resources_AnnualReport()
     {
