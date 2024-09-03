@@ -52,7 +52,7 @@
                                             </li>
                                         </ul>
                                         <div class="blog-one-title hei-65">
-                                            <h3><a href="{{ route('media.press-release-show', $list->id) }}">{{ $list->title }}</a></h3>
+                                            <h3><a href="{{ route('media.press-release-show', base64_encode($list->id)) }}">{{ $list->title }}</a></h3>
                                         </div>
 
 

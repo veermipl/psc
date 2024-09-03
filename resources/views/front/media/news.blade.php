@@ -50,7 +50,7 @@
                                         </li>
                                     </ul>
                                     <div class="blog-one-title hei-65">
-                                        <h3><a href="{{ route('media.news-show', $list->id) }}">{{ $list->title }}</a></h3>
+                                        <h3><a href="{{ route('media.news-show', base64_encode($list->id)) }}">{{ $list->title }}</a></h3>
                                     </div>
                                     <div class="blog-one-text">
                                         @php
@@ -58,7 +58,7 @@
                                         @endphp
                                         <p>{!! $limitedContent !!}</p>
                                     </div>
-                                    <a href="{{ route('media.news-show', $list->id) }}" class="vs-btn1 style5 mt-3" tabindex="0">Read More
+                                    <a href="{{ route('media.news-show', base64_encode($list->id)) }}" class="vs-btn1 style5 mt-3" tabindex="0">Read More
                                         <i class="far fa-long-arrow-right"></i>
                                     </a>
                                 </div>

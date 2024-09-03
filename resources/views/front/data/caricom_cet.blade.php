@@ -98,7 +98,7 @@
                                     @endphp
                                     <p>{!! $limitedContent !!}</p>
 
-                                    <a href="{{ route('data.caricom-cet-objective-show', $sourceVal['id']) }}" class="vs-btn style3 mt-4" tabindex="0">Read More<i
+                                    <a href="{{ route('data.caricom-cet-objective-show', base64_encode($sourceVal['id'])) }}" class="vs-btn style3 mt-4" tabindex="0">Read More<i
                                             class="far fa-long-arrow-right"></i></a>
                                 </div>
                             </div>

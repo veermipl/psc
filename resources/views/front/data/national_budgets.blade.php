@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="blog-one-content">
                                     <div class="blog-one-title ">
-                                        <h3><a href="{{ route('data.national-budgets-source-show', $sourceVal['id']) }}">{{ $sourceVal['title'] }}</a></h3>
+                                        <h3><a href="{{ route('data.national-budgets-source-show', base64_encode($sourceVal['id'])) }}">{{ $sourceVal['title'] }}</a></h3>
                                     </div>
                                     <div class="blog-one-text">
                                         @php
@@ -97,7 +97,7 @@
                                         @endphp
                                         <p>{!! $limitedContent !!}</p>
                                     </div>
-                                    <a href="{{ route('data.national-budgets-source-show', $sourceVal['id']) }}" class="vs-btn1 style5 mt-3" tabindex="0">
+                                    <a href="{{ route('data.national-budgets-source-show', base64_encode($sourceVal['id'])) }}" class="vs-btn1 style5 mt-3" tabindex="0">
                                         Read More <i class="far fa-long-arrow-right"></i>
                                     </a>
                                 </div>
