@@ -16,12 +16,12 @@
                     <div class="p-4 border rounded">
                         <div id="">
                             <button
-                                class="btn btn-sm sub_page_link {{ $tab == 'main' ? 'btn-custom' : 'btn-outline-custom' }}"
+                                class="btn btn-sm sub_page_link {{ $tab == 'main' ? 'btn-primary' : 'btn-outline-custom' }}"
                                 id="sub_page_link_main" type="button" data-target="main">
                                 Main
                             </button>
                             <button
-                                class="btn btn-sm sub_page_link {{ $tab == 'entrepreneurship_development' ? 'btn-custom' : 'btn-outline-custom' }}"
+                                class="btn btn-sm sub_page_link {{ $tab == 'entrepreneurship_development' ? 'btn-primary' : 'btn-outline-custom' }}"
                                 id="sub_page_link_entrepreneurship_development" type="button"
                                 data-target="entrepreneurship_development">
                                 Entrepreneurship Development

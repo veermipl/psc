@@ -64,7 +64,8 @@
         <aside class="sidebar-wrapper" data-simplebar="true">
             <div class="sidebar-header">
                 <div>
-                    <img src="{{ asset('storage/' . ($settings_app_logo ? $settings_app_logo : 'default/logo.png')) }}" class="logo-icon" alt="">
+                    <img src="{{ asset('storage/' . ($settings_app_logo ? $settings_app_logo : 'default/logo.png')) }}"
+                        class="logo-icon" alt="">
                 </div>
                 <div>
                     <h6 class="logo-text">{{ $settings_app_name }}</h6>
@@ -317,6 +318,12 @@
                             <a href="{{ route('admin.cms.guyana-economy') }}">
                                 <ion-icon name="ellipse-outline"></ion-icon>
                                 Guyana Economy
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.cms.landing-page') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Landing Page
                             </a>
                         </li>
                     </ul>
@@ -633,6 +640,18 @@
             })
             .then( /* ... */ )
             .catch( /* ... */ );
+        ClassicEditor
+            .create(document.querySelector('.editor'), {
+                plugins: [Essentials, Bold, Italic, Font, Paragraph],
+                toolbar: {
+                    items: [
+                        'undo', 'redo', '|', 'bold', 'italic', '|',
+                        'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
+                    ]
+                }
+            })
+            .then( /* ... */ )
+            .catch( /* ... */ );
     </script>
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
@@ -674,8 +693,8 @@
         function toggle_sub_page(target_id = null) {
             if (target_id) {
                 //btn
-                $('.sub_page_link').removeClass('btn-custom').addClass('btn-outline-custom');
-                $('#sub_page_link_' + target_id + '').removeClass('btn-outline-custom').addClass('btn-custom');
+                $('.sub_page_link').removeClass('btn-primary').addClass('btn-outline-custom');
+                $('#sub_page_link_' + target_id + '').removeClass('btn-outline-custom').addClass('btn-primary');
 
                 //body
                 $('.sub_page_body').removeClass('show').addClass('hide');

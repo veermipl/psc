@@ -16,17 +16,17 @@
                     <div class="p-4 border rounded">
                         <div id="">
                             <button
-                                class="btn btn-sm sub_page_link {{ $tab == 'main' ? 'btn-custom' : 'btn-outline-custom' }}"
+                                class="btn btn-sm sub_page_link {{ $tab == 'main' ? 'btn-primary' : 'btn-outline-custom' }}"
                                 id="sub_page_link_main" type="button" data-target="main">
                                 Business Readiness Desk
                             </button>
                             <button
-                                class="btn btn-sm sub_page_link {{ $tab == 'top_partner' ? 'btn-custom' : 'btn-outline-custom' }}"
+                                class="btn btn-sm sub_page_link {{ $tab == 'top_partner' ? 'btn-primary' : 'btn-outline-custom' }}"
                                 id="sub_page_link_top_partner" type="button" data-target="top_partner">
                                 Certificate
                             </button>
                             <button
-                                class="btn btn-sm sub_page_link {{ $tab == 'top_country' ? 'btn-custom' : 'btn-outline-custom' }}"
+                                class="btn btn-sm sub_page_link {{ $tab == 'top_country' ? 'btn-primary' : 'btn-outline-custom' }}"
                                 id="sub_page_link_top_country" type="button" data-target="top_country">
                                 Benefits of a certificate
                             </button>
@@ -35,7 +35,8 @@
                         <div id="" class="pt-4">
                             <div class="collapse sub_page_body {{ $tab == 'main' ? 'show' : 'hide' }}"
                                 id="sub_page_body_main">
-                                <form action="{{ route('admin.readines.update_business') }}" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+                                <form action="{{ route('admin.readines.update_business') }}" method="post"
+                                    enctype="multipart/form-data" class="row g-3 needs-validation">
                                     @csrf
                                     @method('post')
 
@@ -75,7 +76,7 @@
                                     </div>
 
                                     <div class="col-md-12 position-relative">
-                                  
+
                                         @if (@$main->image)
                                             <img class="ge_img pop_up_image" src="{{ asset('storage/' . $main->image) }}">
                                         @endif
@@ -95,7 +96,7 @@
                                             <a href="{{ route('admin.readines.certificate.add') }}"
                                                 class="btn btn-primary btn-sm">
                                                 <ion-icon name="add" role="img" class="md hydrated"
-                                                    aria-label="person add"></ion-icon>Create Certificate 
+                                                    aria-label="person add"></ion-icon>Create Certificate
                                             </a>
 
                                             @if (@$top_partner_export_id && count(@$top_partner_export_id) > 0)

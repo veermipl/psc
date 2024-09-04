@@ -16,12 +16,12 @@
                     <div class="p-4 border rounded">
                         <div id="">
                             <button
-                                class="btn btn-sm sub_page_link {{ $tab == 'main' ? 'btn-custom' : 'btn-outline-custom' }}"
+                                class="btn btn-sm sub_page_link {{ $tab == 'main' ? 'btn-primary' : 'btn-outline-custom' }}"
                                 id="sub_page_link_main" type="button" data-target="main">
                                 Main
                             </button>
                             <button
-                                class="btn btn-sm sub_page_link {{ $tab == 'source' ? 'btn-custom' : 'btn-outline-custom' }}"
+                                class="btn btn-sm sub_page_link {{ $tab == 'source' ? 'btn-primary' : 'btn-outline-custom' }}"
                                 id="sub_page_link_source" type="button" data-target="source">
                                 Sources
                             </button>

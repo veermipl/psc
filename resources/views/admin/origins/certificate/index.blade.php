@@ -9,39 +9,39 @@
         <h5 class="fw-bold"> List</h5>
 
         <!-- <div class="filter-wrapper my-3 p-3">
-                <form action="#" method="post">
-                    @csrf
-                    @method('post')
+                    <form action="#" method="post">
+                        @csrf
+                        @method('post')
 
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <input type="text" class="form-control" name="name" placeholder="Name"
-                                value="{{ @$filterValues['name'] }}">
-                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" name="name" placeholder="Name"
+                                    value="{{ @$filterValues['name'] }}">
+                            </div>
 
-                        <div class="form-group col-md-6">
-                            <select name="status" class="form-control">
-                                <option hidden value="">Status</option>
-                                @foreach (config('site.status') as $status)
+                            <div class="form-group col-md-6">
+                                <select name="status" class="form-control">
+                                    <option hidden value="">Status</option>
+                                    @foreach (config('site.status') as $status)
     <option value="{{ $status['value'] }}"
-                                        {{ @$filterValues['status'] == $status['value'] ? 'selected' : '' }}>
-                                        {{ $status['name'] }}
-                                    </option>
+                                            {{ @$filterValues['status'] == $status['value'] ? 'selected' : '' }}>
+                                            {{ $status['name'] }}
+                                        </option>
     @endforeach
-                            </select>
+                                </select>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="text-right">
-                        <a href="{{ route('admin.readines.origins.certificate') }}" class="btn btn-danger btn-sm">Reset</a>
-                        <button class="btn btn-custom btn-sm" type="submit">Filter</button>
-                    </div>
-                </form>
-            </div> -->
+                        <div class="text-right">
+                            <a href="{{ route('admin.readines.origins.certificate') }}" class="btn btn-danger btn-sm">Reset</a>
+                            <button class="btn btn-primary btn-sm" type="submit">Filter</button>
+                        </div>
+                    </form>
+                </div> -->
 
         <div class="d-flex justify-content-between py-3 d-none">
             <a href="{{ route('admin.readines.annul.add') }}">
-                <button class="btn btn-custom btn-sm">
+                <button class="btn btn-primary btn-sm">
                     <i class="fa fa-plus pr-1"></i>Create
                 </button>
             </a>

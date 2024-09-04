@@ -106,6 +106,10 @@ class MemberController extends Controller
             fputcsv($file, $columns);
 
             fputcsv($file, array('John Doe', 'johndoe@yopmail.com', '1234567890', '1'));
+            fputcsv($file, array('Jane Doe', 'janedoe@yopmail.com', '1122334455', '2'));
+            fputcsv($file, array('Sam', 'sam21@yopmail.com', '5242456734', '2'));
+            fputcsv($file, array('Mark', 'mark@yopmail.com', '9925461534', '1'));
+            fputcsv($file, array('Johnny S', 'johnnyS@yopmail.com', '4913647322', '1'));
 
             fclose($file);
         };

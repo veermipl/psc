@@ -1,12 +1,12 @@
 @extends('layout.admin_master')
 
 @section('title', 'COTED - Update Entrepreneurship Development')
-@section('header', 'COTED - Entrepreneurship Development')
+@section('header', 'COTED - Update Entrepreneurship Development')
 
 @section('content')
 
     <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Update COTED - Entrepreneurship Development</div>
+        <div class="breadcrumb-title pe-3">COTED - Update Entrepreneurship Development</div>
     </div>
 
     <div class="row">

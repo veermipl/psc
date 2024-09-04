@@ -27,13 +27,92 @@ use App\Models\NationalBudget;
 use App\Models\BusinessDirectory;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\LandingPage;
 use Carbon\Carbon;
 
 class FrontController extends Controller
 {
     public function index()
     {
-        return view('front.index');
+        $header = LandingPage::orderBy('id', 'desc')->where([
+            'type' => 'header',
+            'status' => '1'
+        ])->get();
+        $sub_header = LandingPage::orderBy('id', 'desc')->where([
+            'type' => 'sub_header',
+            'status' => '1'
+        ])->limit(4)->get();
+        $about_us = LandingPage::where('type', 'about_us')->first();
+        $sector_committees = LandingPage::orderBy('id', 'desc')->where([
+            'type' => 'sector_committee',
+            'status' => '1'
+        ])->get();
+        $report = LandingPage::where('type', 'report')->first();
+        $posts = LandingPage::orderBy('id', 'desc')->where([
+            'type' => 'post',
+            'status' => '1'
+        ])->limit(3)->get();
+
+        $press_release = PressRelease::orderBy('id', 'desc')->where('status', '1')->limit(3)->get();
+        $news = News::orderBy('id', 'desc')->where('status', '1')->limit(3)->get();
+        $social_media = SocialMedia::orderBy('id', 'desc')->limit(3)->get();
+
+        $data['header'] = $header;
+        $data['sub_header'] = $sub_header;
+        $data['about_us'] = $about_us;
+        $data['sector_committees'] = $sector_committees;
+        $data['report'] = $report;
+        $data['posts'] = $posts;
+        $data['press_release'] = $press_release;
+        $data['news'] = $news;
+        $data['social_media'] = $social_media;
+
+        return view('front.index', $data);
+    }
+
+    public function show_banner($id)
+    {
+        $id = base64_decode($id);
+        $latest_list = LandingPage::orderBy('id', 'desc')->where([
+            'type' => 'header',
+            'status' => '1'
+        ])->where('id', '!=', $id)->limit(5)->get() ?? [];
+        $details = LandingPage::where('status', '1')->findOrFail($id);
+
+        $data['latest_list'] = $latest_list;
+        $data['details'] = $details;
+
+        return view('front.index_show_banner', $data);
+    }
+
+    public function show_subBanner($id)
+    {
+        $id = base64_decode($id);
+        $latest_list = LandingPage::orderBy('id', 'desc')->where([
+            'type' => 'sub_header',
+            'status' => '1'
+        ])->where('id', '!=', $id)->limit(5)->get() ?? [];
+        $details = LandingPage::where('status', '1')->findOrFail($id);
+
+        $data['latest_list'] = $latest_list;
+        $data['details'] = $details;
+
+        return view('front.index_show_sub_banner', $data);
+    }
+
+    public function show_post($id)
+    {
+        $id = base64_decode($id);
+        $latest_list = LandingPage::orderBy('id', 'desc')->where([
+            'type' => 'post',
+            'status' => '1'
+        ])->where('id', '!=', $id)->limit(5)->get() ?? [];
+        $details = LandingPage::where('status', '1')->findOrFail($id);
+
+        $data['latest_list'] = $latest_list;
+        $data['details'] = $details;
+
+        return view('front.index_show_post', $data);
     }
 
     public function aboutUs()
@@ -124,7 +203,7 @@ class FrontController extends Controller
     public function show_guyanaEconomy($id)
     {
         $id = base64_decode($id);
-        $latest_list = GuyanaEconomy::orderBy('id', 'asc')->where('status', '1')->where('id', '!=', $id)->limit(5)->get() ?? [];
+        $latest_list = GuyanaEconomy::orderBy('id', 'desc')->where('status', '1')->where('id', '!=', $id)->limit(5)->get() ?? [];
         $details = GuyanaEconomy::where('status', '1')->findOrFail($id);
 
         $data['latest_list'] = $latest_list;
@@ -176,7 +255,7 @@ class FrontController extends Controller
     public function show_NationalBudget_Source($id)
     {
         $id = base64_decode($id);
-        $latest_list = NationalBudget::orderBy('id', 'asc')->where('id', '!=', $id)->where([
+        $latest_list = NationalBudget::orderBy('id', 'desc')->where('id', '!=', $id)->where([
             'type' => 'source',
             'status' => '1'
         ])->limit(5)->get() ?? [];
@@ -224,7 +303,7 @@ class FrontController extends Controller
     public function show_Coted_EntrepreneurshipDevelopment($id)
     {
         $id = base64_decode($id);
-        $latest_list = Coted::orderBy('id', 'asc')->where('id', '!=', $id)->where([
+        $latest_list = Coted::orderBy('id', 'desc')->where('id', '!=', $id)->where([
             'type' => 'entrepreneurship_development',
             'status' => '1'
         ])->limit(5)->get() ?? [];
@@ -258,7 +337,7 @@ class FrontController extends Controller
     public function show_CaricomCet_Objective($id)
     {
         $id = base64_decode($id);
-        $latest_list = CaricomCET::orderBy('id', 'asc')->where('id', '!=', $id)->where([
+        $latest_list = CaricomCET::orderBy('id', 'desc')->where('id', '!=', $id)->where([
             'type' => 'objective',
             'status' => '1'
         ])->limit(5)->get() ?? [];
@@ -283,7 +362,7 @@ class FrontController extends Controller
         $ids = base64_decode($id);
         $certificate = Business::where('type', 'Business_certificate')->where('status', '1')->where('id', $ids)->first();
         $data = Business::where('type', 'Business_certificate')->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
-        return view('front.resources.business_readiness_details', compact( 'certificate', 'data'));
+        return view('front.resources.business_readiness_details', compact('certificate', 'data'));
     }
 
     public function resources_GoInvest()
@@ -312,7 +391,7 @@ class FrontController extends Controller
     }
 
     public function resources_IDBDetails($id)
-    {  
+    {
         $ids = base64_decode($id);
         $data = Business::where('type', 'key_areas')->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
         $details = Business::where('type', 'key_areas')->where('status', '1')->where('id', $ids)->first();
@@ -347,7 +426,7 @@ class FrontController extends Controller
 
     public function resources_CertificateDetails($id)
     {
-       $ids = base64_decode($id);
+        $ids = base64_decode($id);
 
         $data  = Business::where('type', 'Origins_certificate')->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
         $details  = Business::where('type', 'Origins_certificate')->where('id', $ids)->where('status', '1')->first();
@@ -364,8 +443,8 @@ class FrontController extends Controller
     public function resources_Annualdetails($id)
     {
         $ids = base64_decode($id);
-        $details = Business::where('type', 'Annual_Reports')->where('id', $ids )->where('status', '1')->first();
-        $data =Business::where('type', 'Annual_Reports')->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
+        $details = Business::where('type', 'Annual_Reports')->where('id', $ids)->where('status', '1')->first();
+        $data = Business::where('type', 'Annual_Reports')->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
         return view('front.resources.annual-report-details', compact('data', 'details'));
     }
 
@@ -381,7 +460,7 @@ class FrontController extends Controller
     public function show_News($id)
     {
         $id = base64_decode($id);
-        $latest_list = News::orderBy('id', 'asc')->where('id', '!=', $id)->where([
+        $latest_list = News::orderBy('id', 'desc')->where('id', '!=', $id)->where([
             'status' => '1'
         ])->limit(5)->get() ?? [];
         $details = News::where('status', '1')->findOrFail($id);
@@ -406,7 +485,7 @@ class FrontController extends Controller
     public function show_PressRelease($id)
     {
         $id = base64_decode($id);
-        $latest_list = PressRelease::orderBy('id', 'asc')->where('id', '!=', $id)->where([
+        $latest_list = PressRelease::orderBy('id', 'desc')->where('id', '!=', $id)->where([
             'status' => '1'
         ])->limit(5)->get() ?? [];
         $details = PressRelease::where('status', '1')->findOrFail($id);

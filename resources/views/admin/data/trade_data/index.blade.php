@@ -16,17 +16,17 @@
                     <div class="p-4 border rounded">
                         <div id="">
                             <button
-                                class="btn btn-sm sub_page_link {{ $tab == 'main' ? 'btn-custom' : 'btn-outline-custom' }}"
+                                class="btn btn-sm sub_page_link {{ $tab == 'main' ? 'btn-primary' : 'btn-outline-custom' }}"
                                 id="sub_page_link_main" type="button" data-target="main">
                                 Main
                             </button>
                             <button
-                                class="btn btn-sm sub_page_link {{ $tab == 'top_partner' ? 'btn-custom' : 'btn-outline-custom' }}"
+                                class="btn btn-sm sub_page_link {{ $tab == 'top_partner' ? 'btn-primary' : 'btn-outline-custom' }}"
                                 id="sub_page_link_top_partner" type="button" data-target="top_partner">
                                 Top Partner
                             </button>
                             <button
-                                class="btn btn-sm sub_page_link {{ $tab == 'top_country' ? 'btn-custom' : 'btn-outline-custom' }}"
+                                class="btn btn-sm sub_page_link {{ $tab == 'top_country' ? 'btn-primary' : 'btn-outline-custom' }}"
                                 id="sub_page_link_top_country" type="button" data-target="top_country">
                                 Top Country
                             </button>

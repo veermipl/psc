@@ -1,4 +1,3 @@
-
 @extends('layout.admin_master')
 
 @section('title', 'Council - List')
@@ -16,18 +15,20 @@
                 <div class="card-body">
                     <div class="p-4 border rounded">
                         <!-- <div id="">
-                            <button
-                                class="btn btn-sm sub_page_link {{ $tab == 'About' ? 'btn-custom' : 'btn-outline-custom' }}"
-                                id="sub_page_link_About" type="button" data-target="About">
-                                Introduction
-                            </button>
-                            
+                                <button
+                                    class="btn btn-sm sub_page_link {{ $tab == 'About' ? 'btn-primary' : 'btn-outline-custom' }}"
+                                    id="sub_page_link_About" type="button" data-target="About">
+                                    Introduction
+                                </button>
+                                
 
-                        </div> -->
+                            </div> -->
 
                         <div id="" class="pt-4">
-                            <div class="collapse sub_page_body {{ $tab == 'About' ? 'show' : 'hide' }}"  id="sub_page_body_About">
-                                <form action="{{ route('admin.about.council_update') }}" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+                            <div class="collapse sub_page_body {{ $tab == 'About' ? 'show' : 'hide' }}"
+                                id="sub_page_body_About">
+                                <form action="{{ route('admin.about.council_update') }}" method="post"
+                                    enctype="multipart/form-data" class="row g-3 needs-validation">
                                     @csrf
                                     @method('post')
 
@@ -44,14 +45,14 @@
                                     </div>
 
                                     <!-- <div class="col-md-6 position-relative">
-                                        <label for="validationTooltip01" class="form-label">Image <span
-                                                class="text-danger">*</span></label>
-                                        <input type="file" class="form-control" name="images" accept="image/*">
+                                            <label for="validationTooltip01" class="form-label">Image <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="file" class="form-control" name="images" accept="image/*">
 
-                                        @error('images')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div> -->
+                                            @error('images')
+        <span class="text-danger">{{ $message }}</span>
+    @enderror
+                                        </div> -->
 
                                     <div class="col-md-12 position-relative">
                                         <label for="validationTooltip01" class="form-label">Content <span
@@ -64,7 +65,7 @@
                                     </div>
 
                                     <div class="col-md-12 position-relative">
-                                  
+
                                         @if (@$About->image)
                                             <img class="ge_img pop_up_image" src="{{ asset('storage/' . $About->image) }}">
                                         @endif

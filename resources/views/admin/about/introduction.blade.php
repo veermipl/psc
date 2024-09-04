@@ -1,4 +1,3 @@
-
 @extends('layout.admin_master')
 
 @section('title', 'About - List')
@@ -17,29 +16,29 @@
                     <div class="p-4 border rounded">
                         <div id="">
                             <button
-                                class="btn btn-sm sub_page_link {{ $tab == 'About' ? 'btn-custom' : 'btn-outline-custom' }}"
+                                class="btn btn-sm sub_page_link {{ $tab == 'About' ? 'btn-primary' : 'btn-outline-custom' }}"
                                 id="sub_page_link_About" type="button" data-target="About">
                                 Introduction
                             </button>
                             <button
-                                class="btn btn-sm sub_page_link {{ $tab == 'Mission' ? 'btn-custom' : 'btn-outline-custom' }}"
+                                class="btn btn-sm sub_page_link {{ $tab == 'Mission' ? 'btn-primary' : 'btn-outline-custom' }}"
                                 id="sub_page_link_Mission" type="button" data-target="Mission">
                                 Mission Statement
                             </button>
 
                             <button
-                                class="btn btn-sm sub_page_link {{ $tab == 'strategic' ? 'btn-custom' : 'btn-outline-custom' }}"
+                                class="btn btn-sm sub_page_link {{ $tab == 'strategic' ? 'btn-primary' : 'btn-outline-custom' }}"
                                 id="sub_page_link_strategic" type="button" data-target="strategic">
                                 Strategic Priority Areas
                             </button>
                             <button
-                                class="btn btn-sm sub_page_link {{ $tab == 'top_partner' ? 'btn-custom' : 'btn-outline-custom' }}"
+                                class="btn btn-sm sub_page_link {{ $tab == 'top_partner' ? 'btn-primary' : 'btn-outline-custom' }}"
                                 id="sub_page_link_top_partner" type="button" data-target="top_partner">
-                                 Core Value
+                                Core Value
                             </button>
 
                             <button
-                                class="btn btn-sm sub_page_link {{ $tab == 'top_country' ? 'btn-custom' : 'btn-outline-custom' }}"
+                                class="btn btn-sm sub_page_link {{ $tab == 'top_country' ? 'btn-primary' : 'btn-outline-custom' }}"
                                 id="sub_page_link_top_country" type="button" data-target="top_country">
                                 Performance Drivers
                             </button>
@@ -47,8 +46,10 @@
                         </div>
 
                         <div id="" class="pt-4">
-                            <div class="collapse sub_page_body {{ $tab == 'About' ? 'show' : 'hide' }}"  id="sub_page_body_About">
-                                <form action="{{ route('admin.about.introduction_update') }}" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+                            <div class="collapse sub_page_body {{ $tab == 'About' ? 'show' : 'hide' }}"
+                                id="sub_page_body_About">
+                                <form action="{{ route('admin.about.introduction_update') }}" method="post"
+                                    enctype="multipart/form-data" class="row g-3 needs-validation">
                                     @csrf
                                     @method('post')
 
@@ -88,7 +89,7 @@
                                     </div>
 
                                     <div class="col-md-12 position-relative">
-                                  
+
                                         @if (@$About->image)
                                             <img class="ge_img pop_up_image" src="{{ asset('storage/' . $About->image) }}">
                                         @endif
@@ -103,7 +104,8 @@
 
                             <div class="collapse sub_page_body {{ $tab == 'Mission' ? 'show' : 'hide' }}"
                                 id="sub_page_body_Mission">
-                                <form action="{{ route('admin.about.mission_update') }}" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+                                <form action="{{ route('admin.about.mission_update') }}" method="post"
+                                    enctype="multipart/form-data" class="row g-3 needs-validation">
                                     @csrf
                                     @method('post')
 
@@ -142,9 +144,10 @@
                                     </div>
 
                                     <div class="col-md-12 position-relative">
-                                  
+
                                         @if (@$mission->image)
-                                            <img class="ge_img pop_up_image" src="{{ asset('storage/' . $mission->image) }}">
+                                            <img class="ge_img pop_up_image"
+                                                src="{{ asset('storage/' . $mission->image) }}">
                                         @endif
                                     </div>
                                     <input type="hidden" name="type" value="Mission">
@@ -166,7 +169,7 @@
                                                     aria-label="person add"></ion-icon>Strategic Priority Areas
                                             </a>
 
-                                            
+
                                         </div>
                                     </div>
 
@@ -177,7 +180,7 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col">#</th>
-                                                    <th scope="col" data-sortable="true">Title</th>  
+                                                    <th scope="col" data-sortable="true">Title</th>
                                                     <th scope="col">Status</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
@@ -185,7 +188,7 @@
                                             <tbody>
 
 
-                                            @if ($strategic && count($strategic) > 0)
+                                                @if ($strategic && count($strategic) > 0)
                                                     @foreach ($strategic as $listKey => $listValue)
                                                         <tr class="tr_row_{{ $listKey }}">
 
@@ -249,13 +252,12 @@
                                 <div class="row">
                                     <div class="col-lg-12 mb-3">
                                         <div class="d-flex justify-content-between">
-                                            <a href="{{ route('admin.add_corevalue') }}"
-                                                class="btn btn-primary btn-sm">
+                                            <a href="{{ route('admin.add_corevalue') }}" class="btn btn-primary btn-sm">
                                                 <ion-icon name="add" role="img" class="md hydrated"
-                                                    aria-label="person add"></ion-icon>Create Core value 
+                                                    aria-label="person add"></ion-icon>Create Core value
                                             </a>
 
-                                           
+
                                         </div>
                                     </div>
 
@@ -273,7 +275,7 @@
                                             </thead>
                                             <tbody>
 
-                                            @if ($top_partner && count($top_partner) > 0)
+                                                @if ($top_partner && count($top_partner) > 0)
                                                     @foreach ($top_partner as $listKey => $listValue)
                                                         <tr class="tr_row_{{ $listKey }}">
 
@@ -324,7 +326,7 @@
                                                         </tr>
                                                     @endforeach
                                                 @endif
-                                               
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -361,7 +363,7 @@
                                             </thead>
                                             <tbody>
 
-                                            @if ($top_country && count($top_country) > 0)
+                                                @if ($top_country && count($top_country) > 0)
                                                     @foreach ($top_country as $listKey => $listValue)
                                                         <tr class="tr_row_{{ $listKey }}">
 
@@ -412,7 +414,7 @@
                                                         </tr>
                                                     @endforeach
                                                 @endif
-                                               
+
                                             </tbody>
                                         </table>
                                     </div>
@@ -530,7 +532,7 @@
                 if (ltype == 'testimonials') {
                     url = "{{ route('admin.testimonial.destroy') }}";
                 }
-                
+
                 if (ltype == 'core_value') {
                     url = "{{ route('admin.destroy_corevalue') }}";
                 }

@@ -59,7 +59,9 @@ use App\Http\Controllers\Admin\MemberController as AdminMemberController;
 Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
     Artisan::call('route:clear');
+    Artisan::call('config:clear');
     Artisan::call('optimize');
+
     return "Cache cleared !";
 });
 
@@ -77,6 +79,9 @@ Route::get('storage_link', function () {
 
 Route::get('/', [FrontController::class, 'index']);
 Route::get('home', [FrontController::class, 'index'])->name('home');
+Route::get('home/banner-show/{id}', [FrontController::class, 'show_banner'])->name('home.banner.show');
+Route::get('home/sub-banner-show/{id}', [FrontController::class, 'show_subBanner'])->name('home.sub-banner.show');
+Route::get('home/post-show/{id}', [FrontController::class, 'show_post'])->name('home.post.show');
 Route::get('contact-us', [FrontController::class, 'contactUs'])->name('contact-us');
 Route::post('contact-us-save', [FrontController::class, 'save_contactUs'])->name('contact-us-save');
 Route::get('guyana-economy', [FrontController::class, 'guyanaEconomy'])->name('guyana-economy');
@@ -457,6 +462,33 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         Route::post('guyana-economy/filter', [CMSController::class, 'guyanaEconomy'])->name('guyana-economy.filter');
         Route::post('guyana-economy/export', [CMSController::class, 'guyanaEconomyExport'])->name('guyana-economy.export');
         Route::post('guyana-economy/status', [CMSController::class, 'guyanaEconomyStatusToggle'])->name('guyana-economy.status');
+
+        Route::get('landing-page', [CMSController::class, 'landingPage'])->name('landing-page');
+        Route::post('landing-page/update-about-us', [CMSController::class, 'updateAboutUs'])->name('landing-page.update.about-us');
+        Route::post('landing-page/update-report', [CMSController::class, 'updateReport'])->name('landing-page.update.report');
+
+        Route::post('landing-page/update-status', [CMSController::class, 'updateStatus'])->name('landing-page.update-status');
+        Route::post('landing-page/delete', [CMSController::class, 'delete'])->name('landing-page.delete');
+
+        Route::get('landing-page/create-header', [CMSController::class, 'createHeader'])->name('landing-page.create.header');
+        Route::post('landing-page/save-header', [CMSController::class, 'saveHeader'])->name('landing-page.save.header');
+        Route::get('landing-page/edit-header/{id}', [CMSController::class, 'editHeader'])->name('landing-page.edit.header');
+        Route::post('landing-page/update-header', [CMSController::class, 'updateHeader'])->name('landing-page.update.header');
+
+        Route::get('landing-page/create-sub-header', [CMSController::class, 'createSubHeader'])->name('landing-page.create.sub-header');
+        Route::post('landing-page/save-sub-header', [CMSController::class, 'saveSubHeader'])->name('landing-page.save.sub-header');
+        Route::get('landing-page/edit-sub-header/{id}', [CMSController::class, 'editSubHeader'])->name('landing-page.edit.sub-header');
+        Route::post('landing-page/update-sub-header', [CMSController::class, 'updateSubHeader'])->name('landing-page.update.sub-header');
+
+        Route::get('landing-page/create-sector-committee', [CMSController::class, 'createSectorCommittee'])->name('landing-page.create.sector-committee');
+        Route::post('landing-page/save-sector-committee', [CMSController::class, 'saveSectorCommittee'])->name('landing-page.save.sector-committee');
+        Route::get('landing-page/edit-sector-committee/{id}', [CMSController::class, 'editSectorCommittee'])->name('landing-page.edit.sector-committee');
+        Route::post('landing-page/update-sector-committee', [CMSController::class, 'updateSectorCommittee'])->name('landing-page.update.sector-committee');
+
+        Route::get('landing-page/create-post', [CMSController::class, 'createPost'])->name('landing-page.create.post');
+        Route::post('landing-page/save-post', [CMSController::class, 'savePost'])->name('landing-page.save.post');
+        Route::get('landing-page/edit-post/{id}', [CMSController::class, 'editPost'])->name('landing-page.edit.post');
+        Route::post('landing-page/update-post', [CMSController::class, 'updatePost'])->name('landing-page.update.post');
     });
 
     Route::prefix('queries')->name('queries.')->group(function () {

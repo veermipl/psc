@@ -16,17 +16,17 @@
                     <div class="p-4 border rounded">
                         <div id="">
                             <button
-                                class="btn btn-sm sub_page_link {{ $tab == 'main' ? 'btn-custom' : 'btn-outline-custom' }}"
+                                class="btn btn-sm sub_page_link {{ $tab == 'main' ? 'btn-primary' : 'btn-outline-custom' }}"
                                 id="sub_page_link_main" type="button" data-target="main">
                                 Main
                             </button>
                             <button
-                                class="btn btn-sm sub_page_link {{ $tab == 'objective' ? 'btn-custom' : 'btn-outline-custom' }}"
+                                class="btn btn-sm sub_page_link {{ $tab == 'objective' ? 'btn-primary' : 'btn-outline-custom' }}"
                                 id="sub_page_link_objective" type="button" data-target="objective">
                                 Objective
                             </button>
                             <button
-                                class="btn btn-sm sub_page_link {{ $tab == 'how_it_works' ? 'btn-custom' : 'btn-outline-custom' }}"
+                                class="btn btn-sm sub_page_link {{ $tab == 'how_it_works' ? 'btn-primary' : 'btn-outline-custom' }}"
                                 id="sub_page_link_how_it_works" type="button" data-target="how_it_works">
                                 How It Works
                             </button>
@@ -144,14 +144,16 @@
                                                                     <span class="badge alert-success" id="listStatus"
                                                                         lid="{{ $listValue->id }}"
                                                                         lstatus="{{ $listValue->status }}"
-                                                                        lrow="{{ $listKey }}" ltype="{{ $listValue->type }}">
+                                                                        lrow="{{ $listKey }}"
+                                                                        ltype="{{ $listValue->type }}">
                                                                         Active
                                                                     </span>
                                                                 @else
                                                                     <span class="badge alert-danger" id="listStatus"
                                                                         lid="{{ $listValue->id }}"
                                                                         lstatus="{{ $listValue->status }}"
-                                                                        lrow="{{ $listKey }}" ltype="{{ $listValue->type }}">
+                                                                        lrow="{{ $listKey }}"
+                                                                        ltype="{{ $listValue->type }}">
                                                                         In Active
                                                                     </span>
                                                                 @endif
@@ -166,7 +168,8 @@
                                                                     </span>
                                                                     <span class="text-danger" title="Delete"
                                                                         lid="{{ $listValue->id }}"
-                                                                        lrow="{{ $listKey }}" id="deleteListBtn" ltype="{{ $listValue->type }}">
+                                                                        lrow="{{ $listKey }}" id="deleteListBtn"
+                                                                        ltype="{{ $listValue->type }}">
                                                                         <i class="fa fa-trash"></i>
                                                                     </span>
                                                                 </div>
@@ -196,7 +199,8 @@
                                                     @csrf
                                                     @method('post')
 
-                                                    <input type="hidden" value="{{ implode(',', $how_it_works_export_id) }}"
+                                                    <input type="hidden"
+                                                        value="{{ implode(',', $how_it_works_export_id) }}"
                                                         name="export_id">
 
                                                     <button class="btn btn-primary btn-sm" type="submit">
@@ -237,14 +241,16 @@
                                                                     <span class="badge alert-success" id="listStatus"
                                                                         lid="{{ $listValue->id }}"
                                                                         lstatus="{{ $listValue->status }}"
-                                                                        lrow="{{ $listKey }}" ltype="{{ $listValue->type }}">
+                                                                        lrow="{{ $listKey }}"
+                                                                        ltype="{{ $listValue->type }}">
                                                                         Active
                                                                     </span>
                                                                 @else
                                                                     <span class="badge alert-danger" id="listStatus"
                                                                         lid="{{ $listValue->id }}"
                                                                         lstatus="{{ $listValue->status }}"
-                                                                        lrow="{{ $listKey }}" ltype="{{ $listValue->type }}">
+                                                                        lrow="{{ $listKey }}"
+                                                                        ltype="{{ $listValue->type }}">
                                                                         In Active
                                                                     </span>
                                                                 @endif
@@ -259,7 +265,8 @@
                                                                     </span>
                                                                     <span class="text-danger" title="Delete"
                                                                         lid="{{ $listValue->id }}"
-                                                                        lrow="{{ $listKey }}" id="deleteListBtn" ltype="{{ $listValue->type }}">
+                                                                        lrow="{{ $listKey }}" id="deleteListBtn"
+                                                                        ltype="{{ $listValue->type }}">
                                                                         <i class="fa fa-trash"></i>
                                                                     </span>
                                                                 </div>

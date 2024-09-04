@@ -34,14 +34,14 @@
 
                 <div class="text-right">
                     <a href="{{ route('admin.readines.services') }}" class="btn btn-danger btn-sm">Reset</a>
-                    <button class="btn btn-custom btn-sm" type="submit">Filter</button>
+                    <button class="btn btn-primary btn-sm" type="submit">Filter</button>
                 </div>
             </form>
         </div>
 
         <div class="d-flex justify-content-between py-3 d-none">
             <a href="{{ route('admin.readines.services.add') }}">
-                <button class="btn btn-custom btn-sm">
+                <button class="btn btn-primary btn-sm">
                     <i class="fa fa-plus pr-1"></i>Create
                 </button>
             </a>

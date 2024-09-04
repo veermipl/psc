@@ -541,59 +541,59 @@
 
     <script>
         
-var $affectedElements = $("p, h1, h2, h3, h4, h5, h6 ,span, a, td"); // Can be extended, ex. $("div, p, span.someClass")
+        var $affectedElements = $("p, h1, h2, h3, h4, h5, h6 ,span, a, td"); // Can be extended, ex. $("div, p, span.someClass")
 
-// Storing the original size in a data attribute so size can be reset
-$affectedElements.each(function () {
-    var $this = $(this);
-    $this.data("orig-size", $this.css("font-size"));
-});
+        // Storing the original size in a data attribute so size can be reset
+        $affectedElements.each(function () {
+            var $this = $(this);
+            $this.data("orig-size", $this.css("font-size"));
+        });
 
-$("#btn-increase").click(function () {
-    changeFontSize(1);
-})
+        $("#btn-increase").click(function () {
+            changeFontSize(1);
+        })
 
-$("#btn-decrease").click(function () {
-    changeFontSize(-1);
-})
+        $("#btn-decrease").click(function () {
+            changeFontSize(-1);
+        })
 
-$("#btn-origs").click(function () {
-    $affectedElements.each(function () {
-        var $this = $(this);
-        $this.css("font-size", $this.data("orig-size"));
-    });
-})
+        $("#btn-origs").click(function () {
+            $affectedElements.each(function () {
+                var $this = $(this);
+                $this.css("font-size", $this.data("orig-size"));
+            });
+        })
 
-function changeFontSize(direction) {
-    $affectedElements.each(function () {
-        var $this = $(this);
-        $this.css("font-size", parseInt($this.css("font-size")) + direction);
-    });
-}
+        function changeFontSize(direction) {
+            $affectedElements.each(function () {
+                var $this = $(this);
+                $this.css("font-size", parseInt($this.css("font-size")) + direction);
+            });
+        }
     </script>
 
     <script>
         $(".brand-one-carousel-1").owlCarousel({
-    loop: true,
-    nav: false,
-    dots: false,
-    autoplay: true,
-    smartSpeed: 800,
-    responsive: {
-        0: {
-            items: 1,
-        },
-        576: {
-            items: 1,
-        },
-        768: {
-            items: 1,
-        },
-        992: {
-            items: 1,
-        },
-    },
-});
+            loop: true,
+            nav: false,
+            dots: false,
+            autoplay: true,
+            smartSpeed: 800,
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                576: {
+                    items: 1,
+                },
+                768: {
+                    items: 1,
+                },
+                992: {
+                    items: 1,
+                },
+            },
+        });
     </script>
 
  

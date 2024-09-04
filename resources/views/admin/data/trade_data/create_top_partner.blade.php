@@ -1,12 +1,12 @@
 @extends('layout.admin_master')
 
 @section('title', 'Trade Data - Create Top Partner')
-@section('header', 'Trade Data - Source')
+@section('header', 'Trade Data - Create Top Partner')
 
 @section('content')
 
     <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Create Trade Data - Top Partner</div>
+        <div class="breadcrumb-title pe-3">Trade Data - Create Top Partner</div>
     </div>
 
     <div class="row">
