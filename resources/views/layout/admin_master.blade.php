@@ -320,6 +320,12 @@
                                 Guyana Economy
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ route('admin.cms.landing-page') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Landing Page
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
@@ -624,6 +630,18 @@
 
         ClassicEditor
             .create(document.querySelector('#editor'), {
+                plugins: [Essentials, Bold, Italic, Font, Paragraph],
+                toolbar: {
+                    items: [
+                        'undo', 'redo', '|', 'bold', 'italic', '|',
+                        'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
+                    ]
+                }
+            })
+            .then( /* ... */ )
+            .catch( /* ... */ );
+        ClassicEditor
+            .create(document.querySelector('.editor'), {
                 plugins: [Essentials, Bold, Italic, Font, Paragraph],
                 toolbar: {
                     items: [

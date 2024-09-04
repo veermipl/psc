@@ -1,12 +1,12 @@
 @extends('layout.admin_master')
 
 @section('title', 'Caricom CET - Update Objective')
-@section('header', 'Caricom CET - Objective')
+@section('header', 'Caricom CET - Update Objective')
 
 @section('content')
 
     <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Update Caricom CET - Objective</div>
+        <div class="breadcrumb-title pe-3">Caricom CET - Update Objective</div>
     </div>
 
     <div class="row">

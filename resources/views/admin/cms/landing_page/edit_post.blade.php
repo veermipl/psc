@@ -1,12 +1,12 @@
 @extends('layout.admin_master')
 
-@section('title', 'Trade Data - Create Top Country')
-@section('header', 'Trade Data - Create Top Country')
+@section('title', 'Landing Page - Update Post')
+@section('header', 'Landing Page - Update Post')
 
 @section('content')
 
     <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Trade Data - Create Top Country</div>
+        <div class="breadcrumb-title pe-3">Landing Page - Update Post</div>
     </div>
 
     <div class="row">
@@ -14,17 +14,19 @@
             <div class="card radius-10">
                 <div class="card-body">
                     <div class="p-4 border rounded">
-                        <form action="{{ route('admin.data.trade-data.save-top-country') }}" method="post"
+                        <form action="{{ route('admin.cms.landing-page.update.post') }}" method="post"
                             enctype="multipart/form-data" class="row g-3 needs-validation">
                             @csrf
                             @method('post')
 
-                            <input type="hidden" name="type" value="top_country">
+                            <input type="hidden" name="type" value="post">
+                            <input type="hidden" name="source_id" value="{{ $source->id }}">
+                            <input type="hidden" name="old_file" value="{{ $source->file }}">
 
                             <div class="col-md-6 position-relative">
                                 <label for="title">Title <span class="text-danger">*</span></label>
                                 <input type="text" id="title" class="form-control" name="title"
-                                    placeholder="Enter title" value="{{ old('title') }}" maxlength="50">
+                                    placeholder="Enter title" value="{{ old('title', $source->title) }}" maxlength="50">
 
                                 @error('title')
                                     <span class="text-danger">{{ $message }}</span>
@@ -42,7 +44,7 @@
 
                             <div class="col-md-12 position-relative">
                                 <label for="content">Content <span class="text-danger">*</span></label>
-                                <textarea name="content" id="editor" cols="5" rows="5" class="form-control">{{ old('content') }}</textarea>
+                                <textarea name="content" id="editor" cols="5" rows="5" class="form-control">{{ old('content', $source->content) }}</textarea>
 
                                 @error('content')
                                     <span class="text-danger">{{ $message }}</span>
@@ -55,7 +57,7 @@
                                     <option hidden value="">Status</option>
                                     @foreach (config('site.status') as $status)
                                         <option value="{{ $status['value'] }}"
-                                            {{ old('status') == $status['value'] ? 'selected' : '' }}>
+                                            {{ old('status', $source->status) == $status['value'] ? 'selected' : '' }}>
                                             {{ $status['name'] }}
                                         </option>
                                     @endforeach
@@ -66,8 +68,17 @@
                                 @enderror
                             </div>
 
+                            <div class="col-md-6 position-relative">
+                            </div>
+
+                            <div class="col-md-12 position-relative">
+                                @if ($source->file)
+                                    <img class="ge_img pop_up_image" src="{{ asset('storage/' . $source->file) }}">
+                                @endif
+                            </div>
+
                             <div class="col-12 text-end mt-5">
-                                <button class="btn btn-sm btn-primary" type="submit">Create</button>
+                                <button class="btn btn-sm btn-primary" type="submit">Update</button>
                             </div>
                         </form>
                     </div>
@@ -75,5 +86,15 @@
             </div>
         </div>
     </div>
+
+@endsection
+
+
+
+@section('scripts')
+
+    <script type="text/javascript">
+        $(document).ready(function() {});
+    </script>
 
 @endsection

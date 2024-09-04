@@ -46,7 +46,7 @@
                                             <a><i class="fas fa-clock"></i> {{ date('h:i A', strtotime($list->created_at)) }}</a>
                                         </li>
                                         <li>
-                                            <a><i class="fas fa-calendar-alt"></i> {{ date('M d, Y', strtotime($list->created_at)) }}/a>
+                                            <a><i class="fas fa-calendar-alt"></i> {{ date('M d, Y', strtotime($list->created_at)) }}</a>
                                         </li>
                                     </ul>
                                     <div class="blog-one-title hei-65">

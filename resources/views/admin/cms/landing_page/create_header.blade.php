@@ -1,12 +1,12 @@
 @extends('layout.admin_master')
 
-@section('title', 'Trade Data - Create Top Country')
-@section('header', 'Trade Data - Create Top Country')
+@section('title', 'Landing Page - Create Header')
+@section('header', 'Landing Page - Create Header')
 
 @section('content')
 
     <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Trade Data - Create Top Country</div>
+        <div class="breadcrumb-title pe-3">Landing Page - Create Header</div>
     </div>
 
     <div class="row">
@@ -14,12 +14,12 @@
             <div class="card radius-10">
                 <div class="card-body">
                     <div class="p-4 border rounded">
-                        <form action="{{ route('admin.data.trade-data.save-top-country') }}" method="post"
+                        <form action="{{ route('admin.cms.landing-page.save.header') }}" method="post"
                             enctype="multipart/form-data" class="row g-3 needs-validation">
                             @csrf
                             @method('post')
 
-                            <input type="hidden" name="type" value="top_country">
+                            <input type="hidden" name="type" value="header">
 
                             <div class="col-md-6 position-relative">
                                 <label for="title">Title <span class="text-danger">*</span></label>
