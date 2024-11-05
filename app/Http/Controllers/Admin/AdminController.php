@@ -21,6 +21,7 @@ class AdminController extends Controller
         $this->authorize('admin_dashboard');
         $mytime = Carbon::now();
 
+
         $membershipType = MembershipType::orderBy('id', 'desc')->where('status', '1')->get() ?? [];
 
         $totalMembers = User::orderBy('id', 'desc')->whereHas('role', function (Builder $x) {
@@ -45,7 +46,6 @@ class AdminController extends Controller
             $x->where('role_id', 2);
         }) ->whereDate('created_at', $mytime->toDateString())->get() ?? [];
 
-
         $data['membershipType'] = $membershipType;
         $data['totalMembers'] = $totalMembers;
         $data['totalActiveMembers'] = $totalActiveMembers;
@@ -53,7 +53,6 @@ class AdminController extends Controller
         $data['TodaytotalMembers'] = $TodaytotalMembers;
         $data['todattotalActiveMembers'] = $todattotalActiveMembers;
         $data['todaytotalInActiveMembers'] = $todaytotalInActiveMembers;
-
 
         return view('admin.dashboard', $data);
     }

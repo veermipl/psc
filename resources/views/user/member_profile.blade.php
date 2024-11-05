@@ -28,26 +28,26 @@
                                         <p class="mb-1">{{ date('jS \o\f F Y', strtotime(@$UserDetails['date_of_birth'])) }}</p>
                                     @endif
                                 </div>
-                                <div class="d-none-">
+                                <!-- <div class="d-none-">
                                     <a href="{{ route('profile.edit') }}" class="btn btn-primary btn-sm">
                                         Edit
                                     </a>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mb-2">About Me</h4>
-                           
+                            <p class="">
                                 {!! @$UserDetails['about_me'] !!}
-                            
+                            </p>
         
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-lg-5 col-xl-4">
-                    <div class="card radius-10">
+                    <!-- <div class="card radius-10">
                         <div class="card-body">
                             <h5 class="mb-3">Location</h5>
                             @if (@$UserDetails['location'])
@@ -63,7 +63,7 @@
                                 <p class="mb-0"><ion-icon name="home-sharp" class="me-2"></ion-icon>{{ ucwords($UserDetails['address']) }}</p>
                             @endif
                         </div>
-                    </div>
+                    </div> -->
         
                     <div class="card radius-10">
                         <div class="card-body">
@@ -89,7 +89,7 @@
                         </div>
                     </div>
         
-                    <!-- @if (auth()->user()->id !== 1)
+                    @if (auth()->user()->id !== 1)
                         <div class="card radius-10">
                             <div class="card-body">
                                 <h5 class="mb-3">Settings</h5>
@@ -102,7 +102,7 @@
                             </div>
                         </div>
                     @endif
-         -->
+        
                 </div>
             </div>
 

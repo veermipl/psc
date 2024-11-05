@@ -197,6 +197,9 @@ table {
                             <th>Name </th>
                             <th>Address </th>
                             <th>Name of Business/Profession</th>
+                            <th>Telephone  </th>
+                            <th>Email </th>
+                            <th>Website</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -205,6 +208,9 @@ table {
                             <td>{{ $references_namess ?? '' }}</td>
                             <td>{{ $references_addre[$key] ?? '' }}</td>
                             <td>{{ $references_name_of_business[$key] ?? '' }}</td>
+                            <td>{{ $references_tel_no[$key] ?? '' }}</td>
+                            <td>{{ $references_email[$key] ?? '' }}</td>
+                            <td>{{ $references_website[$key] ?? '' }}</td>
                           </tr>
                           @endforeach
                           
@@ -212,7 +218,7 @@ table {
                       </table>
                   </div>
              </div>
-
+<!-- 
              <div class="padding-membr">
                   <div class="row">
                       <table class="table table-bordered th-center">
@@ -235,7 +241,7 @@ table {
                         </tbody>
                       </table>
                   </div>
-             </div>
+             </div> -->
 
         @endif
         <div class="page-breadcrumb d-sm-flex align-items-center mt-4 mb-3">

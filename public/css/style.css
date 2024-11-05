@@ -701,7 +701,7 @@ li {
     color: #1c1f26;
     padding: 20px 5px;
     line-height: 30px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     min-height: 0px;
     background: none;
@@ -2558,6 +2558,12 @@ span.flaticon-paint-roller:before {
     box-shadow: 0px 0px 51px 0px rgb(0, 0, 0, 0.09);
 }
 
+.team-one-content-2 {
+   
+    height: 150px;
+  
+}
+
 .team-one-content h3 {
     font-size: 18px;
     font-weight: 800;
@@ -2626,6 +2632,8 @@ span.flaticon-paint-roller:before {
     background-color: rgb(255, 255, 255);
     box-shadow: 0px 0px 62px 0px rgb(27, 31, 45, 0.05);
     padding: 33px 30px 34px;
+  height: 230px;
+
 }
 
 .blog-one-meta li {
@@ -2776,9 +2784,9 @@ span.flaticon-paint-roller:before {
 }
 
 .footer-widget-useful-links-list li a:hover {
-    color: var(--thm-primary);
+    color: #ecbd00;
     transition: all 0.9s ease-in-out;
-    padding-left: 10px;
+    
 }
 
 .footer-widget-contact {
@@ -4703,6 +4711,10 @@ span.flaticon-paint-roller:before {
     background-color: rgb(255, 255, 255);
     box-shadow: 0px 0px 62px 0px rgb(27, 31, 45, 0.05);
     padding: 28px 30px 40px;
+ word-wrap: break-word;
+  white-space: normal; 
+  overflow: hidden;     /
+
 }
 
 .blog-classic-meta {
@@ -5527,7 +5539,7 @@ span.flaticon-paint-roller:before {
     right: 0;
     top: 0;
     content: "";
-    height: 400px;
+    height: 340px;
     width: 450px;
     background: url(http://design.mishainfotech.com/design/Shreya/gcsl/assets/img/map.svg);
     background-size: cover;
@@ -6607,7 +6619,7 @@ textarea.input {
     background-color: #fff;
     margin: 22.5px 0 25px 0;
     box-shadow: 0px 10px 31px rgba(169, 177, 193, 0.17);
-    border-radius: 5px;
+    border-radius: 50px;
 }
 
 .process-icon img {
@@ -6652,6 +6664,7 @@ textarea.input {
 .sidebar-latest-news-image img {
     width: 80px;
     height: 80px;
+    object-fit: cover;
 }
 
 .drop-img img {
@@ -6721,7 +6734,7 @@ textarea.input {
 }
 
 .showt {
-    display: block;
+   /* display: block; */
 }
 
 .btn-block {
@@ -6937,6 +6950,7 @@ button.btn-block:hover {
 
 .scroll-to-top .icon {
     margin-right: 0px;
+    margin-top: 19px;
 }
 
 .vs-btn1:hover {
@@ -6987,4 +7001,398 @@ button.btn-block:hover {
     .back-ground h2 {
         font-size: 30px;
     }
+}
+/*-------------- Abhishek 09-09-24 ------------------*/
+.blog-one-content-2 {
+    position: relative;
+    display: block;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 62px 0px rgb(27, 31, 45, 0.05);
+    padding: 33px 30px 34px;
+  height: 230px;
+
+}
+
+.guyana-wrap .blog-one-title-2 h3 {
+    font-size: 19px;
+    white-space: nowrap;
+    width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 15px;
+    font-weight: 600;
+
+}
+
+.blog-one-text  {
+    height: 90px;
+}
+
+.blog-one-text-2  {
+    height: 110px;
+}
+
+
+.blog-one-content-3 {
+    position: relative;
+    display: block;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 62px 0px rgb(27, 31, 45, 0.05);
+    padding: 33px 30px 34px;
+    height: 280px;
+}
+
+.features-two-sec-icon-2 img {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgb(255 255 255);
+    padding: 25px;
+}
+
+/*
+.blog-one-img-2 {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    background: #000;
+    width: 100%;
+    height: 200px;
+}
+*/
+
+.main-service-one-sec-img {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    height: 280px;
+}
+
+.team-one-img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.team-one-img {
+    height: 300px;
+}
+
+.blog-one-text-4 {
+    height: 55px;
+}
+
+.blog-one-text-5 {
+    height: 39px;
+}
+
+/ Abhi? /
+.my-lorem-pdf-two-section .my-tab li.nav-item {
+  margin: 20px !important;
+}
+.my-lorem-pdf-two-section .my-lorem-pdf img {
+  width: 50px !important;
+}
+.my-lorem-pdf-two-section .my-lorem-pdf {
+  width: 70px;
+  height: 70px;
+  border-radius: 50px;
+  box-shadow: 1.362px 2.673px 35px 0px rgb(0, 0, 0, 0.08) !important;
+  background: #ffffff !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.my-lorem-pdf-two-section .my-lorem-pdf:hover {
+  background-color: #072d74 !important;
+}
+.my-lorem-pdf-two-section .nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #fff !important;
+  background-color: #072d74 !important;
+}
+
+.vs-btn1 {
+    position: absolute;
+    bottom: 20px;
+}
+
+
+.newslatter-2 {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 32px;
+  //  color: #072d74;
+}
+
+.stragy.priority {
+    min-height: 340px;
+}
+
+.stragy.priority.style5 {
+    position: absolute;
+    bottom: 45px;
+}
+.priority-2{
+  min-height: 340px;
+}
+.blog-one-content.h-165{
+height:185px!important;
+}
+
+
+ .language-picker__form-2 select#language-picker-select {
+    width: 100%;
+    border: 2px solid #072d7461;
+    border-radius: 5px;
+    height: 40px;
+  }
+
+  .my-form-bg {
+    border: 2px solid #a1afca;
+    border-radius: 20px;
+    background: #a1afca3b;
+  }
+
+  .my-form-registration select#language-picker-select {
+    width: 100%;
+    border: 2px solid #072d7461;
+    border-radius: 5px;
+    height: 37px;
+    padding: 0 15px;
+  }
+
+  .input-container-2 .input-2 {
+    width: 100%;
+    border: 2px solid #072d7461;
+    border-radius: 5px;
+    padding: 5px 15px;
+  }
+
+.my-form-registration .input {
+    width: 100%;
+    height: 36px;
+    outline: none;
+    border: 2px solid #072d7461;
+    background: #fff;
+    padding: 0 15px;
+    color: #000; 
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    border-radius: 5px;
+}
+  .my-form-registration .input-container-2 label {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    padding: 0 0.4rem;
+    color: #180000d1;
+    font-size: 17px;
+    font-weight: 400;
+    pointer-events: none;
+  }
+
+  .heading-butum-border {
+    color: #072d74;
+    border-bottom: 2px solid #072d74;
+  }
+
+  .my-add-btn-p {
+    position: relative;
+  }
+
+  .my-add-btn {
+    position: absolute;
+    right: 0px;
+    bottom: 8px;
+  }
+
+  .my-add-btn-type {
+    width: 60px;
+    height: 36px;
+    background-color: var(--thm-primary);
+    color: #fff;
+    padding: 0px;
+    border-radius: 5px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+  }
+
+  .my-add-btn-p-2 {
+    position: relative;
+  }
+
+.my-add-btn-type-2 {
+        position: absolute;
+    right: 15px;
+    bottom: -30px;  
+    width: 40px;
+    height: 34px;
+    background-color: #d10f0f;
+    color: #fff;
+    padding: 0px;
+    border-radius: 5px;
+    z-index: 999;
+}
+
+
+  .add-new-btn {
+    width: 100px;
+    height: 37px;
+    background-color: var(--thm-primary);
+    color: #fff;
+    padding: 0px;
+    border-radius: 5px;
+  }
+
+  /* new-23-09-2024 */
+  .registration-my-h2 h2 {
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: #072d74;
+}
+
+.my-refresh-btn-type {
+    width: 100px;
+    height: 37px;
+    background-color: #2a2a2f;
+    color: #fff;
+    padding: 0px;
+    border-radius: 5px;
+}
+
+.my-save-btn-type {
+    width: 100px;
+    height: 37px;
+    background-color: green;
+    color: #fff;
+    padding: 0px;
+    border-radius: 5px;
+}
+
+.my-form-star {
+    color: rgb(255, 44, 44);
+}
+.my-remove-btn-2 {
+    position: absolute;
+    right: 0px;
+    bottom: 8px;
+}
+
+@media screen and (max-width: 600px) {
+    .registration-my-h2 h2 {
+        font-size: 20px;
+        font-weight: 800;
+        margin-bottom: 16px;
+        color: #072d74;
+    }
+
+    .heading-butum-border {
+        color: #072d74;
+        border-bottom: 1px solid #072d74;
+        font-size: 15px;
+    }
+}
+
+.my-add-btn {
+    position: absolute;
+    right: 16px;
+    top: 33px;
+}
+.remove-btn {
+    position: absolute;
+    right: 0px;
+    background: #d10f0f;
+    color: #fff;
+    padding: 5px 8px;
+    border-bottom-right-radius: 5px;
+    font-size: 14px;
+    border-top-right-radius: 5px;
+    z-index: 99;
+    cursor: pointer;
+    top: 0px;
+}
+.text-danger {
+    color: #dc3545 !important;
+    font-size: 14px;
+}
+
+
+.Referencesss {
+    padding: 15px;
+}
+
+@media screen and (max-width:767px) {
+    form, .contact-info {
+        padding: 0px;
+    }
+    .my-add-btn {
+        position: absolute;
+        right: 16px;
+        top: 60px;
+    }
+.banner-section {
+    position: relative;
+    height: 270px;
+}
+.banner-section .swiper-slide-active .content-box h1 {
+    line-height: 30px;
+}
+    .scroll-to-top {
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        bottom: 50px;
+        right: 5px;
+        line-height: 30px;
+        font-size: 12px;
+        z-index: 99;
+        display: none;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+        -webkit-animation: pulse 2s infinite;
+        animation: pulse 2s infinite;
+        -webkit-box-shadow: 0px 11px 21.25px 3.75px rgba(0, 0, 0, 0.06);
+        box-shadow: 0px 11px 21.25px 3.75px rgba(0, 0, 0, 0.06);
+        background: #2a2a2f;
+        border-radius: 50%;
+        transition: 0.5s;
+    }
+
+    button#contribute-add {
+         position: absolute;
+        right: 0px;
+        top: 0px;
+    }
+    
+}
+
+/*  Abhishek 07-10-2024  */
+
+.my-refresh-btn-type-2 {
+    width: 100px;
+    height: 37px;
+    background-color: #2a2a2f;
+    color: #fff;
+    padding: 7px 20px;
+    border-radius: 5px;
+}
+.my-form-registration input::placeholder {
+    color: #878b8d;
+    opacity: 1;
+}
+
+.my-form-registration label {
+    color: #000000 !important;
+    font-family: var(--body-font); 
+}
+li.dropdown i {
+    margin-left: 5px;
 }

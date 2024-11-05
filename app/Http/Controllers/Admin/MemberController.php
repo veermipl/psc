@@ -16,7 +16,6 @@ use App\Models\MembershipType;
 use App\Mail\user\PasswordUpdated;
 use App\Traits\NotificationTraits;
 use Illuminate\Support\Facades\DB;
-use App\Models\CorporateMemnership;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -76,7 +75,7 @@ class MemberController extends Controller
             })
             ->get();
 
-        $membershipList = MembershipType::orderBy('name', 'asc')->where('status', '1')->get();
+         $membershipList = MembershipType::orderBy('name', 'asc')->where('status', '1')->get();
 
         $data['filterValues'] = $filterValues;
         $data['userList'] = $userList;
@@ -89,6 +88,7 @@ class MemberController extends Controller
     public function import(Request $request)
     {
         $this->authorize('member_import');
+
         return view('admin.member.import');
     }
 
@@ -265,12 +265,7 @@ class MemberController extends Controller
 
         foreach ($users as $userKey => $user) {
             $membershipData = $user->membership;
-
-            if($user->status == '1'){
-                $statusData = 'Active';
-            }else{
-            $statusData = 'Inactive';
-            }
+            $statusData = $user->status;
 
             $dataarray[] = [
                 'id' => $user->id,
@@ -529,6 +524,8 @@ class MemberController extends Controller
 
         return response()->json($data, 200);
     }
+
+
     public function statusToggle(UpdateMemberStatusRequest $request)
     {
         $this->authorize('member_status_edit');
@@ -755,5 +752,6 @@ class MemberController extends Controller
                return redirect()->route('admin.member.index')->with('success', 'Update successfully');
        
          }
+
 
 }

@@ -309,7 +309,7 @@
                                     <div class="recent-post">
                                         <div class="media-body">
                                             <h4 class="post-title">
-                                                <a class="text-inherit"  target="_blank" href="{{ asset('storage/'. $press_releaseVal['files']) }}">{{ $newsVal['title'] }}</a>
+                                                <a class="text-inherit" target="_blank" href="{{ asset('storage/'. $press_releaseVal['files']) }}">{{ $newsVal['title'] }}</a>
                                                 </h4>
                                             <div class="recent-post-meta">
                                                 <a href="#">{{ date('M d, Y', strtotime($newsVal['created_at'])) }}</a>
@@ -336,7 +336,7 @@
                                 <div class="recent-post-wrap">
                                     <div class="recent-post">
                                         <div class="media-body">
-                                            <h4 class="post-title"><a class="text-inherit" href="{{route('home.social.show',base64_encode($social_mediaVal->id))}}"> {{ $social_mediaVal['title'] }}</a></h4>
+                                            <h4 class="post-title"><a class="text-inherit"  href="{{route('home.social.show',base64_encode($social_mediaVal->id))}}"> {{ $social_mediaVal['title'] }}</a></h4>
                                             <div class="recent-post-meta">
                                                 <a href="#">{{ date('M d, Y', strtotime($social_mediaVal['created_at'])) }}</a>
                                             </div>

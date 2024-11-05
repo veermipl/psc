@@ -27,6 +27,11 @@ $member_role = MemberRole::where('status', '1')->get();
         .hidden {
             display: none;
         }
+        heading-butum-border2 {
+            color: #072d74;
+            /* border-bottom: 2px solid #072d74; */
+        }
+
         </style>
 
     @if (session('statuss'))
@@ -78,10 +83,8 @@ $member_role = MemberRole::where('status', '1')->get();
                     <form action="{{ route('register') }}" method="post" class="language-picker__form mb-5" enctype="multipart/form-data" >
                        @csrf
                         <div class="row mb-3">
-                        
                         <div class="col-md-12 text-right pb-1"> <b> Already have an Account ? </b>
                             <a href="{{ route('login') }}"> <b class="heading-butum-border2" style="color:#072d74;"> Login in Now </b>  </a> 
-            
                          </div>
                             <div class="col-md-12 py-4 ">
                                 <h5><b class="heading-butum-border">Application for Membership</b> </h5>
@@ -132,7 +135,7 @@ $member_role = MemberRole::where('status', '1')->get();
 
                                 <select name="legal_status" id="language-picker-select">
                                     <option lang="en" hidden value="">
-                                        Select 
+                                    Select
                                     </option>
                                     @if(isset($legal) && count($legal)> 0)
                                     @foreach($legal as $legals)
@@ -164,7 +167,7 @@ $member_role = MemberRole::where('status', '1')->get();
                             <div class="col-xs-12 col-sm-6 col-md-4 py-2">
                                 <label for="fname" class="mb-0">Type of Business or State <span class="my-form-star">*</span>
                                     <select name="sector" id="language-picker-select">
-                                        <option lang="en" hidden value=""> Select </option>
+                                        <option lang="en" hidden value=""> Select</option>
 
                                         @if(isset($sector) && count($sector)>0)
                                         @foreach($sector as $sectors)
@@ -184,7 +187,7 @@ $member_role = MemberRole::where('status', '1')->get();
                                     Employees/
                                     Members <span class="my-form-star">*</span>
                                     <select name="No_of_employees" name="No_of_employees" id="language-picker-select">
-                                        <option lang="en" value="" hidden>Select</option>
+                                        <option lang="en" value="" hidden> Select</option>
 
                                         <option lang="fr" value="1"
                                             {{ old('No_of_employees') == '1' ? 'selected' : '' }}>
@@ -289,10 +292,10 @@ $member_role = MemberRole::where('status', '1')->get();
                             </div>
 
                             <div class="col-xs-12 col-sm-6 col-md-8 py-2">
-                                <label for="fname" class="mb-0">Seclect
+                                <label for="fname" class="mb-0">Select
                                     Membership (for Corporate Membership only) <span class="my-form-star">*</span></label>
                                 <select name="membership_id" id="language-picker-select">
-                                    <option lang="en" hidden value=""> Seclect Membership </option>
+                                    <option lang="en" hidden value=""> Select </option>
 
                                     @if(isset($members) && count($members)> 0)
                                     @foreach($members as $member)
@@ -541,7 +544,7 @@ $member_role = MemberRole::where('status', '1')->get();
                         <div class="col-xs-12 col-sm-6 col-md-6 py-2">
                             <label for="fname" class="mb-0">Website <span class="my-form-star">*</span></label>
                             <div class="input-container-2">
-                                <input type="text" name="references_website[]" class="input" placeholder="Website" maxlength="150">
+                                <input type="url" name="references_website[]" class="input" placeholder="https://www.example.com" maxlength="150">
                             </div>
                         </div>
 
@@ -742,27 +745,27 @@ let detailedTemplate = `<div class="reference-block">
         <div class="col-xs-12 col-sm-6 col-md-3 py-2">
             <label for="fname" class="mb-0">Name<span class="my-form-star">*</span></label>
             <div class="input-container-2">
-                <input type="text" name="references_name[]" class="input" placeholder="Name">
+                <input type="text" name="references_name[]" class="input" placeholder="Name" maxlength="100">
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-3 py-2">
             <label for="fname" class="mb-0">Address <span class="my-form-star">*</span></label>
-            <div class="input-container-2">
-                <input type="text" name="references_address[]" class="input" placeholder="Address">
+            <div class="input-container-2"> 
+                <input type="text" name="references_address[]" class="input" placeholder="Address" maxlength="100">
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-6 py-2">
             <label for="fname" class="mb-0">Name of Business/Profession <span class="my-form-star">*</span></label>
             <div class="input-container-2">
-                <input type="text" name="references_name_of_business[]" class="input" placeholder="Name of Business/Profession">
+                <input type="text" name="references_name_of_business[]" class="input" placeholder="Name of Business/Profession" maxlength="100">
             </div>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 py-2">
-            <label for="fname" class="mb-0">Telephone Nos. <span class="my-form-star">*</span></label>
-            <div class="input-container-2">
-                <input type="text" name="references_tel_nos[]" class="input" placeholder="Telephone Nos.*" oninput="this.value = this.value.replace(/[^0-9]/g, ''); maxlength="12">
-            </div>
-        </div>
+       <div class="col-xs-12 col-sm-6 col-md-3 py-2">
+    <label for="fname" class="mb-0">Telephone Nos. <span class="my-form-star">*</span></label>
+    <div class="input-container-2">
+        <input type="text" name="references_tel_nos[]" class="input" placeholder="Telephone Nos.*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="12">
+    </div>
+</div>
         <div class="col-xs-12 col-sm-6 col-md-3 py-2">
             <label for="fname" class="mb-0">Email <span class="my-form-star">*</span></label>
             <div class="input-container-2">
@@ -772,7 +775,7 @@ let detailedTemplate = `<div class="reference-block">
         <div class="col-xs-12 col-sm-6 col-md-6 py-2">
             <label for="fname" class="mb-0">Website <span class="my-form-star">*</span></label>
             <div class="input-container-2">
-                <input type="text" name="references_website[]" class="input" placeholder="Website.">
+                <input type="url" name="references_website[]" class="input" placeholder="https://www.example.com.">
             </div>
         </div>
         <div class="col-md-12 text-center">

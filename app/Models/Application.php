@@ -17,7 +17,6 @@ class Application extends Model
 
    public function busibessType() {
         return $this->belongsTo(BusinessTypes::class, 'application_type_id', 'id');
-
     }
 
     public function legalStatus(){

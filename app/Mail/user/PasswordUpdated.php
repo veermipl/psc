@@ -16,12 +16,10 @@ class PasswordUpdated extends Mailable
         $this->user = $user;
         $this->password = $password;
         $this->role = $role;
-
-
     }
+
     public function build()
     {
-     
         return $this->view('mail.auth.welcome_mail')
                     ->subject('Your Password Has Been Updated')
                     ->with([

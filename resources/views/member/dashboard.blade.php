@@ -76,7 +76,7 @@
                             <thead>
                                 <tr class="my-table-header">
                                     <th style="text-align: center;">Title</th>
-                                    <!--  <th style="text-align: center;">Doc Type</th> -->
+                                     <!-- <th style="text-align: center;">Doc Type</th> -->
                                     <th style="text-align: center;">File Size</th>
                                     <th style="text-align: center;">Create Date</th>
                                     <th style="text-align: center;">Action</th>
@@ -90,10 +90,11 @@
                                     $originalDate = $file['CREATED_DATE'];
                                     $formattedDate = (new DateTime($originalDate))->format('d F Y');
                                     ?>
+
                                     <tr class="table-data">
                                         <td style="text-align: left;" id="pdf-icon"><i class="fas fa-file-pdf"
                                                 aria-hidden="true"></i>&nbsp {{ $file['FILENAME'] }}</td>
-                                        <!--  <td style="text-align: center;" id="pdf-icon"></td> -->
+                                         <!-- <td style="text-align: center;" id="pdf-icon">  {{ $file['FILENAME'] }}</td> -->
                                         <td style="text-align: center;">{{ $file['SIZE'] }}</td>
                                         <td style="text-align: center;">{{ $formattedDate }}</td>
                                         <td class="document-all">

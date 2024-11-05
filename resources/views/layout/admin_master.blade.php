@@ -123,11 +123,6 @@
                                 <ion-icon name="ellipse-outline"></ion-icon>Import Members
                             </a>
                         </li> -->
-                        <!-- <li>
-                            <a href="{{ route('admin.member.registration') }}">
-                                <ion-icon name="ellipse-outline"></ion-icon>Registration
-                            </a>
-                        </li> -->
                     </ul>
                 </li>
 

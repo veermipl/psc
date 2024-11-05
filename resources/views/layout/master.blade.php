@@ -203,9 +203,9 @@
                                                         </li>
 
                                                         <li class="dropdown">
-                                                            <a href="index.html">Who We Are<i class="fas fa-chevron-down"></i></a>
+                                                            <a href="index.html">About Us<i class="fas fa-chevron-down"></i></a>
                                                             <ul>
-                                                                <li><a  href="{{ route('about-us.introduction') }}">Introduction</a>
+                                                                <li><a  href="{{ route('about-us.introduction') }}">Who We Are</a>
                                                                 </li>
                                                                 <li><a  href="{{ route('about-us.staff') }}">Staff</a>
                                                                 </li>
@@ -237,13 +237,13 @@
                                                                 @endguest
                                                                 <li>
                                                                     <!-- <a href="{{ route('membership.business-directory') }}">Business Directory</a> -->
-                                                                    <a href="{{ route('membership.business-directory') }}#sectoral corporate">Sectoral</a>
+                                                                    <a href="{{ route('membership.business-directory') }}#corporate">Sectoral</a>
                                                                     
                                                                 </li>
                                                                 <li>
                                                                     <!-- <a href="{{ route('membership.business-directory') }}">Business Directory</a> -->
                                                                   
-                                                                    <a href="{{ route('membership.business-directory') }}#corporate membership">Corporate</a>
+                                                                    <a href="{{ route('membership.business-directory') }}#sectoral corporate">Corporate</a>
                                                                 </li>
                                                                 @guest
                                                                 <li>
@@ -457,7 +457,7 @@
                     <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
                         <div class="footer-widget-single footer-widget-about">
                             <div class="footer-widget-title">
-                                <h3>Who We Are</h3>
+                                <h3>About Us </h3>
                             </div>
                             <div class="footer-widget-about-text">
                                 <p>

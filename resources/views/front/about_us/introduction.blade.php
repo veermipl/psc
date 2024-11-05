@@ -7,13 +7,13 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="back-ground">
-                        <h2>About Us</h2>
+                        <h2>Who We Are</h2>
                         <div class="breadcrumbs text-center wow animate__ animate__fadeInUp animate__delay-1s animated"
                             style="visibility: visible; animation-name: fadeInUp;">
                             <ul>
                                 <li><a href="index.html">Home</a></li>
                                 <span class="slash"> /</span>
-                                <li><a href="{{ route('about-us.introduction') }}">About Us</a></li>
+                                <li><a href="{{ route('about-us.introduction') }}">Who We Are</a></li>
                             </ul>
                         </div>
                     </div>
@@ -47,10 +47,10 @@
                     <div class="col-xl-6">
                         <div class="about-two-right-content">
                             <div class="about-two-title">
-                                <h4 class="sub-title-shape-left section_title-subheading">
+                                <!-- <h4 class="sub-title-shape-left section_title-subheading">
                                     Our
-                                </h4>
-                                <h2>{{ @$introduction->title }}</h2>
+                                </h4> -->
+                                <!-- <h2>{{ @$introduction->title }}</h2> -->
                                 <p class="about-two-title-text mb-2">
                                     {!! @$introduction->contant !!}
                                 </p>

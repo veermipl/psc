@@ -712,9 +712,7 @@ ion-icon {
 /* Footer */
 
 .footer {
-    position: absolute;
-    left: 260px;
-    right: 0;
+    position: fixed;
     bottom: 0;
     width: 100%;
     padding: 0.7rem;
@@ -1573,14 +1571,21 @@ ul.categories-list li {
 }
 
 .cross-m {
-    position: relative;
+    position: absolute;
     cursor: pointer;
     left: 14px;
+top:0;
+}
+.docs-sapn {
+    display: flex;
+    margin-top: 10px;
 }
 
 .pdf-files {
-    font-size: 28px;
+       font-size: 28px;
     text-align: start !important;
+    position: relative;
+    margin-right: 10px;
 }
 
 .cross-m i {
@@ -1600,4 +1605,96 @@ ul.categories-list li {
 
 .d-none{
     display: none !important;
+}
+
+.remove-btn.old {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    color: #fff;
+    padding: 8px 10px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.remove-btn {
+    position: absolute;
+    right: 8px;
+    background: #d10f0f;
+    /* top: 15px; */
+    color: #fff;
+    padding: 6px 10px;
+    border-bottom-right-radius: 6px;
+    font-size: 14px;
+    border-top-right-radius: 9px;
+/*    z-index: 9779;*/
+    cursor: pointer;
+}
+button#expectation-add {
+    position: absolute;
+    right: 9px;
+/*    z-index: 9999;*/
+    top: 37px;
+    background: #072d74;
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 0px 5px 5px 0px;
+}
+.add_buttons_but{
+    position: absolute;
+    right: 9px;
+/*    z-index: 9999;*/
+    top: 37px;
+    background: #072d74;
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 0px 5px 5px 0px;
+}
+.add_but_more{
+    position:relative;
+}
+.breadcrumb-title-2.pe-3 {
+    FONT-SIZE: 16px;
+}
+
+.removell.my-add-btn-type-2{
+    position: absolute;
+    right: 20px;
+    background: #d10f0f;
+    top:-4px;
+    color: #fff;
+    padding: 6px 10px;
+    border-bottom-right-radius: 6px;
+    font-size: 14px;
+    border-top-right-radius: 9px;
+/*    z-index: 999;*/
+    /* top: 15px; */
+    cursor: pointer;
+}
+.m-2 {
+    margin: .5rem 0 !important;
+}
+
+@media (max-width: 767px) {
+.p-4 {
+    padding: 15px;
+}
+.breadcrumb-title {
+    font-size: 15px;
+}
+.add_buttons_but {
+    top:59px;
+}
+button#expectation-add{
+        top:59px;
+}
+.m-2 {
+    margin: .5rem 0 !important;
+}
+}
+.Referencesss
+{
+    position: relative;
+    padding-top: 50px;
 }

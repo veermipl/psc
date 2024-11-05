@@ -17,7 +17,7 @@
                         <div>
                             <p class="mb-2">Total Members</p>
                             <h4 class="mb-0">
-                                {{ count($totalMembers) }}
+                            <a href="{{route('admin.member.index') }}" >   {{ count($totalMembers) }} </a>
                                 <span class="ms-1 font-13 text-success"></span>
                             </h4>
                         </div>
@@ -31,14 +31,13 @@
                 <div class="card-body">
                     <div class="d-flex align-items-start justify-content-between">
                         <div>
-                            <p class="mb-2">Active Members</p>
+                            <p class="mb-2">Approve Members</p>
                             <h4 class="mb-0">
-                                {{ count($totalActiveMembers) }}
+                            <a href="{{route('admin.member.index') }}" >     {{ count($totalActiveMembers) }} </a>
                                 <span class="ms-1 font-13 text-success"></span>
                             </h4>
                         </div>
                     </div>
-                    {{-- <div class="mt-3" id="chart2"></div> --}}
                 </div>
             </div>
         </div>
@@ -47,9 +46,9 @@
                 <div class="card-body">
                     <div class="d-flex align-items-start justify-content-between">
                         <div>
-                            <p class="mb-2">In-active Members</p>
+                            <p class="mb-2">Pending Members </p>
                             <h4 class="mb-0">
-                                {{ count($totalInActiveMembers) }}
+                            <a href="{{route('admin.member.index') }}" >      {{ count($totalInActiveMembers) }} </a>
                                 <span class="ms-1 font-13 text-success"></span>
                             </h4>
                         </div>
@@ -58,7 +57,9 @@
                 </div>
             </div>
         </div>
-    </div> <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
+    </div>
+
+    <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
         <div class="breadcrumb-title pe-0">Today Member </div>
     </div>
 
@@ -70,7 +71,7 @@
                         <div>
                             <p class="mb-2">Total Members</p>
                             <h4 class="mb-0">
-                                {{ count($TodaytotalMembers) }}
+                            <a href="{{route('admin.member.index') }}" >     {{ count($TodaytotalMembers) }} </a>
                                 <span class="ms-1 font-13 text-success"></span>
                             </h4>
                         </div>
@@ -84,9 +85,9 @@
                 <div class="card-body">
                     <div class="d-flex align-items-start justify-content-between">
                         <div>
-                            <p class="mb-2">Active Members</p>
+                            <p class="mb-2">Approve Members</p>
                             <h4 class="mb-0">
-                                {{ count($todattotalActiveMembers) }}
+                            <a href="{{route('admin.member.index') }}" >      {{ count($todattotalActiveMembers) }} </a>
                                 <span class="ms-1 font-13 text-success"></span>
                             </h4>
                         </div>
@@ -99,9 +100,9 @@
                 <div class="card-body">
                     <div class="d-flex align-items-start justify-content-between">
                         <div>
-                            <p class="mb-2">In-active Members</p>
+                            <p class="mb-2">Pending Members</p>
                             <h4 class="mb-0">
-                                {{ count($todaytotalInActiveMembers) }}
+                             <a href="{{route('admin.member.index') }}" >  {{ count($todaytotalInActiveMembers) }} </a>
                                 <span class="ms-1 font-13 text-success"></span>
                             </h4>
                         </div>
@@ -111,5 +112,6 @@
             </div>
         </div>
     </div>
+
 
 @endsection

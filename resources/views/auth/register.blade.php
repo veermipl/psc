@@ -232,7 +232,7 @@
 
                                 <div class="col-lg-6">
                                     <div class="textbox">
-                                        <label for="confirmed">Confirmation Password<span
+                                        <label for="confirmed">Confirmation Password <span
                                                 class="text-danger">*</span></label>
                                         <input type="password" id="confirmed" class="form-control"
                                             name="password_confirmation" value="{{ old('confirm_password') }}"
