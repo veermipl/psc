@@ -94,15 +94,15 @@
 
                     <div class="table-responsive">
                         <table id="userTable" class="table table-sm" data-toggle="table" data-search="true"
-                            data-buttons-prefix="btn-md btn" data-pagination="true">
+                            data-buttons-prefix="btn-md btn" data-pagination="true" data-loading-template="loadingTemplate">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col" data-sortable="true">Name</th>
-                                    <th scope="col" data-sortable="true">Email</th>
-                                    <th scope="col" data-sortable="true">Role</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col" data-field="key">#</th>
+                                    <th scope="col" data-sortable="true" data-field="name">Name</th>
+                                    <th scope="col" data-sortable="true" data-field="email">Email</th>
+                                    <th scope="col" data-sortable="true" data-field="user_role">Role</th>
+                                    <th scope="col" data-field="status">Status</th>
+                                    <th scope="col" data-field="action">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -279,6 +279,10 @@
                             success: function(response) {
                                 if (response.error === false) {
                                     $('tr.tr_row_' + urow + '').remove();
+
+                                    $('#userTable').bootstrapTable('refresh', {
+                                        url: '{{ route("admin.user.reload-table") }}'
+                                    });
 
                                     toastr.success(response.msg);
                                 } else {

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CotedController;
+use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\PhotoController;
 use App\Http\Controllers\Admin\QueryController;
 use App\Http\Controllers\Admin\StaffController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\PerformanceController;
 use App\Http\Controllers\ProcurementController;
+use App\Http\Controllers\admin\CouncilController;
 use App\Http\Controllers\Member\MemberController;
 use App\Http\Controllers\Admin\BusinessController;
 use App\Http\Controllers\Admin\GoInvestController;
@@ -85,17 +87,22 @@ Route::get('home/post-show/{id}', [FrontController::class, 'show_post'])->name('
 Route::get('contact-us', [FrontController::class, 'contactUs'])->name('contact-us');
 Route::post('contact-us-save', [FrontController::class, 'save_contactUs'])->name('contact-us-save');
 Route::get('guyana-economy', [FrontController::class, 'guyanaEconomy'])->name('guyana-economy');
+Route::get('home/social-media/{id}', [FrontController::class, 'social_media'])->name('home.social.show');
 Route::get('guyana-economy-show/{id}', [FrontController::class, 'show_guyanaEconomy'])->name('guyana-economy-show');
 
 Route::get('about-us', [FrontController::class, 'aboutUs'])->name('about-us');
+Route::get('sector-committees/{id}', [FrontController::class, 'about_view'])->name('sector.committees');
 
 Route::prefix('about-us')->name('about-us.')->group(function () {
     Route::get('introduction', [FrontController::class, 'aboutUs_Introduction'])->name('introduction');
+    Route::get('introduction-view/{id}', [FrontController::class, 'introduction_view'])->name('introduction_view');
     Route::get('staff', [FrontController::class, 'aboutUs_Staff'])->name('staff');
     Route::get('council', [FrontController::class, 'aboutUs_Council'])->name('council');
     Route::get('history', [FrontController::class, 'aboutUs_History'])->name('history');
     Route::get('committeess', [FrontController::class, 'aboutUs_Committeess'])->name('committeess');
 });
+
+
 
 Route::prefix('membership')->name('membership.')->group(function () {
     Route::get('business-directory', [FrontController::class, 'membership_BusinessDirectory'])->name('business-directory');
@@ -125,6 +132,10 @@ Route::prefix('resources')->name('resources.')->group(function () {
     Route::get('annual-report-details/{id}', [FrontController::class, 'resources_Annualdetails'])->name('annual.report.details');
     Route::get('certificate-of-origins-details/{id}', [FrontController::class, 'resources_CertificateDetails'])->name('certificate-of-origins.deatils');
     Route::get('idb-invest-details/{id}', [FrontController::class, 'resources_IDBDetails'])->name('idb-invest.details');
+    Route::get('economic-reports', [FrontController::class, 'economic_reports'])->name('economic.reports');
+    Route::get('common-external-tarriff', [FrontController::class, 'common_external'])->name('common.external.tarriff');
+    // Route::get('regulations', [FrontController::class, 'regulations'])->name('regulations ');
+
 });
 
 Route::prefix('media')->name('media.')->group(function () {
@@ -135,6 +146,9 @@ Route::prefix('media')->name('media.')->group(function () {
     Route::get('social-media', [FrontController::class, 'media_SocialMedia'])->name('social-media');
     Route::get('photos', [FrontController::class, 'media_Photos'])->name('photos');
     Route::get('videos', [FrontController::class, 'media_Videos'])->name('videos');
+    Route::get('event', [FrontController::class, 'media_event'])->name('event');
+    Route::get('event-details/{id}', [FrontController::class, 'details_event'])->name('event_details');
+    Route::get('upcoming-event/', [FrontController::class, 'upcoming_event'])->name('upcoming.event');
 });
 //end front-route
 
@@ -146,6 +160,9 @@ Route::middleware(['auth', 'role_per'])->prefix('member')->name('member.')->grou
 
     Route::post('file-details', [MemberController::class, 'getFileDetails'])->name('file-details');
     Route::post('file-download', [MemberController::class, 'downFileDetails'])->name('file-download');
+
+    Route::post('application', [MemberController::class, 'application_form'])->name('application');
+    Route::get('member-details', [UserController::class, 'applications'])->name('applications');
 });
 //
 
@@ -179,6 +196,14 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
     Route::post('member/export', [AdminMemberController::class, 'export'])->name('member.export');
     Route::post('member/status', [AdminMemberController::class, 'statusToggle'])->name('member.status');
     Route::post('member/delete-doc', [AdminMemberController::class, 'deleteDoc'])->name('member.delete-doc');
+    Route::get('member/registration', [AdminMemberController::class, 'registration'])->name('member.registration');
+    Route::get('member/registration-delete/{id}', [AdminMemberController::class, 'registrationDelete']);
+    Route::Post('member/registration-status', [AdminMemberController::class, 'registrationStatus'])->name('member.registration.status');
+
+    Route::get('member/registration-view/{id}', [AdminMemberController::class, 'registrationView'])->name('member.registration.view');
+    Route::get('member/registration-edit/{id}', [AdminMemberController::class, 'registrationEdit'])->name('member.registration.edit');
+    Route::patch('member/registration-update/{id}', [AdminMemberController::class, 'registrationUpdate'])->name('member.registration.update');
+
     Route::resource('member', AdminMemberController::class);
 
     Route::prefix('data')->name('data.')->group(function () {
@@ -356,6 +381,7 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
 
         Route::post('social-media/filter', [SocialMediaController::class, 'index'])->name('social-media.filter');
         Route::post('social-media/status', [SocialMediaController::class, 'statusToggle'])->name('social-media.status');
+        Route::post('press-release/delete-file', [SocialMediaController::class, 'deleteFile'])->name('press-release.delete-file');
         Route::resource('social-media', SocialMediaController::class);
 
         Route::post('photo/filter', [PhotoController::class, 'index'])->name('photo.filter');
@@ -418,6 +444,18 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::Post('history', 'History_update')->name('history_update');
         });
 
+        Route::controller(CouncilController::class)->prefix('council')->name('council.')->group(function(){
+            Route::get('index', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'Store')->name('store');
+            Route::Post('status', 'status')->name('status');
+            Route::delete('destroy/{id}', 'destroy')->name('destroy');
+            Route::get('edit/{id}', 'edit')->name('edit');
+            Route::Post('update/{id}', 'Update')->name('update');
+            Route::post('filter',  'index')->name('filter');
+        
+        });
+
         Route::controller(TestimonialController::class)->prefix('testimonial')->name('testimonial.')->group(function () {
             Route::get('list', 'Index')->name('list');
             Route::get('create', 'create')->name('create');
@@ -450,6 +488,16 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         });
     });
 
+    Route::prefix('event')->name('event.')->group(function(){
+        Route::get('create', [EventController::class, 'create'])->name('create');
+        Route::post('store', [EventController::class, 'store'])->name('store');
+        Route::get('list', [EventController::class, 'list'])->name('list');
+        Route::get('edit/{id}', [EventController::class, 'edit'])->name('edit');
+        Route::post('update/{id}', [EventController::class, 'update'])->name('update');
+        Route::delete('delete/{id}', [EventController::class, 'delete'])->name('delete');
+        Route::post('status', [EventController::class, 'status'])->name('status');
+        Route::post('delete-file', [EventController::class, 'deleteFile'])->name('deleteFile');
+    });
     Route::prefix('cms')->name('cms.')->group(function () {
         Route::get('guyana-economy', [CMSController::class, 'guyanaEconomy'])->name('guyana-economy');
         Route::get('guyana-economy/create', [CMSController::class, 'guyanaEconomyCreate'])->name('guyana-economy.create');

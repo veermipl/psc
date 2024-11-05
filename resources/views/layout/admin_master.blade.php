@@ -701,6 +701,27 @@
                 $('#sub_page_body_' + target_id + '').removeClass('hide').addClass('show');
             }
         }
+
+        function loadingTemplate(message) {
+            return '<i class="fa fa-spinner fa-spin fa-fw fa-2x"></i>'
+        }
+
+        function UpdateNotificationCount(){
+            var notCount = $('span.notify-badge').text();
+            var notCount_new = '';
+            
+            if(notCount && notCount != '' && notCount != null && notCount != undefined){
+                notCount = parseInt(notCount);
+
+                if(notCount > 1){
+                    notCount_new = notCount - 1;
+                    $('span.notify-badge').text(notCount_new);
+                }else{
+                    $('span.notify-badge').remove();
+                }
+            }
+
+        }
     </script>
 
     @yield('scripts')
