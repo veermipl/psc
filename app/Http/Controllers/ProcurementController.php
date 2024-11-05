@@ -103,7 +103,7 @@ class ProcurementController extends Controller
         $this->authorize('resource_status_edit');
 
         $user = Business::find($request->lid);
-        $status = $request->ustatus == 1 ? '0' : '1';
+        $status = $request->lstatus == 1 ? '0' : '1';
 
         DB::transaction(function () use ($user, $status) {
             $user->update([
@@ -201,7 +201,7 @@ class ProcurementController extends Controller
     {
         $this->authorize('resource_status_edit');
         $user = Business::find($request->lid);
-        $status = $request->ustatus == 1 ? '0' : '1';
+        $status = $request->lstatus == 1 ? '0' : '1';
         DB::transaction(function () use ($user, $status) {
             $user->update([
                 'status' => $status

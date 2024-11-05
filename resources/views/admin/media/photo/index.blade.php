@@ -115,7 +115,8 @@
                                             </td>
 
                                             <td>
-                                                {{ $listValue->title }}
+                                            {{  Str::limit($listValue->title, 100) }}
+                                               
                                             </td>
 
                                             <td>

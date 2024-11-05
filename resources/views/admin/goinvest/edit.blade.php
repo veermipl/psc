@@ -95,7 +95,7 @@
                                             <a href="{{ route('admin.readines.investment.add') }}"
                                                 class="btn btn-primary btn-sm">
                                                 <ion-icon name="add" role="img" class="md hydrated"
-                                                    aria-label="person add"></ion-icon> Investment Sectors
+                                                    aria-label="person add"></ion-icon>Create Investment Sectors
                                             </a>
 
                                             @if (@$top_partner_export_id && count(@$top_partner_export_id) > 0)

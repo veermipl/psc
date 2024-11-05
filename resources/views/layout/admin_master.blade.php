@@ -113,7 +113,7 @@
                                 <ion-icon name="ellipse-outline"></ion-icon>List
                             </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="{{ route('admin.member.create') }}">
                                 <ion-icon name="ellipse-outline"></ion-icon>Create Member
                             </a>
@@ -122,7 +122,12 @@
                             <a href="{{ route('admin.member.import') }}">
                                 <ion-icon name="ellipse-outline"></ion-icon>Import Members
                             </a>
-                        </li>
+                        </li> -->
+                        <!-- <li>
+                            <a href="{{ route('admin.member.registration') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>Registration
+                            </a>
+                        </li> -->
                     </ul>
                 </li>
 
@@ -152,6 +157,27 @@
                                 <ion-icon name="ellipse-outline"></ion-icon>Caricom CET
                             </a>
                         </li>
+                    </ul>
+                </li>
+
+                
+                <li class="{{ request()->is('admin/event') || request()->is('admin/user/*') ? 'mm-active' : '' }}">
+                    <a href="javascript:;" class="has-arrow">
+                        <div class="parent-icon"><ion-icon name="people-sharp"></ion-icon></div>
+                        <div class="menu-title">Event</div>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="{{ route('admin.event.list') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>List
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.event.create') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>Create Event
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
 
@@ -287,8 +313,14 @@
                                 Staff
                             </a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="{{ route('admin.about.council') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Council
+                            </a>
+                        </li> -->
+                        <li>
+                            <a href="{{ route('admin.council.index') }}">
                                 <ion-icon name="ellipse-outline"></ion-icon>
                                 Council
                             </a>
@@ -700,27 +732,6 @@
                 $('.sub_page_body').removeClass('show').addClass('hide');
                 $('#sub_page_body_' + target_id + '').removeClass('hide').addClass('show');
             }
-        }
-
-        function loadingTemplate(message) {
-            return '<i class="fa fa-spinner fa-spin fa-fw fa-2x"></i>'
-        }
-
-        function UpdateNotificationCount(){
-            var notCount = $('span.notify-badge').text();
-            var notCount_new = '';
-            
-            if(notCount && notCount != '' && notCount != null && notCount != undefined){
-                notCount = parseInt(notCount);
-
-                if(notCount > 1){
-                    notCount_new = notCount - 1;
-                    $('span.notify-badge').text(notCount_new);
-                }else{
-                    $('span.notify-badge').remove();
-                }
-            }
-
         }
     </script>
 

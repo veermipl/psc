@@ -52,7 +52,7 @@
                                                 @endif
                                             </div>
                                             <div class="portfolio-text">
-                                                <h4>{{ $list->title }}</h4>
+                                                <h4> {{ Str::limit($list->title, 50) }}</h4>
                                             </div>
 
                                         </div>

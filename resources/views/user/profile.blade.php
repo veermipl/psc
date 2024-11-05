@@ -40,7 +40,7 @@
                 <div class="card-body">
                     <h4 class="mb-2">About Me</h4>
                     <p class="">
-                        {{ @$UserDetails['about_me'] }}
+                        {!! @$UserDetails['about_me'] !!}
                     </p>
 
                 </div>

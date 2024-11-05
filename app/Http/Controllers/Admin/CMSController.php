@@ -157,7 +157,7 @@ class CMSController extends Controller
         });
 
         $data['error'] = false;
-        $data['msg'] = 'Deleted';
+        $data['msg'] = 'Guyana economy deleted';
 
         return response()->json($data, 200);
     }
@@ -690,7 +690,7 @@ class CMSController extends Controller
         });
 
         $data['error'] = false;
-        $data['msg'] = 'Header Deleted';
+        $data['msg'] = $list->type. ' Deleted';
 
         return response()->json($data, 200);
     }

@@ -28,8 +28,7 @@
 
                             <button
                                 class="btn btn-sm sub_page_link {{ $tab == 'strategic' ? 'btn-primary' : 'btn-outline-custom' }}"
-                                id="sub_page_link_strategic" type="button" data-target="strategic">
-                                Strategic Priority Areas
+                                id="sub_page_link_strategic" type="button" data-target="strategic">Create Strategic Priority Areas
                             </button>
                             <button
                                 class="btn btn-sm sub_page_link {{ $tab == 'top_partner' ? 'btn-primary' : 'btn-outline-custom' }}"

@@ -93,11 +93,11 @@
                   </div>
                   <div class="blog-one-content">
                     <div class="blog-one-title">
-                      <h3><a href="{{route('resources.go-invest.details',  base64_encode($sectors->id) )}}">{{$sectors->title}} </a></h3>
+                      <h3><a href="{{route('resources.go-invest.details',  base64_encode($sectors->id) )}}">   {{ Str::limit($sectors->title, 28)}} </a></h3>
                     </div>
                     <div class="blog-one-text">
 
-                     {!! Str::limit($sectors->contant, 200)!!}
+                     {!! Str::limit($sectors->contant, 100)!!}
                       <!-- <p>
                         Guyana has discovered significant oil reserves, attracting
                         major international oil companies.

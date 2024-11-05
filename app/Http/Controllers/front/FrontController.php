@@ -2,22 +2,26 @@
 
 namespace App\Http\Controllers\Front;
 
+use Carbon\Carbon;
 use App\Models\News;
+use App\Models\About;
 use App\Models\Coted;
 use App\Models\Query;
+use App\Models\Staff;
 use App\Models\Photos;
 use App\Models\Videos;
+use App\Models\Council;
+use App\Models\Business;
+use App\Models\PSCEvent;
 use App\Models\Settings;
+use App\Models\CoreValue;
 use App\Models\TradeData;
 use App\Models\CaricomCET;
+use App\Models\Committeess;
+use App\Models\LandingPage;
+use App\Models\Performance;
 use App\Models\SocialMedia;
 use App\Models\PressRelease;
-use App\Models\About;
-use App\Models\Business;
-use App\Models\Committeess;
-use App\Models\CoreValue;
-use App\Models\Performance;
-use App\Models\Staff;
 use App\Models\Testimonials;
 use Illuminate\Http\Request;
 use App\Models\GuyanaEconomy;
@@ -27,8 +31,6 @@ use App\Models\NationalBudget;
 use App\Models\BusinessDirectory;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\LandingPage;
-use Carbon\Carbon;
 
 class FrontController extends Controller
 {
@@ -114,6 +116,18 @@ class FrontController extends Controller
 
         return view('front.index_show_post', $data);
     }
+    public function social_media($id){
+        
+        $id = base64_decode($id);
+        $latest_list = SocialMedia::orderBy('id', 'desc')->where(['status' => '1' ])->where('id', '!=', $id)->limit(5)->get() ?? [];
+        $details = SocialMedia::where('status', '1')->findOrFail($id);
+
+        $data['latest_list'] = $latest_list;
+        $data['details'] = $details;
+
+        return view('front.index_social_media', $data);
+
+    }
 
     public function aboutUs()
     {
@@ -126,7 +140,7 @@ class FrontController extends Controller
         $mission =  About::where('type', 'Mission')->where('status', '1')->first();
         $strategic =  Testimonials::where('status', '1')->orderby('id', 'desc')->get();
         $corevalue = CoreValue::where('status', '1')->orderby('id', 'desc')->get();
-        $performance = Performance::where('status', '1')->orderby('id', 'desc')->get();
+        $performance = Performance::where('status', '1')->orderby('id', 'desc')->limit(3)->get();
 
         return view('front.about_us.introduction', compact('introduction', 'mission', 'strategic', 'corevalue', 'performance'));
     }
@@ -140,7 +154,8 @@ class FrontController extends Controller
 
     public function aboutUs_Council()
     {
-        $council =  About::where('type', 'Council')->where('status', '1')->first();
+        // $council =  About::where('type', 'Council')->where('status', '1')->first();
+        $council = Council::where('status', '1')->orderby('name', 'asc')->get();
 
         return view('front.about_us.council', compact('council'));
     }
@@ -172,7 +187,7 @@ class FrontController extends Controller
     {
         $validated = $request->validate([
             'name' => ['required', 'string'],
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email:dns'],
             'phone' => ['required',],
             'message' => ['required'],
             'type' => ['required', 'in:contact_us'],
@@ -215,19 +230,20 @@ class FrontController extends Controller
     public function membership_BusinessDirectory()
     {
         $membershipList = MembershipType::orderBy('name', 'asc')->where('status', '1')->get() ?? [];
-        $business_directory_list = [];
+        // $business_directory_list = [];
 
-        foreach ($membershipList as $key => $value) {
+        // foreach ($membershipList as $key => $value) {
 
-            $list_in_value = BusinessDirectory::select('name')->orderBy('name', 'asc')->where([
-                'type' => $value['id'],
-                'status' => '1',
-            ])->get();
-            $business_directory_list[$value['name']] = $list_in_value->pluck('name')->toArray();
-        }
+        //     $list_in_value = BusinessDirectory::select('name')->orderBy('name', 'asc')->where([
+        //         'type' => $value['id'],
+        //         'status' => '1',
+        //     ])->get();
+        //     $business_directory_list[$value['name']] = $list_in_value->pluck('name')->toArray();
+        // }
+        $list_in_value = BusinessDirectory::orderBy('name', 'asc')->where( 'status', '1')->get();
 
-        $data['business_directory_list'] = $business_directory_list;
-
+        $data['business_directory_list'] = $list_in_value;
+        $data['membershipList'] = $membershipList;
         return view('front.membership.business_directory', $data);
     }
 
@@ -273,11 +289,11 @@ class FrontController extends Controller
         $top_partner = TradeData::orderBy('id', 'desc')->where([
             'type' => 'top_partner',
             'status' => '1'
-        ])->get();
+        ])->limit(3)->get();
         $top_country = TradeData::orderBy('id', 'desc')->where([
             'type' => 'top_country',
             'status' => '1'
-        ])->get();
+        ])->limit(3)->get();
 
         $data['main'] = $main;
         $data['top_partner'] = $top_partner;
@@ -293,11 +309,10 @@ class FrontController extends Controller
             'type' => 'entrepreneurship_development',
             'status' => '1'
         ])->get();
-
         $data['main'] = $main;
         $data['entrepreneurship_development'] = $entrepreneurship_development;
 
-        return view('front.data.coted', $data);
+      return view('front.data.coted', $data);
     }
 
     public function show_Coted_EntrepreneurshipDevelopment($id)
@@ -352,8 +367,8 @@ class FrontController extends Controller
     public function resources_BusinessReadinessDesk()
     {
         $business = Business::where('type', 'Business')->where('status', '1')->first();
-        $certificate = Business::where('type', 'Business_certificate')->where('status', '1')->orderby('id', 'desc')->get();
-        $benefits = Business::where('type', 'Business_benefits')->where('status', '1')->orderby('id', 'desc')->get();
+        $certificate = Business::where('type', 'Business_certificate')->where('status', '1')->orderby('id', 'desc')->limit(3)->get();
+        $benefits = Business::where('type', 'Business_benefits')->where('status', '1')->orderby('id', 'desc')->limit(4)->get();
         return view('front.resources.business_readiness_desk', compact('business', 'certificate', 'benefits'));
     }
 
@@ -361,7 +376,7 @@ class FrontController extends Controller
     {
         $ids = base64_decode($id);
         $certificate = Business::where('type', 'Business_certificate')->where('status', '1')->where('id', $ids)->first();
-        $data = Business::where('type', 'Business_certificate')->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
+        $data = Business::where('type', 'Business_certificate')->where('id', '!=', $ids)->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
         return view('front.resources.business_readiness_details', compact('certificate', 'data'));
     }
 
@@ -377,15 +392,15 @@ class FrontController extends Controller
     {
         $ids = base64_decode($id);
         $details  = Business::where('type', 'Investment')->where('id', $ids)->where('status', '1')->first();
-        $data = Business::where('type', 'Investment')->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
+        $data = Business::where('type', 'Investment')->where('id', '!=', $ids)->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
         return view('front.resources.go_invest_details', compact('details', 'data'));
     }
 
     public function resources_IDBInvest()
     {
         $invest = Business::where('type', 'IDBInvest')->where('status', '1')->first();
-        $about = Business::where('type', 'key_areas')->where('status', '1')->orderby('id', 'desc')->get();
-        $services = Business::where('type', 'idb_investment')->where('status', '1')->orderby('id', 'desc')->get();
+        $about = Business::where('type', 'key_areas')->where('status', '1')->orderby('id', 'desc')->limit(3)->get();
+        $services = Business::where('type', 'idb_investment')->where('status', '1')->orderby('id', 'desc')->limit(3)->get();
 
         return view('front.resources.ibd_invest', compact('invest', 'about', 'services'));
     }
@@ -393,7 +408,7 @@ class FrontController extends Controller
     public function resources_IDBDetails($id)
     {
         $ids = base64_decode($id);
-        $data = Business::where('type', 'key_areas')->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
+        $data = Business::where('type', 'key_areas')->where('id', '!=', $ids)->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
         $details = Business::where('type', 'key_areas')->where('status', '1')->where('id', $ids)->first();
         return view('front.resources.ibd_invest_deatils', compact('details', 'data'));
     }
@@ -401,8 +416,8 @@ class FrontController extends Controller
     public function resources_ProcurementProcessInGuyana()
     {
         $overview = Business::where('type', 'Procurement')->where('status', '1')->first();
-        $methods = Business::where('type', 'Procurement_methods')->where('status', '1')->orderby('id', 'desc')->get();
-        $services = Business::where('type', 'Procurement_services')->where('status', '1')->orderby('id', 'desc')->get();
+        $methods = Business::where('type', 'Procurement_methods')->where('status', '1')->orderby('id', 'desc')->limit(3)->get();
+        $services = Business::where('type', 'Procurement_services')->where('status', '1')->orderby('id', 'desc')->limit(3)->get();
 
         return view('front.resources.procurement_process_in_guyana', compact('overview', 'methods', 'services'));
     }
@@ -411,15 +426,15 @@ class FrontController extends Controller
     {
         $ids = base64_decode($id);
         $details = Business::where('type', 'Procurement_methods')->where('id', $ids)->where('status', '1')->first();
-        $data = Business::where('type', 'Procurement_methods')->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
+        $data = Business::where('type', 'Procurement_methods')->where('id', '!=', $ids)->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
         return view('front.resources.procurement_process_in_guyana_details', compact('details', 'data',));
     }
 
     public function resources_CertificateOfOrigins()
     {
         $origin = Business::where('type', 'Origins')->where('status', '1')->first();
-        $types  = Business::where('type', 'Origins_certificate')->where('status', '1')->orderby('id', 'desc')->get();
-        $certificate = Business::where('type', 'Origins_of_certificates')->where('status', '1')->orderby('id', 'desc')->get();
+        $types  = Business::where('type', 'Origins_certificate')->where('status', '1')->orderby('id', 'desc')->limit(2)->get();
+        $certificate = Business::where('type', 'Origins_of_certificates')->where('status', '1')->orderby('id', 'desc')->limit(3)->get();
 
         return view('front.resources.certificate_of_origins', compact('origin', 'types', 'certificate'));
     }
@@ -428,7 +443,7 @@ class FrontController extends Controller
     {
         $ids = base64_decode($id);
 
-        $data  = Business::where('type', 'Origins_certificate')->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
+        $data  = Business::where('type', 'Origins_certificate')->where('id', '!=', $ids)->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
         $details  = Business::where('type', 'Origins_certificate')->where('id', $ids)->where('status', '1')->first();
         return view('front.resources.certificate_of_origins_details', compact('data', 'details'));
     }
@@ -436,7 +451,6 @@ class FrontController extends Controller
     public function resources_AnnualReport()
     {
         $data = Business::where('type', 'Annual_Reports')->where('status', '1')->orderby('id', 'desc')->get();
-
         return view('front.resources.annual_report', compact('data'));
     }
 
@@ -444,7 +458,7 @@ class FrontController extends Controller
     {
         $ids = base64_decode($id);
         $details = Business::where('type', 'Annual_Reports')->where('id', $ids)->where('status', '1')->first();
-        $data = Business::where('type', 'Annual_Reports')->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
+        $data = Business::where('type', 'Annual_Reports')->where('id', '!=', $ids)->where('status', '1')->orderby('id', 'desc')->limit(5)->get();
         return view('front.resources.annual-report-details', compact('data', 'details'));
     }
 
@@ -517,9 +531,63 @@ class FrontController extends Controller
     public function media_Videos()
     {
         $video_list = Videos::orderBy('id', 'desc')->where('status', '1')->get() ?? [];
-
         $data['video_list'] = $video_list;
-
         return view('front.media.videos', $data);
     }
+    
+    public function about_view($id)
+    {
+        $data = LandingPage::where('id', $id)->where([  'type' => 'sector_committee', 'status' => '1'])->first();
+        return view('front.media.view_details', compact('data'))->render();;
+    }
+    public function introduction_view($id)
+    {
+        $data =  Testimonials::where('status', '1')->where('id', $id)->first();
+        return view('front.about_us.introduction_view', compact('data'))->render();;
+    }
+    
+    public function media_event(){
+
+        $date = Carbon::now();
+
+        $data = PSCEvent::where('status', '1')
+            ->where('date_time', '<=', $date->toDateString())
+            ->orderby('id', 'desc')
+            ->get();
+        return view('front.media.event', compact('data'));
+    }
+
+    public function details_event($id){
+        $ids = base64_decode($id);
+        $events = PSCEvent::orderBy('id', 'desc')->where([
+            'status' => '1'
+        ])->where('id', '!=', $ids)->limit(5)->get() ?? [];
+
+        $details = PSCEvent::where('status', '1')->findOrFail($ids);
+        return view('front.media.event_deatils', compact('events', 'details' ));
+
+    }
+    public function upcoming_event (){
+        $date = Carbon::now();
+
+        $data = PSCEvent::where('status', '1')
+            ->where('date_time', '>=', $date->toDateString())
+            ->orderby('id', 'desc')
+            ->get();
+        
+        return view('front.media.upcoming_event', compact('data'));
+    }
+
+    public function economic_reports (){
+        return view('front.resources.economic_reports');
+    }
+
+    public function common_external (){
+        return view('front.resources.common_external');
+    }
+
+    public function regulations (){
+        return view('front.resources.upcoming_event');
+    }
+
 }

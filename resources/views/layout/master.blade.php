@@ -7,6 +7,12 @@
     $settings_contact_us_address = helper_getSettings('address');
     $settings_contact_us_email = helper_getSettings('email');
     $settings_contact_us_phone = helper_getSettings('phone');
+
+    $settings_contact_us_instagram = helper_getSettings('instagram');
+    $settings_contact_us_facebook = helper_getSettings('facebook');
+    $settings_contact_us_twitter = helper_getSettings('twitter');
+    $settings_contact_us_youtube = helper_getSettings('youtube');
+
 @endphp
 
 <!DOCTYPE html>
@@ -197,7 +203,7 @@
                                                         </li>
 
                                                         <li class="dropdown">
-                                                            <a href="index.html">About Us <i class="fas fa-chevron-down"></i></a>
+                                                            <a href="index.html">Who We Are<i class="fas fa-chevron-down"></i></a>
                                                             <ul>
                                                                 <li><a  href="{{ route('about-us.introduction') }}">Introduction</a>
                                                                 </li>
@@ -222,37 +228,47 @@
                                                                 <i class="fas fa-chevron-down"></i></a>
                                                             <ul>
                                                                 @guest
-                                                                <li>
-                                                                    <a href="{{ route('login') }}">Members Sign-in</a>
-                                                                </li>
+                                                                <!-- 
+                                                                    <li>
+                                                                        <a href="{{ route('login') }}">Members Sign-in</a> 
+                                                                        <a href="{{ route('login') }}"> Members Sign-in </a>
+                                                                    </li>
+                                                                -->
                                                                 @endguest
                                                                 <li>
-                                                                    <a href="{{ route('membership.business-directory') }}">Business
-                                                                        Directory</a>
+                                                                    <!-- <a href="{{ route('membership.business-directory') }}">Business Directory</a> -->
+                                                                    <a href="{{ route('membership.business-directory') }}#sectoral corporate">Sectoral</a>
+                                                                    
+                                                                </li>
+                                                                <li>
+                                                                    <!-- <a href="{{ route('membership.business-directory') }}">Business Directory</a> -->
+                                                                  
+                                                                    <a href="{{ route('membership.business-directory') }}#corporate membership">Corporate</a>
                                                                 </li>
                                                                 @guest
                                                                 <li>
-                                                                    <a href="{{ route('register') }}">Join Now</a>
+                                                                    <a href="{{ route('register') }}">Become a member</a>
                                                                 </li>
                                                                 @endguest
-                                                                <li>
+                                                                <!-- <li>
                                                                     <a href="{{ route('membership.member-benefits') }}">Member
                                                                         Benefits</a>
-                                                                </li>
+                                                                </li> -->
 
                                                             </ul>
                                                         </li>
 
-                                                        <li>
+                                                        <!-- <li>
                                                             <a href="{{ route('guyana-economy') }}"> Guyana's Economy
                                                             </a>
-                                                        </li>
+                                                        </li> -->
 
                                                         <li class="dropdown">
-                                                            <a href="#">Data
-                                                                <i class="fas fa-chevron-down"></i>
+                                                            <a href="#">Data<i class="fas fa-chevron-down"></i>
                                                             </a>
                                                             <ul>
+                                                             <li>  <a href="{{ route('guyana-economy') }}"> Guyana’s Economy </a>
+                                                             </li>
                                                                 <li>
                                                                     <a href="{{ route('data.national_budgets') }}">National
                                                                         Budgets</a>
@@ -273,12 +289,20 @@
                                                         </li>
 
                                                         <li class="dropdown">
-                                                            <a href="#">Resources
-                                                                <i class="fas fa-chevron-down"></i>
+                                                            <a href="#">Resources<i class="fas fa-chevron-down"></i>
                                                             </a>
                                                             <ul>
-                                                                <li><a href="{{ route('resources.business-readiness-desk') }}">Business
-                                                                        Readiness Desk </a></li>
+                                                           
+                                                            <li> <a href="{{ route('resources.economic.reports') }}">Economic Reports </a>
+                                                            </li>
+                                                            <li> <a href="{{ route('resources.common.external.tarriff') }}">Common External Tarriff</a>
+                                                            </li>
+                                                            
+                                                            </li>
+                                                              <li> <a href="{{ route('resources.annual-report') }}">Annual Reports</a>
+                                                                </li>
+                                                          
+                                                                <li><a href="{{ route('resources.business-readiness-desk') }}"> CET Information </a></li>
                                                                 <li>
                                                                     <a href="{{ route('resources.go-invest') }}">Go-Invest</a>
                                                                 </li>
@@ -294,10 +318,7 @@
                                                                     <a href="{{ route('resources.certificate-of-origins') }}">Certificate
                                                                         of Origins</a>
                                                                 </li>
-                                                                <li>
-                                                                    <a href="{{ route('resources.annual-report') }}">Annual
-                                                                        Reports</a>
-                                                                </li>
+                                                                
                                                             </ul>
                                                         </li>
 
@@ -306,25 +327,46 @@
                                                                 <i class="fas fa-chevron-down"></i>
                                                             </a>
                                                             <ul>
-                                                                <li><a href="{{ route('media.news') }}">News</a></li>
+                                                                <li><a href="{{ route('media.news') }}">Newsletter</a></li>
                                                                 <li>
                                                                     <a href="{{ route('media.press-release') }}">Press
                                                                         Releases</a>
                                                                 </li>
-                                                                <li>
+                                                                <!-- <li>
                                                                     <a href="{{ route('media.social-media') }}">Social
                                                                         Media</a>
-                                                                </li>
+                                                                </li> -->
                                                                 <li>
                                                                     <a href="{{ route('media.photos') }}">Photos</a>
                                                                 </li>
                                                                 <li>
                                                                     <a href="{{ route('media.videos') }}">Videos</a>
                                                                 </li>
+                                                                <!-- <li>
+                                                                    <a href="{{ route('media.event') }}">Events</a>
+                                                                </li> -->
+
 
                                                             </ul>
                                                         </li>
+                                                        
+                                                        <li class="dropdown">
+                                                            <a href="#">Event<i class="fas fa-chevron-down"></i>
+                                                            </a>
+                                                            <ul>
+                                                                <li>  <a href="{{ route('media.event') }}">Events</a></li>
+                                                                <li>
+                                                                    <a href="{{ route('media.upcoming.event') }}">  
 
+                                                                    Upcoming Events
+                                                                    </a>
+                                                                </li>
+                                                                <!-- <li>
+                                                                    <a href="{{ route('media.social-media') }}">Social
+                                                                        Media</a>
+                                                                </li> -->
+                                                              </ul>
+                                                        </li>
                                                         <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
                                                     </ul>
                                                 </div>
@@ -411,10 +453,11 @@
         <footer class="footer-section">
             <div class="container">
                 <div class="row mb-3">
+
                     <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
                         <div class="footer-widget-single footer-widget-about">
                             <div class="footer-widget-title">
-                                <h3>About Us</h3>
+                                <h3>Who We Are</h3>
                             </div>
                             <div class="footer-widget-about-text">
                                 <p>
@@ -423,29 +466,56 @@
                                     number of elected corporate members.
                                 </p>
                             </div>
-                            <div class="footer-widget-about-social">
-                                <a href="#"><i class="fab fa-facebook"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"> <i class="fab fa-youtube"></i></a>
-                                <a href="#"><i class="fab fa-instagram"></i></a>
+                           
+                            <div class="footer-widget_contact-info mb-3" style="margin-top: 35px;">
+                                <p style="display: flex; align-items: baseline">
+                                    <i class="fas fa-map-marker-alt" style="margin-right: 10px"></i>
+                                    {{ $settings_contact_us_address }}
+                                </p>
+                                <a href="tel:+592-223-0875"><i class="fas fa-phone" style="margin-right: 10px"></i>
+                                    {{ $settings_contact_us_phone }}
+                                </a>
+                                <br />
+                                <a href="mailto:office@psc.org.gy">
+                                    <i class="fas fa-envelope" style="margin-right: 10px"></i>
+                                    {{ $settings_contact_us_email }}
+                                </a><br />
                             </div>
+
+
+                            <!-- <div class="footer-widget-about-social">
+                                <a href="{{$settings_contact_us_facebook}}"><i class="fab fa-facebook"></i></a>
+                                <a href="{{$settings_contact_us_twitter}}"><i class="fab fa-twitter"></i></a>
+                                <a href="{{$settings_contact_us_youtube}}"> <i class="fab fa-youtube"></i></a>
+                                <a href="{{$settings_contact_us_instagram}}"><i class="fab fa-instagram"></i></a>
+                            </div> -->
                         </div>
                     </div>
-                    <div class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
+
+                    <div class="col-xl-5 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
                         <div class="footer-widget-single footer-widget-useful-links">
                             <div class="footer-widget-title">
                                 <h3>Useful Links</h3>
                             </div>
                             <ul class="footer-widget-useful-links-list list-unstyled">
-                                <li><a href="{{url('about-us/introduction')}}">Introduction</a></li>
-                                <li><a href="{{url('membership/business-directory')}}">Member Benefits</a></li>
-                                <li><a href="{{url('guyana-economy')}}">Guyana's Economy</a></li>
-                                <li><a href="{{url('media/news')}}">News</a></li>
+                                <!-- <li><a target="_blank" href="{{url('about-us/introduction')}}">Introduction</a></li>
+                                <li><a target="_blank" href="{{url('membership/business-directory')}}">Member Benefits</a></li>
+                                <li><a target="_blank" href="{{url('guyana-economy')}}">Guyana's Economy</a></li>
+                                <li><a target="_blank" href="{{url('media/news')}}">News</a></li> -->
+                                <li><a target="_blank" href="https://guyanainvest.gov.gy/">GOINVEST  </a></li>
+                                <li><a target="_blank" href="https://mintic.gov.gy/">Ministry of Tourism, Industry and Commerce </a></li>
+                                <li><a target="_blank" href="https://finance.gov.gy">Ministry of Finance</a></li>
+                                <li><a target="_blank" href="https://www.gra.gov.gy/">Guyana Revenue Authority</a></li>
+                                <li><a target="_blank" href="https://sbb.gov.gy/"> Small Business Bureau</a></li>
+                                <li><a target="_blank" href="http://www.bankofguyana.org/"> Bank of Guyana </a></li>
+                                <li><a target="_blank" href="https://www.nis.org.gy/"> National Insurance Scheme</a></li>
+                                <li><a target="_blank" href=" https://gnbsgy.org/">Guyana National Bureau of Standards</a></li>
                               
                             </ul>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
+
+                    <!-- <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
                         <div class="footer-widget-single footer-widget-contact">
                             <div class="footer-widget-title">
                                 <h3>Contact Us</h3>
@@ -465,7 +535,8 @@
                                 </a><br />
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+
                     <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="400ms">
                         <div class="footer-widget-single">
                             <div class="footer-widget-title">
@@ -474,8 +545,17 @@
                             <ul class="footer-widget-gallery-list list-unstyled">
                                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.6022967381095!2d-58.160602499999996!3d6.818129600000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8dafef0e7ef8479b%3A0x7bf69734452f5a55!2sPrivate%20Sector%20Commission!5e0!3m2!1sen!2sin!4v1707730504072!5m2!1sen!2sin" width="100%" height="170" style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </ul>
+
+                            <div class="footer-widget-about-social">
+                                <a target="_blank" href="{{$settings_contact_us_facebook}}"><i class="fab fa-facebook"></i></a>
+                                <a target="_blank" href="{{$settings_contact_us_twitter}}"><i class="fab fa-twitter"></i></a>
+                                <a target="_blank" href="{{$settings_contact_us_youtube}}"> <i class="fab fa-youtube"></i></a>
+                                <a target="_blank" href="{{$settings_contact_us_instagram}}"><i class="fab fa-instagram"></i></a>
+                            </div>
+
                         </div>
                     </div>
+
                 </div>
             </div>
             <!-- <hr / style="border-bottom: 1px solid #fff;"> -->
@@ -571,6 +651,32 @@
             });
         }
     </script>
+
+<script>
+$(document).ready(function() {
+  
+  $("#myBtnt").click(function(event) {
+    event.stopPropagation(); 
+    if ($("#myDropdownt").is(":visible")) {
+      $("#myDropdownt").hide();
+    } else {
+      $("#myDropdownt").show();
+    }
+  });
+
+  $(document).click(function() {
+    if ($("#myDropdownt").is(":visible")) {
+      $("#myDropdownt").hide(); 
+    }
+  });
+
+  $("#myDropdownt").click(function(event) {
+    event.stopPropagation();
+  });
+});
+
+</script>
+
 
     <script>
         $(".brand-one-carousel-1").owlCarousel({

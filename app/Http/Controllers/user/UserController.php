@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\User;
+use App\Models\Application;
 use App\Models\UserDetails;
 use App\Traits\ImageTraits;
 use Illuminate\Http\Request;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Requests\user\DeleteProfileRequest;
 use App\Http\Requests\user\UpdateProfileRequest;
 use App\Http\Requests\user\UpdateProfileStatusRequest;
+use App\Providers\RouteServiceProvider;
 
 class UserController extends Controller
 {
@@ -153,4 +155,16 @@ class UserController extends Controller
 
         return response()->json($data, 200);
     }
+
+    public function applications(){
+        $id = Auth::user()->id; 
+        $form = Application::where('user_id',  $id)->first();
+        if ($form) {
+            return redirect()->intended(RouteServiceProvider::MEMBER_DASHBOARD);
+        } else {
+            return view('member.registrations');
+             }
+        }
+
+
 }

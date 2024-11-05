@@ -24,9 +24,9 @@ class UpdateNewsRequest extends FormRequest
         return [
             'title' => ['required'],
             'old_files' => ['nullable', 'array'],
-            'files' => ['nullable', 'array'],
-            'files.*' => ['nullable', 'file', 'mimes:jpg,jpeg,gif,png,pdf', 'max:2048'],
-            'content' => ['required'],
+            // 'files' => ['nullable', 'array'],
+            'files' => ['required', 'file', 'mimes:jpg,jpeg,gif,png,pdf'],
+            'content' => ['nullable'],
             'status' => ['required', 'in:0,1'],
         ];
     }

@@ -28,6 +28,8 @@
                 <div class="sortable-masonry">
                     @if(count($social_media_list) > 0)
                         <div class="row items-container">
+
+                       <h3 style="text-align: center;"> Coming soon <h3>
                             @foreach ($social_media_list as $listKey => $list )
                             @endforeach
                         </div>

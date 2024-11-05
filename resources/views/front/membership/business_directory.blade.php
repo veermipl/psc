@@ -1,24 +1,16 @@
 @extends('layout.master')
 
 @section('content')
-    <!-- <section class="why-choose-two-section">
-        <div class="container">
-            <div class="thm-section-title text-center">
-                <h4 class="sub-title-shape-left section_title-subheading">
-                    Membership
-                </h4>
-                <h2>Business Directory</h2>
-            </div>
 
-            <div class="row">
-                <div class="col-lg-12">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque atque, libero ut repudiandae quas voluptatem. Quo ut natus sapiente eos sunt, laborum eius, in, atque dolore quod harum odit amet.
-                </div>
-            </div>
-        </div>
-    </section> -->
-
-    
+    <style>
+        .why-choose-two-section{
+            padding: 0 0 40px;
+        }
+        
+        .cor-padd{
+            padding-top: 60px
+        }
+    </style>
     <section class="banner-section wow bg-about">
         <div class="container">
          <div class="row">
@@ -38,45 +30,51 @@
         </div>
        </section>
 
-  <!--Start Why Choose Two Section -->
 <section class="why-choose-two-section">
     <div class="container">
+    @if(count($membershipList) > 0)
+    @foreach($membershipList as $listKey => $list)
+        <div class="thm-section-title cor-padd text-center" id="{{ strtolower($list->name) }}">  <!-- ID added here -->
+            <h4 class="sub-title-shape-left section_title-subheading">
+                Our
+            </h4>
+            <h2>{{ $list->name }} Members</h2>
+        </div>
         @if(count($business_directory_list) > 0)
-            @foreach($business_directory_list as $listKey => $list)
-                <div class="thm-section-title text-center">
-                    <h4 class="sub-title-shape-left section_title-subheading">
-                        Our
-                    </h4>
-                    <h2>{{ $listKey }} Members</h2>
-                </div>
-                @if(count($list) > 0)
-                    <div class="row">
-                        @foreach($list as $listChildKey => $listChild)
-                        <div class="col-md-6">
-                            <div class="service-details-sidebar">
-                                <div class="service-details-sidebar-single view-all-services p-0">
-                                    <ul>
-                                        <li>
-                                            <div class="icon">
-                                                <i class="fa fa-angle-right"></i>
-                                            </div>
-                                            <div class="text">
-                                                <a href="#">{{ $listChild }}</a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
+            <div class="row">
+                @foreach($business_directory_list as $listChildKey => $listChild)
+                    @if($list->id == $listChild->type)
+                    <div class="col-md-6">
+                        <div class="service-details-sidebar">
+                            <div class="service-details-sidebar-single view-all-services p-0">
+                                <ul>
+                                    <li>
+                                        <div class="icon">
+                                            <i class="fa fa-angle-right"></i>
+                                        </div>
+                                        <div class="text">
+                                            <a  @if($listChild->link != '') target="_blank" href=" {!! $listChild->link ?? '#' !!}"  @endif >
+                                                {{ $listChild->name}}
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                        @endforeach
                     </div>
-                @endif
-            @endforeach
+                    @endif
+                @endforeach
+            </div>
         @else
-            <h6 class="text-center">No Data Found !</h6>
+        <p>No business directories found for {{ $list->name }} members.</p>
         @endif
+    @endforeach
+@else
+    <h6 class="text-center">No Data Found!</h6>
+@endif
     </div>
 </section>
+  <!--Start Why Choose Two Section -->
 
 <!--End Why Choose Two Section -->
 <!-- -----Become a member-start--- -->

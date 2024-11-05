@@ -24,7 +24,7 @@
                                         class="text-danger">*</span></label>
                                 <input type="text" id="name" class="form-control" name="title"
                                     placeholder="Enter title" value="{{ old('title', $press_release->title) }}"
-                                    maxlength="50">
+                                    maxlength="150">
 
                                 @error('title')
                                     <span class="text-danger">{{ $message }}</span>
@@ -33,26 +33,39 @@
 
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Files </label>
-                                <input type="file" class="form-control" name="files[]" accept="image/*,application/pdf"
-                                    multiple>
-
-                                @if ($errors->has('files.*'))
-                                    @foreach ($errors->get('files.*') as $error)
-                                        @foreach ($error as $message)
-                                            <span class="text-danger">{{ $message }}</span><br>
-                                        @endforeach
-                                    @endforeach
-                                @endif
+                                <input type="file" class="form-control" name="files" accept="image/*,application/pdf">
+                              @error('files')
+                                   <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
-                            <div class="col-md-12 position-relative">
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Status <span
+                                        class="text-danger">*</span></label>
+                                <select name="status" class="form-control">
+                                    <option hidden value="">Status</option>
+                                    @foreach (config('site.status') as $status)
+                                        <option value="{{ $status['value'] }}"
+                                            {{ old('status', $press_release->status) == $status['value'] ? 'selected' : '' }}>
+                                            {{ $status['name'] }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @error('status')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <!-- <div class="col-md-12 position-relative">
                                 <label for="validationTooltip01" class="form-label">Content</label>
                                 <textarea name="content" id="editor" cols="5" rows="5" class="form-control">{{ old('content', $press_release->content) }}</textarea>
 
                                 @error('content')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
-                            </div>
+                            </div> -->
+
 
                             <div class="col-md-12 position-relative">
                                 @if ($press_release->files)
@@ -78,11 +91,11 @@
                                                         <img class="li_img pop_up_doc"
                                                             src="{{ asset('storage/default/pdf.png') }}">
                                                     @endif
-                                                    <button class="btn btn-sm btn-outline-danger mt-2 deleteFileBtn"
+                                                    <!-- <button class="btn btn-sm btn-outline-danger mt-2 deleteFileBtn"
                                                         type="button" id="{{ $press_release->id }}"
                                                         file_url="{{ $fileValue }}">
                                                         Delete
-                                                    </button>
+                                                    </button> -->
                                                 </div>
                                             @endif
                                         @endforeach
@@ -90,23 +103,7 @@
                                 @endif
                             </div>
 
-                            <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Status <span
-                                        class="text-danger">*</span></label>
-                                <select name="status" class="form-control">
-                                    <option hidden value="">Status</option>
-                                    @foreach (config('site.status') as $status)
-                                        <option value="{{ $status['value'] }}"
-                                            {{ old('status', $press_release->status) == $status['value'] ? 'selected' : '' }}>
-                                            {{ $status['name'] }}
-                                        </option>
-                                    @endforeach
-                                </select>
-
-                                @error('status')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
+                            
 
                             <div class="col-12 text-end mt-5">
                                 <button class="btn btn-sm btn-primary" type="submit">Update</button>

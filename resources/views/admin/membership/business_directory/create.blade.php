@@ -20,17 +20,6 @@
                             @method('post')
 
                             <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Name <span
-                                        class="text-danger">*</span></label>
-                                <input type="text" id="name" class="form-control" name="name"
-                                    placeholder="Enter name" value="{{ old('name') }}" maxlength="100">
-
-                                @error('name')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Membership Type <span
                                         class="text-danger">*</span></label>
                                 <select name="type" class="form-control">
@@ -47,6 +36,29 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Name <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" id="name" class="form-control" name="name"
+                                    placeholder="Enter name" value="{{ old('name') }}" maxlength="100">
+
+                                @error('name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Website URL </label>
+                                <input type="text" id="link" class="form-control" name="link"
+                                    placeholder="Enter website url" value="{{ old('link') }}" maxlength="100">
+
+                                @error('link')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                           
 
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Status <span

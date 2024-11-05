@@ -11,8 +11,5 @@ class SocialMedia extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'social_media';
-
-    protected $fillable = [
-        '',
-    ];
+    protected $guarded = [''];
 }

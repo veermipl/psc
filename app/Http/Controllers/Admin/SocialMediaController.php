@@ -52,7 +52,6 @@ class SocialMediaController extends Controller
     public function create()
     {
         $this->authorize('media_create');
-
         return view('admin.media.social_media.create');
     }
 
@@ -62,16 +61,24 @@ class SocialMediaController extends Controller
     public function store(StoreSocialMediaRequest $request)
     {
         $this->authorize('media_create');
+        $this->validate($request,[
+            'title'  => 'required',
+            'content'  => 'required',
+            'status' => 'required',
+            'files'  => 'nullable|mimes:jpeg,jpg,png',
+        ]);
 
-        $validated = $request->validated();
-        dd($validated);
-
-        DB::transaction(function () use ($validated) {
+        if ($request->hasFile('files')) {
+            $file = $request->file('files');
+            $image = $file->store('/media/social-media', 'public');
+        }
             SocialMedia::create([
-                'status' => $validated['status'],
+                'title' => $request->title,
+                'content' => $request->content,
+                'files' => $image ?? '',
+                'status' => $request->status,
             ]);
-        });
-
+     
         return redirect()->route('admin.media-center.social-media.index')->with('success', 'Social Media created successfully');
     }
 
@@ -81,39 +88,50 @@ class SocialMediaController extends Controller
     public function show(SocialMedia $social_media)
     {
         $this->authorize('media_view');
-
         $data['social_media'] = $social_media;
-
         return view('admin.media.social_media.view', $data);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SocialMedia $social_media)
+    public function edit($social_media)
     {
         $this->authorize('media_edit');
-
-        $data['social_media'] = $social_media;
-
+        $data['social_media'] =  SocialMedia::find($social_media);
         return view('admin.media.social_media.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSocialMediaRequest $request, SocialMedia $social_media)
+    public function update(UpdateSocialMediaRequest $request, $id)
     {
         $this->authorize('media_create');
 
-        $validated = $request->validated();
-        dd($validated);
+        $this->validate($request,[
+            'title'  => 'required',
+            'content'  => 'required',
+            'status' => 'required',
+            'files'  => 'nullable|mimes:jpeg,jpg,png',
+        ]);
 
-        DB::transaction(function () use ($validated, $social_media) {
-            $social_media->update([
-                'status' => $validated['status'],
-            ]);
-        });
+        $updat = SocialMedia::find($id);
+     
+        if ($request->hasFile('files')) {
+            $file = $request->file('files');
+            $image = $file->store('/media/social-media', 'public');
+        } else {
+            $image = $updat->image;
+        }
+
+        $array = [
+                'title' => $request->title,
+                'content' => $request->content,
+                'files' => $image,
+                'status' => $request->status,
+            ];
+            $updat->Update($array);
 
         return redirect()->route('admin.media-center.social-media.index')->with('success', 'Social Media updated successfully');
     }
@@ -121,14 +139,11 @@ class SocialMediaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SocialMedia $social_media)
+    public function destroy( $id)
     {
         $this->authorize('media_delete');
-
-         DB::transaction(function () use ($social_media) {
-            $social_media->delete();
-        });
-
+        $user = SocialMedia::find($id);
+        $user->delete();
         $data['error'] = false;
         $data['msg'] = 'Social Media Deleted';
 
@@ -138,12 +153,10 @@ class SocialMediaController extends Controller
     public function statusToggle(UpdateSocialMediaStatusRequest $request)
     {
         $this->authorize('media_status_edit');
-
         $validated = $request->validated();
-        dd($validated);
+        $news = SocialMedia::find($request->lid);
 
-        $news = SocialMedia::find($validated['lid']);
-        $status = $validated['lstatus'] == 1 ? '0' : '1';
+        $status = $request->lstatus == 1 ? '0' : '1';
 
         DB::transaction(function () use ($news, $status) {
             $news->update([

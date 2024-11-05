@@ -40,7 +40,7 @@ class BusinessDirectoryController extends Controller
                     });
             })
             ->get();
-        $membershipList = MembershipType::orderBy('name', 'asc')->get();
+        $membershipList = MembershipType::orderBy('name', 'asc')->where('status', '1')->get();
 
         $data['membershipList'] = $membershipList;
         $data['filterValues'] = $filterValues;
@@ -57,7 +57,7 @@ class BusinessDirectoryController extends Controller
     {
         $this->authorize('membership_create');
 
-        $membershipList = MembershipType::orderBy('name', 'asc')->get();
+        $membershipList = MembershipType::orderBy('name', 'asc')->where('status', '1')->get();
 
         $data['membershipList'] = $membershipList;
 
@@ -77,6 +77,7 @@ class BusinessDirectoryController extends Controller
             BusinessDirectory::create([
                 'name' => $validated['name'],
                 'type' => $validated['type'],
+                'link' => $validated['link'],
                 'status' => $validated['status'],
             ]);
         });
@@ -106,7 +107,7 @@ class BusinessDirectoryController extends Controller
     {
         $this->authorize('membership_edit');
 
-        $membershipList = MembershipType::orderBy('name', 'asc')->get();
+        $membershipList = MembershipType::orderBy('name', 'asc')->where('status', '1')->get();
 
         $data['membershipList'] = $membershipList;
         $data['business_directory'] = $business_directory;
@@ -127,6 +128,7 @@ class BusinessDirectoryController extends Controller
             $business_directory->update([
                 'name' => $validated['name'],
                 'type' => $validated['type'],
+                'link' => $validated['link'],
                 'status' => $validated['status'],
             ]);
         });
@@ -193,6 +195,7 @@ class BusinessDirectoryController extends Controller
                 'id' => $dataVal->id,
                 'name' => $dataVal->name ?? $noData,
                 'membership_type' => $membershipTypeData ?? $noData,
+                'link' => $dataVal->link ?? $noData,
                 'status' => $statusData,
             ];
         }
@@ -212,6 +215,7 @@ class BusinessDirectoryController extends Controller
             foreach ($dataarray as $task) {
                 $row['ID'] = $task['id'];
                 $row['Name'] = $task['name'];
+                $row['Website URL'] = $task['link'];
                 $row['Membership Type'] = $task['membership_type'];
                 $row['Status'] = $task['status'];
 

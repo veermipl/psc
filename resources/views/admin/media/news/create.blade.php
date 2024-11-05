@@ -23,7 +23,7 @@
                                 <label for="validationTooltip01" class="form-label">Title <span
                                         class="text-danger">*</span></label>
                                 <input type="text" id="name" class="form-control" name="title"
-                                    placeholder="Enter title" value="{{ old('title') }}" maxlength="50">
+                                    placeholder="Enter title" value="{{ old('title') }}" maxlength="150">
 
                                 @error('title')
                                     <span class="text-danger">{{ $message }}</span>
@@ -32,18 +32,23 @@
 
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Files </label>
-                                <input type="file" class="form-control" name="files[]" accept="image/*,application/pdf"
-                                    multiple>
+                                <input type="file" class="form-control" name="files" accept="image/*,application/pdf">
 
+                                    @error('files')
+                                    <span class="text-danger">{{ $message }}</span>
+                                     @enderror
+                                
+                            <!-- 
                                 @if ($errors->has('files.*'))
                                     @foreach ($errors->get('files.*') as $error)
                                         @foreach ($error as $message)
                                             <span class="text-danger">{{ $message }}</span><br>
                                         @endforeach
                                     @endforeach
-                                @endif
-                            </div>
+                                @endif -->
 
+                            </div>
+<!-- 
                             <div class="col-md-12 position-relative">
                                 <label for="validationTooltip01" class="form-label">Content <span
                                         class="text-danger">*</span></label>
@@ -52,7 +57,7 @@
                                 @error('content')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
-                            </div>
+                            </div> -->
 
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Status <span

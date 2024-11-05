@@ -55,11 +55,11 @@
                                     <img src="{{ asset('storage/default/no_image.png') }}">
                                 @endif
                             </div>
-                            <h3>{{ $sub_headerVal['title'] }}</h3>
-                            @php
-                                $limitedContent = Str::limit($sub_headerVal['content'], 150);
-                            @endphp
-                            <p>{!! $limitedContent !!}</p>
+                            <h3>{{  Str::limit($sub_headerVal->title, 30) }}</h3>
+                       
+                            <div class=" blog-one-text-2">
+                                    {!! Str::limit($sub_headerVal->content, 100)!!}
+                                </div>
                             <a href="{{ route('home.sub-banner.show', base64_encode($sub_headerVal['id'])) }}" class="vs-btn style3 mt-4" tabindex="0">
                                 Read More<i class="far fa-long-arrow-right"></i>
                             </a>
@@ -124,13 +124,13 @@
                     <div class="col-xl-12">
                         <div class="testimonials-one-carousel owl-theme owl-carousel">
                             @foreach($sector_committees as $sector_committeesKey => $sector_committeesVal)
-                                <div class="testimonials-one-single">
+                                <div class="testimonials-one-single priority-2">
                                     <div class="client-info">
                                         <div class="client-img">
                                             @if ($sector_committeesVal['file'])
-                                                <img src="{{ asset('storage/' . $sector_committeesVal['file']) }}">
+                                                <img style="width: 64px; width: 64px;" src="{{ asset('storage/' . $sector_committeesVal['file']) }}">
                                             @else
-                                                <img src="{{ asset('storage/default/no_image.png') }}">
+                                                <img  style="width: 64px; width: 64px;" src="{{ asset('storage/default/no_image.png') }}">
                                             @endif
                                         </div>
                                         <div class="client-content">
@@ -138,11 +138,13 @@
                                         </div>
                                     </div>
                                     <div class="text-box">
-                                        <p>{!! $sector_committeesVal['content'] !!}</p>
+                                     {!!  Str::limit($sector_committeesVal['content'], 150) !!}
                                     </div>
                                     <div class="testimonials-quote">
                                         <i class="fa fa-quote-left"></i>
                                     </div>
+
+                                    <button type="button" class="vs-btn1 style5  btn btn-sm mt-3 open_modal" data-id="{{$sector_committeesVal['id']}}" href="#" data-toggle="modal" data-target="#exampleModal">Read More</button>
                                 </div>
                             @endforeach
                         </div>
@@ -227,7 +229,7 @@
                                         <img src="{{ asset('storage/default/no_image.png') }}">
                                     @endif
                                 </div>
-                                <div class="blog-one-content">
+                                <div class="blog-one-content-3">
                                     <ul class="blog-classic-meta">
                                         <li>
                                             <a><i class="fas fa-clock"></i> {{ date('h:i A', strtotime($postVal['created_at'])) }}</a>
@@ -237,11 +239,11 @@
                                         </li>
                                     </ul>
                                     <div class="blog-one-title">
-                                        <h3><a href="{{ route('home.post.show', base64_encode($postVal['id'])) }}">{{ $postVal['title'] }}</a></h3>
+                                        <h3><a href="{{ route('home.post.show', base64_encode($postVal['id'])) }}"> {{ Str::limit($postVal->title, 20) }}  </a></h3>
                                     </div>
                                     <div class="blog-one-text">
                                         @php
-                                            $limitedContent = Str::limit($postVal['content'], 150);
+                                            $limitedContent = Str::limit($postVal['content'], 180);
                                         @endphp
                                         <p>{!! $limitedContent !!}</p>
                                     </div>
@@ -278,7 +280,7 @@
                                     <div class="recent-post">
                                         <div class="media-body">
                                             <h4 class="post-title">
-                                                <a class="text-inherit" href="{{ route('media.press-release-show', base64_encode($press_releaseVal['id'])) }}">{{ $press_releaseVal['title'] }}</a>
+                                                <a class="text-inherit" target="_blank" href="{{ asset('storage/'. $press_releaseVal['files']) }}">{{ $press_releaseVal['title'] }}</a>
                                             </h4>
                                             <div class="recent-post-meta">
                                                 <a href="#">{{ date('M d, Y', strtotime($press_releaseVal['created_at'])) }}</a>
@@ -287,9 +289,10 @@
                                     </div>
                                 </div>
                             @endforeach
-                            <a href="{{ route('media.press-release') }}" class="vs-btn style5 mt-4" tabindex="0">
+                            <a href="{{ route('media.press-release') }}" class="vs-btn1 style5 mt-3" tabindex="0">
                                 Read More<i class="far fa-long-arrow-right"></i>
                             </a>
+                        
                         @else
                             <hr>
                             <h6 class="text-dark">No Data Found !</h6>
@@ -306,16 +309,16 @@
                                     <div class="recent-post">
                                         <div class="media-body">
                                             <h4 class="post-title">
-                                                <a class="text-inherit" href="{{ route('media.news-show', base64_encode($newsVal['id'])) }}">{{ $newsVal['title'] }}</a>
+                                                <a class="text-inherit"  target="_blank" href="{{ asset('storage/'. $press_releaseVal['files']) }}">{{ $newsVal['title'] }}</a>
                                                 </h4>
                                             <div class="recent-post-meta">
-                                                <a href="#">{{ date('M d, Y', strtotime($press_releaseVal['created_at'])) }}</a>
+                                                <a href="#">{{ date('M d, Y', strtotime($newsVal['created_at'])) }}</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
-                            <a href="{{ route('media.news') }}" class="vs-btn style5 mt-4" tabindex="0">
+                            <a href="{{ route('media.news') }}" class="vs-btn1 style5 mt-3" tabindex="0">
                                 Read More<i class="far fa-long-arrow-right"></i>
                             </a>
                         @else
@@ -333,15 +336,15 @@
                                 <div class="recent-post-wrap">
                                     <div class="recent-post">
                                         <div class="media-body">
-                                            <h4 class="post-title"><a class="text-inherit" href="#"> {{ $social_mediaVal['title'] }}</a></h4>
+                                            <h4 class="post-title"><a class="text-inherit" href="{{route('home.social.show',base64_encode($social_mediaVal->id))}}"> {{ $social_mediaVal['title'] }}</a></h4>
                                             <div class="recent-post-meta">
-                                                <a href="#">{{ date('M d, Y', strtotime($press_releaseVal['created_at'])) }}</a>
+                                                <a href="#">{{ date('M d, Y', strtotime($social_mediaVal['created_at'])) }}</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
-                            <a href="{{ route('media.social-media') }}" class="vs-btn style5 mt-4" tabindex="0">
+                            <a href="{{ route('media.social-media') }}" class="vs-btn1 style5 mt-3" tabindex="0">
                                 Read More<i class="far fa-long-arrow-right"></i>
                             </a>
                         @else
@@ -391,4 +394,43 @@
     </section>
     <!--End video Two Section -->
 
+@endsection
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" >
+        <div class="modal-content" style="width: 135% !important;">
+        <div class="modal-header">
+            <!-- <h5 class="modal-title" id="exampleModalLabel" ><strong>Learn more </strong></h5> -->
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+                </div>
+                    <div class="modal-body">  </div>
+                </div>
+     </div>
+ </div>
+
+@section('scripts')
+<script type="text/javascript">
+$(document).ready(function(){
+        $('.open_modal').click(function(){
+            let id = $(this).data('id');
+            let url = `{{ url('/sector-committees/${id}') }}`;
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function(response) {
+                    console.log(response)
+                    $('#exampleModalCenter').modal('show');
+                    $('.modal-body').html(response)
+                }
+            });
+        })
+        $('.close').click(function(){
+            $('#exampleModalCenter').modal('hide');
+
+        })
+    })
+
+</script>
 @endsection

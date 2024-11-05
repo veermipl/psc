@@ -19,6 +19,23 @@
                             @csrf
                             @method('post')
 
+                            <div class="col-md-6 position-relative">
+                                <input type="text" class="form-control" name="title" placeholder="Title"
+                                    value="{{ $filterValues['title'] }}">
+                            </div>
+
+                            <div class="col-md-6 position-relative">
+                                <select name="status" class="form-control">
+                                    <option hidden value="">Status</option>
+                                    @foreach (config('site.status') as $status)
+                                        <option value="{{ $status['value'] }}"
+                                            {{ $filterValues['status'] == $status['value'] ? 'selected' : '' }}>
+                                            {{ $status['name'] }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <div class="col-12 text-end">
                                 <a href="{{ route('admin.media-center.social-media.index') }}"
                                     class="btn btn-danger btn-sm">
@@ -44,7 +61,7 @@
             <div class="d-flex justify-content-between">
                 <a href="{{ route('admin.media-center.social-media.create') }}" class="btn btn-primary btn-sm">
                     <ion-icon name="add" role="img" class="md hydrated" aria-label="person add"></ion-icon>Create
-                    Social Media
+                    Press Release
                 </a>
 
                 @if ($export_id && count($export_id) > 0)
@@ -72,11 +89,12 @@
                     </div>
 
                     <div class="table-responsive">
-                        <table id="socialMediaTable" class="table table-sm table-borderless table-light" data-toggle="table"
-                            data-search="true" data-buttons-prefix="btn-md btn" data-pagination="true">
+                        <table id="pressReleaseTable" class="table table-sm table-borderless table-light"
+                            data-toggle="table" data-search="true" data-buttons-prefix="btn-md btn" data-pagination="true">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
+                                    <th scope="col" data-sortable="true">Title</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -87,6 +105,13 @@
                                         <tr class="tr_row_{{ $listKey }}">
 
                                             <th scope="row">{{ $listKey + 1 }}</th>
+
+                                            <td>
+                                                <a href="#"
+                                                    class="text-secondary">
+                                                    {{ $listValue->title }}
+                                                </a>
+                                            </td>
 
                                             <td>
                                                 @if ($listValue->status == 1)

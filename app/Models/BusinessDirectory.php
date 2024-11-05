@@ -16,6 +16,7 @@ class BusinessDirectory extends Model
         'name',
         'type',
         'status',
+        'link',
     ];
 
     public function membershipType()

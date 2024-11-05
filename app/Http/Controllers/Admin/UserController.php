@@ -60,26 +60,6 @@ class UserController extends Controller
         $data['userList'] = $userList;
         $data['export_id'] = $userList->pluck('id')->toArray();
         $data['roleList'] = $roleList;
-        
-        if ($request->route()->getName() === 'admin.user.reload-table') {
-            foreach ($userList as $userKey => $user) {
-                $userRoles = $user->role ? $user->role->pluck('name')->toArray() : [];
-
-                $user['key'] = $userKey + 1;
-                $user['name'] = '<a href="'. route('admin.user.show', $user->id) .'" class="text-secondary">'. $user->name .'</a>';
-                $user['user_role'] = implode(', ', $userRoles);
-                if ($user['status'] == 1) {
-                    $user['status'] = '<span class="badge alert-success" id="' . ($user->id !== 1 ? "userStatuss" : "") . '" uid="' . $user->id . '" ustatus="' . $user->status . '" urow="' . $userKey . '">Active</span>';
-                } else {
-                    $user['status'] = '<span class="badge alert-danger" id="' . ($user->id !== 1 ? "userStatus" : "") . '" uid="' . $user->id . '" ustatus="' . $user->status . '" urow="' . $userKey . '">In Active</span>';
-                }
-                if($user->id !== 1){
-                    $user['action'] = '<div class="tableOptions"><span class="text-dark" title="Edit"><a href="'. route('admin.user.edit', $user->id) .'"><i class="fa fa-pencil"></i></a></span><span class="text-danger" title="Delete" uid="'. $user->id .'" urow="'. $userKey .'" id="deleteUserBtn"><i class="fa fa-trash"></i></span></div>';
-                }
-            }
-
-            return response()->json($userList, 200);
-        }
 
         return view('admin.user.index', $data);
     }

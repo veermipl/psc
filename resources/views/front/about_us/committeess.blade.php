@@ -50,16 +50,16 @@
                                             @if($members->twitter != '')
                                                 <a href="{{$members->twitter}}"><i class="fab fa-twitter"></i></a>
                                             @endif
-                                            @if($members->instra != '')
-                                                <a href="{{$members->instra}}"><i class="fab fa-dribbble"></i></a>
-                                            @endif
                                             @if($members->dribbble != '')
-                                                <a href="{{$members->dribbble}}"><i class="fab fa-instagram"></i></a>
+                                                <a href="{{$members->dribbble}}"><i class="fab fa-dribbble"></i></a>
+                                            @endif
+                                            @if($members->instra != '')
+                                                <a href="{{$members->instra}}"><i class="fab fa-instagram"></i></a>
                                             @endif
                                         </div>
                                     </div>
                                 </div>
-                                <div class="team-one-content">
+                                <div class="team-one-content team-one-content-2 ">
                                     <h3>{{$members->name}}</h3>
                                     <p>{{$members->office}}</p>
                                 </div>

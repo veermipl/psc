@@ -90,7 +90,7 @@
                             <div class="main-service-one-sec-content">
                                 <h4>{{ $sourceVal['title'] }}</h4>
                                 @php
-                                    $limitedContent = Str::limit($sourceVal['content'], 200);
+                                    $limitedContent = Str::limit($sourceVal['content'], 50);
                                 @endphp
                                 <p>{!! $limitedContent !!}</p>
                             </div>
@@ -129,7 +129,7 @@
                                 <div class="main-service-one-sec-content">
                                     <h4>{{ $sourceVal['title'] }}</h4>
                                     @php
-                                        $limitedContent = Str::limit($sourceVal['content'], 200);
+                                        $limitedContent = Str::limit($sourceVal['content'], 50);
                                     @endphp
                                     <p>{!! $limitedContent !!}</p>
                                 </div>

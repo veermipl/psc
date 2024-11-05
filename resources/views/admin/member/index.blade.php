@@ -70,10 +70,10 @@
     <div class="row">
         <div class="col-lg-12 mb-3">
             <div class="d-flex justify-content-between">
-                <a href="{{ route('admin.member.create') }}" class="btn btn-primary btn-sm">
+                <!-- <a href="{{ route('admin.member.create') }}" class="btn btn-primary btn-sm">
                     <ion-icon name="person-add-outline" role="img" class="md hydrated"
                         aria-label="person add"></ion-icon>Create Member
-                </a>
+                </a> -->
 
                 @if ($export_id && count($export_id) > 0)
                     <form action="{{ route('admin.member.export') }}" method="post" class="d-none_">
@@ -108,8 +108,9 @@
                                     <th scope="col" data-sortable="true">Name</th>
                                     <th scope="col" data-sortable="true">Email</th>
                                     <th scope="col" data-sortable="true">Membership</th>
-                                    <th scope="col" data-sortable="false">Form</th>
-                                    <th scope="col" data-sortable="false">Sup. Docs</th>
+                                    <!-- <th scope="col" data-sortable="false">Form</th> -->
+                                    <!-- <th scope="col" data-sortable="false">Sup. Docs</th> -->
+                                    <th scope="col" data-sortable="false">Telephone No.</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -134,7 +135,7 @@
                                                 {{ $user->membership ? $user->membership->name : '' }}
                                             </td>
 
-                                            <td>
+                                            <!-- <td>
                                                 @if ($user->form_pdf)
                                                     <a href="{{ $user->form_pdf ? asset('storage/' . $user->form_pdf) : '' }}"
                                                         target="_blank" title="Filled Form">
@@ -143,9 +144,9 @@
                                                     </a>
                                                 @else
                                                 @endif
-                                            </td>
+                                            </td> -->
 
-                                            <td>
+                                            <!-- <td>
                                                 @if ($user->supportingDoc)
                                                     @php
                                                         $docsArr = $user->supportingDoc->pluck('file_name')->toArray();
@@ -160,9 +161,11 @@
                                                     @endforeach
                                                 @else
                                                 @endif
-                                            </td>
+                                            </td> -->
 
-                                            <td>
+                                            <td>{{ $user->mobile_number }}    </td>
+
+                                            <!-- <td>
                                                 @if ($user->status == 1)
                                                     <span class="badge alert-success" id="userStatus"
                                                         uid="{{ $user->id }}" ustatus="{{ $user->status }}"
@@ -176,17 +179,38 @@
                                                         In Active
                                                     </span>
                                                 @endif
+                                            </td> -->
+
+                                            <td>
+                                                @if ($user->status == 1)
+                                                    <span class="badge alert-success"  >
+                                                        Active
+                                                    </span>
+                                                @else
+                                                    <span class="badge alert-danger"  >
+                                                        In Active
+                                                    </span>
+                                                @endif
                                             </td>
+
+
 
                                             <td>
                                                 <div class="tableOptions">
                                                     <span class="text-dark" title="Edit">
-                                                        <a href="{{ route('admin.member.edit', $user->id) }}"><i
+                                                        <a @if($user->member_id != '') href="{{ route('admin.member.registration.edit', $user->member_id)  }}" @endif><i
                                                                 class="fa fa-pencil"></i></a>
                                                     </span>
                                                     <span class="text-danger" title="Delete" uid="{{ $user->id }}"
                                                         urow="{{ $userKey }}" id="deleteUserBtn">
                                                         <i class="fa fa-trash"></i>
+                                                    </span>
+
+                                                    <span class="text-dark" title="View">
+                                                        @if($user->member_id != '')
+                                                        <a href="{{ route('admin.member.registration.view', $user->member_id) }}">
+                                                            @endif
+                                                            <i class="fa fa-eye"></i>
                                                     </span>
                                                 </div>
                                             </td>

@@ -99,7 +99,7 @@
                       <h3><a href="{{route('resources.idb-invest.details',base64_encode($focus->id) )}}"> {{$focus->title}} </a></h3>
                     </div>
                     <div class="blog-one-text">
-                    {!! Str::limit($focus->contant, 200)!!}
+                    {!! Str::limit($focus->contant, 110)!!}
                
                     </div>
                     <a href="{{route('resources.idb-invest.details',base64_encode($focus->id) )}}" class="vs-btn1 style5 mt-3" tabindex="0"
@@ -149,7 +149,8 @@
                           <li>
                             <p>
 
-                           {!! $ids->contant !!}
+                            {!! Str::limit($ids->contant, 520)!!}
+
                           </li>
 
                           

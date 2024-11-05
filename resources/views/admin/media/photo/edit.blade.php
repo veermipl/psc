@@ -32,7 +32,7 @@
                                 <label for="validationTooltip01" class="form-label">Title <span
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="title" placeholder="Image title"
-                                    value="{{ old('title', $photo->title) }}">
+                                    value="{{ old('title', $photo->title) }}"  maxlength="100">
 
                                 @error('title')
                                     <span class="text-danger">{{ $message }}</span>

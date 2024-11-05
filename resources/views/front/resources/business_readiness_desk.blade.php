@@ -98,8 +98,8 @@
                     </div>
                     <h3> {{ $origin->title}} </h3>   
 
-                        {!! Str::limit($origin->contant, 200)!!}
-  
+                        {!! Str::limit($origin->contant, 150)!!}
+                          </p>
                     <a href="{{route('resources.business.details',base64_encode($origin->id) )}}" class="vs-btn style3 mt-4" tabindex="0"
                       >Read More<i class="far fa-long-arrow-right"></i
                     ></a>
@@ -107,7 +107,6 @@
                 </div>
                 @endforeach
             @endif
-
 
           </div>
         </div>
@@ -141,12 +140,12 @@
                           <div class="recent-post-meta">
                             <ul class="table-list">
                               <li>
-                                <p>
-
-                                {!!  $origin->contant!!}
+                                
+                              {!! Str::limit($origin->contant, 350)!!}
+                              
                                   <!-- Enables reduced import duties under preferential
                                   trade agreements. -->
-                                </p>
+                                
                               </li>
                             </ul>
                           </div>

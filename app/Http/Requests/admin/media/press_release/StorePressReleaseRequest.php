@@ -23,8 +23,8 @@ class StorePressReleaseRequest extends FormRequest
     {
         return [
             'title' => ['required'],
-            'files' => ['nullable', 'array'],
-            'files.*' => ['nullable', 'file', 'mimes:jpg,jpeg,gif,png,pdf', 'max:2048'],
+            // 'files' => ['nullable', 'array'],
+            'files' => ['nullable', 'file', 'mimes:jpg,jpeg,gif,png,pdf', 'max:2048'],
             'content' => ['nullable'],
             'status' => ['required', 'in:0,1'],
         ];

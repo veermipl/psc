@@ -63,24 +63,28 @@ class NewsController extends Controller
     public function store(StoreNewsRequest $request)
     {
         $this->authorize('media_create');
-
         $validated = $request->validated();
+      
+        // $allFiles= [];
+        // if ($request->hasFile('files')) {
+        //     $files = $request->file('files');
 
-        $allFiles= [];
+        //     foreach ($files as $filesKey => $fileValue) {
+        //         $path = $fileValue->store('media/news', 'public');
+        //         array_push($allFiles, $path);
+        //     }
+        // }
+        // $validated['files'] = (count($allFiles) > 0) ? implode(',', $allFiles) : null;
+
         if ($request->hasFile('files')) {
-            $files = $request->file('files');
-
-            foreach ($files as $filesKey => $fileValue) {
-                $path = $fileValue->store('media/news', 'public');
-                array_push($allFiles, $path);
-            }
+            $file = $request->file('files');
+            $validated['files'] = $file->store('media/news', 'public');
         }
-        $validated['files'] = (count($allFiles) > 0) ? implode(',', $allFiles) : null;
 
         DB::transaction(function () use ($validated) {
             $news = News::create([
                 'title' => $validated['title'],
-                'content' => $validated['content'],
+                'content' => $validated['content'] ?? '',
                 'files' => $validated['files'],
                 'status' => $validated['status'],
             ]);
@@ -122,16 +126,33 @@ class NewsController extends Controller
 
         $validated = $request->validated();
 
-        $allFiles = $validated['old_files'] ?? [];
-        if ($request->hasFile('files')) {
-            $files = $request->file('files');
+        // if($request->files){
+        //     $validated = $request->validate([
+        //         'files' => 'required|array',
+        //         'files.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        //     ]);
+        // }
 
-            foreach ($files as $fileKey => $fileValue) {
-                $path = $fileValue->store('media/news', 'public');
-                array_push($allFiles, $path);
-            }
+        // $allFiles = $validated['old_files'] ?? [];
+        // if ($request->hasFile('files')) {
+        //     $files = $request->file('files');
+
+        //     foreach ($files as $fileKey => $fileValue) {
+        //         $path = $fileValue->store('media/news', 'public');
+        //         array_push($allFiles, $path);
+        //     }
+        // }
+        // $validated['files'] = (count($allFiles) > 0) ? implode(',', $allFiles) : null;
+
+
+        $data['news'] = $news;
+        if ($request->hasFile('files')) {
+            $file = $request->file('files');
+            $validated['files']  = $file->store('/media/news', 'public');
+        }else{
+
+            $validated['files'] = $news->files ;
         }
-        $validated['files'] = (count($allFiles) > 0) ? implode(',', $allFiles) : null;
 
         DB::transaction(function () use ($news, $validated) {
             $news->update([

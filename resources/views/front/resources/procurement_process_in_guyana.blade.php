@@ -100,7 +100,7 @@
                     <h3><a href="{{route('resources.procurement.deatils', base64_encode($method->id) )}}">{{$method->title}}</a></h3>
                   </div>
                   <div class="blog-one-text">
-                  {!! Str::limit($method->contant, 200)!!}
+                  {!! Str::limit($method->contant, 120)!!}
   
                   </div>
                   <a href="{{route('resources.procurement.deatils', base64_encode($method->id) )}}" class="vs-btn1 style5 mt-3" tabindex="0"
@@ -144,7 +144,8 @@
                     <div class="media-body">
                       <div class="recent-post-meta">
                         <ul class="table-list">
-                         {!! $procurement->contant !!}
+
+                         {!! Str::limit($procurement->contant, 300)!!}
                           
                         </ul>
                       </div>

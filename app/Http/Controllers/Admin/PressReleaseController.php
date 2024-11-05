@@ -66,21 +66,26 @@ class PressReleaseController extends Controller
 
         $validated = $request->validated();
 
-        $allFiles = [];
-        if ($request->hasFile('files')) {
-            $files = $request->file('files');
+        // $allFiles = [];
+        // if ($request->hasFile('files')) {
+        //     $files = $request->file('files');
 
-            foreach ($files as $filesKey => $fileValue) {
-                $path = $fileValue->store('media/press_release', 'public');
-                array_push($allFiles, $path);
-            }
+        //     foreach ($files as $filesKey => $fileValue) {
+        //         $path = $fileValue->store('media/press_release', 'public');
+        //         array_push($allFiles, $path);
+        //     }
+        // }
+        // $validated['files'] = (count($allFiles) > 0) ? implode(',', $allFiles) : null;
+
+        if ($request->hasFile('files')) {
+            $file = $request->file('files');
+            $validated['files']  = $file->store('/media/press_release', 'public');
         }
-        $validated['files'] = (count($allFiles) > 0) ? implode(',', $allFiles) : null;
 
         DB::transaction(function () use ($validated) {
             PressRelease::create([
                 'title' => $validated['title'],
-                'content' => $validated['content'],
+                'content' => $validated['content'] ?? '',
                 'files' => $validated['files'],
                 'status' => $validated['status'],
             ]);
@@ -122,21 +127,32 @@ class PressReleaseController extends Controller
 
         $validated = $request->validated();
 
-        $allFiles = $validated['old_files'] ?? [];
-        if ($request->hasFile('files')) {
-            $files = $request->file('files');
+        // $allFiles = $validated['old_files'] ?? [];
+        // if ($request->hasFile('files')) {
+        //     $files = $request->file('files');
 
-            foreach ($files as $fileKey => $fileValue) {
-                $path = $fileValue->store('media/press_release', 'public');
-                array_push($allFiles, $path);
-            }
+        //     foreach ($files as $fileKey => $fileValue) {
+        //         $path = $fileValue->store('media/press_release', 'public');
+        //         array_push($allFiles, $path);
+        //     }
+        // }
+        // $validated['files'] = (count($allFiles) > 0) ? implode(',', $allFiles) : null;
+
+
+        $data['press_release'] = $press_release;
+
+        if ($request->hasFile('files')) {
+            $file = $request->file('files');
+            $validated['files']  = $file->store('/media/press_release', 'public');
+        }else{
+
+            $validated['files'] = $press_release->files ;
         }
-        $validated['files'] = (count($allFiles) > 0) ? implode(',', $allFiles) : null;
 
         DB::transaction(function () use ($press_release, $validated) {
             $press_release->update([
                 'title' => $validated['title'],
-                'content' => $validated['content'],
+                'content' => $validated['content'] ?? '',
                 'files' => $validated['files'],
                 'status' => $validated['status'],
             ]);

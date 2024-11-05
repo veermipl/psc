@@ -49,10 +49,10 @@
                                     </li>
                                 </ul>
                                 <div class="blog-one-title">
-                                    <h3><a href="{{ route('guyana-economy-show', $list->id) }}">{{ $list->title }}</a></h3>
+                                    <h3><a href="{{ route('guyana-economy-show', base64_encode($list->id)) }}">  {!! Str::limit($list->title, 28)!!}</a></h3>
                                 </div>
-                                <div class="blog-one-text">
-                                    @php
+                                <div class="blog-one-text-4">
+                                @php
                                         $limitedContent = Str::limit($list->content, 150);
                                     @endphp
                                     <p>{!! $limitedContent !!}</p>

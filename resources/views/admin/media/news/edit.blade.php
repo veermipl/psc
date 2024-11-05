@@ -34,19 +34,32 @@
 
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Files </label>
-                                <input type="file" class="form-control" name="files[]" accept="image/*,application/pdf"
-                                    multiple>
+                                <input type="file" class="form-control" name="files" accept="image/*,application/pdf">
 
-                                @if ($errors->has('files.*'))
-                                    @foreach ($errors->get('files.*') as $error)
-                                        @foreach ($error as $message)
-                                            <span class="text-danger">{{ $message }}</span><br>
-                                        @endforeach
+                                @error('files')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Status <span
+                                        class="text-danger">*</span></label>
+                                <select name="status" class="form-control">
+                                    <option hidden value="">Status</option>
+                                    @foreach (config('site.status') as $status)
+                                        <option value="{{ $status['value'] }}"
+                                            {{ old('status', $news->status) == $status['value'] ? 'selected' : '' }}>
+                                            {{ $status['name'] }}
+                                        </option>
                                     @endforeach
-                                @endif
+                                </select>
+
+                                @error('status')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
-                            <div class="col-md-12 position-relative">
+                            <!-- <div class="col-md-12 position-relative">
                                 <label for="validationTooltip01" class="form-label">Content <span
                                         class="text-danger">*</span></label>
                                 <textarea name="content" id="editor" cols="5" rows="5" class="form-control">{{ old('content', $news->content) }}</textarea>
@@ -54,7 +67,7 @@
                                 @error('content')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
-                            </div>
+                            </div> -->
 
                             <div class="col-md-12 position-relative">
                                 @if ($news->files)
@@ -80,11 +93,11 @@
                                                         <img class="li_img pop_up_doc"
                                                             src="{{ asset('storage/default/pdf.png') }}">
                                                     @endif
-                                                    <button class="btn btn-sm btn-outline-danger mt-2 deleteFileBtn"
+                                                    <!-- <button class="btn btn-sm btn-outline-danger mt-2 deleteFileBtn"
                                                         type="button" id="{{ $news->id }}"
                                                         file_url="{{ $fileValue }}">
                                                         Delete
-                                                    </button>
+                                                    </button> -->
                                                 </div>
                                             @endif
                                         @endforeach
@@ -92,23 +105,6 @@
                                 @endif
                             </div>
 
-                            <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Status <span
-                                        class="text-danger">*</span></label>
-                                <select name="status" class="form-control">
-                                    <option hidden value="">Status</option>
-                                    @foreach (config('site.status') as $status)
-                                        <option value="{{ $status['value'] }}"
-                                            {{ old('status', $news->status) == $status['value'] ? 'selected' : '' }}>
-                                            {{ $status['name'] }}
-                                        </option>
-                                    @endforeach
-                                </select>
-
-                                @error('status')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
 
                             <div class="col-12 text-end mt-5">
                                 <button class="btn btn-sm btn-primary" type="submit">Update</button>

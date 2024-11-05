@@ -85,7 +85,7 @@
                             <div class="col-lg-4 col-md-6">
                                 <div class="features-two-sec-single wow fadeInUp h-100 animated active" data-wow-delay="300ms"
                                     style="visibility: visible;animation-delay: 300ms;animation-name: fadeInUp;">
-                                    <div class="features-two-sec-icon">
+                                    <div class="features-two-sec-icon-2">
                                         @if ($sourceVal['file'])
                                             <img src="{{ asset('storage/' . $sourceVal['file']) }}">
                                         @else

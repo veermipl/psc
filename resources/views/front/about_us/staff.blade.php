@@ -62,7 +62,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="team-one-content">
+                                <div class="team-one-content team-one-content-2">
                                     <h3>{{$members->name}}</h3>
                                     <p>{{$members->office}}</p>
                                 </div>

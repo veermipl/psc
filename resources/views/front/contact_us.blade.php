@@ -72,10 +72,13 @@
                         <a href="{{ @$settings['instagram'] ? $settings['instagram'] : '' }}" target="{{ @$settings['instagram'] ? '_blank' : '' }}">
                             <i class="fab fa-instagram"></i>
                         </a>
-
                         <a href="{{ @$settings['youtube'] ? $settings['youtube'] : '' }}" target="{{ @$settings['youtube'] ? '_blank' : '' }}">
-                            <i class="fab fa-youtube"></i>
+                            <i class="fab fa-linkedin"></i>
                         </a>
+
+                        <!-- <a href="{{ @$settings['youtube'] ? $settings['youtube'] : '' }}" target="{{ @$settings['youtube'] ? '_blank' : '' }}">
+                            <i class="fab fa-youtube"></i>
+                        </a> -->
                     </div>
                 </div>
             </div>
@@ -93,7 +96,7 @@
                     <h3 class="title">Contact us</h3>
 
                     <div class="input-container mb-1">
-                        <input type="text" name="name" class="input" value="{{ old('message') }}" />
+                        <input type="text" name="name" class="input" value="{{ old('message') }}"  maxlength="50"/>
                         <label for="">Username</label>
                         <span>Username</span>
                     </div>
@@ -103,7 +106,7 @@
                     @enderror
 
                     <div class="input-container mb-1">
-                        <input type="email" name="email" class="input" value="{{ old('email') }}"  />
+                        <input type="email" name="email" class="input" value="{{ old('email') }}" maxlength="50"  />
                         <label for="">Email</label>
                         <span>Email</span>
                     </div>
@@ -113,7 +116,7 @@
                     @enderror
 
                     <div class="input-container mb-1">
-                        <input type="tel" name="phone" class="input" value="{{ old('phone') }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                        <input type="text" name="phone" class="input" value="{{ old('phone') }}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" maxlength="12" />
                         <label for="">Phone</label>
                         <span>Phone</span>
                     </div>

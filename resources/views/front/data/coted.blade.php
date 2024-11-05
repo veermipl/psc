@@ -89,7 +89,7 @@
                                     @endif
                                 </div>
                                 <div class="blog-one-content">
-                                    <div class="blog-one-title ">
+                                    <div class="blog-one-title-2 ">
                                         <h3><a href="{{ route('data.coted-entrepreneurship-development-show', base64_encode($sourceVal['id'])) }}">{{ $sourceVal['title'] }}</a></h3>
                                     </div>
                                     <div class="blog-one-text">

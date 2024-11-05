@@ -20,7 +20,7 @@
 
                     <div class="table-responsive">
                         <table id="notificationTable" class="table table-sm table-borderless table-light" data-toggle="table"
-                            data-search="true" data-buttons-prefix="btn-md btn" data-pagination="true" data-loading-template="loadingTemplate">
+                            data-search="true" data-buttons-prefix="btn-md btn" data-pagination="true">
                             <thead>
                                 <tr>
                                     <th scope="col" data-field="key">#</th>
@@ -88,7 +88,7 @@
 
 @section('scripts')
 
-    <script type="text/javascript">   
+    <script type="text/javascript">
         $(document).ready(function() {
 
             $(document).on('click', '#listStatus', function(e) {
@@ -199,8 +199,6 @@
                                         url: '{{ route("admin.system.notification.reload-table") }}'
                                     });
 
-                                    UpdateNotificationCount();
-                                    
                                     toastr.success(response.msg);
                                 } else {
                                     toastr.error(response.msg);

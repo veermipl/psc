@@ -39,9 +39,9 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="mb-2">About Me</h4>
-                            <p class="">
-                                {{ @$UserDetails['about_me'] }}
-                            </p>
+                           
+                                {!! @$UserDetails['about_me'] !!}
+                            
         
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                         </div>
                     </div>
         
-                    @if (auth()->user()->id !== 1)
+                    <!-- @if (auth()->user()->id !== 1)
                         <div class="card radius-10">
                             <div class="card-body">
                                 <h5 class="mb-3">Settings</h5>
@@ -102,7 +102,7 @@
                             </div>
                         </div>
                     @endif
-        
+         -->
                 </div>
             </div>
 
