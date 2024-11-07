@@ -31,6 +31,7 @@ use App\Http\Requests\admin\member\DeleteMemberDocRequest;
 use App\Http\Requests\admin\member\ImportAddMemberRequest;
 use App\Mail\admin\member\SendMemberWelcomeRegistrationMail;
 use App\Http\Requests\admin\member\UpdateMemberStatusRequest;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class MemberController extends Controller
 {
@@ -75,7 +76,7 @@ class MemberController extends Controller
             })
             ->get();
 
-         $membershipList = MembershipType::orderBy('name', 'asc')->where('status', '1')->get();
+        $membershipList = MembershipType::orderBy('name', 'asc')->where('status', '1')->get();
 
         $data['filterValues'] = $filterValues;
         $data['userList'] = $userList;
@@ -153,10 +154,10 @@ class MemberController extends Controller
                     $invalidRow[] = "Invalid member email '" . htmlspecialchars($row[1] ?? '') . "' at line $line";
                     $flag = true;
                 } else {
-                    if($this->mailExist($row[1])){
+                    if ($this->mailExist($row[1])) {
                         $invalidRow[] = "Email already exist! '" . htmlspecialchars($row[1] ?? '') . "' at line $line";
                         $flag = true;
-                    }else{
+                    } else {
                         $info['email'] = $row[1];
                     }
                 }
@@ -210,7 +211,7 @@ class MemberController extends Controller
 
         $tableData = json_decode($validated['tableData'], true);
 
-        if(count($tableData) > 0){
+        if (count($tableData) > 0) {
             foreach ($tableData as $key => $userData) {
                 $genPwd = $this->generateRandomPassword(12);
 
@@ -224,7 +225,7 @@ class MemberController extends Controller
                         'status' => '0',
                         'password' => Hash::make($genPwd),
                     ]);
-        
+
                     $user->role()->sync(Role::where('name', 'Member')->pluck('id')->toArray());
                     $this->InitialUserRolePermission($user);
 
@@ -235,14 +236,13 @@ class MemberController extends Controller
                     Mail::to($userData['email'])->queue((new SendMemberWelcomeRegistrationMail($userData))->afterCommit());
 
                     Session::flash("success", "Members Imported");
-        
                 });
             }
 
             $data['error'] = false;
             $data['msg'] = "Members Imported";
             $data['redirect'] = route('admin.member.index');
-        }else{
+        } else {
             $data['error'] = true;
             $data['msg'] = "No data sent";
         }
@@ -488,12 +488,12 @@ class MemberController extends Controller
         $this->authorize('member_doc_delete');
         $validated = $request->validated();
         $user = User::findOrFail($validated['id']);
-        if( $user == '' ){
-        $data['error'] = true;
-        $data['msg'] = 'Failed to deleted';
-        return response()->json($data, 200);
+        if ($user == '') {
+            $data['error'] = true;
+            $data['msg'] = 'Failed to deleted';
+            return response()->json($data, 200);
         }
-        
+
         if ($validated['doc_type'] == 'form') {
             DB::transaction(function () use ($user) {
                 $user->update([
@@ -525,7 +525,6 @@ class MemberController extends Controller
         return response()->json($data, 200);
     }
 
-
     public function statusToggle(UpdateMemberStatusRequest $request)
     {
         $this->authorize('member_status_edit');
@@ -551,14 +550,16 @@ class MemberController extends Controller
         return response()->json($data, 200);
     }
 
-    public function registration (){
-        $data = Application::with('user','busibessType', 'legalStatus', 'sector', 'corporate' )->orderby('id', 'desc')->get();
+    public function registration()
+    {
+        $data = Application::with('user', 'busibessType', 'legalStatus', 'sector', 'corporate')->orderby('id', 'desc')->get();
         return view('admin.member.applications.index', compact('data'));
     }
 
-    public function registrationDelete($id){
+    public function registrationDelete($id)
+    {
         $user = Application::find($id);
-        $user->delete(); 
+        $user->delete();
 
         $data['error'] = false;
         $data['msg'] = 'Deleted ';
@@ -568,190 +569,216 @@ class MemberController extends Controller
 
     public function registrationStatus(Request $request)
     {
-         $user = Application::find($request->uid);
-            $status = $request->ustatus == 1 ? '0' : '1';
-            DB::transaction(function () use ($user, $status) {
-                $user->update([
-                    'status' => $status
-                ]);
-            });
-            $data['error'] = false;
-            $data['msg'] = 'status updated';
-            return response()->json($data, 200);
-    }
-    public function registrationView($id){
-        $data = Application::with('user','busibessType', 'legalStatus', 'sectors', 'corporate' )->where('id', $id)->first();
-        $docVal = MemberFiles::where('user_id', $data->user->id)->get();
-        // dd($docVal);
-        return view('admin.member.applications.view', compact('data', 'docVal'));
+        $user = Application::find($request->uid);
+        $status = $request->ustatus == 1 ? '0' : '1';
+        DB::transaction(function () use ($user, $status) {
+            $user->update([
+                'status' => $status
+            ]);
+        });
+        $data['error'] = false;
+        $data['msg'] = 'status updated';
+        return response()->json($data, 200);
     }
 
- 
+    public function registrationView($id)
+    {
+        $data = Application::with('user', 'busibessType', 'legalStatus', 'sectors', 'corporate')->where('id', $id)->first();
+        $docVal = MemberFiles::where('user_id', $data->user->id)->get();
+
+        return view('admin.member.applications.view', compact('data', 'docVal', 'id'));
+    }
 
     public function registrationEdit($id)
     {
         $data = Application::with('user')->where('id', $id)->first();
         $docVal = MemberFiles::where('user_id', $data->user->id)->pluck('file_name')->toArray();
+
         return view('admin.member.applications.edit', compact('data', 'docVal'));
     }
 
-    public function registrationUpdate(Request $request, $id){
+    public function registrationUpdate(Request $request, $id)
+    {
 
         $this->validate($request, [
             'applicationtypeid' => 'required',
             'name_of_business'  => 'required',
-			'legal_status'  => 'required',
+            'legal_status'  => 'required',
             'date_of_egistration'  => 'required',
             'sector'  => 'required',
-			'no_of_employees'  => 'required',
-			'registered_office_address'  => 'required',
-			'type_of_business'  => 'required',
+            'no_of_employees'  => 'required',
+            'registered_office_address'  => 'required',
+            'type_of_business'  => 'required',
             'telephone_no'  => 'required',
-			'fax_no'  => 'required',
+            'fax_no'  => 'required',
             'email'  => 'required',
-			'website'  => 'required',
+            'website'  => 'required',
             'membership_id'  => 'required',
-			'your_expectation.*'  => 'required',
+            'your_expectation.*'  => 'required',
             'contribute_towards.*'  => 'required',
-			'state_briefly'  => 'required',
+            'state_briefly'  => 'required',
             'you_know_about'  => 'required',
-			'references_name.*'  => 'required',
+            'references_name.*'  => 'required',
             'references_address.*'  => 'required',
-			'references_name_of_business.*'  => 'required',
+            'references_name_of_business.*'  => 'required',
             'references_tel_nos.*'  => 'required',
-			'references_email.*'  => 'required',
+            'references_email.*'  => 'required',
             'references_website.*'  => 'required',
-			'principal_name'  => 'required',
+            'principal_name'  => 'required',
             'principal_designation'  => 'required',
-			'principal_signature'  => 'required',
-            'principal_date'  => 'required',  
+            'principal_signature'  => 'required',
+            'principal_date'  => 'required',
             'status' => 'required',
-            'role'  => 'required',  
-            'supporting_document.*'  => 'nullable|mimes:jpeg,jpg,png,pdf,docx',     
+            'role'  => 'required',
+            'supporting_document.*'  => 'nullable|mimes:jpeg,jpg,png,pdf,docx',
 
-           
-	 ], [
-		'applicationtypeid.required' => 'The application type is required.',
-		'name_of_business.required' => 'Please provide the name of the business.',
-		'legal_status.required' => 'The legal status field is mandatory.',
-		'date_of_egistration.required' => 'Please specify the date of registration.',
-		'sector.required' => 'Please choose the sector.',
-		'no_of_employees.required' => 'Enter the number of employees.',
-		'registered_office_address.required' => 'The office address is required.',
-		'type_of_business.required' => 'Please specify the type of business.',
-		'telephone_no.required' => 'Please provide a telephone number.',
-		'fax_no.required' => 'Fax number is required.',
-		'email.required' => 'Please provide an email address.',
-		'website.required' => 'Website is required.',
-		'membership_id.required' => 'Please provide a membership ID.',
-		'your_expectation.*.required' => 'Please specify your expectations.',
-		'contribute_towards.*.required' => 'Please specify how you will contribute.',
-		'state_briefly.required' => 'Please provide a brief statement.',
-		'you_know_about.required' => 'How you know about us is required.',
-		'references_name.*.required' => 'Name is required for all entries.',
-		'references_address.*.required' => 'Address is required for all entries.',
-		'references_name_of_business.*.required' => 'Business name is required for all entries.',
-		'references_tel_nos.*.required' => 'Telephone number is required for all entries.',
-		'references_email.*.required' => 'Email is required for all entries.',
-		'references_website.*.required' => 'Website is required for all entries.',
-		'principal_name.required' => 'The  name is required.',
-		'principal_designation.required' => 'The  designation is required.',
-		'principal_signature.required' => 'The  signature is required.',
-		'principal_date.required' => 'Please provide the date.',
-		'role.required' => 'Please select role.',
-        'supporting_document.*.required' => 'document format type only jpg,jpeg,png,pdf,docx'
-	
-	]);
 
-    $password = Str::password(8, true, true, false, false);
-            $your_expectation =  implode(',', $request->your_expectation) ;
-            $contribute_towards =  implode(',', $request->contribute_towards) ;
-            $references_name =  implode(',', $request->references_name) ;
-            $references_address =  implode(',', $request->references_address) ;
-            $references_name_of_business =  implode(',', $request->references_name_of_business) ;
-            $references_tel_nos =  implode(',', $request->references_tel_nos) ;
-            $references_email =  implode(',', $request->references_email) ;
-            $references_website =  implode(',', $request->references_website) ;
+        ], [
+            'applicationtypeid.required' => 'The application type is required.',
+            'name_of_business.required' => 'Please provide the name of the business.',
+            'legal_status.required' => 'The legal status field is mandatory.',
+            'date_of_egistration.required' => 'Please specify the date of registration.',
+            'sector.required' => 'Please choose the sector.',
+            'no_of_employees.required' => 'Enter the number of employees.',
+            'registered_office_address.required' => 'The office address is required.',
+            'type_of_business.required' => 'Please specify the type of business.',
+            'telephone_no.required' => 'Please provide a telephone number.',
+            'fax_no.required' => 'Fax number is required.',
+            'email.required' => 'Please provide an email address.',
+            'website.required' => 'Website is required.',
+            'membership_id.required' => 'Please provide a membership ID.',
+            'your_expectation.*.required' => 'Please specify your expectations.',
+            'contribute_towards.*.required' => 'Please specify how you will contribute.',
+            'state_briefly.required' => 'Please provide a brief statement.',
+            'you_know_about.required' => 'How you know about us is required.',
+            'references_name.*.required' => 'Name is required for all entries.',
+            'references_address.*.required' => 'Address is required for all entries.',
+            'references_name_of_business.*.required' => 'Business name is required for all entries.',
+            'references_tel_nos.*.required' => 'Telephone number is required for all entries.',
+            'references_email.*.required' => 'Email is required for all entries.',
+            'references_website.*.required' => 'Website is required for all entries.',
+            'principal_name.required' => 'The  name is required.',
+            'principal_designation.required' => 'The  designation is required.',
+            'principal_signature.required' => 'The  signature is required.',
+            'principal_date.required' => 'Please provide the date.',
+            'role.required' => 'Please select role.',
+            'supporting_document.*.required' => 'document format type only jpg,jpeg,png,pdf,docx'
 
-            $data = Application::where('id', $id)->first();
-            $user = User::where('member_id', $id)->first();
-            
-            $user_data = [
-                'name' => $request->principal_name,
-                'email' => $request->email,
-                'mobile_number' => $request->telephone_no,
-                'member_role' => $request->role,
-                'status' => $request->status,
-            ];
-            
-            if ($request->status == '1') {
-                $user_data['password'] = Hash::make($password);
+        ]);
+
+        $password = Str::password(8, true, true, false, false);
+        $your_expectation =  implode(',', $request->your_expectation);
+        $contribute_towards =  implode(',', $request->contribute_towards);
+        $references_name =  implode(',', $request->references_name);
+        $references_address =  implode(',', $request->references_address);
+        $references_name_of_business =  implode(',', $request->references_name_of_business);
+        $references_tel_nos =  implode(',', $request->references_tel_nos);
+        $references_email =  implode(',', $request->references_email);
+        $references_website =  implode(',', $request->references_website);
+
+        $data = Application::where('id', $id)->first();
+        $user = User::where('member_id', $id)->first();
+
+        $user_data = [
+            'name' => $request->principal_name,
+            'email' => $request->email,
+            'mobile_number' => $request->telephone_no,
+            'member_role' => $request->role,
+            'status' => $request->status,
+        ];
+
+        if ($request->status == '1') {
+            $user_data['password'] = Hash::make($password);
+        }
+
+        $sDoc = $request['old_doc'] ?? [];
+        if ($request->has('supporting_document')) {
+            $images = $request->file('supporting_document');
+            foreach ($images as $imageKey => $image) {
+                $path = $image->store('supporting_documents', 'public');
+                array_push($sDoc, $path);
             }
-
-            $sDoc = $request['old_doc'] ?? [];
-            if ($request->has('supporting_document')) {
-                $images = $request->file('supporting_document');
-                foreach ($images as $imageKey => $image) {
-                    $path = $image->store('supporting_documents', 'public');
-                    array_push($sDoc, $path);
-                }
+        }
+        if (is_array($sDoc) && count($sDoc) > 0) {
+            MemberFiles::where('user_id', $user->id)->delete();
+            foreach ($sDoc as $sDocValue) {
+                MemberFiles::create([
+                    'user_id' => $user->id,
+                    'file_name' => $sDocValue,
+                ]);
             }
-            if (is_array($sDoc) && count($sDoc) > 0) {
-                MemberFiles::where('user_id', $user->id)->delete();
-                foreach ($sDoc as $sDocValue) {
-                    MemberFiles::create([
-                        'user_id' => $user->id,
-                        'file_name' => $sDocValue, 
-                    ]);
-                }
-            }
+        }
 
-         $dataee =    $user->update($user_data);
-               $array = ([
-                //    'user_id' => $id,
-                   'application_type_id' => $request->applicationtypeid,
-                   'name_of_business' => $request->name_of_business,
-                   'legal_status' => $request->legal_status,
-                   'date_of_egistration' => $request->date_of_egistration,
-                   'sector' => $request->sector,
-                   'No_of_employees' => $request->no_of_employees,
-                   'registered_office_address' => $request->registered_office_address,
-                   'type_of_business' => $request->type_of_business,
-                   'telephone_no' => $request->telephone_no,
-                   'fax_no' => $request->fax_no,
-                   'email' => $request->email,
-                   'website' => $request->website,
-                   'membership_id' => $request->membership_id,
-                   'state_briefly' => $request->state_briefly,
-                   'you_know_about' => $request->you_know_about,
-                   'principal_name' => $request->principal_name,
-                   'principal_designation' => $request->principal_designation,
-                   'principal_signature' => $request->principal_signature,
-                   'principal_date' => $request->principal_date,
-                   'your_expectation' => $your_expectation,
-                   'contribute_towards' => $contribute_towards,
-                   'contribute_towards' => $contribute_towards,
-                   'references_name' => $references_name,
-                   'references_address' => $references_address,
-                   'references_name_of_business' => $references_name_of_business,
-                   'references_tel_nos' => $references_tel_nos,
-                   'references_email' => $references_email,
-                   'references_website' => $references_website,
-               ]);
+        $dataee =    $user->update($user_data);
+        $array = ([
+            //    'user_id' => $id,
+            'application_type_id' => $request->applicationtypeid,
+            'name_of_business' => $request->name_of_business,
+            'legal_status' => $request->legal_status,
+            'date_of_egistration' => $request->date_of_egistration,
+            'sector' => $request->sector,
+            'No_of_employees' => $request->no_of_employees,
+            'registered_office_address' => $request->registered_office_address,
+            'type_of_business' => $request->type_of_business,
+            'telephone_no' => $request->telephone_no,
+            'fax_no' => $request->fax_no,
+            'email' => $request->email,
+            'website' => $request->website,
+            'membership_id' => $request->membership_id,
+            'state_briefly' => $request->state_briefly,
+            'you_know_about' => $request->you_know_about,
+            'principal_name' => $request->principal_name,
+            'principal_designation' => $request->principal_designation,
+            'principal_signature' => $request->principal_signature,
+            'principal_date' => $request->principal_date,
+            'your_expectation' => $your_expectation,
+            'contribute_towards' => $contribute_towards,
+            'contribute_towards' => $contribute_towards,
+            'references_name' => $references_name,
+            'references_address' => $references_address,
+            'references_name_of_business' => $references_name_of_business,
+            'references_tel_nos' => $references_tel_nos,
+            'references_email' => $references_email,
+            'references_website' => $references_website,
+        ]);
 
-               $data->update($array);
+        $data->update($array);
 
-               if ($request->status == '1' && $user->email) {
-                $role = MemberRole::where('id', $request->role)->first('name');
-                Log::info('Sending mail to ' . $user->email);
-                Mail::to($user->email)->send(new PasswordUpdated($user, $password, $role));
-                Log::info('Mail sent to ' . $user->email);
+        if ($request->status == '1' && $user->email) {
+            $role = MemberRole::where('id', $request->role)->first('name');
+            Log::info('Sending mail to ' . $user->email);
+            Mail::to($user->email)->send(new PasswordUpdated($user, $password, $role));
+            Log::info('Mail sent to ' . $user->email);
+        }
 
-            }
+        return redirect()->route('admin.member.index')->with('success', 'Update successfully');
+    }
 
-               return redirect()->route('admin.member.index')->with('success', 'Update successfully');
-       
-         }
+    protected function getRegistrationData($id)
+    {
+        $userData = User::with('supportingDoc')->where('member_id', $id)->firstOrFail();
+        $data = Application::with('user', 'busibessType', 'legalStatus', 'sectors', 'corporate')->where('id', $id)->first();
+        $docVal = MemberFiles::where('user_id', $data->user->id)->get();
 
+        return compact('userData', 'data', 'docVal');
+    }
 
+    public function registrationPrint(Request $request, $id)
+    {
+        $data = $this->getRegistrationData($id);
+        $data['isPrint'] = true;
+
+        return view('admin.member.applications.pdf', $data);
+    }
+
+    public function registrationAsPdf(Request $request, $id)
+    {
+        $data = $this->getRegistrationData($id);
+        $data['isPrint'] = false;
+
+        $html = view('admin.member.applications.pdf', $data)->render();
+        $pdf = Pdf::loadHTML($html);
+
+        return $pdf->download('registration.pdf');
+    }
 }

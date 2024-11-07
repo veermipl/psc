@@ -199,10 +199,11 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
     Route::get('member/registration', [AdminMemberController::class, 'registration'])->name('member.registration');
     Route::get('member/registration-delete/{id}', [AdminMemberController::class, 'registrationDelete']);
     Route::Post('member/registration-status', [AdminMemberController::class, 'registrationStatus'])->name('member.registration.status');
-
     Route::get('member/registration-view/{id}', [AdminMemberController::class, 'registrationView'])->name('member.registration.view');
     Route::get('member/registration-edit/{id}', [AdminMemberController::class, 'registrationEdit'])->name('member.registration.edit');
     Route::patch('member/registration-update/{id}', [AdminMemberController::class, 'registrationUpdate'])->name('member.registration.update');
+    Route::get('member/print/{id}', [AdminMemberController::class, 'registrationPrint'])->name('member.print');
+    Route::get('member/download-pdf/{id}', [AdminMemberController::class, 'registrationAsPdf'])->name('member.download-pdf');
 
     Route::resource('member', AdminMemberController::class);
 
@@ -498,6 +499,7 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         Route::post('status', [EventController::class, 'status'])->name('status');
         Route::post('delete-file', [EventController::class, 'deleteFile'])->name('deleteFile');
     });
+
     Route::prefix('cms')->name('cms.')->group(function () {
         Route::get('guyana-economy', [CMSController::class, 'guyanaEconomy'])->name('guyana-economy');
         Route::get('guyana-economy/create', [CMSController::class, 'guyanaEconomyCreate'])->name('guyana-economy.create');
