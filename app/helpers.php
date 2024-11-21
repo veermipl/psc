@@ -1,6 +1,7 @@
 <?php
 
 use App\Traits\UserTraits;
+use App\Traits\CommonTraits;
 use App\Traits\SettingTraits;
 use App\Traits\NotificationTraits;
 
@@ -45,5 +46,22 @@ if (!function_exists('helper_generateRandomPassword')) {
         };
 
         return $userTraitInstance->generateRandomPassword();
+    }
+}
+
+if (!function_exists('common_helper')) {
+    function common_helper($functionName = null)
+    {
+        if ($functionName) {
+            $commonTraitInstance = new class {
+                use CommonTraits;
+            };
+
+            try {
+                return $commonTraitInstance->$functionName();
+            } catch (\Throwable $th) {
+                return null;
+            }
+        }
     }
 }

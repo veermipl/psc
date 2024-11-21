@@ -19,7 +19,7 @@ use App\Http\Controllers\Admin\VideoController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\PerformanceController;
 use App\Http\Controllers\ProcurementController;
-use App\Http\Controllers\admin\CouncilController;
+use App\Http\Controllers\Admin\CouncilController;
 use App\Http\Controllers\Member\MemberController;
 use App\Http\Controllers\Admin\BusinessController;
 use App\Http\Controllers\Admin\GoInvestController;
@@ -40,6 +40,7 @@ use App\Http\Controllers\Admin\MemberBenefitController;
 use App\Http\Controllers\Admin\MembershipTypeController;
 use App\Http\Controllers\Admin\NationalBudgetController;
 use App\Http\Controllers\Admin\BusinessDirectoryController;
+use App\Http\Controllers\Admin\ExecutiveCommitteeController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\MemberController as AdminMemberController;
 
@@ -64,7 +65,7 @@ Route::get('/clear-cache', function () {
     Artisan::call('config:clear');
     Artisan::call('optimize');
 
-    return "Cache cleared !";
+    return "Cache cleared !!!";
 });
 
 Route::get('/phpinfo', function () {
@@ -100,9 +101,10 @@ Route::prefix('about-us')->name('about-us.')->group(function () {
     Route::get('council', [FrontController::class, 'aboutUs_Council'])->name('council');
     Route::get('history', [FrontController::class, 'aboutUs_History'])->name('history');
     Route::get('committeess', [FrontController::class, 'aboutUs_Committeess'])->name('committeess');
+    Route::get('committeess-show/{id}', [FrontController::class, 'aboutUs_Committeess_Show'])->name('committeess-show');
+    Route::get('executive-committeess', [FrontController::class, 'aboutUs_ExecutiveCommitteess'])->name('executive-committeess');
+    Route::get('executive-committeess-show/{id}', [FrontController::class, 'aboutUs_ExecutiveCommitteess_Show'])->name('executive-committeess-show');
 });
-
-
 
 Route::prefix('membership')->name('membership.')->group(function () {
     Route::get('business-directory', [FrontController::class, 'membership_BusinessDirectory'])->name('business-directory');
@@ -420,6 +422,7 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::get('destroy/{id}', 'destroy')->name('destroy');
             Route::get('edit/{id}', 'edit')->name('edit');
             Route::patch('update/{id}', 'Update')->name('update');
+            Route::post('reorder', 'reorder')->name('reorder');
         });
 
         Route::controller(CommitteessController::class)->prefix('committeess')->name('committeess.')->group(function () {
@@ -431,6 +434,14 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::get('edit/{id}', 'edit')->name('edit');
             Route::patch('update/{id}', 'Update')->name('update');
         });
+
+        Route::name('about-us.')->group(function () {
+            Route::post('executive-committee/filter', [ExecutiveCommitteeController::class, 'index'])->name('executive-committee.filter');
+            Route::post('executive-committee/export', [ExecutiveCommitteeController::class, 'export'])->name('executive-committee.export');
+            Route::post('executive-committee/status', [ExecutiveCommitteeController::class, 'statusToggle'])->name('executive-committee.status');
+            Route::resource('executive-committee', ExecutiveCommitteeController::class);
+        });
+
 
         Route::controller(AboutController::class)->prefix('about')->name('about.')->group(function () {
 
@@ -445,7 +456,7 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::Post('history', 'History_update')->name('history_update');
         });
 
-        Route::controller(CouncilController::class)->prefix('council')->name('council.')->group(function(){
+        Route::controller(CouncilController::class)->prefix('council')->name('council.')->group(function () {
             Route::get('index', 'index')->name('index');
             Route::get('create', 'create')->name('create');
             Route::post('store', 'Store')->name('store');
@@ -454,7 +465,6 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::get('edit/{id}', 'edit')->name('edit');
             Route::Post('update/{id}', 'Update')->name('update');
             Route::post('filter',  'index')->name('filter');
-        
         });
 
         Route::controller(TestimonialController::class)->prefix('testimonial')->name('testimonial.')->group(function () {
@@ -477,7 +487,6 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::post('update-performance/{id}', 'Update')->name('performance_update');
         });
 
-
         Route::controller(CoreValueController::class)->group(function () {
             Route::get('core-value', 'Index')->name('corevalue');
             Route::get('create-corevalue', 'add')->name('add_corevalue');
@@ -489,7 +498,7 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         });
     });
 
-    Route::prefix('event')->name('event.')->group(function(){
+    Route::prefix('event')->name('event.')->group(function () {
         Route::get('create', [EventController::class, 'create'])->name('create');
         Route::post('store', [EventController::class, 'store'])->name('store');
         Route::get('list', [EventController::class, 'list'])->name('list');

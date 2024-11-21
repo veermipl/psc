@@ -1,12 +1,12 @@
 @extends('layout.admin_master')
 
-@section('title', 'Committeess Members - Edit')
-@section('header', 'Edit Committees')
+@section('title', 'Executive Committee - Create')
+@section('header', 'Create Executive Committee ')
 
 @section('content')
 
     <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Edit Committeess Members        </div>
+        <div class="breadcrumb-title pe-3">Create Executive Committee </div>
     </div>
 
     <div class="row">
@@ -14,16 +14,16 @@
             <div class="card radius-10">
                 <div class="card-body">
                     <div class="p-4 border rounded">
-                        <form action="{{ route('admin.committeess.update', $data->id) }}" method="post" enctype="multipart/form-data"
+                        <form action="{{ route('admin.about-us.executive-committee.store') }}" method="post" enctype="multipart/form-data"
                             class="row g-3 needs-validation">
                             @csrf
-                              @method('PATCH')
+                            @method('post')
 
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Name <span
                                         class="text-danger">*</span></label>
                                 <input type="text" id="name" class="form-control" name="name"
-                                    placeholder="Enter name" value="{{ old('name', @$data->name) }}" maxlength="50">
+                                    placeholder="Enter name" value="{{ old('name') }}" maxlength="50">
 
                                 @error('name')
                                     <span class="text-danger">{{ $message }}</span>
@@ -31,19 +31,19 @@
                             </div>
 
                             <div class="col-md-6 position-relative">
-                                    <label for="validationTooltip01" class="form-label">Designation <span
-                                                class="text-danger">*</span></label>
-                                        <input type="text" id="office" class="form-control" name="office"
-                                            placeholder="Enter Designation" value="{{ old('office', @$data->office) }}" maxlength="50">
+                                <label for="validationTooltip01" class="form-label">Designation <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" id="designation" class="form-control" name="designation"
+                                    placeholder="Enter Designation" value="{{ old('designation') }}" maxlength="50">
 
-                                        @error('office')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                @error('designation')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
-
+                            
                             <div class="col-md-12 position-relative">
                                 <label for="validationTooltip01" class="form-label">Terms Of Reference <span class="text-danger">*</span></label>
-                                <textarea name="terms_of_reference" id="editor" cols="5" rows="5" class="form-control">{{ old('terms_of_reference', @$data->terms_of_reference) }}</textarea>
+                                <textarea name="terms_of_reference" id="editor" cols="5" rows="5" class="form-control">{{ old('terms_of_reference') }}</textarea>
 
                                 @error('terms_of_reference')
                                     <span class="text-danger">{{ $message }}</span>
@@ -53,7 +53,7 @@
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Facebook link </label>
                                 <input type="text" id="facebook" class="form-control" name="facebook"
-                                    value="{{ old('facebook', @$data->facebook) }}" placeholder="Enter Facebook link" maxlength="50">
+                                    value="{{ old('facebook') }}" placeholder="Enter Facebook link" maxlength="50">
 
                                 @error('facebook')
                                     <span class="text-danger">{{ $message }}</span>
@@ -63,7 +63,7 @@
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Twitter Link </label>
                                 <input type="text" id="twitter" class="form-control" name="twitter"
-                                value="{{ old('twitter',  @$data->twitter) }}" placeholder="Enter Twitter Link" maxlength="50">
+                                    value="{{ old('twitter') }}" placeholder="Enter Twitter Link" maxlength="50">
 
                                 @error('twitter')
                                     <span class="text-danger">{{ $message }}</span>
@@ -73,7 +73,7 @@
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Instagram Link </label>
                                 <input type="text" id="instagram" class="form-control" name="instagram"
-                                value="{{ old('instagram', @$data->instra) }}" placeholder="Enter Instagram Link" maxlength="50">
+                                    value="{{ old('instagram') }}" placeholder="Enter Instagram Link" maxlength="50">
 
                                 @error('instagram')
                                     <span class="text-danger">{{ $message }}</span>
@@ -83,7 +83,7 @@
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Dribbble Link </label>
                                 <input type="text" id="dribbble" class="form-control" name="dribbble"
-                                value="{{ old('dribbble', @$data->dribbble) }}" placeholder="Enter dribbble Link" maxlength="50">
+                                    value="{{ old('dribbble') }}" placeholder="Enter dribbble Link" maxlength="50">
 
                                 @error('dribbble')
                                     <span class="text-danger">{{ $message }}</span>
@@ -93,12 +93,15 @@
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Upload Profile Image <span
                                         class="text-danger">*</span></label>
-                                <input type="file" id="profile" class="form-control" name="profile" accept="application/jpge/jig/png">
+                                <input type="file" id="profile" class="form-control" name="profile"
+                                    accept="application/jpge/jig/png">
 
                                 @error('profile')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+
+
 
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Status <span
@@ -107,7 +110,7 @@
                                     <option hidden value="">Status</option>
                                     @foreach (config('site.status') as $status)
                                         <option value="{{ $status['value'] }}"
-                                        {{ $data->status == $status['value'] ? 'selected' : '' }}>
+                                            {{ old('status') == $status['value'] ? 'selected' : '' }}>
                                             {{ $status['name'] }}
                                         </option>
                                     @endforeach
@@ -119,13 +122,10 @@
                             </div>
 
                             <div class="col-md-6 position-relative">
-                            @if (@$data->image)
-                                      <img class="ge_img pop_up_image" src="{{ asset('storage/' . $data->image) }}">
-                                  @endif
                             </div>
 
                             <div class="col-12 text-end mt-5">
-                                <button class="btn btn-sm btn-primary" type="submit">Update</button>
+                                <button class="btn btn-sm btn-primary" type="submit">Create</button>
                             </div>
                         </form>
                     </div>

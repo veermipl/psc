@@ -1,5 +1,5 @@
 @php
-    if(auth()->check()){
+    if (auth()->check()) {
         $user_details = helper_getUserDetails(auth()->user()->id);
     }
     $settings_app_name = helper_getSettings('app_name');
@@ -12,6 +12,8 @@
     $settings_contact_us_facebook = helper_getSettings('facebook');
     $settings_contact_us_twitter = helper_getSettings('twitter');
     $settings_contact_us_youtube = helper_getSettings('youtube');
+
+    $membership_type = common_helper('getMembershipType');
 
 @endphp
 
@@ -39,8 +41,10 @@
 
     <link rel="icon" href="images/favicon.png" type="image/x-icon" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.1.2/css/dataTables.dataTables.css">
@@ -92,6 +96,7 @@
             top: 12px;
         }
     </style>
+
     @yield('css')
 </head>
 
@@ -117,7 +122,8 @@
                                     <ul>
                                         <li class="desk_logo">
                                             <a href="{{ route('home') }}">
-                                                <img src="{{ asset('images/Gover-website/logo-other.png') }}" alt="logo" />
+                                                <img src="{{ asset('images/Gover-website/logo-other.png') }}"
+                                                    alt="logo" />
                                             </a>
                                         </li>
                                     </ul>
@@ -125,49 +131,58 @@
                                 <div class="header_top_two_box pull-right">
                                     <div class="opening_hour">
                                         <div class="js">
-                                            <div class="language-picker js-language-picker" data-trigger-class="btn btn--subtle">
+                                            <div class="language-picker js-language-picker"
+                                                data-trigger-class="btn btn--subtle">
                                                 <div id="google_translate_element"></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="opening_hour social_links_1">
                                         <div class="topbar-one__right">
-                                            <a href="#" class="topbar-one__guide-btn" id="btn-increase" title="Increase font size" style="font-size: 17px">
+                                            <a href="#" class="topbar-one__guide-btn" id="btn-increase"
+                                                title="Increase font size" style="font-size: 17px">
                                                 +A</a>
-                                            <a href="#" class="topbar-one__guide-btn" id="btn-origs" title="Reset font size" style="font-size: 17px">A
+                                            <a href="#" class="topbar-one__guide-btn" id="btn-origs"
+                                                title="Reset font size" style="font-size: 17px">A
                                             </a>
-                                            <a href="#" class="topbar-one__guide-btn" id="btn-decrease" title="Decrease font size" style="font-size: 17px">
+                                            <a href="#" class="topbar-one__guide-btn" id="btn-decrease"
+                                                title="Decrease font size" style="font-size: 17px">
                                                 -A</a>
                                         </div>
                                     </div>
                                     @auth
-                                    <div class="d-flex">
-                                        <div class="ml-2">
-                                            <div class="dropdownt">
-                                                <div class="drop-img dropbtnt" id="myBtnt">
-                                                    <img src="{{ asset('storage/' . ($user_details ? $user_details['profile_image'] : 'default/user.png'))}}" class="user-img" alt="user-picture">
-                                                    <i class="fas fa-chevron-down"></i>
-                                                </div>
-                                                <div id="myDropdownt" class="dropdown-contentt">
-                                                    <a href="{{ route('profile') }}"> <i class="far fa-user"></i> Profile</a>
-                                                    @if (auth()->user()->hasPermission('admin_dashboard'))
-                                                        <a href="{{ route('admin.dashboard') }}"> <i class="far fa-dashboard"></i> Admin Dashboard</a>
-                                                    @endif
-                                                    @if (auth()->user()->hasPermission('member_dashboard'))
-                                                        <a href="{{ route('member.dashboard') }}"> <i class="far fa-dashboard"></i> Member Dashboard</a>
-                                                    @endif
+                                        <div class="d-flex">
+                                            <div class="ml-2">
+                                                <div class="dropdownt">
+                                                    <div class="drop-img dropbtnt" id="myBtnt">
+                                                        <img src="{{ asset('storage/' . ($user_details ? $user_details['profile_image'] : 'default/user.png')) }}"
+                                                            class="user-img" alt="user-picture">
+                                                        <i class="fas fa-chevron-down"></i>
+                                                    </div>
+                                                    <div id="myDropdownt" class="dropdown-contentt">
+                                                        <a href="{{ route('profile') }}"> <i class="far fa-user"></i>
+                                                            Profile</a>
+                                                        @if (auth()->user()->hasPermission('admin_dashboard'))
+                                                            <a href="{{ route('admin.dashboard') }}"> <i
+                                                                    class="far fa-dashboard"></i> Admin Dashboard</a>
+                                                        @endif
+                                                        @if (auth()->user()->hasPermission('member_dashboard'))
+                                                            <a href="{{ route('member.dashboard') }}"> <i
+                                                                    class="far fa-dashboard"></i> Member Dashboard</a>
+                                                        @endif
 
-                                                    <form action="{{ route('logout') }}" method="post">
-                                                        @csrf
-                                                        @method('post')
-                                                        <button class=" btn-sm btn-block" style="padding-left: 18px; text-align:start;">
-                                                            <i class="far fa-lock"></i> Logout
-                                                        </button>
-                                                    </form>
+                                                        <form action="{{ route('logout') }}" method="post">
+                                                            @csrf
+                                                            @method('post')
+                                                            <button class=" btn-sm btn-block"
+                                                                style="padding-left: 18px; text-align:start;">
+                                                                <i class="far fa-lock"></i> Logout
+                                                            </button>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                     @endauth
                                 </div>
                             </div>
@@ -184,7 +199,9 @@
                             <div class="header_upper_inner clearfix">
                                 <div class="header_upper_one_box pull-left m-show">
                                     <div class="logo">
-                                        <a href="{{ route('home') }}"><img src="{{ asset('images/Gover-website/logo-other.png') }}" alt="" title="" /></a>
+                                        <a href="{{ route('home') }}"><img
+                                                src="{{ asset('images/Gover-website/logo-other.png') }}"
+                                                alt="" title="" /></a>
                                     </div>
                                 </div>
                                 <div class="header_upper_two_box one pull-right">
@@ -203,23 +220,39 @@
                                                         </li>
 
                                                         <li class="dropdown">
-                                                            <a href="index.html">About Us<i class="fas fa-chevron-down"></i></a>
+                                                            <a href="index.html">About Us<i
+                                                                    class="fas fa-chevron-down"></i></a>
                                                             <ul>
-                                                                <li><a  href="{{ route('about-us.introduction') }}">Who We Are</a>
-                                                                </li>
-                                                                <li><a  href="{{ route('about-us.staff') }}">Staff</a>
+                                                                <li>
+                                                                    <a href="{{ route('about-us.introduction') }}">
+                                                                        Who We Are
+                                                                    </a>
                                                                 </li>
                                                                 <li>
-                                                                    <a  href="{{ route('about-us.council') }}">Council</a>
+                                                                    <a href="{{ route('about-us.staff') }}">
+                                                                        Staff
+                                                                    </a>
                                                                 </li>
                                                                 <li>
-                                                                    <a href="{{ route('about-us.history') }}">History</a>
+                                                                    <a href="{{ route('about-us.council') }}">
+                                                                        Council
+                                                                    </a>
                                                                 </li>
-
                                                                 <li>
-                                                                    <a href="{{ route('about-us.committeess') }}">Committeess</a>
+                                                                    <a href="{{ route('about-us.history') }}">
+                                                                        History
+                                                                    </a>
                                                                 </li>
-
+                                                                <li>
+                                                                    <a href="{{ route('about-us.committeess') }}">
+                                                                        Committeess
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="{{ route('about-us.executive-committeess') }}">
+                                                                        Executive Committeess
+                                                                    </a>
+                                                                </li>
                                                             </ul>
                                                         </li>
 
@@ -228,31 +261,35 @@
                                                                 <i class="fas fa-chevron-down"></i></a>
                                                             <ul>
                                                                 @guest
-                                                                <!-- 
-                                                                    <li>
-                                                                        <a href="{{ route('login') }}">Members Sign-in</a> 
-                                                                        <a href="{{ route('login') }}"> Members Sign-in </a>
-                                                                    </li>
-                                                                -->
+                                                                    <!--
+                                                                        <li>
+                                                                            <a href="{{ route('login') }}">Members Sign-in</a>
+                                                                            <a href="{{ route('login') }}"> Members Sign-in </a>
+                                                                        </li>
+                                                                    -->
                                                                 @endguest
-                                                                <li>
-                                                                    <!-- <a href="{{ route('membership.business-directory') }}">Business Directory</a> -->
-                                                                    <a href="{{ route('membership.business-directory') }}#corporate">Sectoral</a>
-                                                                    
-                                                                </li>
-                                                                <li>
-                                                                    <!-- <a href="{{ route('membership.business-directory') }}">Business Directory</a> -->
-                                                                  
-                                                                    <a href="{{ route('membership.business-directory') }}#sectoral corporate">Corporate</a>
-                                                                </li>
+
+                                                                @if($membership_type)
+                                                                    @foreach($membership_type as $mTypeKey => $mType)
+                                                                        <li>
+                                                                            <a href="{{ route('membership.business-directory') }}#{{ $mType->name_key }}">
+                                                                                {{ $mType->name }}
+                                                                            </a>
+                                                                        </li>
+                                                                    @endforeach
+                                                                @endif
+
                                                                 @guest
-                                                                <li>
-                                                                    <a href="{{ route('register') }}">Become a member</a>
-                                                                </li>
+                                                                    <li>
+                                                                        <a href="{{ route('register') }}">
+                                                                            Become a member
+                                                                        </a>
+                                                                    </li>
                                                                 @endguest
+
                                                                 <!-- <li>
-                                                                    <a href="{{ route('membership.member-benefits') }}">Member
-                                                                        Benefits</a>
+                                                                    <a href="{{ route('membership.member-benefits') }}">
+                                                                        Member Benefits</a>
                                                                 </li> -->
 
                                                             </ul>
@@ -267,8 +304,9 @@
                                                             <a href="#">Data<i class="fas fa-chevron-down"></i>
                                                             </a>
                                                             <ul>
-                                                             <li>  <a href="{{ route('guyana-economy') }}"> Guyana’s Economy </a>
-                                                             </li>
+                                                                <li> <a href="{{ route('guyana-economy') }}"> Guyana’s
+                                                                        Economy </a>
+                                                                </li>
                                                                 <li>
                                                                     <a href="{{ route('data.national_budgets') }}">National
                                                                         Budgets</a>
@@ -289,85 +327,95 @@
                                                         </li>
 
                                                         <li class="dropdown">
-                                                            <a href="#">Resources<i class="fas fa-chevron-down"></i>
+                                                            <a href="#">Resources<i
+                                                                    class="fas fa-chevron-down"></i>
                                                             </a>
                                                             <ul>
-                                                           
-                                                            <li> <a href="{{ route('resources.economic.reports') }}">Economic Reports </a>
-                                                            </li>
-                                                            <li> <a href="{{ route('resources.common.external.tarriff') }}">Common External Tarriff</a>
-                                                            </li>
-                                                            
-                                                            </li>
-                                                              <li> <a href="{{ route('resources.annual-report') }}">Annual Reports</a>
+
+                                                                <li> <a
+                                                                        href="{{ route('resources.economic.reports') }}">Economic
+                                                                        Reports </a>
                                                                 </li>
-                                                          
-                                                                <li><a href="{{ route('resources.business-readiness-desk') }}"> CET Information </a></li>
-                                                                <li>
-                                                                    <a href="{{ route('resources.go-invest') }}">Go-Invest</a>
+                                                                <li> <a
+                                                                        href="{{ route('resources.common.external.tarriff') }}">Common
+                                                                        External Tarriff</a>
                                                                 </li>
-                                                                <li>
-                                                                    <a href="{{ route('resources.idb-invest') }}">IDB
-                                                                        Invest</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="{{ route('resources.procurement-process-in-guyana') }}">Procurement
-                                                                        Process in Guyana</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="{{ route('resources.certificate-of-origins') }}">Certificate
-                                                                        of Origins</a>
-                                                                </li>
-                                                                
-                                                            </ul>
+
+                                                        </li>
+                                                        <li> <a href="{{ route('resources.annual-report') }}">Annual
+                                                                Reports</a>
                                                         </li>
 
-                                                        <li class="dropdown">
-                                                            <a href="index.html">Media Center
-                                                                <i class="fas fa-chevron-down"></i>
-                                                            </a>
-                                                            <ul>
-                                                                <li><a href="{{ route('media.news') }}">Newsletter</a></li>
-                                                                <li>
-                                                                    <a href="{{ route('media.press-release') }}">Press
-                                                                        Releases</a>
-                                                                </li>
-                                                                <!-- <li>
+                                                        <li><a
+                                                                href="{{ route('resources.business-readiness-desk') }}">
+                                                                CET Information </a></li>
+                                                        <li>
+                                                            <a href="{{ route('resources.go-invest') }}">Go-Invest</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="{{ route('resources.idb-invest') }}">IDB
+                                                                Invest</a>
+                                                        </li>
+                                                        <li>
+                                                            <a
+                                                                href="{{ route('resources.procurement-process-in-guyana') }}">Procurement
+                                                                Process in Guyana</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="{{ route('resources.certificate-of-origins') }}">Certificate
+                                                                of Origins</a>
+                                                        </li>
+
+                                                    </ul>
+                                                    </li>
+
+                                                    <li class="dropdown">
+                                                        <a href="index.html">Media Center
+                                                            <i class="fas fa-chevron-down"></i>
+                                                        </a>
+                                                        <ul>
+                                                            <li><a href="{{ route('media.news') }}">Newsletter</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ route('media.press-release') }}">Press
+                                                                    Releases</a>
+                                                            </li>
+                                                            <!-- <li>
                                                                     <a href="{{ route('media.social-media') }}">Social
                                                                         Media</a>
                                                                 </li> -->
-                                                                <li>
-                                                                    <a href="{{ route('media.photos') }}">Photos</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="{{ route('media.videos') }}">Videos</a>
-                                                                </li>
-                                                                <!-- <li>
+                                                            <li>
+                                                                <a href="{{ route('media.photos') }}">Photos</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ route('media.videos') }}">Videos</a>
+                                                            </li>
+                                                            <!-- <li>
                                                                     <a href="{{ route('media.event') }}">Events</a>
                                                                 </li> -->
 
 
-                                                            </ul>
-                                                        </li>
-                                                        
-                                                        <li class="dropdown">
-                                                            <a href="#">Event<i class="fas fa-chevron-down"></i>
-                                                            </a>
-                                                            <ul>
-                                                                <li>  <a href="{{ route('media.event') }}">Events</a></li>
-                                                                <li>
-                                                                    <a href="{{ route('media.upcoming.event') }}">  
+                                                        </ul>
+                                                    </li>
+
+                                                    <li class="dropdown">
+                                                        <a href="#">Event<i class="fas fa-chevron-down"></i>
+                                                        </a>
+                                                        <ul>
+                                                            <li> <a href="{{ route('media.event') }}">Events</a></li>
+                                                            <li>
+                                                                <a href="{{ route('media.upcoming.event') }}">
 
                                                                     Upcoming Events
-                                                                    </a>
-                                                                </li>
-                                                                <!-- <li>
+                                                                </a>
+                                                            </li>
+                                                            <!-- <li>
                                                                     <a href="{{ route('media.social-media') }}">Social
                                                                         Media</a>
                                                                 </li> -->
-                                                              </ul>
-                                                        </li>
-                                                        <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
                                                     </ul>
                                                 </div>
                                             </nav>
@@ -375,7 +423,8 @@
                                         </div>
                                     </div>
                                     <div class="icon-search-box">
-                                        <button class="dropdown-toggle" id="searchDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <button class="dropdown-toggle" id="searchDropdown" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
                                             <i class="fa fa-search" aria-hidden="true"></i>
                                         </button>
                                         <form action="#" class="dropdown-menu" aria-labelledby="searchDropdown">
@@ -400,7 +449,9 @@
                         <div class="header-column">
                             <div class="logo-box">
                                 <div class="logo">
-                                    <a href="{{url('/')}}"><img src="{{asset('images/Gover-website/logo-other.png')}}" alt="" title="" /></a>
+                                    <a href="{{ url('/') }}"><img
+                                            src="{{ asset('images/Gover-website/logo-other.png') }}" alt=""
+                                            title="" /></a>
                                 </div>
                             </div>
                         </div>
@@ -440,10 +491,10 @@
         <!-- End Main Header -->
 
         @if (session('status') == 'verification-link-sent')
-        <div class="flashMsg alertSuccess">
-            <strong>A new verification link has been sent to the email address you provided during
-                registration.</strong>
-        </div>
+            <div class="flashMsg alertSuccess">
+                <strong>A new verification link has been sent to the email address you provided during
+                    registration.</strong>
+            </div>
         @endif
 
 
@@ -466,7 +517,7 @@
                                     number of elected corporate members.
                                 </p>
                             </div>
-                           
+
                             <div class="footer-widget_contact-info mb-3" style="margin-top: 35px;">
                                 <p style="display: flex; align-items: baseline">
                                     <i class="fas fa-map-marker-alt" style="margin-right: 10px"></i>
@@ -484,10 +535,10 @@
 
 
                             <!-- <div class="footer-widget-about-social">
-                                <a href="{{$settings_contact_us_facebook}}"><i class="fab fa-facebook"></i></a>
-                                <a href="{{$settings_contact_us_twitter}}"><i class="fab fa-twitter"></i></a>
-                                <a href="{{$settings_contact_us_youtube}}"> <i class="fab fa-youtube"></i></a>
-                                <a href="{{$settings_contact_us_instagram}}"><i class="fab fa-instagram"></i></a>
+                                <a href="{{ $settings_contact_us_facebook }}"><i class="fab fa-facebook"></i></a>
+                                <a href="{{ $settings_contact_us_twitter }}"><i class="fab fa-twitter"></i></a>
+                                <a href="{{ $settings_contact_us_youtube }}"> <i class="fab fa-youtube"></i></a>
+                                <a href="{{ $settings_contact_us_instagram }}"><i class="fab fa-instagram"></i></a>
                             </div> -->
                         </div>
                     </div>
@@ -498,19 +549,23 @@
                                 <h3>Useful Links</h3>
                             </div>
                             <ul class="footer-widget-useful-links-list list-unstyled">
-                                <!-- <li><a target="_blank" href="{{url('about-us/introduction')}}">Introduction</a></li>
-                                <li><a target="_blank" href="{{url('membership/business-directory')}}">Member Benefits</a></li>
-                                <li><a target="_blank" href="{{url('guyana-economy')}}">Guyana's Economy</a></li>
-                                <li><a target="_blank" href="{{url('media/news')}}">News</a></li> -->
-                                <li><a target="_blank" href="https://guyanainvest.gov.gy/">GOINVEST  </a></li>
-                                <li><a target="_blank" href="https://mintic.gov.gy/">Ministry of Tourism, Industry and Commerce </a></li>
+                                <!-- <li><a target="_blank" href="{{ url('about-us/introduction') }}">Introduction</a></li>
+                                <li><a target="_blank" href="{{ url('membership/business-directory') }}">Member Benefits</a></li>
+                                <li><a target="_blank" href="{{ url('guyana-economy') }}">Guyana's Economy</a></li>
+                                <li><a target="_blank" href="{{ url('media/news') }}">News</a></li> -->
+                                <li><a target="_blank" href="https://guyanainvest.gov.gy/">GOINVEST </a></li>
+                                <li><a target="_blank" href="https://mintic.gov.gy/">Ministry of Tourism, Industry and
+                                        Commerce </a></li>
                                 <li><a target="_blank" href="https://finance.gov.gy">Ministry of Finance</a></li>
-                                <li><a target="_blank" href="https://www.gra.gov.gy/">Guyana Revenue Authority</a></li>
+                                <li><a target="_blank" href="https://www.gra.gov.gy/">Guyana Revenue Authority</a>
+                                </li>
                                 <li><a target="_blank" href="https://sbb.gov.gy/"> Small Business Bureau</a></li>
                                 <li><a target="_blank" href="http://www.bankofguyana.org/"> Bank of Guyana </a></li>
-                                <li><a target="_blank" href="https://www.nis.org.gy/"> National Insurance Scheme</a></li>
-                                <li><a target="_blank" href=" https://gnbsgy.org/">Guyana National Bureau of Standards</a></li>
-                              
+                                <li><a target="_blank" href="https://www.nis.org.gy/"> National Insurance Scheme</a>
+                                </li>
+                                <li><a target="_blank" href=" https://gnbsgy.org/">Guyana National Bureau of
+                                        Standards</a></li>
+
                             </ul>
                         </div>
                     </div>
@@ -543,14 +598,21 @@
                                 <h3>Private Sector Commission</h3>
                             </div>
                             <ul class="footer-widget-gallery-list list-unstyled">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.6022967381095!2d-58.160602499999996!3d6.818129600000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8dafef0e7ef8479b%3A0x7bf69734452f5a55!2sPrivate%20Sector%20Commission!5e0!3m2!1sen!2sin!4v1707730504072!5m2!1sen!2sin" width="100%" height="170" style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.6022967381095!2d-58.160602499999996!3d6.818129600000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8dafef0e7ef8479b%3A0x7bf69734452f5a55!2sPrivate%20Sector%20Commission!5e0!3m2!1sen!2sin!4v1707730504072!5m2!1sen!2sin"
+                                    width="100%" height="170" style="border: 0" allowfullscreen=""
+                                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </ul>
 
                             <div class="footer-widget-about-social">
-                                <a target="_blank" href="{{$settings_contact_us_facebook}}"><i class="fab fa-facebook"></i></a>
-                                <a target="_blank" href="{{$settings_contact_us_twitter}}"><i class="fab fa-twitter"></i></a>
-                                <a target="_blank" href="{{$settings_contact_us_youtube}}"> <i class="fab fa-youtube"></i></a>
-                                <a target="_blank" href="{{$settings_contact_us_instagram}}"><i class="fab fa-instagram"></i></a>
+                                <a target="_blank" href="{{ $settings_contact_us_facebook }}"><i
+                                        class="fab fa-facebook"></i></a>
+                                <a target="_blank" href="{{ $settings_contact_us_twitter }}"><i
+                                        class="fab fa-twitter"></i></a>
+                                <a target="_blank" href="{{ $settings_contact_us_youtube }}"> <i
+                                        class="fab fa-youtube"></i></a>
+                                <a target="_blank" href="{{ $settings_contact_us_instagram }}"><i
+                                        class="fab fa-instagram"></i></a>
                             </div>
 
                         </div>
@@ -620,62 +682,61 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        
-        var $affectedElements = $("p, h1, h2, h3, h4, h5, h6 ,span, a, td"); // Can be extended, ex. $("div, p, span.someClass")
+        var $affectedElements = $(
+            "p, h1, h2, h3, h4, h5, h6 ,span, a, td"); // Can be extended, ex. $("div, p, span.someClass")
 
         // Storing the original size in a data attribute so size can be reset
-        $affectedElements.each(function () {
+        $affectedElements.each(function() {
             var $this = $(this);
             $this.data("orig-size", $this.css("font-size"));
         });
 
-        $("#btn-increase").click(function () {
+        $("#btn-increase").click(function() {
             changeFontSize(1);
         })
 
-        $("#btn-decrease").click(function () {
+        $("#btn-decrease").click(function() {
             changeFontSize(-1);
         })
 
-        $("#btn-origs").click(function () {
-            $affectedElements.each(function () {
+        $("#btn-origs").click(function() {
+            $affectedElements.each(function() {
                 var $this = $(this);
                 $this.css("font-size", $this.data("orig-size"));
             });
         })
 
         function changeFontSize(direction) {
-            $affectedElements.each(function () {
+            $affectedElements.each(function() {
                 var $this = $(this);
                 $this.css("font-size", parseInt($this.css("font-size")) + direction);
             });
         }
     </script>
 
-<script>
-$(document).ready(function() {
-  
-  $("#myBtnt").click(function(event) {
-    event.stopPropagation(); 
-    if ($("#myDropdownt").is(":visible")) {
-      $("#myDropdownt").hide();
-    } else {
-      $("#myDropdownt").show();
-    }
-  });
+    <script>
+        $(document).ready(function() {
 
-  $(document).click(function() {
-    if ($("#myDropdownt").is(":visible")) {
-      $("#myDropdownt").hide(); 
-    }
-  });
+            $("#myBtnt").click(function(event) {
+                event.stopPropagation();
+                if ($("#myDropdownt").is(":visible")) {
+                    $("#myDropdownt").hide();
+                } else {
+                    $("#myDropdownt").show();
+                }
+            });
 
-  $("#myDropdownt").click(function(event) {
-    event.stopPropagation();
-  });
-});
+            $(document).click(function() {
+                if ($("#myDropdownt").is(":visible")) {
+                    $("#myDropdownt").hide();
+                }
+            });
 
-</script>
+            $("#myDropdownt").click(function(event) {
+                event.stopPropagation();
+            });
+        });
+    </script>
 
 
     <script>
@@ -702,26 +763,26 @@ $(document).ready(function() {
         });
     </script>
 
- 
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     @if (session('success'))
-    <script>
-        toastr.success("{{ session('success') }}");
-    </script>
+        <script>
+            toastr.success("{{ session('success') }}");
+        </script>
     @endif
 
     @if (session('error'))
-    <script>
-        toastr.error("{{ session('error') }}");
-    </script>
+        <script>
+            toastr.error("{{ session('error') }}");
+        </script>
     @endif
 
     @if (session('status'))
-    <script>
-        toastr.success("{{ session('status') }}");
-    </script>
+        <script>
+            toastr.success("{{ session('status') }}");
+        </script>
     @endif
 
     @yield('scripts')

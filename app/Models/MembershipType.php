@@ -14,6 +14,7 @@ class MembershipType extends Model
 
     protected $fillable = [
         'name',
+        'name_key',
         'status',
     ];
 }

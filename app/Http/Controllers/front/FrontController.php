@@ -31,6 +31,7 @@ use App\Models\NationalBudget;
 use App\Models\BusinessDirectory;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\ExecutiveCommitteess;
 
 class FrontController extends Controller
 {
@@ -116,17 +117,17 @@ class FrontController extends Controller
 
         return view('front.index_show_post', $data);
     }
-    public function social_media($id){
-        
+    public function social_media($id)
+    {
+
         $id = base64_decode($id);
-        $latest_list = SocialMedia::orderBy('id', 'desc')->where(['status' => '1' ])->where('id', '!=', $id)->limit(5)->get() ?? [];
+        $latest_list = SocialMedia::orderBy('id', 'desc')->where(['status' => '1'])->where('id', '!=', $id)->limit(5)->get() ?? [];
         $details = SocialMedia::where('status', '1')->findOrFail($id);
 
         $data['latest_list'] = $latest_list;
         $data['details'] = $details;
 
         return view('front.index_social_media', $data);
-
     }
 
     public function aboutUs()
@@ -147,7 +148,7 @@ class FrontController extends Controller
 
     public function aboutUs_Staff()
     {
-        $staff =  Staff::where('status', '1')->orderby('id', 'desc')->get();
+        $staff =  Staff::where('status', '1')->orderby('order_key', 'asc')->get();
 
         return view('front.about_us.staff', compact('staff'));
     }
@@ -172,6 +173,31 @@ class FrontController extends Controller
         $committees = Committeess::where('status', '1')->orderby('id', 'desc')->get();
 
         return view('front.about_us.committeess', compact('committees'));
+    }
+
+    public function aboutUs_Committeess_Show(Request $request, $id)
+    {
+        $details = Committeess::where('status', '1')->findOrFail($id);
+
+        $data['details'] = $details;
+
+        return view('front.about_us.committeess_view', compact('details'));
+    }
+
+    public function aboutUs_ExecutiveCommitteess()
+    {
+        $executive_committees = ExecutiveCommitteess::where('status', '1')->orderby('id', 'desc')->get();
+
+        return view('front.about_us.executive_committeess', compact('executive_committees'));
+    }
+
+    public function aboutUs_ExecutiveCommitteess_Show(Request $request, $id)
+    {
+        $details = ExecutiveCommitteess::where('status', '1')->findOrFail($id);
+
+        $data['details'] = $details;
+
+        return view('front.about_us.executive_committeess_view', compact('details'));
     }
 
     public function contactUs()
@@ -240,10 +266,11 @@ class FrontController extends Controller
         //     ])->get();
         //     $business_directory_list[$value['name']] = $list_in_value->pluck('name')->toArray();
         // }
-        $list_in_value = BusinessDirectory::orderBy('name', 'asc')->where( 'status', '1')->get();
+        $list_in_value = BusinessDirectory::orderBy('name', 'asc')->where('status', '1')->get();
 
         $data['business_directory_list'] = $list_in_value;
         $data['membershipList'] = $membershipList;
+
         return view('front.membership.business_directory', $data);
     }
 
@@ -312,7 +339,7 @@ class FrontController extends Controller
         $data['main'] = $main;
         $data['entrepreneurship_development'] = $entrepreneurship_development;
 
-      return view('front.data.coted', $data);
+        return view('front.data.coted', $data);
     }
 
     public function show_Coted_EntrepreneurshipDevelopment($id)
@@ -534,10 +561,10 @@ class FrontController extends Controller
         $data['video_list'] = $video_list;
         return view('front.media.videos', $data);
     }
-    
+
     public function about_view($id)
     {
-        $data = LandingPage::where('id', $id)->where([  'type' => 'sector_committee', 'status' => '1'])->first();
+        $data = LandingPage::where('id', $id)->where(['type' => 'sector_committee', 'status' => '1'])->first();
         return view('front.media.view_details', compact('data'))->render();;
     }
     public function introduction_view($id)
@@ -545,8 +572,9 @@ class FrontController extends Controller
         $data =  Testimonials::where('status', '1')->where('id', $id)->first();
         return view('front.about_us.introduction_view', compact('data'))->render();;
     }
-    
-    public function media_event(){
+
+    public function media_event()
+    {
 
         $date = Carbon::now();
 
@@ -557,37 +585,40 @@ class FrontController extends Controller
         return view('front.media.event', compact('data'));
     }
 
-    public function details_event($id){
+    public function details_event($id)
+    {
         $ids = base64_decode($id);
         $events = PSCEvent::orderBy('id', 'desc')->where([
             'status' => '1'
         ])->where('id', '!=', $ids)->limit(5)->get() ?? [];
 
         $details = PSCEvent::where('status', '1')->findOrFail($ids);
-        return view('front.media.event_deatils', compact('events', 'details' ));
-
+        return view('front.media.event_deatils', compact('events', 'details'));
     }
-    public function upcoming_event (){
+    public function upcoming_event()
+    {
         $date = Carbon::now();
 
         $data = PSCEvent::where('status', '1')
             ->where('date_time', '>=', $date->toDateString())
             ->orderby('id', 'desc')
             ->get();
-        
+
         return view('front.media.upcoming_event', compact('data'));
     }
 
-    public function economic_reports (){
+    public function economic_reports()
+    {
         return view('front.resources.economic_reports');
     }
 
-    public function common_external (){
+    public function common_external()
+    {
         return view('front.resources.common_external');
     }
 
-    public function regulations (){
+    public function regulations()
+    {
         return view('front.resources.upcoming_event');
     }
-
 }

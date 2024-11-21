@@ -58,7 +58,7 @@ class StaffController extends Controller
     {
         $this->authorize('about_us_view');
 
-        $data = Staff::where('deleted_at', '0')->orderby('id', 'desc')->get();
+        $data = Staff::where('deleted_at', '0')->orderby('order_key', 'asc')->get();
 
         return view('admin.staff.index', compact('data'));
     }
@@ -135,5 +135,26 @@ class StaffController extends Controller
         $staff->Update($array);
 
         return redirect()->route('admin.staff.list')->with('status', 'Staff update successfully');
+    }
+
+    public function reorder(Request $request)
+    {
+        $validated = $request->validate([
+            'position' => ['required', 'array']
+        ]);
+
+        $i = 1;
+        foreach ($validated['position'] as $key => $value) {
+            $shortUpdate = Staff::where('id', $value)->update([
+                'order_key' => $i,
+            ]);
+            $i++;
+        }
+
+        $data['error'] = false;
+        $data['msg'] = 'Staff Order List updated';
+        $data['shortUpdate'] = $shortUpdate;
+
+        return response()->json($data, 200);
     }
 }

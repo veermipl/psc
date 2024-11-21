@@ -1437,7 +1437,7 @@ li {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
-    top: 80px;
+    /*    top: 80px;*/
 }
 
 .banner-section .swiper-slide-active .content-box .inner {
@@ -2559,9 +2559,7 @@ span.flaticon-paint-roller:before {
 }
 
 .team-one-content-2 {
-   
     height: 150px;
-  
 }
 
 .team-one-content h3 {
@@ -2632,8 +2630,7 @@ span.flaticon-paint-roller:before {
     background-color: rgb(255, 255, 255);
     box-shadow: 0px 0px 62px 0px rgb(27, 31, 45, 0.05);
     padding: 33px 30px 34px;
-  height: 230px;
-
+    height: 230px;
 }
 
 .blog-one-meta li {
@@ -2786,7 +2783,6 @@ span.flaticon-paint-roller:before {
 .footer-widget-useful-links-list li a:hover {
     color: #ecbd00;
     transition: all 0.9s ease-in-out;
-    
 }
 
 .footer-widget-contact {
@@ -4711,10 +4707,9 @@ span.flaticon-paint-roller:before {
     background-color: rgb(255, 255, 255);
     box-shadow: 0px 0px 62px 0px rgb(27, 31, 45, 0.05);
     padding: 28px 30px 40px;
- word-wrap: break-word;
-  white-space: normal; 
-  overflow: hidden;     /
-
+    word-wrap: break-word;
+    white-space: normal;
+    overflow: hidden;
 }
 
 .blog-classic-meta {
@@ -6734,7 +6729,7 @@ textarea.input {
 }
 
 .showt {
-   /* display: block; */
+    /* display: block; */
 }
 
 .btn-block {
@@ -6994,7 +6989,7 @@ button.btn-block:hover {
     width: 600px;
 }
 .detail-slide img {
-    height: 400px ;
+    height: 400px;
     width: 100%;
 }
 @media screen and (max-width: 767px) {
@@ -7009,8 +7004,7 @@ button.btn-block:hover {
     background-color: rgb(255, 255, 255);
     box-shadow: 0px 0px 62px 0px rgb(27, 31, 45, 0.05);
     padding: 33px 30px 34px;
-  height: 230px;
-
+    height: 230px;
 }
 
 .guyana-wrap .blog-one-title-2 h3 {
@@ -7021,17 +7015,15 @@ button.btn-block:hover {
     text-overflow: ellipsis;
     margin-bottom: 15px;
     font-weight: 600;
-
 }
 
-.blog-one-text  {
+.blog-one-text {
     height: 90px;
 }
 
-.blog-one-text-2  {
+.blog-one-text-2 {
     height: 110px;
 }
-
 
 .blog-one-content-3 {
     position: relative;
@@ -7089,30 +7081,29 @@ button.btn-block:hover {
     height: 39px;
 }
 
-/ Abhi? /
-.my-lorem-pdf-two-section .my-tab li.nav-item {
-  margin: 20px !important;
+/ Abhi? / .my-lorem-pdf-two-section .my-tab li.nav-item {
+    margin: 20px !important;
 }
 .my-lorem-pdf-two-section .my-lorem-pdf img {
-  width: 50px !important;
+    width: 50px !important;
 }
 .my-lorem-pdf-two-section .my-lorem-pdf {
-  width: 70px;
-  height: 70px;
-  border-radius: 50px;
-  box-shadow: 1.362px 2.673px 35px 0px rgb(0, 0, 0, 0.08) !important;
-  background: #ffffff !important;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
+    box-shadow: 1.362px 2.673px 35px 0px rgb(0, 0, 0, 0.08) !important;
+    background: #ffffff !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .my-lorem-pdf-two-section .my-lorem-pdf:hover {
-  background-color: #072d74 !important;
+    background-color: #072d74 !important;
 }
 .my-lorem-pdf-two-section .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
-  color: #fff !important;
-  background-color: #072d74 !important;
+    color: #fff !important;
+    background-color: #072d74 !important;
 }
 
 .vs-btn1 {
@@ -7120,12 +7111,11 @@ button.btn-block:hover {
     bottom: 20px;
 }
 
-
 .newslatter-2 {
     font-size: 22px;
     font-weight: 700;
     line-height: 32px;
-  //  color: #072d74;
+    //  color: #072d74;
 }
 
 .stragy.priority {
@@ -7136,41 +7126,40 @@ button.btn-block:hover {
     position: absolute;
     bottom: 45px;
 }
-.priority-2{
-  min-height: 340px;
+.priority-2 {
+    min-height: 340px;
 }
-.blog-one-content.h-165{
-height:185px!important;
+.blog-one-content.h-165 {
+    height: 185px !important;
 }
 
-
- .language-picker__form-2 select#language-picker-select {
+.language-picker__form-2 select#language-picker-select {
     width: 100%;
     border: 2px solid #072d7461;
     border-radius: 5px;
     height: 40px;
-  }
+}
 
-  .my-form-bg {
+.my-form-bg {
     border: 2px solid #a1afca;
     border-radius: 20px;
     background: #a1afca3b;
-  }
+}
 
-  .my-form-registration select#language-picker-select {
+.my-form-registration select#language-picker-select {
     width: 100%;
     border: 2px solid #072d7461;
     border-radius: 5px;
     height: 37px;
     padding: 0 15px;
-  }
+}
 
-  .input-container-2 .input-2 {
+.input-container-2 .input-2 {
     width: 100%;
     border: 2px solid #072d7461;
     border-radius: 5px;
     padding: 5px 15px;
-  }
+}
 
 .my-form-registration .input {
     width: 100%;
@@ -7179,13 +7168,13 @@ height:185px!important;
     border: 2px solid #072d7461;
     background: #fff;
     padding: 0 15px;
-    color: #000; 
+    color: #000;
     font-weight: 500;
     font-size: 0.95rem;
     letter-spacing: 0.5px;
     border-radius: 5px;
 }
-  .my-form-registration .input-container-2 label {
+.my-form-registration .input-container-2 label {
     position: absolute;
     top: 50%;
     left: 15px;
@@ -7195,24 +7184,24 @@ height:185px!important;
     font-size: 17px;
     font-weight: 400;
     pointer-events: none;
-  }
+}
 
-  .heading-butum-border {
+.heading-butum-border {
     color: #072d74;
     border-bottom: 2px solid #072d74;
-  }
+}
 
-  .my-add-btn-p {
+.my-add-btn-p {
     position: relative;
-  }
+}
 
-  .my-add-btn {
+.my-add-btn {
     position: absolute;
     right: 0px;
     bottom: 8px;
-  }
+}
 
-  .my-add-btn-type {
+.my-add-btn-type {
     width: 60px;
     height: 36px;
     background-color: var(--thm-primary);
@@ -7221,16 +7210,16 @@ height:185px!important;
     border-radius: 5px;
     border-bottom-left-radius: 0px;
     border-top-left-radius: 0px;
-  }
+}
 
-  .my-add-btn-p-2 {
+.my-add-btn-p-2 {
     position: relative;
-  }
+}
 
 .my-add-btn-type-2 {
-        position: absolute;
+    position: absolute;
     right: 15px;
-    bottom: -30px;  
+    bottom: -30px;
     width: 40px;
     height: 34px;
     background-color: #d10f0f;
@@ -7240,18 +7229,17 @@ height:185px!important;
     z-index: 999;
 }
 
-
-  .add-new-btn {
+.add-new-btn {
     width: 100px;
     height: 37px;
     background-color: var(--thm-primary);
     color: #fff;
     padding: 0px;
     border-radius: 5px;
-  }
+}
 
-  /* new-23-09-2024 */
-  .registration-my-h2 h2 {
+/* new-23-09-2024 */
+.registration-my-h2 h2 {
     font-size: 30px;
     font-weight: 800;
     margin-bottom: 16px;
@@ -7323,13 +7311,13 @@ height:185px!important;
     font-size: 14px;
 }
 
-
 .Referencesss {
     padding: 15px;
 }
 
-@media screen and (max-width:767px) {
-    form, .contact-info {
+@media screen and (max-width: 767px) {
+    form,
+    .contact-info {
         padding: 0px;
     }
     .my-add-btn {
@@ -7337,13 +7325,13 @@ height:185px!important;
         right: 16px;
         top: 60px;
     }
-.banner-section {
-    position: relative;
-    height: 270px;
-}
-.banner-section .swiper-slide-active .content-box h1 {
-    line-height: 30px;
-}
+    .banner-section {
+        position: relative;
+        height: 270px;
+    }
+    .banner-section .swiper-slide-active .content-box h1 {
+        line-height: 30px;
+    }
     .scroll-to-top {
         position: fixed;
         width: 40px;
@@ -7367,11 +7355,10 @@ height:185px!important;
     }
 
     button#contribute-add {
-         position: absolute;
+        position: absolute;
         right: 0px;
         top: 0px;
     }
-    
 }
 
 /*  Abhishek 07-10-2024  */
@@ -7391,8 +7378,15 @@ height:185px!important;
 
 .my-form-registration label {
     color: #000000 !important;
-    font-family: var(--body-font); 
+    font-family: var(--body-font);
 }
+
 li.dropdown i {
     margin-left: 5px;
+}
+
+.connectedSortable td,
+.connectedSortable tr {
+    border-collapse: collapse;
+    cursor: all-scroll;
 }

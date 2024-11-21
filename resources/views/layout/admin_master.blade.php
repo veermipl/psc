@@ -155,10 +155,10 @@
                     </ul>
                 </li>
 
-                
-                <li class="{{ request()->is('admin/event') || request()->is('admin/user/*') ? 'mm-active' : '' }}">
+
+                <li class="{{ request()->is('admin/event') || request()->is('admin/event/*') ? 'mm-active' : '' }}">
                     <a href="javascript:;" class="has-arrow">
-                        <div class="parent-icon"><ion-icon name="people-sharp"></ion-icon></div>
+                        <div class="parent-icon"><ion-icon name="calendar-sharp"></ion-icon></div>
                         <div class="menu-title">Event</div>
                     </a>
                     <ul>
@@ -330,6 +330,12 @@
                             <a href="{{ route('admin.committeess.list') }}">
                                 <ion-icon name="ellipse-outline"></ion-icon>
                                 Committees
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.about-us.executive-committee.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Executive Committees
                             </a>
                         </li>
                     </ul>
@@ -581,7 +587,7 @@
         <!--start footer-->
         <footer class="footer">
             <div class="footer-text">
-                Copyright © 2024. All right reserved.
+                Copyright © <?= date('Y') ?>. All right reserved.
             </div>
         </footer>
         <!--end footer-->
@@ -636,6 +642,10 @@
 
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js"></script> --}}
     {{-- <script src="{{ asset('js/dropzone.js') }}"></script> --}}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"
+        integrity="sha512-MSOo1aY+3pXCOCdGAYoBZ6YGI0aragoQsg1mKKBHXCYPIWxamwOE7Drh+N5CPgGI5SA9IEKJiPjdfqWFWmZtRA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script type="importmap">
         {
@@ -728,6 +738,55 @@
                 $('#sub_page_body_' + target_id + '').removeClass('hide').addClass('show');
             }
         }
+
+        $(document).ready(function() {
+            $(".connectedSortable").sortable({
+                delay: 150,
+                stop: function() {
+                    var selectedData = new Array();
+                    var toRoute = $(this).closest("tbody").attr("route");
+
+                    $('.connectedSortable>tr').each(function() {
+                        selectedData.push($(this).attr("id"));
+                    });
+
+                    updateOrder(selectedData, toRoute);
+                }
+            });
+
+            function updateOrder(data, toRoute = null) {
+                if (toRoute) {
+                    $.ajax({
+                        url: toRoute,
+                        method: 'post',
+                        dataType: 'json',
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            position: data
+                        },
+                        beforeSend: function() {
+                            //loader-show
+                        },
+                        success: function(response) {
+                            if (response.error === false) {
+                                toastr.success(response.msg);
+                                setTimeout(() => {
+                                    location.reload()
+                                }, 1000);
+                            } else {
+                                toastr.error(response.msg);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            toastr.error(error);
+                        },
+                        complete: function(xhr, status) {
+                            //loader-hide
+                        }
+                    });
+                }
+            }
+        });
     </script>
 
     @yield('scripts')

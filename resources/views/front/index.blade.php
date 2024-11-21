@@ -1,6 +1,18 @@
 @extends('layout.master')
 
 @section('content')
+<style>
+    .ban-sli-left{
+    position: absolute;
+    top: 18px;
+    right: 25px;
+}
+.ban-sli-right{
+position: absolute;
+    top: 18px;
+    right: 24px;
+}
+</style>
     @if(count($header) > 0)
     <section class="banner-section wow fadeIn">
         <div class="swiper-container banner-slider">
@@ -29,10 +41,10 @@
         </div>
         <div class="banner-slider-nav">
             <div class="banner-slider-control banner-slider-button-prev">
-                <span><i class="far fa-angle-left"></i></span>
+                <span class="ban-sli-left"><i class="far fa-angle-left"></i></span>
             </div>
             <div class="banner-slider-control banner-slider-button-next">
-                <span><i class="far fa-angle-right"></i></span>
+                <span class="ban-sli-right"><i class="far fa-angle-right"></i></span>
             </div>
         </div>
         <div class="banner-shape__left_1"></div>
@@ -188,16 +200,16 @@
                                     <p>{!! $report['content'] !!}</p>
                                 </div>
                             </div>
-                            @if($report['link'])
+                            @if($report['additional_file'])
                                 <div class="progress-levels">
-                                    <a href="{{ $report['link'] }}" target="_blank" class="vs-btn style3 view-btns mt-4" tabindex="0"
+                                    <a href="{{ asset('storage/' . $report['additional_file']) }}" target="_blank" class="vs-btn style3 view-btns mt-4" tabindex="0"
                                         style="position: unset;text-align: center;margin-top: 20px !important;">
                                         Download annual report<i class="far fa-long-arrow-right"></i>
                                     </a>
-                                    <a href="{{ $report['link'] }}" target="_blank" class="vs-btn style3 view-btn mt-4" tabindex="0"
+                                    {{-- <a href="{{ $report['link'] }}" target="_blank" class="vs-btn style3 view-btn mt-4" tabindex="0"
                                         style="position: unset;text-align: center;margin-top: 20px !important;">
                                         View older annual reports<i class="far fa-long-arrow-right"></i>
-                                    </a>
+                                    </a> --}}
                                 </div>
                             @endif
                         </div>
@@ -302,7 +314,7 @@
 
                 <div class="col-md-6 col-lg-4 py-2">
                     <div class="widget h-100">
-                        <h3 class="widget_title">News</h3>
+                        <h3 class="widget_title">News Letter</h3>
                         @if(count($news) > 0)
                             @foreach($news as $newsKey => $newsVal)
                                 <div class="recent-post-wrap">

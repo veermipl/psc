@@ -6,7 +6,7 @@
 @section('content')
 
     <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Create Committeess Members  </div>
+        <div class="breadcrumb-title pe-3">Create Committeess Members </div>
     </div>
 
     <div class="row">
@@ -31,14 +31,23 @@
                             </div>
 
                             <div class="col-md-6 position-relative">
-                                    <label for="validationTooltip01" class="form-label">Designation <span
-                                                class="text-danger">*</span></label>
-                                        <input type="text" id="office" class="form-control" name="office"
-                                            placeholder="Enter Designation" value="{{ old('office') }}" maxlength="50">
+                                <label for="validationTooltip01" class="form-label">Designation <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" id="office" class="form-control" name="office"
+                                    placeholder="Enter Designation" value="{{ old('office') }}" maxlength="50">
 
-                                        @error('office')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                @error('office')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-12 position-relative">
+                                <label for="validationTooltip01" class="form-label">Terms Of Reference <span class="text-danger">*</span></label>
+                                <textarea name="terms_of_reference" id="editor" cols="5" rows="5" class="form-control">{{ old('terms_of_reference') }}</textarea>
+
+                                @error('terms_of_reference')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="col-md-6 position-relative">
@@ -84,14 +93,15 @@
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Upload Profile Image <span
                                         class="text-danger">*</span></label>
-                                <input type="file" id="profile" class="form-control" name="profile" accept="application/jpge/jig/png">
+                                <input type="file" id="profile" class="form-control" name="profile"
+                                    accept="application/jpge/jig/png">
 
                                 @error('profile')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
 
-                  
+
 
                             <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Status <span

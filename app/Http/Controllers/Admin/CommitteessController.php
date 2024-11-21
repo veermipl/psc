@@ -12,6 +12,15 @@ class CommitteessController extends Controller
 {
     use  ImageTraits;
 
+    public function list()
+    {
+        $this->authorize('about_us_view');
+
+        $data = Committeess::where('deleted_at', '0')->orderby('id', 'desc')->get();
+
+        return view('admin.committeess.index', compact('data'));
+    }
+
     public function create()
     {
         $this->authorize('about_us');
@@ -28,8 +37,8 @@ class CommitteessController extends Controller
             'office'  => 'required',
             'profile'  => 'required',
             'profile'  => 'required|mimes:jpeg,jpg,png',
-            'status' => 'required'
-
+            'status' => 'required',
+            'terms_of_reference' => ['required', 'string']
         ]);
 
         // $profile = null;
@@ -48,19 +57,11 @@ class CommitteessController extends Controller
             'dribbble' => $request->dribbble ?? '',
             'status' => $request->status,
             'image' => $profile ?? '',
+            'terms_of_reference' => $request->terms_of_reference ?? '',
         ];
         Committeess::create($create);
 
         return redirect()->route('admin.committeess.list')->withSuccess('Committeess create successfully!');
-    }
-
-    public function list()
-    {
-        $this->authorize('about_us_view');
-
-        $data = Committeess::where('deleted_at', '0')->orderby('id', 'desc')->get();
-
-        return view('admin.committeess.index', compact('data'));
     }
 
     public function status(Request $request)
@@ -95,7 +96,9 @@ class CommitteessController extends Controller
     public function edit($id)
     {
         $this->authorize('about_us_edit');
+
         $data = Committeess::find($id);
+
         return view('admin.committeess.edit', compact('data'));
     }
 
@@ -109,6 +112,7 @@ class CommitteessController extends Controller
             // 'profile'  => 'required',
             'status' => 'required',
             'profile'  => 'nullable|mimes:jpeg,jpg,png',
+            'terms_of_reference' => 'required', 'string',
         ]);
 
         $staff = Committeess::find($id);
@@ -129,6 +133,7 @@ class CommitteessController extends Controller
             'dribbble' => $request->dribbble,
             'status' => $request->status,
             'image' => $profile,
+            'terms_of_reference' => $request->terms_of_reference,
         ];
         $staff->Update($array);
         

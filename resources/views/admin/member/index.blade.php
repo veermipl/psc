@@ -212,6 +212,26 @@
                                                             @endif
                                                             <i class="fa fa-eye"></i>
                                                     </span>
+
+                                                    <span class="text-dark" title="Print">
+                                                        @if($user->member_id != '')
+                                                            <a href="{{ route('admin.member.print', $user->member_id) }}" target="_blank">
+                                                                <i class="fa fa-print"></i>
+                                                            </a>
+                                                        @else
+                                                            <i class="fa fa-print"></i>
+                                                        @endif
+                                                    </span>
+
+                                                    <span class="text-dark" title="PDF">
+                                                        @if($user->member_id != '')
+                                                            <a href="{{ route('admin.member.download-pdf', $user->member_id) }}">
+                                                                <i class="fa fa-file"></i>
+                                                            </a>
+                                                        @else
+                                                            <i class="fa fa-file"></i>
+                                                        @endif
+                                                    </span>
                                                 </div>
                                             </td>
                                         </tr>

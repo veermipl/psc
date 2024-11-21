@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\admin;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\membership\type\ExportMembershipTypeRequest;
-use App\Http\Requests\admin\membership\type\StoreMembershipTypeRequest;
-use App\Http\Requests\admin\membership\type\UpdateMembershipTypeRequest;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\MembershipType as MembershipTypeModel;
+use App\Http\Requests\admin\membership\type\StoreMembershipTypeRequest;
+use App\Http\Requests\admin\membership\type\ExportMembershipTypeRequest;
+use App\Http\Requests\admin\membership\type\UpdateMembershipTypeRequest;
 use App\Http\Requests\admin\membership\type\UpdateMembershipTypeStatusRequest;
 
 class MembershipTypeController extends Controller
@@ -65,6 +66,7 @@ class MembershipTypeController extends Controller
         DB::transaction(function () use ($validated) {
             $type = MembershipTypeModel::create([
                 'name' => $validated['name'],
+                'name_key' => Str::of($validated['name'])->lower()->replaceMatches('/[^a-z0-9]+/i', '_'),
                 'status' => $validated['status'],
             ]);
         });
@@ -108,6 +110,7 @@ class MembershipTypeController extends Controller
         DB::transaction(function () use ($type, $validated) {
             $type->update([
                 'name' => $validated['name'],
+                'name_key' => Str::of($validated['name'])->lower()->replaceMatches('/[^a-z0-9]+/i', '_'),
                 'status' => $validated['status'],
             ]);
         });

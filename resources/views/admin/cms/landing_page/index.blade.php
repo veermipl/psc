@@ -402,6 +402,7 @@
                                         <input type="hidden" name="type" value="report">
                                         <input type="hidden" name="old_file" value="{{ @$report->file }}">
                                         <input type="hidden" name="old_icon" value="{{ @$report->icon }}">
+                                        <input type="hidden" name="old_additional_file" value="{{ @$report->additional_file }}">
 
                                         <div class="col-md-6 position-relative">
                                             <label for="validationTooltip01" class="form-label">Title <span
@@ -426,7 +427,7 @@
                                             @enderror
                                         </div>
 
-                                        <div class="col-md-6 position-relative">
+                                        <div class="col-md-4 position-relative">
                                             <label for="validationTooltip01" class="form-label">Image <span class="text-danger">*</span></label>
                                             <input type="file" class="form-control" name="file" accept="image/*">
 
@@ -435,7 +436,7 @@
                                             @enderror
                                         </div>
 
-                                        <div class="col-md-6 position-relative">
+                                        <div class="col-md-4 position-relative">
                                             <label for="validationTooltip01" class="form-label">Icon</label>
                                             <input type="file" class="form-control" name="icon" accept="image/*">
 
@@ -444,15 +445,40 @@
                                             @enderror
                                         </div>
 
-                                        <div class="col-md-6 position-relative">
+                                        <div class="col-md-4 position-relative">
+                                            <label for="validationTooltip01" class="form-label">Report</label>
+                                            <input type="file" class="form-control" name="additional_file" accept="">
+
+                                            @error('additional_file')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                        <div class="col-md-4 position-relative">
                                             @if (@$report->file)
                                                 <img class="ge_img pop_up_image" src="{{ asset('storage/' . $report->file) }}">
                                             @endif
                                         </div>
 
-                                        <div class="col-md-6 position-relative">
+                                        <div class="col-md-4 position-relative">
                                             @if (@$report->icon)
                                                 <img class="ge_img pop_up_image" src="{{ asset('storage/' . $report->icon) }}">
+                                            @endif
+                                        </div>
+
+                                        <div class="col-md-4 position-relative">
+                                            @if(@$report->additional_file)
+                                                <div class="docs-sapn m-0">
+                                                    <span class="text-center pdf-files">
+                                                            <a href="{{ $report->additional_file ? asset('storage/' . $report->additional_file) : '' }}"
+                                                                target="_blank" title="Annual Report">
+                                                                <i class="fa fa-file text-dark"></i>
+                                                            </a>
+                                                            <div class="deleteReportBtn" doc_url="{{ $report->additional_file }}" doc_type="annual_report">
+                                                            <div class="cross-m"><i class="fa fa-close bg-danger"></i></div>
+                                                        </div>
+                                                    </span>
+                                                </div>
                                             @endif
                                         </div>
 
@@ -464,7 +490,6 @@
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
-                                        
 
                                         <div class="col-12 text-end mt-5">
                                             <button class="btn btn-sm btn-primary" type="submit">Update</button>

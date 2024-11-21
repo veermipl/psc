@@ -35,13 +35,13 @@
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="connectedSortable" route="{{ route('admin.staff.reorder') }}">
                                 @if (@$data && count(@$data) > 0)
                                     @foreach ($data as $userKey => $user)
                                         @php
                                             $userRoles = $user->role ? $user->role->pluck('name')->toArray() : [];
                                         @endphp
-                                        <tr class="tr_row_{{ $userKey }}">
+                                        <tr class="tr_row_{{ $userKey }}" id="{{ $user->id }}">
                                             <th scope="row">{{ $userKey + 1 }}</th>
                                             <td><img style="height:40px; width:50px"
                                                     src="{{ asset('storage/' . $user->image) }}"> </td>
@@ -226,6 +226,48 @@
                 });
 
             });
+
+            // $(".connectedSortable").sortable({
+            //     delay: 150,
+            //     stop: function() {
+            //         var selectedData = new Array();
+            //         $('.connectedSortable>tr').each(function() {
+            //             selectedData.push($(this).attr("id"));
+            //         });
+            //         updateOrder(selectedData);
+            //     }
+            // });
+
+            // function updateOrder(data) {
+            //     $.ajax({
+            //         url: "{{ route('admin.staff.reorder') }}",
+            //         method: 'post',
+            //         dataType: 'json',
+            //         data: {
+            //             "_token": "{{ csrf_token() }}",
+            //             position: data
+            //         },
+            //         beforeSend: function() {
+            //             //loader-show
+            //         },
+            //         success: function(response) {
+            //             if (response.error === false) {
+            //                 toastr.success(response.msg);
+            //                 setTimeout(() => {
+            //                     location.reload()
+            //                 }, 1000);
+            //             } else {
+            //                 toastr.error(response.msg);
+            //             }
+            //         },
+            //         error: function(xhr, status, error) {
+            //             toastr.error(error);
+            //         },
+            //         complete: function(xhr, status) {
+            //             //loader-hide
+            //         }
+            //     })
+            // }
         });
     </script>
 

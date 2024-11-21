@@ -3,6 +3,8 @@
 namespace App\Http\Requests\admin\cms\landing_page;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UpdateReportRequest extends FormRequest
 {
@@ -28,8 +30,22 @@ class UpdateReportRequest extends FormRequest
             'file' => ['required_if:old_file,null', 'image', 'mimes:jpg,jpeg,gif,png', 'max:2048'],
             'old_icon' => ['nullable', 'string'],
             'icon' => ['nullable', 'image', 'mimes:jpg,jpeg,gif,png', 'max:2048'],
+            'old_additional_file' => ['nullable', 'string'],
+            'additional_file' => ['nullable', 'file', 'mimes:pdf', 'max:2048'],
             'content' => ['required'],
             'type' => ['required'],
         ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        $type = request('type');
+        $errors = $validator->errors();
+
+        $redirect = redirect()->route('admin.cms.landing-page', ['tab' => $type])
+            ->withErrors($errors)
+            ->withInput();
+
+        throw new HttpResponseException($redirect);
     }
 }

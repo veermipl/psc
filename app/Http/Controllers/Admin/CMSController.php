@@ -355,6 +355,18 @@ class CMSController extends Controller
         }
         $validated['icon'] = $iconName;
 
+        $addFileName = $validated['old_additional_file'] ?? null;
+        if ($request->hasFile('additional_file')) {
+            $additional_file = $request->file('additional_file');
+
+            $addFileName = $additional_file->store('cms/landing_page/report', 'public');
+
+            if ($request->filled('old_additional_file')) {
+                $this->deleteFromStorage('public', $validated['old_additional_file'], $isArray = false);
+            }
+        }
+        $validated['additional_file'] = $addFileName;
+
         DB::transaction(function () use ($validated) {
             LandingPage::updateOrCreate(
                 [
@@ -364,6 +376,7 @@ class CMSController extends Controller
                     'title' => $validated['title'],
                     'content' => $validated['content'],
                     'file' => $validated['file'],
+                    'additional_file' => $validated['additional_file'],
                     'link' => $validated['link'],
                     'icon' => $validated['icon'],
                 ]
