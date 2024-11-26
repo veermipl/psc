@@ -58,7 +58,9 @@
             @endforeach
 
             @else
-            <h4 class="text-center"> No Data found ! </h4>
+            <h2">
+              <span class="badge badge-primary fs-5" style="font-size: 20px">Check out Past Events !</span>
+            </h2>
     @endif
     
 

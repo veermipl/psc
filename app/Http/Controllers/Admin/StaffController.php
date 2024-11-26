@@ -25,6 +25,7 @@ class StaffController extends Controller
 
         $this->validate($request, [
             'name'  => 'required',
+            'terms_of_reference'   => 'nullable',
             'office'  => 'required',
             'profile'  => 'required',
             'profile'  => 'required|mimes:jpeg,jpg,png',
@@ -41,6 +42,7 @@ class StaffController extends Controller
         $create = [
             'name' => $request->name ?? '',
             // 'email' => $request->status ?? '',
+            'terms_of_reference' => $request->terms_of_reference,
             'office' => $request->office ?? '',
             'facebook' => $request->facebook ?? '',
             'twitter' => $request->twitter ?? '',
@@ -97,7 +99,9 @@ class StaffController extends Controller
     public function edit($id)
     {
         $this->authorize('about_us_edit');
-        $data = Staff::find($id);
+
+        $data = Staff::findOrFail($id);
+
         return view('admin.staff.edit', compact('data'));
     }
 
@@ -107,6 +111,7 @@ class StaffController extends Controller
 
         $this->validate($request, [
             'name'  => 'required',
+            'terms_of_reference'   => 'nullable',
             'office'  => 'required',
             // 'profile'  => 'required',
             'status' => 'required',
@@ -124,6 +129,7 @@ class StaffController extends Controller
         $array = [
             'name' => $request->name,
             // 'email' => $request->status ?? '',
+            'terms_of_reference' => $request->terms_of_reference,
             'office' => $request->office,
             'facebook' => $request->facebook,
             'twitter' => $request->twitter,

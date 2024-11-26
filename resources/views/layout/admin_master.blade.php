@@ -247,6 +247,12 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{ route('admin.media-center.album.index') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Albums
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ route('admin.media-center.photo.index') }}">
                                 <ion-icon name="ellipse-outline"></ion-icon>
                                 Photos
@@ -432,6 +438,11 @@
                         <li>
                             <a href="#"><ion-icon name="ellipse-outline"></ion-icon>
                                 Recover Account
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.system.web-hits.index') }}"><ion-icon name="ellipse-outline"></ion-icon>
+                                Web Hits
                             </a>
                         </li>
                     </ul>

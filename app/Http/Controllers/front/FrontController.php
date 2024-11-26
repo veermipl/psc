@@ -8,6 +8,7 @@ use App\Models\About;
 use App\Models\Coted;
 use App\Models\Query;
 use App\Models\Staff;
+use App\Models\Albums;
 use App\Models\Photos;
 use App\Models\Videos;
 use App\Models\Council;
@@ -17,6 +18,7 @@ use App\Models\Settings;
 use App\Models\CoreValue;
 use App\Models\TradeData;
 use App\Models\CaricomCET;
+use App\Models\AlbumPhotos;
 use App\Models\Committeess;
 use App\Models\LandingPage;
 use App\Models\Performance;
@@ -153,12 +155,26 @@ class FrontController extends Controller
         return view('front.about_us.staff', compact('staff'));
     }
 
+    public function aboutUs_Staff_Show(Request $request, $id)
+    {
+        $staff =  Staff::where('status', '1')->findOrFail($id);
+
+        return view('front.about_us.staff_view', compact('staff'));
+    }
+
     public function aboutUs_Council()
     {
         // $council =  About::where('type', 'Council')->where('status', '1')->first();
         $council = Council::where('status', '1')->orderby('name', 'asc')->get();
 
         return view('front.about_us.council', compact('council'));
+    }
+
+    public function aboutUs_Council_Show(Request $request, $id)
+    {
+        $council = Council::where('status', '1')->findOrFail($id);
+
+        return view('front.about_us.council_view', compact('council'));
     }
 
     public function aboutUs_History()
@@ -553,6 +569,30 @@ class FrontController extends Controller
         $data['photo_list'] = $photo_list;
 
         return view('front.media.photos', $data);
+    }
+
+    public function media_Albums()
+    {
+        $album_list = Albums::orderBy('id', 'desc')->where('status', '1')->get() ?? [];
+
+        $data['album_list'] = $album_list;
+
+        return view('front.media.album', $data);
+    }
+
+    public function media_AlbumPhotos(Request $request, $id)
+    {
+        $album = Albums::findOrFail($id);
+
+        $album_photo_list = AlbumPhotos::orderBy('id', 'desc')->where([
+            'status' => '1',
+            'album_id' => $id,
+        ])->get() ?? [];
+
+        $data['album'] = $album;
+        $data['album_photo_list'] = $album_photo_list;
+
+        return view('front.media.album_photo', $data);
     }
 
     public function media_Videos()

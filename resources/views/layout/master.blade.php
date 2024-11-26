@@ -12,6 +12,7 @@
     $settings_contact_us_facebook = helper_getSettings('facebook');
     $settings_contact_us_twitter = helper_getSettings('twitter');
     $settings_contact_us_youtube = helper_getSettings('youtube');
+    $settings_contact_us_linkedin = helper_getSettings('linkedin');
 
     $membership_type = common_helper('getMembershipType');
 
@@ -388,6 +389,9 @@
                                                                 <a href="{{ route('media.photos') }}">Photos</a>
                                                             </li>
                                                             <li>
+                                                                <a href="{{ route('media.albums') }}">Albums</a>
+                                                            </li>
+                                                            <li>
                                                                 <a href="{{ route('media.videos') }}">Videos</a>
                                                             </li>
                                                             <!-- <li>
@@ -402,7 +406,7 @@
                                                         <a href="#">Event<i class="fas fa-chevron-down"></i>
                                                         </a>
                                                         <ul>
-                                                            <li> <a href="{{ route('media.event') }}">Events</a></li>
+                                                            <li> <a href="{{ route('media.event') }}">Past Events</a></li>
                                                             <li>
                                                                 <a href="{{ route('media.upcoming.event') }}">
 
@@ -609,8 +613,8 @@
                                         class="fab fa-facebook"></i></a>
                                 <a target="_blank" href="{{ $settings_contact_us_twitter }}"><i
                                         class="fab fa-twitter"></i></a>
-                                <a target="_blank" href="{{ $settings_contact_us_youtube }}"> <i
-                                        class="fab fa-youtube"></i></a>
+                                <a target="_blank" href="{{ $settings_contact_us_linkedin }}"> <i
+                                        class="fab fa-linkedin"></i></a>
                                 <a target="_blank" href="{{ $settings_contact_us_instagram }}"><i
                                         class="fab fa-instagram"></i></a>
                             </div>

@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AlbumController;
 use App\Http\Controllers\Admin\CotedController;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\PhotoController;
@@ -20,6 +21,7 @@ use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\PerformanceController;
 use App\Http\Controllers\ProcurementController;
 use App\Http\Controllers\Admin\CouncilController;
+use App\Http\Controllers\Admin\WebHitsController;
 use App\Http\Controllers\Member\MemberController;
 use App\Http\Controllers\Admin\BusinessController;
 use App\Http\Controllers\Admin\GoInvestController;
@@ -80,77 +82,83 @@ Route::get('storage_link', function () {
     return "Storage linked !";
 });
 
-Route::get('/', [FrontController::class, 'index']);
-Route::get('home', [FrontController::class, 'index'])->name('home');
-Route::get('home/banner-show/{id}', [FrontController::class, 'show_banner'])->name('home.banner.show');
-Route::get('home/sub-banner-show/{id}', [FrontController::class, 'show_subBanner'])->name('home.sub-banner.show');
-Route::get('home/post-show/{id}', [FrontController::class, 'show_post'])->name('home.post.show');
-Route::get('contact-us', [FrontController::class, 'contactUs'])->name('contact-us');
-Route::post('contact-us-save', [FrontController::class, 'save_contactUs'])->name('contact-us-save');
-Route::get('guyana-economy', [FrontController::class, 'guyanaEconomy'])->name('guyana-economy');
-Route::get('home/social-media/{id}', [FrontController::class, 'social_media'])->name('home.social.show');
-Route::get('guyana-economy-show/{id}', [FrontController::class, 'show_guyanaEconomy'])->name('guyana-economy-show');
+Route::middleware(['web_hits'])->group(function () {
+    Route::get('/', [FrontController::class, 'index']);
+    Route::get('home', [FrontController::class, 'index'])->name('home');
+    Route::get('home/banner-show/{id}', [FrontController::class, 'show_banner'])->name('home.banner.show');
+    Route::get('home/sub-banner-show/{id}', [FrontController::class, 'show_subBanner'])->name('home.sub-banner.show');
+    Route::get('home/post-show/{id}', [FrontController::class, 'show_post'])->name('home.post.show');
+    Route::get('contact-us', [FrontController::class, 'contactUs'])->name('contact-us');
+    Route::post('contact-us-save', [FrontController::class, 'save_contactUs'])->name('contact-us-save');
+    Route::get('guyana-economy', [FrontController::class, 'guyanaEconomy'])->name('guyana-economy');
+    Route::get('home/social-media/{id}', [FrontController::class, 'social_media'])->name('home.social.show');
+    Route::get('guyana-economy-show/{id}', [FrontController::class, 'show_guyanaEconomy'])->name('guyana-economy-show');
 
-Route::get('about-us', [FrontController::class, 'aboutUs'])->name('about-us');
-Route::get('sector-committees/{id}', [FrontController::class, 'about_view'])->name('sector.committees');
+    Route::get('about-us', [FrontController::class, 'aboutUs'])->name('about-us');
+    Route::get('sector-committees/{id}', [FrontController::class, 'about_view'])->name('sector.committees');
 
-Route::prefix('about-us')->name('about-us.')->group(function () {
-    Route::get('introduction', [FrontController::class, 'aboutUs_Introduction'])->name('introduction');
-    Route::get('introduction-view/{id}', [FrontController::class, 'introduction_view'])->name('introduction_view');
-    Route::get('staff', [FrontController::class, 'aboutUs_Staff'])->name('staff');
-    Route::get('council', [FrontController::class, 'aboutUs_Council'])->name('council');
-    Route::get('history', [FrontController::class, 'aboutUs_History'])->name('history');
-    Route::get('committeess', [FrontController::class, 'aboutUs_Committeess'])->name('committeess');
-    Route::get('committeess-show/{id}', [FrontController::class, 'aboutUs_Committeess_Show'])->name('committeess-show');
-    Route::get('executive-committeess', [FrontController::class, 'aboutUs_ExecutiveCommitteess'])->name('executive-committeess');
-    Route::get('executive-committeess-show/{id}', [FrontController::class, 'aboutUs_ExecutiveCommitteess_Show'])->name('executive-committeess-show');
-});
+    Route::prefix('about-us')->name('about-us.')->group(function () {
+        Route::get('introduction', [FrontController::class, 'aboutUs_Introduction'])->name('introduction');
+        Route::get('introduction-view/{id}', [FrontController::class, 'introduction_view'])->name('introduction_view');
+        Route::get('staff', [FrontController::class, 'aboutUs_Staff'])->name('staff');
+        Route::get('staff-show/{id}', [FrontController::class, 'aboutUs_Staff_Show'])->name('staff-show');
+        Route::get('council', [FrontController::class, 'aboutUs_Council'])->name('council');
+        Route::get('council-show/{id}', [FrontController::class, 'aboutUs_Council_Show'])->name('council-show');
+        Route::get('history', [FrontController::class, 'aboutUs_History'])->name('history');
+        Route::get('committeess', [FrontController::class, 'aboutUs_Committeess'])->name('committeess');
+        Route::get('committeess-show/{id}', [FrontController::class, 'aboutUs_Committeess_Show'])->name('committeess-show');
+        Route::get('executive-committeess', [FrontController::class, 'aboutUs_ExecutiveCommitteess'])->name('executive-committeess');
+        Route::get('executive-committeess-show/{id}', [FrontController::class, 'aboutUs_ExecutiveCommitteess_Show'])->name('executive-committeess-show');
+    });
 
-Route::prefix('membership')->name('membership.')->group(function () {
-    Route::get('business-directory', [FrontController::class, 'membership_BusinessDirectory'])->name('business-directory');
-    Route::get('member-benefits', [FrontController::class, 'membership_MemberBenefits'])->name('member-benefits');
-});
+    Route::prefix('membership')->name('membership.')->group(function () {
+        Route::get('business-directory', [FrontController::class, 'membership_BusinessDirectory'])->name('business-directory');
+        Route::get('member-benefits', [FrontController::class, 'membership_MemberBenefits'])->name('member-benefits');
+    });
 
-Route::prefix('data')->name('data.')->group(function () {
-    Route::get('national-budgets', [FrontController::class, 'data_NationalBudgets'])->name('national_budgets');
-    Route::get('national-budgets-source-show/{id}', [FrontController::class, 'show_NationalBudget_Source'])->name('national-budgets-source-show');
-    Route::get('trade-data', [FrontController::class, 'data_TradeData'])->name('trade-data');
-    Route::get('coted', [FrontController::class, 'data_Coted'])->name('coted');
-    Route::get('coted-entrepreneurship-development-show/{id}', [FrontController::class, 'show_Coted_EntrepreneurshipDevelopment'])->name('coted-entrepreneurship-development-show');
-    Route::get('caricom-cet', [FrontController::class, 'data_CaricomCet'])->name('caricom-cet');
-    Route::get('caricom-cet-objective-show/{id}', [FrontController::class, 'show_CaricomCet_Objective'])->name('caricom-cet-objective-show');
-});
+    Route::prefix('data')->name('data.')->group(function () {
+        Route::get('national-budgets', [FrontController::class, 'data_NationalBudgets'])->name('national_budgets');
+        Route::get('national-budgets-source-show/{id}', [FrontController::class, 'show_NationalBudget_Source'])->name('national-budgets-source-show');
+        Route::get('trade-data', [FrontController::class, 'data_TradeData'])->name('trade-data');
+        Route::get('coted', [FrontController::class, 'data_Coted'])->name('coted');
+        Route::get('coted-entrepreneurship-development-show/{id}', [FrontController::class, 'show_Coted_EntrepreneurshipDevelopment'])->name('coted-entrepreneurship-development-show');
+        Route::get('caricom-cet', [FrontController::class, 'data_CaricomCet'])->name('caricom-cet');
+        Route::get('caricom-cet-objective-show/{id}', [FrontController::class, 'show_CaricomCet_Objective'])->name('caricom-cet-objective-show');
+    });
 
-Route::prefix('resources')->name('resources.')->group(function () {
-    Route::get('business-readiness-desk', [FrontController::class, 'resources_BusinessReadinessDesk'])->name('business-readiness-desk');
-    Route::get('go-invest', [FrontController::class, 'resources_GoInvest'])->name('go-invest');
-    Route::get('go-invest-details/{id}', [FrontController::class, 'resources_Detils'])->name('go-invest.details');
-    Route::get('idb-invest', [FrontController::class, 'resources_IDBInvest'])->name('idb-invest');
-    Route::get('procurement-process-in-guyana', [FrontController::class, 'resources_ProcurementProcessInGuyana'])->name('procurement-process-in-guyana');
-    Route::get('certificate-of-origins', [FrontController::class, 'resources_CertificateOfOrigins'])->name('certificate-of-origins');
-    Route::get('annual-report', [FrontController::class, 'resources_AnnualReport'])->name('annual-report');
-    Route::get('resources-business-details/{id}', [FrontController::class, 'resources_Businessdetails'])->name('business.details');
-    Route::get('procurement-process-in-guyana-details/{id}', [FrontController::class, 'resources_ProcurementProcessDetails'])->name('procurement.deatils');
-    Route::get('annual-report-details/{id}', [FrontController::class, 'resources_Annualdetails'])->name('annual.report.details');
-    Route::get('certificate-of-origins-details/{id}', [FrontController::class, 'resources_CertificateDetails'])->name('certificate-of-origins.deatils');
-    Route::get('idb-invest-details/{id}', [FrontController::class, 'resources_IDBDetails'])->name('idb-invest.details');
-    Route::get('economic-reports', [FrontController::class, 'economic_reports'])->name('economic.reports');
-    Route::get('common-external-tarriff', [FrontController::class, 'common_external'])->name('common.external.tarriff');
-    // Route::get('regulations', [FrontController::class, 'regulations'])->name('regulations ');
+    Route::prefix('resources')->name('resources.')->group(function () {
+        Route::get('business-readiness-desk', [FrontController::class, 'resources_BusinessReadinessDesk'])->name('business-readiness-desk');
+        Route::get('go-invest', [FrontController::class, 'resources_GoInvest'])->name('go-invest');
+        Route::get('go-invest-details/{id}', [FrontController::class, 'resources_Detils'])->name('go-invest.details');
+        Route::get('idb-invest', [FrontController::class, 'resources_IDBInvest'])->name('idb-invest');
+        Route::get('procurement-process-in-guyana', [FrontController::class, 'resources_ProcurementProcessInGuyana'])->name('procurement-process-in-guyana');
+        Route::get('certificate-of-origins', [FrontController::class, 'resources_CertificateOfOrigins'])->name('certificate-of-origins');
+        Route::get('annual-report', [FrontController::class, 'resources_AnnualReport'])->name('annual-report');
+        Route::get('resources-business-details/{id}', [FrontController::class, 'resources_Businessdetails'])->name('business.details');
+        Route::get('procurement-process-in-guyana-details/{id}', [FrontController::class, 'resources_ProcurementProcessDetails'])->name('procurement.deatils');
+        Route::get('annual-report-details/{id}', [FrontController::class, 'resources_Annualdetails'])->name('annual.report.details');
+        Route::get('certificate-of-origins-details/{id}', [FrontController::class, 'resources_CertificateDetails'])->name('certificate-of-origins.deatils');
+        Route::get('idb-invest-details/{id}', [FrontController::class, 'resources_IDBDetails'])->name('idb-invest.details');
+        Route::get('economic-reports', [FrontController::class, 'economic_reports'])->name('economic.reports');
+        Route::get('common-external-tarriff', [FrontController::class, 'common_external'])->name('common.external.tarriff');
+        // Route::get('regulations', [FrontController::class, 'regulations'])->name('regulations ');
 
-});
+    });
 
-Route::prefix('media')->name('media.')->group(function () {
-    Route::get('news', [FrontController::class, 'media_News'])->name('news');
-    Route::get('news-show/{id}', [FrontController::class, 'show_News'])->name('news-show');
-    Route::get('press-release', [FrontController::class, 'media_PressRelease'])->name('press-release');
-    Route::get('press-release-show/{id}', [FrontController::class, 'show_PressRelease'])->name('press-release-show');
-    Route::get('social-media', [FrontController::class, 'media_SocialMedia'])->name('social-media');
-    Route::get('photos', [FrontController::class, 'media_Photos'])->name('photos');
-    Route::get('videos', [FrontController::class, 'media_Videos'])->name('videos');
-    Route::get('event', [FrontController::class, 'media_event'])->name('event');
-    Route::get('event-details/{id}', [FrontController::class, 'details_event'])->name('event_details');
-    Route::get('upcoming-event/', [FrontController::class, 'upcoming_event'])->name('upcoming.event');
+    Route::prefix('media')->name('media.')->group(function () {
+        Route::get('news', [FrontController::class, 'media_News'])->name('news');
+        Route::get('news-show/{id}', [FrontController::class, 'show_News'])->name('news-show');
+        Route::get('press-release', [FrontController::class, 'media_PressRelease'])->name('press-release');
+        Route::get('press-release-show/{id}', [FrontController::class, 'show_PressRelease'])->name('press-release-show');
+        Route::get('social-media', [FrontController::class, 'media_SocialMedia'])->name('social-media');
+        Route::get('photos', [FrontController::class, 'media_Photos'])->name('photos');
+        Route::get('albums', [FrontController::class, 'media_Albums'])->name('albums');
+        Route::get('album-photos/{id}', [FrontController::class, 'media_AlbumPhotos'])->name('album-photos');
+        Route::get('videos', [FrontController::class, 'media_Videos'])->name('videos');
+        Route::get('event', [FrontController::class, 'media_event'])->name('event');
+        Route::get('event-details/{id}', [FrontController::class, 'details_event'])->name('event_details');
+        Route::get('upcoming-event/', [FrontController::class, 'upcoming_event'])->name('upcoming.event');
+    });
 });
 //end front-route
 
@@ -166,10 +174,10 @@ Route::middleware(['auth', 'role_per'])->prefix('member')->name('member.')->grou
     Route::post('application', [MemberController::class, 'application_form'])->name('application');
     Route::get('member-details', [UserController::class, 'applications'])->name('applications');
 });
-//
+//member routes
 
 
-//
+//profile routes
 Route::middleware(['auth', 'role_per'])->group(function () {
     Route::get('profile', [UserController::class, 'profile'])->name('profile');
     Route::get('profile/edit', [UserController::class, 'profileEdit'])->name('profile.edit');
@@ -177,7 +185,7 @@ Route::middleware(['auth', 'role_per'])->group(function () {
     Route::post('profile/status', [UserController::class, 'profileStatus'])->name('profile.status');
     Route::post('profile/delete', [UserController::class, 'profileDelete'])->name('profile.delete');
 });
-//
+//profile routes
 
 
 // admin routes
@@ -387,6 +395,10 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         Route::post('press-release/delete-file', [SocialMediaController::class, 'deleteFile'])->name('press-release.delete-file');
         Route::resource('social-media', SocialMediaController::class);
 
+        Route::post('album/filter', [AlbumController::class, 'index'])->name('album.filter');
+        Route::post('album/status', [AlbumController::class, 'statusToggle'])->name('album.status');
+        Route::resource('album', AlbumController::class);
+
         Route::post('photo/filter', [PhotoController::class, 'index'])->name('photo.filter');
         Route::post('photo/status', [PhotoController::class, 'statusToggle'])->name('photo.status');
         Route::resource('photo', PhotoController::class);
@@ -441,7 +453,6 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
             Route::post('executive-committee/status', [ExecutiveCommitteeController::class, 'statusToggle'])->name('executive-committee.status');
             Route::resource('executive-committee', ExecutiveCommitteeController::class);
         });
-
 
         Route::controller(AboutController::class)->prefix('about')->name('about.')->group(function () {
 
@@ -581,8 +592,11 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         Route::post('notification/mark-as-read', [NotificationController::class, 'markAsRead'])->name('notification.mark-as-read');
         Route::get('notification/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('notification.mark-all-as-read');
         Route::resource('notification', NotificationController::class);
+
+        Route::resource('web-hits', WebHitsController::class);
     });
 });
+// admin routes
 
 // Route::get('test', [TestController::class, 'test'])->name('test');
 

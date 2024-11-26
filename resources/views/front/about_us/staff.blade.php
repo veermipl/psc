@@ -23,57 +23,253 @@
        </section>
 
 
-      <section class="blog-one-section">
-        <div class="container">
-            <div class="thm-section-title text-center">
-                <h4 class="sub-title-shape-left section_title-subheading">
-                    Our
-                </h4>
-                <h2>Staff Members</h2>
+      <section class="blog-one-section-staff">
+        <!-- tree design start -->
+    <div class="tree">
+      <ul>
+        <li>
+          <a href="{{ route('about-us.staff-show', 8) }}">
+            <div class="mx-auto mb-2">
+              <img
+                src="https://psc.digitalnoticeboard.biz/storage/images/team/V5fVLGFUg3dKfyJPWAxJbIYT86hLmm4gQ29KwMNj.jpg"
+                alt="Sample avatar"
+              />
             </div>
-
-            @if(count(@$staff) > 0)
-                <div class="row">
-                    @foreach($staff as $members)
-                        <div class="col-xl-3 col-lg-3 col-md-6">
-                            <div class="team-one-single wow fadeInLeft animated" data-wow-delay="100ms" style="visibility: visible; animation-delay: 100ms; animation-name: fadeInLeft;">
-                                <div class="team-one-img">
-                                    @if($members->image != '')
-                                        <img src="{{ asset('storage/'.$members->image) }}" alt="">
-                                    @else
-                                        <img src="{{asset('images/team/commeties.png')}}" alt="">
-                                    @endif
-
-                                    <div class="team-one-hover">
-                                        <div class="team-one-social">
-                                        @if($members->facebook != '')
-                                            <a href="{{$members->facebook}}"><i class="fab fa-facebook-square"></i></a>
-                                            @endif
-                                            @if($members->twitter != '')
-                                            <a href="{{$members->twitter}}"><i class="fab fa-twitter"></i></a>
-                                            @endif
-                                            @if($members->dribbble != '')
-                                            <a href="{{$members->dribbble}}"><i class="fab fa-dribbble"></i></a>
-                                            @endif
-                                            @if($members->instra != '')
-                                            <a href="{{$members->instra}}"><i class="fab fa-instagram"></i></a>
-                                            @endif
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="team-one-content team-one-content-2">
-                                    <h3>{{$members->name}}</h3>
-                                    <p>{{$members->office}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
+            <p class="font-weight-bold"><span>Name: </span>Leah Alves</p>
+            <p class="font-weight-bold"><span>Designation: </span>CEO</p>
+          </a>
+          <ul class="inn_line">
+            
+            <li>
+              <a href="#">
+                <div class="mx-auto mb-2">
+                  <img
+                    src="https://psc.digitalnoticeboard.biz/storage/images/team/TN51nNu2sicbFpOl8R7iXoNm8FKnMZBAN5pd4bAE.jpg"
+                    alt="Sample avatar"
+                  />
                 </div>
-            @else
-                <h6 class="text-center">No Data Found !</h6>
-            @endif
-        </div>
+                <p class="font-weight-bold"><span>Name: </span>Nayteram Ramnarine</p>
+                <p class="font-weight-bold"><span>Designation: </span>Manager</p>
+              </a>
+              <ul class="inn_line">
+                <li>
+                  <a href="#">
+                    <div class="mx-auto mb-2">
+                      <img
+                        src="https://psc.digitalnoticeboard.biz/storage/images/team/XM1TBxACP8aiRzfhz15ixGgaUDWWrDuDw39BjTzj.jpg"
+                        alt="Sample avatar"
+                      />
+                    </div>
+                    <p class="font-weight-bold"><span>Name: </span>Nelissa Singh</p>
+                 <p class="font-weight-bold"><span>Designation: </span>Team Lead</p>
+                  </a>
+                  <ul class="inn_line">
+                    <li>
+                      <a href="#">
+                        <div class="mx-auto mb-2">
+                          <img
+                            src="https://psc.digitalnoticeboard.biz/storage/images/team/QNo7OUGTFDidlg9cE7u1vu0T879uNbyG7X7IvpwA.jpg"
+                            alt="Sample avatar"
+                          />
+                        </div>
+                        <p class="font-weight-bold">Team member</p>
+                      </a>
+                      
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#">
+                    <div class="mx-auto mb-2">
+                      <img
+                        src="https://psc.digitalnoticeboard.biz/storage/images/team/XM1TBxACP8aiRzfhz15ixGgaUDWWrDuDw39BjTzj.jpg"
+                        alt="Sample avatar"
+                      />
+                    </div>
+                    <p class="font-weight-bold"><span>Name: </span>Nelissa Singh</p>
+                      <p class="font-weight-bold"><span>Designation: </span>Team Lead</p>
+                  </a>
+                  <ul class="inn_line">
+                    <li>
+                      <a href="#">
+                        <div class="mx-auto mb-2">
+                          <img
+                            src="https://psc.digitalnoticeboard.biz/storage/images/team/QNo7OUGTFDidlg9cE7u1vu0T879uNbyG7X7IvpwA.jpg"
+                            alt="Sample avatar"
+                          />
+                        </div>
+                        <p class="font-weight-bold">Team member</p>
+                      </a>
+                      
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#">
+                <div class="mx-auto mb-2">
+                  <img
+                    src="https://psc.digitalnoticeboard.biz/storage/images/team/TN51nNu2sicbFpOl8R7iXoNm8FKnMZBAN5pd4bAE.jpg"
+                    alt="Sample avatar"
+                  />
+                </div>
+                <p class="font-weight-bold"><span>Name: </span>Nayteram Ramnarine</p>
+              <p class="font-weight-bold"><span>Designation: </span>Manager</p>
+              </a>
+              <ul class="inn_line">
+                <li>
+                  <a href="#">
+                    <div class="mx-auto mb-2">
+                      <img
+                        src="https://psc.digitalnoticeboard.biz/storage/images/team/XM1TBxACP8aiRzfhz15ixGgaUDWWrDuDw39BjTzj.jpg"
+                        alt="Sample avatar"
+                      />
+                    </div>
+                    <p class="font-weight-bold"><span>Name: </span>Nelissa Singh</p>
+                    <p class="font-weight-bold"><span>Designation: </span>Team Lead</p>
+                  </a>
+                  <ul class="inn_line">
+                    <li>
+                      <a href="#">
+                        <div class="mx-auto mb-2">
+                          <img
+                            src="https://psc.digitalnoticeboard.biz/storage/images/team/QNo7OUGTFDidlg9cE7u1vu0T879uNbyG7X7IvpwA.jpg"
+                            alt="Sample avatar"
+                          />
+                        </div>
+                        <p class="font-weight-bold">Team member</p>
+                      </a>
+                      
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#">
+                    <div class="mx-auto mb-2">
+                      <img
+                        src="https://psc.digitalnoticeboard.biz/storage/images/team/XM1TBxACP8aiRzfhz15ixGgaUDWWrDuDw39BjTzj.jpg"
+                        alt="Sample avatar"
+                      />
+                    </div>
+                    <p class="font-weight-bold"><span>Name: </span>Nelissa Singh</p>
+                    <p class="font-weight-bold"><span>Designation: </span>Team Lead</p>
+                  </a>
+                  <ul class="inn_line">
+                    <li>
+                      <a href="#">
+                        <div class="mx-auto mb-2">
+                          <img
+                            src="https://psc.digitalnoticeboard.biz/storage/images/team/QNo7OUGTFDidlg9cE7u1vu0T879uNbyG7X7IvpwA.jpg"
+                            alt="Sample avatar"
+                          />
+                        </div>
+                        <p class="font-weight-bold">Team member</p>
+                      </a>
+                      
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#">
+                    <div class="mx-auto mb-2">
+                      <img
+                        src="https://psc.digitalnoticeboard.biz/storage/images/team/XM1TBxACP8aiRzfhz15ixGgaUDWWrDuDw39BjTzj.jpg"
+                        alt="Sample avatar"
+                      />
+                    </div>
+                    <p class="font-weight-bold"><span>Name: </span>Nelissa Singh</p>
+                       <p class="font-weight-bold"><span>Designation: </span>Team Lead</p>
+                  </a>
+                  <ul class="inn_line">
+                    <li>
+                      <a href="#">
+                        <div class="mx-auto mb-2">
+                          <img
+                            src="https://psc.digitalnoticeboard.biz/storage/images/team/QNo7OUGTFDidlg9cE7u1vu0T879uNbyG7X7IvpwA.jpg"
+                            alt="Sample avatar"
+                          />
+                        </div>
+                        <p class="font-weight-bold">Team member</p>
+                      </a>
+                      
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#">
+                <div class="mx-auto mb-2">
+                  <img
+                    src="https://psc.digitalnoticeboard.biz/storage/images/team/TN51nNu2sicbFpOl8R7iXoNm8FKnMZBAN5pd4bAE.jpg"
+                    alt="Sample avatar"
+                  />
+                </div>
+                <p class="font-weight-bold"><span>Name: </span>Nayteram Ramnarine</p>
+            <p class="font-weight-bold"><span>Designation: </span>Manager</p>
+              </a>
+              <ul class="inn_line">
+                <li>
+                  <a href="#">
+                    <div class="mx-auto mb-2">
+                      <img
+                        src="https://psc.digitalnoticeboard.biz/storage/images/team/XM1TBxACP8aiRzfhz15ixGgaUDWWrDuDw39BjTzj.jpg"
+                        alt="Sample avatar"
+                      />
+                    </div>
+                    <p class="font-weight-bold"><span>Name: </span>Nelissa Singh</p>
+            <p class="font-weight-bold"><span>Designation: </span>Team Lead</p>
+                  </a>
+                  <ul class="inn_line">
+                    <li>
+                      <a href="#">
+                        <div class="mx-auto mb-2">
+                          <img
+                            src="https://psc.digitalnoticeboard.biz/storage/images/team/QNo7OUGTFDidlg9cE7u1vu0T879uNbyG7X7IvpwA.jpg"
+                            alt="Sample avatar"
+                          />
+                        </div>
+                        <p class="font-weight-bold">Team member</p>
+                      </a>
+                      
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="#">
+                    <div class="mx-auto mb-2">
+                      <img
+                        src="https://psc.digitalnoticeboard.biz/storage/images/team/XM1TBxACP8aiRzfhz15ixGgaUDWWrDuDw39BjTzj.jpg"
+                        alt="Sample avatar"
+                      />
+                    </div>
+                    <p class="font-weight-bold"><span>Name: </span>Nelissa Singh</p>
+            <p class="font-weight-bold"><span>Designation: </span>Team Lead</p>
+                  </a>
+                  <ul class="inn_line">
+                    <li>
+                      <a href="#">
+                        <div class="mx-auto mb-2">
+                          <img
+                            src="https://psc.digitalnoticeboard.biz/storage/images/team/QNo7OUGTFDidlg9cE7u1vu0T879uNbyG7X7IvpwA.jpg"
+                            alt="Sample avatar"
+                          />
+                        </div>
+                        <p class="font-weight-bold">Team member</p>
+                      </a>
+                      
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!-- tree design end -->
     </section>
 
 @endsection

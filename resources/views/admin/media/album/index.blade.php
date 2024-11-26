@@ -1,12 +1,12 @@
 @extends('layout.admin_master')
 
-@section('title', 'Council - List')
-@section('header', 'Council')
+@section('title', 'Album - List')
+@section('header', 'Album')
 
 @section('content')
 
     <div class="page-breadcrumb d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Council List</div>
+        <div class="breadcrumb-title pe-3">Album</div>
     </div>
 
     <div class="row">
@@ -14,13 +14,14 @@
             <div class="card radius-10">
                 <div class="card-body">
                     <div class="p-4 border rounded">
-                    <form class="row g-3 needs-validation" action="{{ route('admin.council.filter') }}" method="post">
+                        <form action="{{ route('admin.media-center.album.filter') }}" method="post"
+                            class="row g-3 needs-validation">
                             @csrf
                             @method('post')
 
                             <div class="col-md-6 position-relative">
-                                <input type="text" class="form-control" name="name" placeholder="Name"
-                                    value="{{ $filterValues['name'] }}">
+                                <input type="text" class="form-control" name="title" placeholder="Title"
+                                    value="{{ $filterValues['title'] }}">
                             </div>
 
                             <div class="col-md-6 position-relative">
@@ -36,15 +37,18 @@
                             </div>
 
                             <div class="col-12 text-end">
-                                <a href="{{ route('admin.council.index') }}" class="btn btn-danger btn-sm">
+                                <a href="{{ route('admin.media-center.photo.index') }}" class="btn btn-danger btn-sm">
                                     <ion-icon name="reload" role="img" class="md hydrated"
                                         aria-label="reload"></ion-icon>
                                     Reset
                                 </a>
-                                <button class="btn btn-primary btn-sm"><ion-icon name="funnel" role="img"
-                                        class="md hydrated" aria-label="funnel"></ion-icon>Filter</button>
+                                <button class="btn btn-primary btn-sm">
+                                    <ion-icon name="funnel" role="img" class="md hydrated"
+                                        aria-label="funnel"></ion-icon>Filter
+                                </button>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -54,12 +58,23 @@
     <div class="row">
         <div class="col-lg-12 mb-3">
             <div class="d-flex justify-content-between">
-                <a href="{{ route('admin.council.create') }}" class="btn btn-primary btn-sm">
-                    <ion-icon name="person-add-outline" role="img" class="md hydrated"
-                        aria-label="person add"></ion-icon>Create Council
+                <a href="{{ route('admin.media-center.album.create') }}" class="btn btn-primary btn-sm">
+                    <ion-icon name="add" role="img" class="md hydrated" aria-label="person add"></ion-icon>Create
+                    Album
                 </a>
 
-                
+                @if ($export_id && count($export_id) > 0)
+                    <form action="" method="post" class="d-none">
+                        @csrf
+                        @method('post')
+
+                        <input type="hidden" value="{{ implode(',', $export_id) }}" name="export_id">
+
+                        <button class="btn btn-primary btn-sm" type="submit">
+                            <ion-icon name="document-outline"></ion-icon>Export
+                        </button>
+                    </form>
+                @endif
             </div>
         </div>
     </div>
@@ -69,53 +84,52 @@
             <div class="card radius-10 w-100">
                 <div class="card-body">
                     <div class="d-flex align-items-center">
-                        <h6 class="mb-0">Council List</h6>
+                        <h6 class="mb-0">Recent List</h6>
                     </div>
 
                     <div class="table-responsive">
-                        <table id="memberTable" class="table table-sm" data-toggle="table" data-search="true"
-                            data-buttons-prefix="btn-md btn" data-pagination="true">
+                        <table id="photoTable" class="table table-sm table-borderless table-light" data-toggle="table"
+                            data-search="true" data-buttons-prefix="btn-md btn" data-pagination="true">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col" data-sortable="true">Image</th>
-                                    <th scope="col" data-sortable="true">Name</th>
-                                    <th scope="col" data-sortable="true">Designattion</th>
+                                    <th scope="col" data-sortable="true">Title</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($data && count($data) > 0)
-                                    @foreach ($data as $userKey => $user)
-                                        <tr class="tr_row_{{ $userKey }}">
+                                @if ($list && count($list) > 0)
+                                    @foreach ($list as $listKey => $listValue)
+                                        <tr class="tr_row_{{ $listKey }}">
 
-                                            <th scope="row">{{ $userKey + 1 }}</th>
+                                            <th scope="row">{{ $listKey + 1 }}</th>
+
                                             <td>
-                                              <img style="height: 35px; width:30px" src="{{asset('storage/'.$user->image) }}">
+                                                <a href="{{ asset('storage/' . $listValue->name) }}" target="_blank"
+                                                    class="text-dark pop_up_image">
+                                                    <img src="{{ $listValue->name && isset($listValue->name) ? asset('storage/' . $listValue->name) : asset('storage/default/no_image.jpg') }}"
+                                                        class="tableImg" alt="">
+                                                </a>
                                             </td>
 
                                             <td>
-                                            {{ Str::limit($user->name, 100) }}
-                                                
+                                            {{  Str::limit($listValue->title, 100) }}
+                                               
                                             </td>
 
                                             <td>
-                                            {{  Str::limit($user->designattion, 100) }}
-                                            
-                                            </td>
-
-                                            <td>
-                                                @if ($user->status == 1)
-                                                    <span class="badge alert-success" id="userStatus"
-                                                        uid="{{ $user->id }}" ustatus="{{ $user->status }}"
-                                                        urow="{{ $userKey }}">
+                                                @if ($listValue->status == 1)
+                                                    <span class="badge alert-success" id="listStatus"
+                                                        lid="{{ $listValue->id }}" lstatus="{{ $listValue->status }}"
+                                                        lrow="{{ $listKey }}">
                                                         Active
                                                     </span>
                                                 @else
-                                                    <span class="badge alert-danger" id="userStatus"
-                                                        uid="{{ $user->id }}" ustatus="{{ $user->status }}"
-                                                        urow="{{ $userKey }}">
+                                                    <span class="badge alert-danger" id="listStatus"
+                                                        lid="{{ $listValue->id }}" lstatus="{{ $listValue->status }}"
+                                                        lrow="{{ $listKey }}">
                                                         In Active
                                                     </span>
                                                 @endif
@@ -124,11 +138,12 @@
                                             <td>
                                                 <div class="tableOptions">
                                                     <span class="text-dark" title="Edit">
-                                                        <a href="{{ route('admin.council.edit', $user->id) }}"><i
+                                                        <a
+                                                            href="{{ route('admin.media-center.photo.edit', $listValue->id) }}"><i
                                                                 class="fa fa-pencil"></i></a>
                                                     </span>
-                                                    <span class="text-danger" title="Delete" uid="{{ $user->id }}"
-                                                        urow="{{ $userKey }}" id="deleteUserBtn">
+                                                    <span class="text-danger" title="Delete" lid="{{ $listValue->id }}"
+                                                        lrow="{{ $listKey }}" id="deleteListBtn">
                                                         <i class="fa fa-trash"></i>
                                                     </span>
                                                 </div>
@@ -152,12 +167,12 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-            $(document).on('click', '#userStatus', function(e) {
+            $(document).on('click', '#listStatus', function(e) {
                 e.preventDefault();
 
-                var uid = $(this).attr('uid');
-                var ustatus = $(this).attr('ustatus');
-                var urow = $(this).attr('urow');
+                var lid = $(this).attr('lid');
+                var lstatus = $(this).attr('lstatus');
+                var lrow = $(this).attr('lrow');
 
                 Swal.fire({
                     title: "Are you sure?",
@@ -172,18 +187,18 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "{{ route('admin.council.status') }}",
+                            url: "{{ route('admin.media-center.photo.status') }}",
                             method: 'POST',
                             data: {
                                 _method: 'post',
                                 _token: '{{ csrf_token() }}',
-                                uid: uid,
-                                ustatus: ustatus,
+                                lid: lid,
+                                lstatus: lstatus,
                             },
                             dataType: "json",
                             beforeSend: function() {
                                 // $('.preloader').show();
-                                $('span#userStatus[urow="' + urow + '"]').prop(
+                                $('span#listStatus[urow="' + lrow + '"]').prop(
                                     'disabled', true).css({
                                     'cursor': 'not-allowed'
                                 });
@@ -192,14 +207,14 @@
                                 if (response.error === false) {
                                     toastr.success(response.msg);
 
-                                    if (parseInt(ustatus) == 1) {
-                                        $('span#userStatus[urow="' + urow + '"]').attr(
-                                            'ustatus', 0).removeClass(
+                                    if (parseInt(lstatus) == 1) {
+                                        $('span#listStatus[lrow="' + lrow + '"]').attr(
+                                            'lstatus', 0).removeClass(
                                             'alert-success').addClass(
                                             'alert-danger').html('In Active');
                                     } else {
-                                        $('span#userStatus[urow="' + urow + '"]').attr(
-                                            'ustatus', 1).removeClass(
+                                        $('span#listStatus[lrow="' + lrow + '"]').attr(
+                                            'lstatus', 1).removeClass(
                                             'alert-danger').addClass(
                                             'alert-success').html('Active');
                                     }
@@ -212,7 +227,7 @@
                             },
                             complete: function(xhr, status) {
                                 // $('.preloader').hide();
-                                $('span#userStatus[urow="' + urow + '"]').prop(
+                                $('span#listStatus[urow="' + lrow + '"]').prop(
                                     'disabled', false).css({
                                     'cursor': 'pointer'
                                 });
@@ -222,12 +237,12 @@
                 });
             });
 
-            $(document).on('click', '#deleteUserBtn', function(e) {
+            $(document).on('click', '#deleteListBtn', function(e) {
                 e.preventDefault();
 
-                var uid = $(this).attr('uid');
-                var urow = $(this).attr('urow');
-                var url = `{{ url('/admin/about-us/council/destroy/${uid}') }}`;
+                var lid = $(this).attr('lid');
+                var lrow = $(this).attr('lrow');
+                var url = `{{ url('/admin/media-center/photo/${lid}') }}`;
 
                 Swal.fire({
                     title: "Are you sure?",
@@ -243,22 +258,22 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             url: url,
-                            method: 'get',
+                            method: 'POST',
                             data: {
-                                _method: 'get',
+                                _method: 'delete',
                                 _token: '{{ csrf_token() }}',
                             },
                             dataType: "json",
                             beforeSend: function() {
                                 // $('.preloader').show();
-                                $('span#deleteUserBtn[urow="' + urow + '"]').prop(
+                                $('span#deleteListBtn[lrow="' + lrow + '"]').prop(
                                     'disabled', true).css({
                                     'cursor': 'not-allowed'
                                 });
                             },
                             success: function(response) {
                                 if (response.error === false) {
-                                    $('tr.tr_row_' + urow + '').remove();
+                                    $('tr.tr_row_' + lrow + '').remove();
 
                                     toastr.success(response.msg);
                                 } else {
@@ -270,7 +285,7 @@
                             },
                             complete: function(xhr, status) {
                                 // $('.preloader').hide();
-                                $('span#deleteUserBtn[urow="' + urow + '"]').prop(
+                                $('span#deleteListBtn[lrow="' + lrow + '"]').prop(
                                     'disabled', false).css({
                                     'cursor': 'pointer'
                                 });

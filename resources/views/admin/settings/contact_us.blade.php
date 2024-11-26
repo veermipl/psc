@@ -118,6 +118,17 @@
                                 @enderror
                             </div>
 
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Linkedin <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="linkedin" placeholder="linkedin"
+                                    value="{{ old('linkedin', @$settings['linkedin']) }}" maxlength="50">
+
+                                @error('linkedin')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
                             <div class="col-12 text-end mt-5">
                                 <button class="btn btn-sm btn-primary" type="submit">Update</button>
                             </div>

@@ -31,6 +31,7 @@ class UpdateContactUsSettingsRequest extends FormRequest
             'twitter' => ['required', 'url'],
             'instagram' => ['required', 'url'],
             'youtube' => ['required', 'url'],
+            'linkedin' => ['required', 'url'],
         ];
     }
 

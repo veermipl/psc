@@ -10,7 +10,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class CouncilController extends Controller
 {
-    public function index (Request $request){
+    public function index(Request $request)
+    {
         $this->authorize('resource');
 
         $filterValues = [
@@ -34,17 +35,19 @@ class CouncilController extends Controller
         // dd($data);
         // return view('admin.membership.type.index', $data);
         return view('admin.about.council.index', $data);
-
     }
 
-    public function create(){
+    public function create()
+    {
         return view('admin.about.council.craete');
     }
 
-    public function store (Request $request){
+    public function store(Request $request)
+    {
         $this->validate($request, [
             'name'     => 'required',
             // 'designattion'   => 'required',
+            'terms_of_reference'   => 'nullable',
             'status'    => 'required',
             'profile'    => 'required|mimes:jpeg,jpg,png'
         ]);
@@ -57,6 +60,7 @@ class CouncilController extends Controller
         $array = [
             'name' => $request->name,
             'designattion' => $request->designattion,
+            'terms_of_reference' => $request->terms_of_reference,
             'image' => $image,
             'status' => $request->status,
         ];
@@ -79,40 +83,46 @@ class CouncilController extends Controller
 
         $data['error'] = false;
         $data['msg'] = 'Status updated';
- 
+
         return response()->json($data, 200);
     }
-    
-    public function edit($id){
-       $data = Council::find($id);
+
+    public function edit($id)
+    {
+        $data = Council::findOrFail($id);
+
         return view('admin.about.council.edit', compact('data'));
+    }
 
-    } 
-
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $this->authorize('resource_edit');
 
         $this->validate($request, [
             'name'     => 'required',
             // 'designattion'   => 'required',
+            'terms_of_reference'   => 'nullable',
             'status'    => 'required',
             'image'    => 'nullable|mimes:jpeg,jpg,png'
         ]);
+
         $test = Council::find($id);
+
         if ($request->hasFile('images')) {
             $file = $request->file('images');
             $profile = $file->store('/images/business', 'public');
         } else {
             $profile = $test->image;
         }
-
+        
         $array = [
-            'title' => $request->title,
-            'contant' => $request->content,
+            'name' => $request->name,
+            'designattion' => $request->designattion,
             'image' => $profile,
             'status' => $request->status,
+            'terms_of_reference' => $request->terms_of_reference,
         ];
-        $test->Update($array);
+        $test->update($array);
 
         return redirect()->route('admin.council.index')->with('status', 'Council update successfully');
     }
@@ -128,6 +138,4 @@ class CouncilController extends Controller
         // return redirect()->route('admin.council.index')->with('status', 'Council type Deleted');
         return response()->json($data, 200);
     }
-
-
 }

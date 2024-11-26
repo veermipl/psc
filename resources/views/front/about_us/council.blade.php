@@ -48,6 +48,11 @@
                                     <h3>{{$members->name}}</h3>
                                     <p>{{$members->designattion}}</p>
                                 </div>
+                                {{-- <div class="team-one-content pt-3">
+                                    <a href="{{ route('about-us.council-show', $members->id) }}" class="vs-btn1 style5 mt-3" tabindex="0">
+                                        Read More <i class="far fa-long-arrow-right"></i>
+                                    </a>
+                                </div> --}}
                             </div>
                         </div>
                     @endforeach
