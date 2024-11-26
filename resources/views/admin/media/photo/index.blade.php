@@ -19,12 +19,28 @@
                             @csrf
                             @method('post')
 
-                            <div class="col-md-6 position-relative">
+                            <div class="col-md-4 position-relative">
                                 <input type="text" class="form-control" name="title" placeholder="Title"
                                     value="{{ $filterValues['title'] }}">
                             </div>
 
-                            <div class="col-md-6 position-relative">
+                            <div class="col-md-4 position-relative">
+                                <select name="album" class="form-control">
+                                    <option hidden value="">Album</option>
+                                    @foreach ($albums as $albumVal)
+                                        <option value="{{ $albumVal->id }}"
+                                            {{ old('album', $filterValues['album']) == $albumVal->id ? 'selected' : '' }}>
+                                            {{ $albumVal->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @error('album')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-4 position-relative">
                                 <select name="status" class="form-control">
                                     <option hidden value="">Status</option>
                                     @foreach (config('site.status') as $status)

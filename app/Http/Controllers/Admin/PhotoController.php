@@ -26,6 +26,7 @@ class PhotoController extends Controller
 
         $filterValues = [
             'title' => $request->title ?? null,
+            'album' => $request->album ?? null,
             'status' => $request->status ?? null,
         ];
 
@@ -34,12 +35,18 @@ class PhotoController extends Controller
                 $query->when($request->filled('title'), function (Builder $q) use ($filterValues) {
                         $q->where('title', 'like', '%'.$filterValues['title'].'%');
                     })
+                    ->when($request->filled('album'), function (Builder $q) use ($filterValues) {
+                        $q->where('album_id', $filterValues['album']);
+                    })
                 ->when($request->filled('status'), function (Builder $q) use ($filterValues) {
                         $q->where('status', $filterValues['status']);
                     });
             })
             ->get();
 
+        $albums = Albums::orderBy('id', 'desc')->where('status', '1')->get() ?? [];
+
+        $data['albums'] = $albums;
         $data['filterValues'] = $filterValues;
         $data['list'] = $list;
         $data['export_id'] = $list->pluck('id')->toArray();
