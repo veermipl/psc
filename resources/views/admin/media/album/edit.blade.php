@@ -20,12 +20,34 @@
                             @method('patch')
 
                             <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Title <span
+                                <label for="validationTooltip01" class="form-label">Album Name <span
                                         class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="title" placeholder="Image title"
-                                    value="{{ old('title', $photo->title) }}"  maxlength="100">
+                                <input type="text" class="form-control" name="title" placeholder="Album Name"
+                                    value="{{ old('title', $album->name) }}"  maxlength="100">
 
                                 @error('title')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Album Cover</label>
+
+                                @if ($album->image)
+                                    <input type="hidden" name="old_image" value="{{ $album->image }}">
+                                    <a href="{{ $album->image ? asset('storage/' . $album->image) : '' }}"
+                                        class="badge alert-primary text-dark" target="_blank">
+                                        View Album Cover
+                                    </a>
+                                @else
+                                    <a href="{{ asset('storage/default/logo.png')  }}" class="badge alert-primary text-dark" target="_blank">
+                                        View Logo
+                                    </a>
+                                @endif
+
+                                <input type="file" class="form-control" name="image" accept="image/*">
+
+                                @error('image')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -37,7 +59,7 @@
                                     <option hidden value="">Status</option>
                                     @foreach (config('site.status') as $status)
                                         <option value="{{ $status['value'] }}"
-                                            {{ old('status', $photo->status) == $status['value'] ? 'selected' : '' }}>
+                                            {{ old('status', $album->status) == $status['value'] ? 'selected' : '' }}>
                                             {{ $status['name'] }}
                                         </option>
                                     @endforeach
@@ -46,18 +68,6 @@
                                 @error('status')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
-                            </div>
-
-                            <div class="col-md-12 position-relative">
-                                @if ($photo->name)
-                                    <div class="editImgWrapper_" img_row_url="{{ $photo->name }}">
-                                        <input type="hidden" name="old_image" value="{{ $photo->name }}">
-                                        <img class="li_img_ pop_up_image" src="{{ asset('storage/' . $photo->name) }}"
-                                            width="500px">
-                                    </div>
-                                @else
-                                    <p class="text-danger">No Image</p>
-                                @endif
                             </div>
 
                             <div class="col-12 text-end mt-5">

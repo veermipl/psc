@@ -18,7 +18,6 @@ use App\Models\Settings;
 use App\Models\CoreValue;
 use App\Models\TradeData;
 use App\Models\CaricomCET;
-use App\Models\AlbumPhotos;
 use App\Models\Committeess;
 use App\Models\LandingPage;
 use App\Models\Performance;
@@ -584,7 +583,7 @@ class FrontController extends Controller
     {
         $album = Albums::findOrFail($id);
 
-        $album_photo_list = AlbumPhotos::orderBy('id', 'desc')->where([
+        $album_photo_list = Photos::orderBy('id', 'desc')->where([
             'status' => '1',
             'album_id' => $id,
         ])->get() ?? [];

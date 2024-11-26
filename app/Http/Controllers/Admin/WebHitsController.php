@@ -2,22 +2,33 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\WebHits;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 
 class WebHitsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // $this->authorize('notification');
 
         $filterValues = [
-            'title' => $request->title ?? null,
-            'status' => $request->status ?? null,
+            'date_from' => $request->date_from ?? null,
+            'date_to' => $request->date_to ?? null,
         ];
 
-        $list = WebHits::orderBy('id', 'desc')->get();
+        $list = WebHits::orderBy('id', 'desc')
+            ->where(function (Builder $query) use ($filterValues, $request) {
+                $query->when($request->filled('date_from'), function (Builder $q) use ($filterValues) {
+                    $q->whereDate('created_at', '>=', $filterValues['date_from']);
+                })
+                    ->when($request->filled('date_to'), function (Builder $q) use ($filterValues) {
+                        $q->whereDate('created_at', '<=', $filterValues['date_to']);
+                    });
+            })
+            ->get();
 
         $data['filterValues'] = $filterValues;
         $data['list'] = $list;
@@ -26,16 +37,10 @@ class WebHitsController extends Controller
         return view('admin.web_hits.index', $data);
     }
 
-    public function reloadTable()
+    public function truncateData()
     {
-        $list = WebHits::orderBy('id', 'desc')->get();
+        WebHits::truncate();
 
-        foreach ($list as $key => $value) {
-            $value['key'] = $key + 1;
-            $value['ip_address'] = '';
-            $value['visited_url'] = '';
-        }
-
-        return response()->json($list, 200);
+        return redirect()->route('admin.system.web-hits.index')->with('success', 'Table Truncated');
     }
 }

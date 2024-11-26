@@ -593,6 +593,9 @@ Route::middleware(['auth', 'role_per'])->prefix('admin')->name('admin.')->group(
         Route::get('notification/mark-all-as-read', [NotificationController::class, 'markAllAsRead'])->name('notification.mark-all-as-read');
         Route::resource('notification', NotificationController::class);
 
+        Route::post('web-hits/filter', [WebHitsController::class, 'index'])->name('web-hits.filter');
+        Route::post('web-hits/export', [WebHitsController::class, 'export'])->name('web-hits.export');
+        Route::get('web-hits/truncate', [WebHitsController::class, 'truncateData'])->name('web-hits.truncate');
         Route::resource('web-hits', WebHitsController::class);
     });
 });

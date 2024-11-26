@@ -9,6 +9,68 @@
         <div class="breadcrumb-title pe-3">Web Hits</div>
     </div>
 
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card radius-10">
+                <div class="card-body">
+                    <div class="p-4 border rounded">
+                        <form action="{{ route('admin.system.web-hits.filter') }}" method="post"
+                            class="row g-3 needs-validation">
+                            @csrf
+                            @method('post')
+
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Date From</label>
+                                <input type="date" class="form-control" name="date_from" placeholder="" value="{{ $filterValues['date_from'] }}">
+                            </div>
+
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Date To</label>
+                                <input type="date" class="form-control" name="date_to" placeholder="Date To" value="{{ $filterValues['date_to'] }}">
+                            </div>
+
+                            <div class="col-12 text-end">
+                                <a href="{{ route('admin.system.web-hits.index') }}"
+                                    class="btn btn-danger btn-sm">
+                                    <ion-icon name="reload" role="img" class="md hydrated"
+                                        aria-label="reload"></ion-icon>
+                                    Reset
+                                </a>
+                                <button class="btn btn-primary btn-sm">
+                                    <ion-icon name="funnel" role="img" class="md hydrated"
+                                        aria-label="funnel"></ion-icon>Filter
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 mb-3">
+            <div class="d-flex justify-content-between">
+                @if ($export_id && count($export_id) > 0)
+                    <form action="{{ route('admin.system.web-hits.export') }}" method="post" class="d-none">
+                        @csrf
+                        @method('post')
+
+                        <input type="hidden" value="{{ implode(',', $export_id) }}" name="export_id">
+                        <input type="hidden" value="contact_us_queries" name="file_name">
+
+                        <button class="btn btn-primary btn-sm" type="submit">
+                            <ion-icon name="document-outline"></ion-icon>Export
+                        </button>
+                    </form>
+
+                    <a href="{{ route('admin.system.web-hits.truncate') }}" class="btn btn-danger btn-sm">
+                        <ion-icon name="trash-outline"></ion-icon>Truncate
+                    </a>
+                @endif
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-lg-12">
@@ -26,6 +88,7 @@
                                     <th scope="col" data-field="key">#</th>
                                     <th scope="col" data-sortable="true" data-field="ip_address">IP Address</th>
                                     <th scope="col" data-sortable="true" data-field="visited_url">Visited URL</th>
+                                    <th scope="col" data-sortable="true" data-field="date">Date</th>
                                     {{-- <th scope="col" data-field="action">Action</th> --}}
                                 </tr>
                             </thead>
@@ -42,6 +105,10 @@
 
                                             <td>
                                                 {{ $listValue->url }}
+                                            </td>
+
+                                            <td>
+                                                {{ date('jS M Y', strtotime($listValue->created_at)) }}
                                             </td>
 
                                             {{-- <td>

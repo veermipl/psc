@@ -20,12 +20,22 @@
                             @method('post')
 
                             <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Title <span
+                                <label for="validationTooltip01" class="form-label">Album Name <span
                                         class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="title" placeholder="Image title"
+                                <input type="text" class="form-control" name="title" placeholder="Album Name"
                                     value="{{ old('title') }}" maxlength="100">
 
                                 @error('title')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Album Cover <span
+                                        class="text-danger">*</span></label>
+                                <input type="file" class="form-control" name="image" accept="image/*">
+
+                                @error('image')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

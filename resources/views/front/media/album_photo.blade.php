@@ -7,13 +7,13 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="back-ground">
-                        <h2>Album Photos</h2>
+                        <h2>{{ $album ? $album->name : 'Album'}} Photos</h2>
                         <div class="breadcrumbs text-center wow animate__ animate__fadeInUp animate__delay-1s animated"
                             style="visibility: visible; animation-name: fadeInUp;">
                             <ul>
                                 <li><a href="{{ route('home') }}">Home</a></li>
                                 <span class="slash"> /</span>
-                                <li><a href="{{ route('media.photos') }}">Albums</a></li>
+                                <li><a href="{{ route('media.albums') }}">Albums</a></li>
                             </ul>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                             @endforeach
                         </div>
                     @else
-                        <h6 class="text-center">No Photos Found !</h6>
+                        <h6 class="text-center">No Photo(s) Found !</h6>
                     @endif
                 </div>
             </div>

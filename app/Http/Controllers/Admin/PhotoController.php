@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Models\Albums;
 use App\Models\Photos;
 use App\Traits\ImageTraits;
 use Illuminate\Http\Request;
@@ -53,7 +54,12 @@ class PhotoController extends Controller
     {
         $this->authorize('media_create');
 
-        return view('admin.media.photo.create');
+        $albums = Albums::orderBy('id', 'desc')->where('status', '1')->get() ?? [];
+
+        $data['albums'] = $albums;
+        $data['selected_album'] = request('album');
+
+        return view('admin.media.photo.create', $data);
     }
 
     /**
@@ -78,6 +84,7 @@ class PhotoController extends Controller
             Photos::create([
                 'name' => $validated['name'],
                 'title' => $validated['title'],
+                'album_id' => $validated['album'],
                 'status' => $validated['status'],
             ]);
         });
@@ -89,10 +96,13 @@ class PhotoController extends Controller
      * Display the specified resource.
      */
     public function show(Photos $photo)
-    {
+    {   
         $this->authorize('media_view');
 
+        $albums = Albums::orderBy('id', 'desc')->where('status', '1')->get() ?? [];
+
         $data['photo'] = $photo;
+        $data['albums'] = $albums;
 
         return view('admin.media.photo.view', $data);
     }
@@ -103,8 +113,11 @@ class PhotoController extends Controller
     public function edit(Photos $photo)
     {
         $this->authorize('media_edit');
-
+        
+        $albums = Albums::orderBy('id', 'desc')->where('status', '1')->get() ?? [];
+        
         $data['photo'] = $photo;
+        $data['albums'] = $albums;
 
         return view('admin.media.photo.edit', $data);
     }
@@ -133,8 +146,9 @@ class PhotoController extends Controller
 
         DB::transaction(function () use ($photo, $validated) {
             $photo->update([
-                'name' => $validated['name'],
                 'title' => $validated['title'],
+                'album_id' => $validated['album'],
+                'name' => $validated['name'],
                 'status' => $validated['status'],
             ]);
         });

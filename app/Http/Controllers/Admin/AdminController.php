@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\WebHits;
 use Illuminate\Http\Request;
 use App\Models\MembershipType;
 use App\Http\Controllers\Controller;
@@ -19,8 +20,8 @@ class AdminController extends Controller
     public function dashboard(Request $request)
     {
         $this->authorize('admin_dashboard');
-        $mytime = Carbon::now();
 
+        $mytime = Carbon::now();
 
         $membershipType = MembershipType::orderBy('id', 'desc')->where('status', '1')->get() ?? [];
 
@@ -33,26 +34,29 @@ class AdminController extends Controller
         $totalInActiveMembers = User::orderBy('id', 'desc')->where('status', '0')->whereHas('role', function (Builder $x) {
             $x->where('role_id', 2);
         })->get() ?? [];
+        $totalWebVisits = WebHits::orderBy('id', 'desc')->get() ?? [];
 
         $TodaytotalMembers = User::orderBy('id', 'desc')->whereHas('role', function (Builder $x) {
             $x->where('role_id', 2);
-        }) ->whereDate('created_at', $mytime->toDateString())->get() ?? [];
-
-     $todattotalActiveMembers = User::orderBy('id', 'desc')->where('status', '1')->whereHas('role', function (Builder $x) {
+        })->whereDate('created_at', $mytime->toDateString())->get() ?? [];
+        $todattotalActiveMembers = User::orderBy('id', 'desc')->where('status', '1')->whereHas('role', function (Builder $x) {
             $x->where('role_id', 2);
-        }) ->whereDate('created_at', $mytime->toDateString())->get() ?? [];
-
-    $todaytotalInActiveMembers = User::orderBy('id', 'desc')->where('status', '0')->whereHas('role', function (Builder $x) {
+        })->whereDate('created_at', $mytime->toDateString())->get() ?? [];
+        $todaytotalInActiveMembers = User::orderBy('id', 'desc')->where('status', '0')->whereHas('role', function (Builder $x) {
             $x->where('role_id', 2);
-        }) ->whereDate('created_at', $mytime->toDateString())->get() ?? [];
+        })->whereDate('created_at', $mytime->toDateString())->get() ?? [];
+        $todayTotalWebVisits = WebHits::orderBy('id', 'desc')->whereDate('created_at', $mytime->toDateString())->get() ?? [];
 
         $data['membershipType'] = $membershipType;
         $data['totalMembers'] = $totalMembers;
         $data['totalActiveMembers'] = $totalActiveMembers;
         $data['totalInActiveMembers'] = $totalInActiveMembers;
+        $data['totalWebVisits'] = $totalWebVisits;
+
         $data['TodaytotalMembers'] = $TodaytotalMembers;
         $data['todattotalActiveMembers'] = $todattotalActiveMembers;
         $data['todaytotalInActiveMembers'] = $todaytotalInActiveMembers;
+        $data['todayTotalWebVisits'] = $todayTotalWebVisits;
 
         return view('admin.dashboard', $data);
     }

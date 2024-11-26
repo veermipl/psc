@@ -20,22 +20,39 @@
                             @method('post')
 
                             <div class="col-md-6 position-relative">
-                                <label for="validationTooltip01" class="form-label">Image <span
-                                        class="text-danger">*</span></label>
-                                <input type="file" class="form-control" name="image" accept="image/*">
-
-                                @error('image')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            <div class="col-md-6 position-relative">
                                 <label for="validationTooltip01" class="form-label">Title <span
                                         class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="title" placeholder="Image title"
                                     value="{{ old('title') }}" maxlength="100">
 
                                 @error('title')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Album </label>
+                                <select name="album" class="form-control">
+                                    <option hidden value="">Select Album</option>
+                                    @foreach ($albums as $albumVal)
+                                        <option value="{{ $albumVal->id }}"
+                                            {{ old('album', $selected_album) == $albumVal->id ? 'selected' : '' }}>
+                                            {{ $albumVal->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @error('album')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-6 position-relative">
+                                <label for="validationTooltip01" class="form-label">Image <span
+                                        class="text-danger">*</span></label>
+                                <input type="file" class="form-control" name="image" accept="image/*">
+
+                                @error('image')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>

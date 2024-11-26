@@ -37,7 +37,7 @@
                             </div>
 
                             <div class="col-12 text-end">
-                                <a href="{{ route('admin.media-center.photo.index') }}" class="btn btn-danger btn-sm">
+                                <a href="{{ route('admin.media-center.album.index') }}" class="btn btn-danger btn-sm">
                                     <ion-icon name="reload" role="img" class="md hydrated"
                                         aria-label="reload"></ion-icon>
                                     Reset
@@ -107,15 +107,15 @@
                                             <th scope="row">{{ $listKey + 1 }}</th>
 
                                             <td>
-                                                <a href="{{ asset('storage/' . $listValue->name) }}" target="_blank"
+                                                <a href="{{ asset('storage/' . $listValue->image) }}" target="_blank"
                                                     class="text-dark pop_up_image">
-                                                    <img src="{{ $listValue->name && isset($listValue->name) ? asset('storage/' . $listValue->name) : asset('storage/default/no_image.jpg') }}"
+                                                    <img src="{{ $listValue->image && isset($listValue->image) ? asset('storage/' . $listValue->image) : asset('storage/default/no_image.jpg') }}"
                                                         class="tableImg" alt="">
                                                 </a>
                                             </td>
 
                                             <td>
-                                            {{  Str::limit($listValue->title, 100) }}
+                                            {{  Str::limit($listValue->name, 100) }}
                                                
                                             </td>
 
@@ -137,10 +137,15 @@
 
                                             <td>
                                                 <div class="tableOptions">
+                                                    <span class="text-dark" title="Add Photo">
+                                                        <a href="{{ route('admin.media-center.photo.create', ['album' => $listValue->id]) }}">
+                                                            <i class="fa fa-plus"></i>
+                                                        </a>
+                                                    </span>
                                                     <span class="text-dark" title="Edit">
-                                                        <a
-                                                            href="{{ route('admin.media-center.photo.edit', $listValue->id) }}"><i
-                                                                class="fa fa-pencil"></i></a>
+                                                        <a href="{{ route('admin.media-center.album.edit', $listValue->id) }}">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </a>
                                                     </span>
                                                     <span class="text-danger" title="Delete" lid="{{ $listValue->id }}"
                                                         lrow="{{ $listKey }}" id="deleteListBtn">
@@ -187,7 +192,7 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: "{{ route('admin.media-center.photo.status') }}",
+                            url: "{{ route('admin.media-center.album.status') }}",
                             method: 'POST',
                             data: {
                                 _method: 'post',
@@ -242,7 +247,7 @@
 
                 var lid = $(this).attr('lid');
                 var lrow = $(this).attr('lrow');
-                var url = `{{ url('/admin/media-center/photo/${lid}') }}`;
+                var url = `{{ url('/admin/media-center/album/${lid}') }}`;
 
                 Swal.fire({
                     title: "Are you sure?",

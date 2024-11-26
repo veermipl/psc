@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Albums;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -15,6 +16,12 @@ class Photos extends Model
     protected $fillable = [
         'name',
         'title',
+        'album_id',
         'status',
     ];
+
+    public function album()
+    {
+        return $this->belongsTo(Albums::class);
+    }
 }

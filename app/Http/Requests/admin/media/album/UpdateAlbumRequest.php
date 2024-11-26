@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\admin\media\photo;
+namespace App\Http\Requests\admin\media\album;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePhotoRequest extends FormRequest
+class UpdateAlbumRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,8 @@ class StorePhotoRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string'],
-            'album' => ['required', 'string', 'exists:albums,id'],
-            'image' => ['required', 'image', 'mimes:jpg,jpeg,gif,png'],
+            'old_image' => ['nullable', 'string'],
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,gif,png'],
             'status' => ['required', 'in:0,1'],
         ];
     }

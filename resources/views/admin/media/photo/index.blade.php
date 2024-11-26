@@ -95,6 +95,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col" data-sortable="true">Image</th>
                                     <th scope="col" data-sortable="true">Title</th>
+                                    <th scope="col" data-sortable="true">Album</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -115,8 +116,11 @@
                                             </td>
 
                                             <td>
-                                            {{  Str::limit($listValue->title, 100) }}
-                                               
+                                                {{ Str::limit($listValue->title, 50) }}
+                                            </td>
+
+                                            <td>
+                                                {{ $listValue->album ? $listValue->album->name : 'N/A' }}
                                             </td>
 
                                             <td>

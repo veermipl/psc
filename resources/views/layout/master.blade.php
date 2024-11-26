@@ -386,10 +386,10 @@
                                                                         Media</a>
                                                                 </li> -->
                                                             <li>
-                                                                <a href="{{ route('media.photos') }}">Photos</a>
+                                                                <a href="{{ route('media.albums') }}">Albums</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('media.albums') }}">Albums</a>
+                                                                <a href="{{ route('media.photos') }}">Photos</a>
                                                             </li>
                                                             <li>
                                                                 <a href="{{ route('media.videos') }}">Videos</a>
