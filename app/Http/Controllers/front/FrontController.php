@@ -163,10 +163,16 @@ class FrontController extends Controller
 
     public function aboutUs_Council()
     {
-        // $council =  About::where('type', 'Council')->where('status', '1')->first();
         $council = Council::where('status', '1')->orderby('name', 'asc')->get();
 
         return view('front.about_us.council', compact('council'));
+    }
+
+    public function aboutUs_CouncilDetails()
+    {
+        $details = About::where('type', 'Council')->where('status', '1')->first();;
+
+        return view('front.about_us.council_details', compact('details'));
     }
 
     public function aboutUs_Council_Show(Request $request, $id)
@@ -612,28 +618,42 @@ class FrontController extends Controller
         return view('front.about_us.introduction_view', compact('data'))->render();;
     }
 
-    public function media_event()
+    public function events()
     {
-
         $date = Carbon::now();
 
         $data = PSCEvent::where('status', '1')
-            ->where('date_time', '<=', $date->toDateString())
             ->orderby('id', 'desc')
             ->get();
+
         return view('front.media.event', compact('data'));
     }
 
     public function details_event($id)
     {
         $ids = base64_decode($id);
+
         $events = PSCEvent::orderBy('id', 'desc')->where([
             'status' => '1'
         ])->where('id', '!=', $ids)->limit(5)->get() ?? [];
 
         $details = PSCEvent::where('status', '1')->findOrFail($ids);
+        
         return view('front.media.event_deatils', compact('events', 'details'));
     }
+
+    public function past_event()
+    {
+        $date = Carbon::now();
+
+        $data = PSCEvent::where('status', '1')
+            ->where('date_time', '<=', $date->toDateString())
+            ->orderby('id', 'desc')
+            ->get();
+
+        return view('front.media.past_event', compact('data'));
+    }
+
     public function upcoming_event()
     {
         $date = Carbon::now();

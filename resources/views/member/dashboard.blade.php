@@ -2,6 +2,16 @@
 
 @section('content')
     <style>
+        #loaderWrapper {
+            position: absolute;
+            /* border: 1px solid red; */
+            width: 100%;
+            height: 100%;
+            top: 0;
+            z-index: 99999;
+            display: none;
+        }
+
         .loader {
             border: 16px solid #f3f3f3;
             /* Light grey */
@@ -60,7 +70,9 @@
         }
     </style>
 
-    <div id="loader" class="loader" style="display:none;"></div>
+    <div id="loaderWrapper">
+        <div id="loader" class="loader"></div>
+    </div>
 
     <div id="fileContent"></div>
 
@@ -76,7 +88,7 @@
                             <thead>
                                 <tr class="my-table-header">
                                     <th style="text-align: center;">Title</th>
-                                     <!-- <th style="text-align: center;">Doc Type</th> -->
+                                    <!-- <th style="text-align: center;">Doc Type</th> -->
                                     <th style="text-align: center;">File Size</th>
                                     <th style="text-align: center;">Create Date</th>
                                     <th style="text-align: center;">Action</th>
@@ -94,7 +106,7 @@
                                     <tr class="table-data">
                                         <td style="text-align: left;" id="pdf-icon"><i class="fas fa-file-pdf"
                                                 aria-hidden="true"></i>&nbsp {{ $file['FILENAME'] }}</td>
-                                         <!-- <td style="text-align: center;" id="pdf-icon">  {{ $file['FILENAME'] }}</td> -->
+                                        <!-- <td style="text-align: center;" id="pdf-icon">  {{ $file['FILENAME'] }}</td> -->
                                         <td style="text-align: center;">{{ $file['SIZE'] }}</td>
                                         <td style="text-align: center;">{{ $formattedDate }}</td>
                                         <td class="document-all">
@@ -115,16 +127,13 @@
                 </div>
             </div>
         </div>
-        <div id="loader"></div>
     </section>
 @endsection
 
 
 
 @section('scripts')
-
     <script type="text/javascript">
-
         $(document).ready(function() {
             $('#member-list').DataTable({
                 language: {
@@ -140,7 +149,7 @@
                 var dataId = $(this).attr('data-id');
 
                 $.ajax({
-                    url: '{{ route("member.file-details") }}',
+                    url: '{{ route('member.file-details') }}',
                     method: 'POST',
                     data: {
                         _method: 'post',
@@ -148,6 +157,9 @@
                         fileName: dataId,
                     },
                     dataType: "json",
+                    beforeSend: function(){
+                        $('#loaderWrapper').show();
+                    },
                     success: function(response) {
                         if (response.error) {
                             alert(response.msg);
@@ -159,6 +171,9 @@
                     },
                     error: function(xhr, status, error) {
                         alert('Error: ' + error);
+                    },
+                    complete: function(xhr, status){
+                        $('#loaderWrapper').hide();
                     }
                 });
             });
@@ -167,7 +182,7 @@
                 var dataId = $(this).attr('data-id');
 
                 $.ajax({
-                    url: '{{ route("member.file-download") }}',
+                    url: '{{ route('member.file-download') }}',
                     method: 'POST',
                     data: {
                         _method: 'post',
@@ -175,6 +190,9 @@
                         fileName: dataId,
                     },
                     dataType: "json",
+                    beforeSend: function(){
+                        $('#loaderWrapper').show();
+                    },
                     success: function(response) {
                         if (response.error) {
                             alert(response.msg);
@@ -191,10 +209,12 @@
                     },
                     error: function(xhr, status, error) {
                         alert('Error: ' + error);
+                    },
+                    complete: function(xhr, status){
+                        $('#loaderWrapper').hide();
                     }
                 });
             });
         });
     </script>
-
 @endsection

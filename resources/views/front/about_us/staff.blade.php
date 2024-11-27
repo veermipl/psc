@@ -1,275 +1,66 @@
 @extends('layout.master')
 
 @section('content')
-
-
     <section class="banner-section wow bg-about">
         <div class="container">
-         <div class="row">
-             <div class="col-lg-12">
-                 <div class="back-ground">
-                     <h2>Staff</h2>
-                     <div class="breadcrumbs text-center wow animate__ animate__fadeInUp animate__delay-1s animated" style="visibility: visible; animation-name: fadeInUp;">
-                         <ul>
-                             <li><a href="{{url('/')}}">Home</a></li>
-                              <span class="slash">   /</span>
-                             <li><a href="{{ route('about-us.staff') }}">Staff</a></li>
-                         </ul>
-                     </div>
-                 </div>
-             </div>
-         </div>
-        </div>
-       </section>
-
-
-      <section class="blog-one-section-staff">
-        <!-- tree design start -->
-    <div class="tree">
-      <ul>
-        <li>
-          <a href="{{ route('about-us.staff-show', 8) }}">
-            <div class="mx-auto mb-2">
-              <img
-                src="https://psc.digitalnoticeboard.biz/storage/images/team/V5fVLGFUg3dKfyJPWAxJbIYT86hLmm4gQ29KwMNj.jpg"
-                alt="Sample avatar"
-              />
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="back-ground">
+                        <h2>Staff</h2>
+                        <div class="breadcrumbs text-center wow animate__ animate__fadeInUp animate__delay-1s animated"
+                            style="visibility: visible; animation-name: fadeInUp;">
+                            <ul>
+                                <li><a href="{{ url('/') }}">Home</a></li>
+                                <span class="slash"> /</span>
+                                <li><a href="{{ route('about-us.staff') }}">Staff</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p class="font-weight-bold"><span>Name: </span>Leah Alves</p>
-            <p class="font-weight-bold"><span>Designation: </span>CEO</p>
-          </a>
-          <ul class="inn_line">
-            
-            <li>
-              <a href="#">
-                <div class="mx-auto mb-2">
-                  <img
-                    src="https://psc.digitalnoticeboard.biz/storage/images/team/TN51nNu2sicbFpOl8R7iXoNm8FKnMZBAN5pd4bAE.jpg"
-                    alt="Sample avatar"
-                  />
-                </div>
-                <p class="font-weight-bold"><span>Name: </span>Nayteram Ramnarine</p>
-                <p class="font-weight-bold"><span>Designation: </span>Manager</p>
-              </a>
-              <ul class="inn_line">
-                <li>
-                  <a href="#">
-                    <div class="mx-auto mb-2">
-                      <img
-                        src="https://psc.digitalnoticeboard.biz/storage/images/team/XM1TBxACP8aiRzfhz15ixGgaUDWWrDuDw39BjTzj.jpg"
-                        alt="Sample avatar"
-                      />
-                    </div>
-                    <p class="font-weight-bold"><span>Name: </span>Nelissa Singh</p>
-                 <p class="font-weight-bold"><span>Designation: </span>Team Lead</p>
-                  </a>
-                  <ul class="inn_line">
-                    <li>
-                      <a href="#">
-                        <div class="mx-auto mb-2">
-                          <img
-                            src="https://psc.digitalnoticeboard.biz/storage/images/team/QNo7OUGTFDidlg9cE7u1vu0T879uNbyG7X7IvpwA.jpg"
-                            alt="Sample avatar"
-                          />
-                        </div>
-                        <p class="font-weight-bold">Team member</p>
-                      </a>
-                      
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="mx-auto mb-2">
-                      <img
-                        src="https://psc.digitalnoticeboard.biz/storage/images/team/XM1TBxACP8aiRzfhz15ixGgaUDWWrDuDw39BjTzj.jpg"
-                        alt="Sample avatar"
-                      />
-                    </div>
-                    <p class="font-weight-bold"><span>Name: </span>Nelissa Singh</p>
-                      <p class="font-weight-bold"><span>Designation: </span>Team Lead</p>
-                  </a>
-                  <ul class="inn_line">
-                    <li>
-                      <a href="#">
-                        <div class="mx-auto mb-2">
-                          <img
-                            src="https://psc.digitalnoticeboard.biz/storage/images/team/QNo7OUGTFDidlg9cE7u1vu0T879uNbyG7X7IvpwA.jpg"
-                            alt="Sample avatar"
-                          />
-                        </div>
-                        <p class="font-weight-bold">Team member</p>
-                      </a>
-                      
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">
-                <div class="mx-auto mb-2">
-                  <img
-                    src="https://psc.digitalnoticeboard.biz/storage/images/team/TN51nNu2sicbFpOl8R7iXoNm8FKnMZBAN5pd4bAE.jpg"
-                    alt="Sample avatar"
-                  />
-                </div>
-                <p class="font-weight-bold"><span>Name: </span>Nayteram Ramnarine</p>
-              <p class="font-weight-bold"><span>Designation: </span>Manager</p>
-              </a>
-              <ul class="inn_line">
-                <li>
-                  <a href="#">
-                    <div class="mx-auto mb-2">
-                      <img
-                        src="https://psc.digitalnoticeboard.biz/storage/images/team/XM1TBxACP8aiRzfhz15ixGgaUDWWrDuDw39BjTzj.jpg"
-                        alt="Sample avatar"
-                      />
-                    </div>
-                    <p class="font-weight-bold"><span>Name: </span>Nelissa Singh</p>
-                    <p class="font-weight-bold"><span>Designation: </span>Team Lead</p>
-                  </a>
-                  <ul class="inn_line">
-                    <li>
-                      <a href="#">
-                        <div class="mx-auto mb-2">
-                          <img
-                            src="https://psc.digitalnoticeboard.biz/storage/images/team/QNo7OUGTFDidlg9cE7u1vu0T879uNbyG7X7IvpwA.jpg"
-                            alt="Sample avatar"
-                          />
-                        </div>
-                        <p class="font-weight-bold">Team member</p>
-                      </a>
-                      
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="mx-auto mb-2">
-                      <img
-                        src="https://psc.digitalnoticeboard.biz/storage/images/team/XM1TBxACP8aiRzfhz15ixGgaUDWWrDuDw39BjTzj.jpg"
-                        alt="Sample avatar"
-                      />
-                    </div>
-                    <p class="font-weight-bold"><span>Name: </span>Nelissa Singh</p>
-                    <p class="font-weight-bold"><span>Designation: </span>Team Lead</p>
-                  </a>
-                  <ul class="inn_line">
-                    <li>
-                      <a href="#">
-                        <div class="mx-auto mb-2">
-                          <img
-                            src="https://psc.digitalnoticeboard.biz/storage/images/team/QNo7OUGTFDidlg9cE7u1vu0T879uNbyG7X7IvpwA.jpg"
-                            alt="Sample avatar"
-                          />
-                        </div>
-                        <p class="font-weight-bold">Team member</p>
-                      </a>
-                      
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="mx-auto mb-2">
-                      <img
-                        src="https://psc.digitalnoticeboard.biz/storage/images/team/XM1TBxACP8aiRzfhz15ixGgaUDWWrDuDw39BjTzj.jpg"
-                        alt="Sample avatar"
-                      />
-                    </div>
-                    <p class="font-weight-bold"><span>Name: </span>Nelissa Singh</p>
-                       <p class="font-weight-bold"><span>Designation: </span>Team Lead</p>
-                  </a>
-                  <ul class="inn_line">
-                    <li>
-                      <a href="#">
-                        <div class="mx-auto mb-2">
-                          <img
-                            src="https://psc.digitalnoticeboard.biz/storage/images/team/QNo7OUGTFDidlg9cE7u1vu0T879uNbyG7X7IvpwA.jpg"
-                            alt="Sample avatar"
-                          />
-                        </div>
-                        <p class="font-weight-bold">Team member</p>
-                      </a>
-                      
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">
-                <div class="mx-auto mb-2">
-                  <img
-                    src="https://psc.digitalnoticeboard.biz/storage/images/team/TN51nNu2sicbFpOl8R7iXoNm8FKnMZBAN5pd4bAE.jpg"
-                    alt="Sample avatar"
-                  />
-                </div>
-                <p class="font-weight-bold"><span>Name: </span>Nayteram Ramnarine</p>
-            <p class="font-weight-bold"><span>Designation: </span>Manager</p>
-              </a>
-              <ul class="inn_line">
-                <li>
-                  <a href="#">
-                    <div class="mx-auto mb-2">
-                      <img
-                        src="https://psc.digitalnoticeboard.biz/storage/images/team/XM1TBxACP8aiRzfhz15ixGgaUDWWrDuDw39BjTzj.jpg"
-                        alt="Sample avatar"
-                      />
-                    </div>
-                    <p class="font-weight-bold"><span>Name: </span>Nelissa Singh</p>
-            <p class="font-weight-bold"><span>Designation: </span>Team Lead</p>
-                  </a>
-                  <ul class="inn_line">
-                    <li>
-                      <a href="#">
-                        <div class="mx-auto mb-2">
-                          <img
-                            src="https://psc.digitalnoticeboard.biz/storage/images/team/QNo7OUGTFDidlg9cE7u1vu0T879uNbyG7X7IvpwA.jpg"
-                            alt="Sample avatar"
-                          />
-                        </div>
-                        <p class="font-weight-bold">Team member</p>
-                      </a>
-                      
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="mx-auto mb-2">
-                      <img
-                        src="https://psc.digitalnoticeboard.biz/storage/images/team/XM1TBxACP8aiRzfhz15ixGgaUDWWrDuDw39BjTzj.jpg"
-                        alt="Sample avatar"
-                      />
-                    </div>
-                    <p class="font-weight-bold"><span>Name: </span>Nelissa Singh</p>
-            <p class="font-weight-bold"><span>Designation: </span>Team Lead</p>
-                  </a>
-                  <ul class="inn_line">
-                    <li>
-                      <a href="#">
-                        <div class="mx-auto mb-2">
-                          <img
-                            src="https://psc.digitalnoticeboard.biz/storage/images/team/QNo7OUGTFDidlg9cE7u1vu0T879uNbyG7X7IvpwA.jpg"
-                            alt="Sample avatar"
-                          />
-                        </div>
-                        <p class="font-weight-bold">Team member</p>
-                      </a>
-                      
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            
-          </ul>
-        </li>
-      </ul>
-    </div>
-    <!-- tree design end -->
+        </div>
     </section>
 
+
+    <section class="blog-one-section">
+        <div class="container">
+            <div class="thm-section-title text-center">
+                <h4 class="sub-title-shape-left section_title-subheading">
+                    Our
+                </h4>
+                <h2>Staff </h2>
+            </div>
+
+            @if (count(@$staff) > 0)
+                <div class="row">
+                    @foreach ($staff as $members)
+                        <div class="col-xl-3 col-lg-3 col-md-6">
+                            <div class="team-one-single wow fadeInLeft animated" data-wow-delay="100ms"
+                                style="visibility: visible; animation-delay: 100ms; animation-name: fadeInLeft;">
+                                <div class="team-one-img">
+                                    @if ($members->image)
+                                        <img src="{{ asset('storage/' . $members->image) }}" alt="">
+                                    @else
+                                        <img src="{{ asset('images/team/commeties.png') }}" alt="">
+                                    @endif
+                                </div>
+                                <div class="team-one-content team-one-content-2">
+                                    <h3>{{ $members->name }}</h3>
+                                    <p>{{ $members->office }}</p>
+                                </div>
+                                <div class="team-one-content pt-0 d-none">
+                                    <a href="{{ route('about-us.staff-show', $members->id) }}" class="vs-btn1 style5 mt-3"
+                                        tabindex="0">
+                                        Read More <i class="far fa-long-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <h6 class="text-center">No Data Found !</h6>
+            @endif
+        </div>
+    </section>
 @endsection

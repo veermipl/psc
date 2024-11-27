@@ -7391,7 +7391,9 @@ li.dropdown i {
     cursor: all-scroll;
 }
 
-/*staff css*/
+/*staff css start*/
+
+/*for-desktop*/
  .tree img {
   width: 80px;
   height: 80px;
@@ -7503,10 +7505,117 @@ li.dropdown i {
 .blog-one-section-staff{
     padding: 50px 0 70px;
 }
-/*end*/
+/*for mobile*/
+.level {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .person {
+      display: inline-block;
+      padding: 10px 15px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin: 5px 0;
+    }
+#team-leaders-2 {
+    width: 90%;
+    margin-left: 35px;
+}
+#team-leaders-1 {
+    width: 90%;
+    margin-left: 35px;
+}
+    .person span {
+      display: block;
+      font-size: 14px;
+    }
+
+    .toggle {
+      background-color: #072d74;
+      color: white;
+      border: none;
+      padding: 2px 12px;
+      margin-top: 5px;
+      cursor: pointer;
+      border-radius: 3px;
+      font-size: 14px;
+    }
+
+    .toggle:focus {
+      outline: none;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Connecting lines */
+    .line {
+      width: 2px;
+      height: 20px;
+      background-color: #ccc;
+      margin: 0 auto;
+    }
+    .staff-mob {
+        display: none;
+      }
+      .person img{
+            height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    object-position: top;
+      }
+      .person p{
+        margin-bottom: 0;
+      }
+
+    @media (max-width: 600px) {
+      .person {
+        width: 90%;
+      }
+    }
+    @media (max-width: 767px) {
+      .staff-desk {
+        display: none;
+      }
+      .staff-mob {
+        display: block;
+      }
+    }
+/* staff css end*/
 .vs-btn5.style5 {
        background-color: var(--thm-primary);
     color: #fff;
     border-radius: 5px;
     padding: 8px;
+}
+.about-two-sec-image.commi-img img {
+    width: 100%;
+    border-radius: 6px;
+    height: 400px;
+    object-fit: cover;
+        object-position: top;
+}
+.about-two-title.commi-detail h2{
+margin-bottom: 15px;
+font-size: 30px;
+    font-weight: 800;
+    line-height: 25px;
+}
+.about-two-title.commi-detail h4{
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+.about-two-title.commi-detail h4 span{
+color:#072d74;
+}
+.mar-left-20{
+    margin-left: 20px   ;
 }

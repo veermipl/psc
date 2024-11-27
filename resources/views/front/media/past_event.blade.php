@@ -7,13 +7,13 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="back-ground">
-                        <h2>Upcoming Event</h2>
+                        <h2>Past Event</h2>
                         <div class="breadcrumbs text-center wow animate__ animate__fadeInUp animate__delay-1s animated"
                             style="visibility: visible; animation-name: fadeInUp;">
                             <ul>
                                 <li><a href="{{ route('home') }}">Home</a></li>
                                 <span class="slash"> /</span>
-                                <li><a href="{{ route('event.upcoming-event') }}">Upcoming Event</a></li>
+                                <li><a href="{{ route('event.past-event') }}">Past Event</a></li>
                             </ul>
                         </div>
                     </div>
@@ -62,9 +62,9 @@
                         </div>
                     @endforeach
                 @else
-                    <a href="{{ route('event.past-event') }}">
-                      <span class="badge badge-primary fs-5" style="font-size: 19px">Check out Past Events !</span>
-                    </a>
+                    <h5>
+                        <span class="badge badge-danger" style="font-size: 19px">No Data Found !</span>
+                    </h5>
                 @endif
             </div>
     </section>

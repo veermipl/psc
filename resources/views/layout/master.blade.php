@@ -378,8 +378,9 @@
                                                             <li><a href="{{ route('media.news') }}">Newsletter</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('media.press-release') }}">Press
-                                                                    Releases</a>
+                                                                <a href="{{ route('media.press-release') }}">
+                                                                    Press Releases
+                                                                </a>
                                                             </li>
                                                             <!-- <li>
                                                                     <a href="{{ route('media.social-media') }}">Social
@@ -388,17 +389,12 @@
                                                             <li>
                                                                 <a href="{{ route('media.albums') }}">Albums</a>
                                                             </li>
-                                                            <li>
+                                                            {{-- <li>
                                                                 <a href="{{ route('media.photos') }}">Photos</a>
-                                                            </li>
+                                                            </li> --}}
                                                             <li>
                                                                 <a href="{{ route('media.videos') }}">Videos</a>
                                                             </li>
-                                                            <!-- <li>
-                                                                    <a href="{{ route('media.event') }}">Events</a>
-                                                                </li> -->
-
-
                                                         </ul>
                                                     </li>
 
@@ -406,17 +402,17 @@
                                                         <a href="#">Event<i class="fas fa-chevron-down"></i>
                                                         </a>
                                                         <ul>
-                                                            <li> <a href="{{ route('media.event') }}">Past Events</a></li>
                                                             <li>
-                                                                <a href="{{ route('media.upcoming.event') }}">
+                                                                <a href="{{ route('event.past-event') }}">
+                                                                    Past Events
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ route('event.upcoming-event') }}">
 
                                                                     Upcoming Events
                                                                 </a>
                                                             </li>
-                                                            <!-- <li>
-                                                                    <a href="{{ route('media.social-media') }}">Social
-                                                                        Media</a>
-                                                                </li> -->
                                                         </ul>
                                                     </li>
                                                     <li><a href="{{ route('contact-us') }}">Contact Us</a></li>

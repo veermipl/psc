@@ -103,6 +103,7 @@ Route::middleware(['web_hits'])->group(function () {
         Route::get('staff', [FrontController::class, 'aboutUs_Staff'])->name('staff');
         Route::get('staff-show/{id}', [FrontController::class, 'aboutUs_Staff_Show'])->name('staff-show');
         Route::get('council', [FrontController::class, 'aboutUs_Council'])->name('council');
+        Route::get('council-details', [FrontController::class, 'aboutUs_CouncilDetails'])->name('council-details');
         Route::get('council-show/{id}', [FrontController::class, 'aboutUs_Council_Show'])->name('council-show');
         Route::get('history', [FrontController::class, 'aboutUs_History'])->name('history');
         Route::get('committeess', [FrontController::class, 'aboutUs_Committeess'])->name('committeess');
@@ -155,9 +156,13 @@ Route::middleware(['web_hits'])->group(function () {
         Route::get('albums', [FrontController::class, 'media_Albums'])->name('albums');
         Route::get('album-photos/{id}', [FrontController::class, 'media_AlbumPhotos'])->name('album-photos');
         Route::get('videos', [FrontController::class, 'media_Videos'])->name('videos');
-        Route::get('event', [FrontController::class, 'media_event'])->name('event');
+    });
+
+    Route::prefix('event')->name('event.')->group(function () {
+        Route::get('event', [FrontController::class, 'events'])->name('event');
         Route::get('event-details/{id}', [FrontController::class, 'details_event'])->name('event_details');
-        Route::get('upcoming-event/', [FrontController::class, 'upcoming_event'])->name('upcoming.event');
+        Route::get('past-event/', [FrontController::class, 'past_event'])->name('past-event');
+        Route::get('upcoming-event/', [FrontController::class, 'upcoming_event'])->name('upcoming-event');
     });
 });
 //end front-route

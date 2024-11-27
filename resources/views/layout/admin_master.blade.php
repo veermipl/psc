@@ -314,16 +314,16 @@
                                 Staff
                             </a>
                         </li>
-                        <!-- <li>
-                            <a href="{{ route('admin.about.council') }}">
-                                <ion-icon name="ellipse-outline"></ion-icon>
-                                Council
-                            </a>
-                        </li> -->
                         <li>
                             <a href="{{ route('admin.council.index') }}">
                                 <ion-icon name="ellipse-outline"></ion-icon>
                                 Council
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.about.council') }}">
+                                <ion-icon name="ellipse-outline"></ion-icon>
+                                Council Information
                             </a>
                         </li>
                         <li>

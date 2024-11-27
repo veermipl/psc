@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-4 col-xl-4">
+        <div class="col-12 col-lg-4 col-xl-4 d-none">
             <div class="card radius-10">
                 <div class="card-body">
                     <div class="d-flex align-items-start justify-content-between">
